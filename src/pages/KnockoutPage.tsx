@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import BracketMatch from '../components/Knockout/BracketMatch'
 import { loadTeams, loadDraw, loadScores } from '../data/loaders'
 import type { Team, DrawResult, Match } from '../types'
 
@@ -9,84 +8,127 @@ interface MatchData {
   awayTeamId: string | null
   homeScore: number | null
   awayScore: number | null
-  label?: string
 }
 
 interface ZoomMatch extends MatchData {
-  stage: string
-  date?: string
-  venue?: string
+  roundLabel: string
 }
 
-const ROUNDS = ['R32', 'R16', 'QF', 'SF', 'F'] as const
+// Layout constants
+const SLOT_H = 80    // px height per R32 slot
+const MATCH_H = 64   // px height of a match card
+const MATCH_W = 152  // px width of a match card
+const COL_GAP = 24   // px gap between columns
+const BRACKET_H = 8 * SLOT_H  // 640px total
+
+function matchTop(roundIndex: number, matchIndex: number): number {
+  const slotsPerMatch = Math.pow(2, roundIndex)
+  const centerOffset = (slotsPerMatch * SLOT_H) / 2
+  return matchIndex * slotsPerMatch * SLOT_H + centerOffset - MATCH_H / 2
+}
+
+const LEFT_ROUNDS = ['R32', 'R16', 'QF', 'SF'] as const
+const RIGHT_ROUNDS = ['SF', 'QF', 'R16', 'R32'] as const
 const ROUND_LABELS: Record<string, string> = {
-  R32: 'Round of 32',
-  R16: 'Round of 16',
-  QF: 'Quarter-Finals',
-  SF: 'Semi-Finals',
-  F: 'Final',
+  R32: 'Round of 32', R16: 'Round of 16', QF: 'Quarter-Finals', SF: 'Semi-Finals', F: 'Final',
 }
 
 function buildPlaceholderBracket(): Record<string, MatchData[]> {
-  const bracket: Record<string, MatchData[]> = {
-    R32: Array.from({ length: 16 }, (_, i) => ({
-      id: `R32-${i + 1}`,
-      homeTeamId: null,
-      awayTeamId: null,
-      homeScore: null,
-      awayScore: null,
-      label: `R32 Match ${i + 1}`,
-    })),
-    R16: Array.from({ length: 8 }, (_, i) => ({
-      id: `R16-${i + 1}`,
-      homeTeamId: null,
-      awayTeamId: null,
-      homeScore: null,
-      awayScore: null,
-    })),
-    QF: Array.from({ length: 4 }, (_, i) => ({
-      id: `QF-${i + 1}`,
-      homeTeamId: null,
-      awayTeamId: null,
-      homeScore: null,
-      awayScore: null,
-    })),
-    SF: Array.from({ length: 2 }, (_, i) => ({
-      id: `SF-${i + 1}`,
-      homeTeamId: null,
-      awayTeamId: null,
-      homeScore: null,
-      awayScore: null,
-    })),
-    F: [{
-      id: 'F-1',
-      homeTeamId: null,
-      awayTeamId: null,
-      homeScore: null,
-      awayScore: null,
-    }],
+  return {
+    R32: Array.from({ length: 16 }, (_, i) => ({ id: `R32-${i + 1}`, homeTeamId: null, awayTeamId: null, homeScore: null, awayScore: null })),
+    R16: Array.from({ length: 8 }, (_, i) => ({ id: `R16-${i + 1}`, homeTeamId: null, awayTeamId: null, homeScore: null, awayScore: null })),
+    QF: Array.from({ length: 4 }, (_, i) => ({ id: `QF-${i + 1}`, homeTeamId: null, awayTeamId: null, homeScore: null, awayScore: null })),
+    SF: Array.from({ length: 2 }, (_, i) => ({ id: `SF-${i + 1}`, homeTeamId: null, awayTeamId: null, homeScore: null, awayScore: null })),
+    F: [{ id: 'F-1', homeTeamId: null, awayTeamId: null, homeScore: null, awayScore: null }],
   }
-  return bracket
 }
 
-function mergeScoresIntoBracket(bracket: Record<string, MatchData[]>, matches: Match[]): Record<string, MatchData[]> {
-  const knockoutMatches = matches.filter(m => m.stage !== 'GROUP')
-  const updated = { ...bracket }
-  for (const match of knockoutMatches) {
-    const stageMatches = updated[match.stage]
-    if (!stageMatches) continue
-    const idx = stageMatches.findIndex(m => m.id === String(match.id))
-    if (idx !== -1) {
-      updated[match.stage][idx] = {
-        ...updated[match.stage][idx],
-        homeTeamId: match.homeTeamId,
-        awayTeamId: match.awayTeamId,
-        homeScore: match.homeScore,
-        awayScore: match.awayScore,
-      }
-    }
+function MatchCard({ match, teams, flipped = false, onClick }: {
+  match: MatchData; teams: Team[]; flipped?: boolean; onClick: () => void
+}) {
+  const home = teams.find(t => t.id === match.homeTeamId)
+  const away = teams.find(t => t.id === match.awayTeamId)
+  const finished = match.homeScore !== null && match.awayScore !== null
+  const homeWon = finished && match.homeScore! > match.awayScore!
+  const awayWon = finished && match.awayScore! > match.homeScore!
+
+  function Row({ team, score, won, lost }: { team: Team | null; score: number | null; won: boolean; lost: boolean }) {
+    return (
+      <div className={`flex items-center gap-1.5 px-2 py-1 ${lost ? 'opacity-40' : ''}`}>
+        {team
+          ? <>
+              <img src={team.flag} alt={team.name} className={`w-6 h-4 object-cover rounded shrink-0 ${lost ? 'grayscale' : ''}`} />
+              <span className={`text-xs flex-1 truncate ${won ? 'text-yellow-400 font-semibold' : 'text-white/80'}`}>{team.name}</span>
+              {score !== null && <span className={`text-xs font-bold ${won ? 'text-yellow-400' : 'text-white/40'}`}>{score}</span>}
+            </>
+          : <>
+              <div className="w-6 h-4 bg-white/10 rounded shrink-0" />
+              <span className="text-xs text-white/25 flex-1">TBD</span>
+            </>
+        }
+      </div>
+    )
   }
-  return updated
+
+  const rows = flipped
+    ? [{ team: away, score: match.awayScore, won: awayWon, lost: homeWon }, { team: home, score: match.homeScore, won: homeWon, lost: awayWon }]
+    : [{ team: home, score: match.homeScore, won: homeWon, lost: awayWon }, { team: away, score: match.awayScore, won: awayWon, lost: homeWon }]
+
+  return (
+    <button
+      onClick={onClick}
+      style={{ width: MATCH_W, height: MATCH_H }}
+      className="rounded-lg border border-white/15 bg-white/5 hover:border-yellow-400/40 hover:bg-white/10 transition-all text-left flex flex-col justify-center overflow-hidden"
+    >
+      <Row {...rows[0]} />
+      <div className="h-px bg-white/10 mx-2" />
+      <Row {...rows[1]} />
+    </button>
+  )
+}
+
+function BracketColumn({ rounds, bracket, teams, leftSide, onMatchClick }: {
+  rounds: readonly string[]
+  bracket: Record<string, MatchData[]>
+  teams: Team[]
+  leftSide: boolean
+  onMatchClick: (m: MatchData, round: string) => void
+}) {
+  return (
+    <div className="flex gap-0" style={{ flexDirection: leftSide ? 'row' : 'row-reverse' }}>
+      {rounds.map((round, colIdx) => {
+        const allMatches = bracket[round] ?? []
+        // Left side uses first half, right side uses second half
+        const matches = leftSide
+          ? allMatches.slice(0, allMatches.length / 2)
+          : allMatches.slice(allMatches.length / 2)
+        // For right side, round index increases going inward (toward center)
+        const roundIdx = leftSide ? colIdx : rounds.length - 1 - colIdx
+
+        return (
+          <div key={round} style={{ position: 'relative', width: MATCH_W, height: BRACKET_H, marginLeft: colIdx > 0 ? COL_GAP : 0 }}>
+            {/* Round label at top */}
+            <div
+              className="absolute top-0 w-full text-center text-xs uppercase tracking-wider text-white/30 pb-2"
+              style={{ top: -24 }}
+            >
+              {ROUND_LABELS[round]}
+            </div>
+            {matches.map((match, i) => (
+              <div key={match.id} style={{ position: 'absolute', top: matchTop(roundIdx, i), left: 0 }}>
+                <MatchCard
+                  match={match}
+                  teams={teams}
+                  flipped={!leftSide}
+                  onClick={() => onMatchClick(match, round)}
+                />
+              </div>
+            ))}
+          </div>
+        )
+      })}
+    </div>
+  )
 }
 
 export default function KnockoutPage() {
@@ -101,95 +143,98 @@ export default function KnockoutPage() {
       setTeams(t)
       setDraw(d)
       if (s.matches?.length) {
-        setBracket(prev => mergeScoresIntoBracket(prev, s.matches))
+        const updated = { ...buildPlaceholderBracket() }
+        for (const m of s.matches.filter((m: Match) => m.stage !== 'GROUP')) {
+          const stage = updated[m.stage]
+          if (!stage) continue
+          const idx = stage.findIndex(x => x.id === String(m.id))
+          if (idx !== -1) {
+            updated[m.stage][idx] = { ...updated[m.stage][idx], homeTeamId: m.homeTeamId, awayTeamId: m.awayTeamId, homeScore: m.homeScore, awayScore: m.awayScore }
+          }
+        }
+        setBracket(updated)
       }
       setLoading(false)
     })
   }, [])
 
   if (loading) {
-    return <PageCenter><div className="text-white/50 animate-pulse">Loading bracket…</div></PageCenter>
+    return <div className="flex items-center justify-center min-h-[80vh] text-white/50 animate-pulse">Loading bracket…</div>
   }
 
+  const final = bracket.F?.[0] ?? null
+
   return (
-    <div className="max-w-full px-4 py-8">
+    <div className="px-4 py-8">
       <h1 className="text-3xl font-bold text-white mb-2">Knockout Bracket</h1>
-      <p className="text-white/40 text-sm mb-8">Click any match for details</p>
+      <p className="text-white/40 text-sm mb-10">Click any match for details</p>
 
       <div className="overflow-x-auto pb-6">
-        <div className="flex gap-8 min-w-max items-start">
-          {ROUNDS.map(round => (
-            <div key={round} className="flex flex-col gap-3">
-              <h3 className="text-xs uppercase tracking-wider text-white/40 text-center mb-2">
-                {ROUND_LABELS[round]}
-              </h3>
-              <div
-                className="flex flex-col gap-4 justify-around"
-                style={{ minHeight: `${bracket[round].length * 72}px` }}
-              >
-                {bracket[round].map(match => (
-                  <BracketMatch
-                    key={match.id}
-                    match={match}
-                    teams={teams}
-                    onClick={m => setZoom({ ...m, stage: round })}
-                  />
-                ))}
-              </div>
+        <div style={{ display: 'flex', alignItems: 'flex-start', gap: COL_GAP, paddingTop: 24, minWidth: 'max-content' }}>
+
+          {/* Left side: R32 → SF */}
+          <BracketColumn
+            rounds={LEFT_ROUNDS}
+            bracket={bracket}
+            teams={teams}
+            leftSide={true}
+            onMatchClick={(m, r) => setZoom({ ...m, roundLabel: ROUND_LABELS[r] })}
+          />
+
+          {/* Final in centre */}
+          <div style={{ position: 'relative', width: MATCH_W, height: BRACKET_H, marginTop: 0 }}>
+            <div className="absolute w-full text-center text-xs uppercase tracking-wider text-yellow-400/60 pb-2" style={{ top: -24 }}>
+              Final
             </div>
-          ))}
+            {final && (
+              <div style={{ position: 'absolute', top: matchTop(3, 0), left: 0 }}>
+                <MatchCard
+                  match={final}
+                  teams={teams}
+                  onClick={() => setZoom({ ...final, roundLabel: 'Final' })}
+                />
+              </div>
+            )}
+          </div>
+
+          {/* Right side: SF → R32 */}
+          <BracketColumn
+            rounds={RIGHT_ROUNDS}
+            bracket={bracket}
+            teams={teams}
+            leftSide={false}
+            onMatchClick={(m, r) => setZoom({ ...m, roundLabel: ROUND_LABELS[r] })}
+          />
         </div>
       </div>
 
       {/* Zoom modal */}
       {zoom && (
-        <div
-          className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-          onClick={() => setZoom(null)}
-        >
-          <div
-            className="bg-gray-900 border border-white/20 rounded-2xl p-6 max-w-sm w-full"
-            onClick={e => e.stopPropagation()}
-          >
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={() => setZoom(null)}>
+          <div className="bg-gray-900 border border-white/20 rounded-2xl p-6 max-w-sm w-full" onClick={e => e.stopPropagation()}>
             <div className="flex justify-between items-start mb-4">
-              <h3 className="font-bold text-white">{ROUND_LABELS[zoom.stage]}</h3>
-              <button onClick={() => setZoom(null)} className="text-white/40 hover:text-white text-xl">×</button>
+              <h3 className="font-bold text-white">{zoom.roundLabel}</h3>
+              <button onClick={() => setZoom(null)} className="text-white/40 hover:text-white text-xl leading-none">×</button>
             </div>
-
-            {[
-              { teamId: zoom.homeTeamId, score: zoom.homeScore },
-              { teamId: zoom.awayTeamId, score: zoom.awayScore },
-            ].map(({ teamId, score }, i) => {
+            {[{ teamId: zoom.homeTeamId, score: zoom.homeScore }, { teamId: zoom.awayTeamId, score: zoom.awayScore }].map(({ teamId, score }, i) => {
               const team = teams.find(t => t.id === teamId)
               const player = teamId ? draw[teamId] : null
               return (
-                <div key={i} className={`flex items-center gap-3 p-3 rounded-xl mb-2 ${i === 0 ? 'bg-white/5' : 'bg-white/5'}`}>
-                  {team ? (
-                    <>
-                      <img src={team.flag} alt={team.name} className="w-10 h-7 object-cover rounded" />
-                      <div className="flex-1">
-                        <p className="font-semibold text-white">{team.name}</p>
-                        {player && <p className="text-xs text-white/50">{player}</p>}
-                      </div>
-                      {score !== null && <span className="text-2xl font-bold text-yellow-400">{score}</span>}
-                    </>
-                  ) : (
-                    <p className="text-white/30 text-sm">TBD</p>
-                  )}
+                <div key={i} className="flex items-center gap-3 p-3 rounded-xl bg-white/5 mb-2">
+                  {team ? <>
+                    <img src={team.flag} alt={team.name} className="w-10 h-7 object-cover rounded" />
+                    <div className="flex-1">
+                      <p className="font-semibold text-white">{team.name}</p>
+                      {player && <p className="text-xs text-white/50">{player}</p>}
+                    </div>
+                    {score !== null && <span className="text-2xl font-bold text-yellow-400">{score}</span>}
+                  </> : <p className="text-white/30 text-sm">TBD</p>}
                 </div>
               )
             })}
           </div>
         </div>
       )}
-    </div>
-  )
-}
-
-function PageCenter({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="flex items-center justify-center min-h-[80vh] px-4">
-      {children}
     </div>
   )
 }
