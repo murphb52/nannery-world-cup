@@ -1,0 +1,61 @@
+[
+  { "id": "USA", "name": "United States", "group": "A", "flag": "https://flagcdn.com/w80/us.png" },
+  { "id": "PAN", "name": "Panama", "group": "A", "flag": "https://flagcdn.com/w80/pa.png" },
+  { "id": "MAR", "name": "Morocco", "group": "A", "flag": "https://flagcdn.com/w80/ma.png" },
+  { "id": "JAM", "name": "Jamaica", "group": "A", "flag": "https://flagcdn.com/w80/jm.png" },
+
+  { "id": "MEX", "name": "Mexico", "group": "B", "flag": "https://flagcdn.com/w80/mx.png" },
+  { "id": "ECU", "name": "Ecuador", "group": "B", "flag": "https://flagcdn.com/w80/ec.png" },
+  { "id": "SEN", "name": "Senegal", "group": "B", "flag": "https://flagcdn.com/w80/sn.png" },
+  { "id": "NZL", "name": "New Zealand", "group": "B", "flag": "https://flagcdn.com/w80/nz.png" },
+
+  { "id": "CAN", "name": "Canada", "group": "C", "flag": "https://flagcdn.com/w80/ca.png" },
+  { "id": "URU", "name": "Uruguay", "group": "C", "flag": "https://flagcdn.com/w80/uy.png" },
+  { "id": "CMR", "name": "Cameroon", "group": "C", "flag": "https://flagcdn.com/w80/cm.png" },
+  { "id": "DEN", "name": "Denmark", "group": "C", "flag": "https://flagcdn.com/w80/dk.png" },
+
+  { "id": "ARG", "name": "Argentina", "group": "D", "flag": "https://flagcdn.com/w80/ar.png" },
+  { "id": "CHI", "name": "Chile", "group": "D", "flag": "https://flagcdn.com/w80/cl.png" },
+  { "id": "AUS", "name": "Australia", "group": "D", "flag": "https://flagcdn.com/w80/au.png" },
+  { "id": "SVK", "name": "Slovakia", "group": "D", "flag": "https://flagcdn.com/w80/sk.png" },
+
+  { "id": "BRA", "name": "Brazil", "group": "E", "flag": "https://flagcdn.com/w80/br.png" },
+  { "id": "NOR", "name": "Norway", "group": "E", "flag": "https://flagcdn.com/w80/no.png" },
+  { "id": "GHA", "name": "Ghana", "group": "E", "flag": "https://flagcdn.com/w80/gh.png" },
+  { "id": "CON1", "name": "Concacaf Play-off 1", "group": "E", "flag": "https://flagcdn.com/w80/hn.png" },
+
+  { "id": "FRA", "name": "France", "group": "F", "flag": "https://flagcdn.com/w80/fr.png" },
+  { "id": "NGA", "name": "Nigeria", "group": "F", "flag": "https://flagcdn.com/w80/ng.png" },
+  { "id": "BIH", "name": "Bosnia-Herzegovina", "group": "F", "flag": "https://flagcdn.com/w80/ba.png" },
+  { "id": "PLY1", "name": "Inter-Continental Play-off 1", "group": "F", "flag": "https://flagcdn.com/w80/un.png" },
+
+  { "id": "ENG", "name": "England", "group": "G", "flag": "https://flagcdn.com/w80/gb-eng.png" },
+  { "id": "IRN", "name": "Iran", "group": "G", "flag": "https://flagcdn.com/w80/ir.png" },
+  { "id": "COL", "name": "Colombia", "group": "G", "flag": "https://flagcdn.com/w80/co.png" },
+  { "id": "TUN", "name": "Tunisia", "group": "G", "flag": "https://flagcdn.com/w80/tn.png" },
+
+  { "id": "GER", "name": "Germany", "group": "H", "flag": "https://flagcdn.com/w80/de.png" },
+  { "id": "JPN", "name": "Japan", "group": "H", "flag": "https://flagcdn.com/w80/jp.png" },
+  { "id": "KOR", "name": "South Korea", "group": "H", "flag": "https://flagcdn.com/w80/kr.png" },
+  { "id": "KSA", "name": "Saudi Arabia", "group": "H", "flag": "https://flagcdn.com/w80/sa.png" },
+
+  { "id": "ESP", "name": "Spain", "group": "I", "flag": "https://flagcdn.com/w80/es.png" },
+  { "id": "BRA2", "name": "Brazil (Ticket 2)", "group": "I", "flag": "https://flagcdn.com/w80/br.png" },
+  { "id": "POL", "name": "Poland", "group": "I", "flag": "https://flagcdn.com/w80/pl.png" },
+  { "id": "EGY", "name": "Egypt", "group": "I", "flag": "https://flagcdn.com/w80/eg.png" },
+
+  { "id": "POR", "name": "Portugal", "group": "J", "flag": "https://flagcdn.com/w80/pt.png" },
+  { "id": "CRO", "name": "Croatia", "group": "J", "flag": "https://flagcdn.com/w80/hr.png" },
+  { "id": "RSA", "name": "South Africa", "group": "J", "flag": "https://flagcdn.com/w80/za.png" },
+  { "id": "IVC", "name": "Ivory Coast", "group": "J", "flag": "https://flagcdn.com/w80/ci.png" },
+
+  { "id": "NED", "name": "Netherlands", "group": "K", "flag": "https://flagcdn.com/w80/nl.png" },
+  { "id": "SUI", "name": "Switzerland", "group": "K", "flag": "https://flagcdn.com/w80/ch.png" },
+  { "id": "VEN", "name": "Venezuela", "group": "K", "flag": "https://flagcdn.com/w80/ve.png" },
+  { "id": "ALG", "name": "Algeria", "group": "K", "flag": "https://flagcdn.com/w80/dz.png" },
+
+  { "id": "BEL", "name": "Belgium", "group": "L", "flag": "https://flagcdn.com/w80/be.png" },
+  { "id": "ITA", "name": "Italy", "group": "L", "flag": "https://flagcdn.com/w80/it.png" },
+  { "id": "MEX2", "name": "Mexico (Ticket 2)", "group": "L", "flag": "https://flagcdn.com/w80/mx.png" },
+  { "id": "SRB", "name": "Serbia", "group": "L", "flag": "https://flagcdn.com/w80/rs.png" }
+]

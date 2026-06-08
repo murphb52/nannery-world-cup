@@ -1,0 +1,34 @@
+name: Fetch Scores
+
+on:
+  schedule:
+    - cron: '0 23 * * *'   # 11pm UTC daily (midnight UK BST)
+  workflow_dispatch:         # manual trigger from GitHub Actions UI
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Fetch scores from football-data.org
+        env:
+          FOOTBALL_DATA_API_KEY: ${{ secrets.FOOTBALL_DATA_API_KEY }}
+        run: node scripts/fetch-scores.js
+
+      - name: Commit updated data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git diff --quiet data/scores.json || (
+            git add data/scores.json &&
+            git commit -m "chore: update scores $(date -u +%Y-%m-%d)"
+          )
+          git push
