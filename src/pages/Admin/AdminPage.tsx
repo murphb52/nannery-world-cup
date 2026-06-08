@@ -8,13 +8,22 @@ const PASSPHRASE = 'nannery2026'
 const ADMIN_TABS = ['Draw', 'Players', 'Teams'] as const
 type AdminTab = typeof ADMIN_TABS[number]
 
+function masked(token: string) {
+  if (!token) return ''
+  return token.slice(0, 7) + '••••••••••••••••' + token.slice(-4)
+}
+
 export default function AdminPage() {
   const [authed, setAuthed] = useState(false)
   const [input, setInput] = useState('')
   const [error, setError] = useState(false)
   const [tab, setTab] = useState<AdminTab>('Draw')
-  const [pat, setPatState] = useState(getPat())
-  const [patSaved, setPatSaved] = useState(!!getPat())
+  const [overriding, setOverriding] = useState(false)
+  const [overrideVal, setOverrideVal] = useState('')
+
+  const bakedPat = import.meta.env.VITE_GITHUB_PAT as string | undefined
+  const sessionPat = getPat() !== bakedPat ? getPat() : ''
+  const activePat = getPat()
 
   useEffect(() => {
     setAuthed(sessionStorage.getItem('admin_authed') === '1')
@@ -30,10 +39,17 @@ export default function AdminPage() {
     }
   }
 
-  function savePat(p: string) {
-    setPat(p)
-    setPatState(p)
-    setPatSaved(true)
+  function applyOverride() {
+    setPat(overrideVal)
+    setOverriding(false)
+    setOverrideVal('')
+  }
+
+  function clearOverride() {
+    if (bakedPat) setPat(bakedPat)
+    else sessionStorage.removeItem('admin_pat')
+    setOverriding(false)
+    setOverrideVal('')
   }
 
   if (!authed) {
@@ -82,27 +98,53 @@ export default function AdminPage() {
         </button>
       </div>
 
-      {/* GitHub PAT */}
+      {/* GitHub token */}
       <div className="mb-6 p-4 rounded-xl border border-white/10 bg-white/5">
-        <p className="text-sm font-medium text-white/70 mb-2">GitHub Personal Access Token <span className="text-white/30">(required to save changes)</span></p>
-        <div className="flex gap-2">
-          <input
-            type="password"
-            value={pat}
-            onChange={e => { setPatState(e.target.value); setPatSaved(false) }}
-            placeholder="ghp_xxxxxxxxxxxx"
-            className="flex-1 px-3 py-2 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/30 text-sm focus:outline-none focus:border-yellow-400/50"
-          />
-          <button
-            onClick={() => savePat(pat)}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-              patSaved ? 'bg-green-500/20 text-green-400 border border-green-500/30' : 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 hover:bg-yellow-500/30'
-            }`}
-          >
-            {patSaved ? '✓ Saved' : 'Save'}
-          </button>
+        <div className="flex items-center justify-between gap-4">
+          <div className="flex items-center gap-3 min-w-0">
+            <span className={`text-lg shrink-0 ${activePat ? 'text-green-400' : 'text-red-400'}`}>
+              {activePat ? '✓' : '⚠'}
+            </span>
+            {overriding ? (
+              <input
+                type="password"
+                value={overrideVal}
+                onChange={e => setOverrideVal(e.target.value)}
+                onKeyDown={e => e.key === 'Enter' && applyOverride()}
+                placeholder="ghp_xxxxxxxxxxxx"
+                autoFocus
+                className="flex-1 px-3 py-1.5 rounded-lg bg-white/10 border border-yellow-400/30 text-white placeholder-white/30 text-sm focus:outline-none"
+              />
+            ) : (
+              <div>
+                <p className="text-sm text-white/70 font-medium">
+                  {activePat ? masked(activePat) : 'No GitHub token set'}
+                </p>
+                <p className="text-xs text-white/30 mt-0.5">
+                  {sessionPat ? 'Using session override' : bakedPat ? 'Baked in at build time' : 'Set a token to enable saves'}
+                </p>
+              </div>
+            )}
+          </div>
+
+          <div className="flex gap-2 shrink-0">
+            {overriding ? (
+              <>
+                <button onClick={applyOverride} className="px-3 py-1.5 rounded-lg bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 text-xs font-medium hover:bg-yellow-500/30 transition-all">Apply</button>
+                <button onClick={() => { setOverriding(false); setOverrideVal('') }} className="px-3 py-1.5 rounded-lg border border-white/20 text-white/50 text-xs hover:text-white transition-all">Cancel</button>
+              </>
+            ) : (
+              <>
+                <button onClick={() => setOverriding(true)} className="px-3 py-1.5 rounded-lg border border-white/20 text-white/50 text-xs hover:text-white transition-all">
+                  {activePat ? 'Override' : 'Set token'}
+                </button>
+                {sessionPat && (
+                  <button onClick={clearOverride} className="px-3 py-1.5 rounded-lg border border-white/20 text-white/30 text-xs hover:text-white/60 transition-all">Clear override</button>
+                )}
+              </>
+            )}
+          </div>
         </div>
-        <p className="text-xs text-white/25 mt-1">Stored in session only — cleared when you close the tab</p>
       </div>
 
       {/* Tabs */}

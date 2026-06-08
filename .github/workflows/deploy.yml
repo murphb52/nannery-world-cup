@@ -28,6 +28,8 @@ jobs:
       - run: npm ci
 
       - run: npm run build
+        env:
+          VITE_GITHUB_PAT: ${{ secrets.VITE_GITHUB_PAT }}
 
       - uses: actions/upload-pages-artifact@v3
         with:

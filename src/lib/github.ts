@@ -1,6 +1,15 @@
 const REPO_OWNER = 'murphb52'
 const REPO_NAME = 'nannery-world-cup'
 
+export function getPat(): string {
+  // Session override takes precedence (e.g. for local dev), else use baked-in build token
+  return sessionStorage.getItem('admin_pat') || import.meta.env.VITE_GITHUB_PAT || ''
+}
+
+export function setPat(pat: string): void {
+  sessionStorage.setItem('admin_pat', pat)
+}
+
 export async function githubCommit(
   pat: string,
   path: string,
@@ -9,7 +18,6 @@ export async function githubCommit(
 ): Promise<void> {
   const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(content, null, 2))))
 
-  // Get current SHA
   const getRes = await fetch(
     `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}`,
     { headers: { Authorization: `Bearer ${pat}`, Accept: 'application/vnd.github+json' } }
@@ -33,12 +41,4 @@ export async function githubCommit(
     const err = await putRes.json()
     throw new Error(err.message ?? `Failed to commit ${path}`)
   }
-}
-
-export function getPat(): string {
-  return sessionStorage.getItem('admin_pat') ?? ''
-}
-
-export function setPat(pat: string): void {
-  sessionStorage.setItem('admin_pat', pat)
 }
