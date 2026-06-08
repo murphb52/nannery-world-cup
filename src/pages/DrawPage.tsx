@@ -42,7 +42,7 @@ export default function DrawPage() {
     setSaveStatus('saving')
     try {
       const content = btoa(JSON.stringify(result, null, 2))
-      const repoOwner = 'brianmartinmurphy'
+      const repoOwner = 'murphb52'
       const repoName = 'nannery-world-cup'
       const path = 'data/draw.json'
 
