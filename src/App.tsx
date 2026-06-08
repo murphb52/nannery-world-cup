@@ -3,6 +3,7 @@ import { useState } from 'react'
 import GroupsPage from './pages/GroupsPage'
 import KnockoutPage from './pages/KnockoutPage'
 import PrizesPage from './pages/PrizesPage'
+import PlayersPage from './pages/PlayersPage'
 import AdminPage from './pages/Admin/AdminPage'
 
 function Nav() {
@@ -21,29 +22,32 @@ function Nav() {
       <div className="max-w-7xl mx-auto px-4 flex items-center gap-1 h-14">
         <button
           onClick={handleLogoClick}
-          className="text-xl font-bold mr-6 bg-gradient-to-r from-yellow-400 to-red-500 bg-clip-text text-transparent cursor-pointer select-none"
+          className="text-base sm:text-xl font-bold mr-2 sm:mr-6 bg-gradient-to-r from-yellow-400 to-red-500 bg-clip-text text-transparent cursor-pointer select-none whitespace-nowrap shrink-0"
         >
           🏆 Nannery World Cup
         </button>
-        {[
-          { to: '/groups', label: 'Groups' },
-          { to: '/bracket', label: 'Bracket' },
-          { to: '/prizes', label: 'Prizes' },
-        ].map(({ to, label }) => (
-          <NavLink
-            key={to}
-            to={to}
-            className={({ isActive }) =>
-              `px-4 py-1.5 rounded-full text-sm font-medium transition-all ${
-                isActive
-                  ? 'bg-yellow-400/20 text-yellow-400 border border-yellow-400/30'
-                  : 'text-white/60 hover:text-white hover:bg-white/10'
-              }`
-            }
-          >
-            {label}
-          </NavLink>
-        ))}
+        <div className="flex items-center gap-1 overflow-x-auto no-scrollbar -mx-1 px-1">
+          {[
+            { to: '/groups', label: 'Groups' },
+            { to: '/bracket', label: 'Bracket' },
+            { to: '/players', label: 'Players' },
+            { to: '/prizes', label: 'Prizes' },
+          ].map(({ to, label }) => (
+            <NavLink
+              key={to}
+              to={to}
+              className={({ isActive }) =>
+                `px-3 sm:px-4 py-1.5 rounded-full text-sm font-medium transition-all whitespace-nowrap shrink-0 ${
+                  isActive
+                    ? 'bg-yellow-400/20 text-yellow-400 border border-yellow-400/30'
+                    : 'text-white/60 hover:text-white hover:bg-white/10'
+                }`
+              }
+            >
+              {label}
+            </NavLink>
+          ))}
+        </div>
       </div>
     </nav>
   )
@@ -60,6 +64,7 @@ export default function App() {
             <Route path="/" element={<GroupsPage />} />
             <Route path="/groups" element={<GroupsPage />} />
             <Route path="/bracket" element={<KnockoutPage />} />
+            <Route path="/players" element={<PlayersPage />} />
             <Route path="/prizes" element={<PrizesPage />} />
             <Route path="/admin" element={<AdminPage />} />
           </Routes>
