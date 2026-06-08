@@ -183,7 +183,7 @@ function BracketColumn({ rounds, bracket, teams, leftSide, onMatchClick }: {
   onMatchClick: (m: MatchData, round: string) => void
 }) {
   return (
-    <div className="flex gap-0" style={{ flexDirection: leftSide ? 'row' : 'row-reverse' }}>
+    <div className="flex gap-0" style={{ flexDirection: 'row' }}>
       {rounds.map((round, colIdx) => {
         const allMatches = bracket[round] ?? []
         // Left side uses first half, right side uses second half
