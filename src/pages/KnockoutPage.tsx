@@ -27,6 +27,94 @@ function matchTop(roundIndex: number, matchIndex: number): number {
   return matchIndex * slotsPerMatch * SLOT_H + centerOffset - MATCH_H / 2
 }
 
+function matchCenterY(roundIndex: number, matchIndex: number): number {
+  return matchTop(roundIndex, matchIndex) + MATCH_H / 2
+}
+
+// Total width of one side (4 rounds) + final column in centre
+const SIDE_W = 4 * MATCH_W + 3 * COL_GAP  // 680
+const TOTAL_W = SIDE_W * 2 + MATCH_W + COL_GAP * 2  // full bracket width
+
+function colX(colIndex: number): number {
+  return colIndex * (MATCH_W + COL_GAP)
+}
+
+// Renders SVG connector lines for the left or right half of the bracket
+function ConnectorLines({ side }: { side: 'left' | 'right' }) {
+  const paths: string[] = []
+  const stroke = 'rgba(255,255,255,0.2)'
+
+  // Left side: cols 0(R32)→1(R16)→2(QF)→3(SF)→4(Final)
+  // Right side (mirrored): cols 8(R32)→7(R16)→6(QF)→5(SF)→4(Final)
+  // For right side we flip x around the centre of the full bracket
+
+  const rounds = 4 // R32, R16, QF, SF — 4 columns per side
+
+  for (let r = 0; r < rounds; r++) {
+    const matchesThisRound = Math.pow(2, rounds - 1 - r) // 8,4,2,1
+    const matchesNextRound = matchesThisRound / 2
+
+    if (matchesNextRound < 1) continue // SF→Final handled separately
+
+    for (let i = 0; i < matchesNextRound; i++) {
+      const topMatchIdx = i * 2
+      const botMatchIdx = i * 2 + 1
+      const nextMatchIdx = i
+
+      const topY = matchCenterY(r, topMatchIdx)
+      const botY = matchCenterY(r, botMatchIdx)
+      const nextY = matchCenterY(r + 1, nextMatchIdx)
+
+      if (side === 'left') {
+        const fromX = colX(r) + MATCH_W
+        const toX = colX(r + 1)
+        const midX = fromX + COL_GAP / 2
+        // Exit lines from both matches
+        paths.push(`M${fromX},${topY} H${midX}`)
+        paths.push(`M${fromX},${botY} H${midX}`)
+        // Vertical connector
+        paths.push(`M${midX},${topY} V${botY}`)
+        // Entry line to next match
+        paths.push(`M${midX},${nextY} H${toX}`)
+      } else {
+        // Mirror: right R32 is at col 8, R16 at col 7, etc.
+        const rCol = (rounds * 2) - r      // 8,7,6,5
+        const nextRCol = rCol - 1           // 7,6,5,4→but SF→Final is separate
+        const fromX = colX(rCol)            // left edge of right-side card
+        const toX = colX(nextRCol) + MATCH_W // right edge of inner card
+        const midX = toX + COL_GAP / 2
+        paths.push(`M${fromX},${topY} H${midX}`)
+        paths.push(`M${fromX},${botY} H${midX}`)
+        paths.push(`M${midX},${topY} V${botY}`)
+        paths.push(`M${midX},${nextY} H${toX}`)
+      }
+    }
+  }
+
+  // SF → Final connector
+  const sfY = matchCenterY(3, 0)
+  const finalY = matchCenterY(3, 0) // Final sits at same vertical centre
+  if (side === 'left') {
+    const sfRight = colX(3) + MATCH_W
+    const finalLeft = colX(4)
+    paths.push(`M${sfRight},${sfY} H${finalLeft}`)
+  } else {
+    const sfLeft = colX(5)       // right SF left edge
+    const finalRight = colX(4) + MATCH_W
+    paths.push(`M${sfLeft},${finalY} H${finalRight}`)
+  }
+
+  return (
+    <svg
+      style={{ position: 'absolute', top: 0, left: 0, width: TOTAL_W, height: BRACKET_H, pointerEvents: 'none', overflow: 'visible' }}
+    >
+      {paths.map((d, i) => (
+        <path key={i} d={d} stroke={stroke} strokeWidth={1.5} fill="none" />
+      ))}
+    </svg>
+  )
+}
+
 const LEFT_ROUNDS = ['R32', 'R16', 'QF', 'SF'] as const
 const RIGHT_ROUNDS = ['SF', 'QF', 'R16', 'R32'] as const
 const ROUND_LABELS: Record<string, string> = {
@@ -170,41 +258,49 @@ export default function KnockoutPage() {
       <p className="text-white/40 text-sm mb-10">Click any match for details</p>
 
       <div className="overflow-x-auto pb-6">
-        <div style={{ display: 'flex', alignItems: 'flex-start', gap: COL_GAP, paddingTop: 24, minWidth: 'max-content' }}>
+        <div style={{ position: 'relative', paddingTop: 24, minWidth: 'max-content', width: TOTAL_W }}>
 
-          {/* Left side: R32 → SF */}
-          <BracketColumn
-            rounds={LEFT_ROUNDS}
-            bracket={bracket}
-            teams={teams}
-            leftSide={true}
-            onMatchClick={(m, r) => setZoom({ ...m, roundLabel: ROUND_LABELS[r] })}
-          />
+          {/* Connector lines — rendered behind everything */}
+          <ConnectorLines side="left" />
+          <ConnectorLines side="right" />
 
-          {/* Final in centre */}
-          <div style={{ position: 'relative', width: MATCH_W, height: BRACKET_H, marginTop: 0 }}>
-            <div className="absolute w-full text-center text-xs uppercase tracking-wider text-yellow-400/60 pb-2" style={{ top: -24 }}>
-              Final
-            </div>
-            {final && (
-              <div style={{ position: 'absolute', top: matchTop(3, 0), left: 0 }}>
-                <MatchCard
-                  match={final}
-                  teams={teams}
-                  onClick={() => setZoom({ ...final, roundLabel: 'Final' })}
-                />
+          {/* Match columns — laid out absolutely so connectors can span the full width */}
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: COL_GAP }}>
+
+            {/* Left side: R32 → SF */}
+            <BracketColumn
+              rounds={LEFT_ROUNDS}
+              bracket={bracket}
+              teams={teams}
+              leftSide={true}
+              onMatchClick={(m, r) => setZoom({ ...m, roundLabel: ROUND_LABELS[r] })}
+            />
+
+            {/* Final in centre */}
+            <div style={{ position: 'relative', width: MATCH_W, height: BRACKET_H }}>
+              <div className="absolute w-full text-center text-xs uppercase tracking-wider text-yellow-400/60" style={{ top: -24 }}>
+                Final
               </div>
-            )}
-          </div>
+              {final && (
+                <div style={{ position: 'absolute', top: matchTop(3, 0), left: 0 }}>
+                  <MatchCard
+                    match={final}
+                    teams={teams}
+                    onClick={() => setZoom({ ...final, roundLabel: 'Final' })}
+                  />
+                </div>
+              )}
+            </div>
 
-          {/* Right side: SF → R32 */}
-          <BracketColumn
-            rounds={RIGHT_ROUNDS}
-            bracket={bracket}
-            teams={teams}
-            leftSide={false}
-            onMatchClick={(m, r) => setZoom({ ...m, roundLabel: ROUND_LABELS[r] })}
-          />
+            {/* Right side: SF → R32 */}
+            <BracketColumn
+              rounds={RIGHT_ROUNDS}
+              bracket={bracket}
+              teams={teams}
+              leftSide={false}
+              onMatchClick={(m, r) => setZoom({ ...m, roundLabel: ROUND_LABELS[r] })}
+            />
+          </div>
         </div>
       </div>
 
