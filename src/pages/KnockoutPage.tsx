@@ -20,6 +20,7 @@ const MATCH_H = 64   // px height of a match card
 const MATCH_W = 152  // px width of a match card
 const COL_GAP = 24   // px gap between columns
 const BRACKET_H = 8 * SLOT_H  // 640px total
+const LABEL_H = 24  // px height reserved above matches for round labels
 
 function matchTop(roundIndex: number, matchIndex: number): number {
   const slotsPerMatch = Math.pow(2, roundIndex)
@@ -106,7 +107,7 @@ function ConnectorLines({ side }: { side: 'left' | 'right' }) {
 
   return (
     <svg
-      style={{ position: 'absolute', top: 0, left: 0, width: TOTAL_W, height: BRACKET_H, pointerEvents: 'none', overflow: 'visible' }}
+      style={{ position: 'absolute', top: LABEL_H, left: 0, width: TOTAL_W, height: BRACKET_H, pointerEvents: 'none', overflow: 'visible' }}
     >
       {paths.map((d, i) => (
         <path key={i} d={d} stroke={stroke} strokeWidth={1.5} fill="none" />
