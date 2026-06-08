@@ -25,6 +25,8 @@ export default function AdminDraw() {
     })
   }, [])
 
+  const drawDone = Object.keys(draw).length > 0
+
   async function save(data: DrawResult, msg: string) {
     const pat = getPat()
     if (!pat) { setSaveMsg('⚠ No GitHub PAT set above'); return }
@@ -46,6 +48,17 @@ export default function AdminDraw() {
     await save({}, 'chore: clear draw results')
   }
 
+  async function instantDraw() {
+    const msg = drawDone
+      ? 'Re-draw all pairings instantly?'
+      : 'Randomly assign all 48 players to teams instantly (no animation)?'
+    if (!confirm(msg)) return
+    const shuffledPlayers = [...players].sort(() => Math.random() - 0.5)
+    const result: DrawResult = {}
+    teams.forEach((team, i) => { result[team.id] = shuffledPlayers[i] })
+    await save(result, 'feat: instant draw — random assignment')
+  }
+
   async function applyEdit() {
     if (!editPairing) return
     const updated = { ...draw, [editPairing.teamId]: editPairing.player }
@@ -60,7 +73,6 @@ export default function AdminDraw() {
 
   if (loading) return <div className="text-white/40 animate-pulse">Loading…</div>
 
-  const drawDone = Object.keys(draw).length > 0
   const unassigned = players.filter(p => !Object.values(draw).includes(p))
 
   if (view === 'ceremony') {
@@ -104,6 +116,13 @@ export default function AdminDraw() {
           className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-yellow-500 to-red-500 text-black font-bold text-sm hover:opacity-90 transition-all"
         >
           🎲 {drawDone ? 'Re-run Draw Ceremony' : 'Run Draw Ceremony'}
+        </button>
+        <button
+          onClick={instantDraw}
+          disabled={saving}
+          className="px-5 py-2.5 rounded-xl border border-white/20 text-white/70 text-sm hover:bg-white/10 disabled:opacity-40 transition-all"
+        >
+          ⚡ Instant Draw
         </button>
         {drawDone && (
           <button
