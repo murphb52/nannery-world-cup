@@ -46,8 +46,8 @@ function buildPlaceholderBracket(): Record<string, MatchData[]> {
 function MatchCard({ match, teams, flipped = false, onClick }: {
   match: MatchData; teams: Team[]; flipped?: boolean; onClick: () => void
 }) {
-  const home = teams.find(t => t.id === match.homeTeamId)
-  const away = teams.find(t => t.id === match.awayTeamId)
+  const home = teams.find(t => t.id === match.homeTeamId) ?? null
+  const away = teams.find(t => t.id === match.awayTeamId) ?? null
   const finished = match.homeScore !== null && match.awayScore !== null
   const homeWon = finished && match.homeScore! > match.awayScore!
   const awayWon = finished && match.awayScore! > match.homeScore!
