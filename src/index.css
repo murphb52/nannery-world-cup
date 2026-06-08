@@ -13,3 +13,12 @@
     min-height: 100svh;
   }
 }
+
+/* Hide scrollbar for horizontally-scrollable nav on small screens */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
