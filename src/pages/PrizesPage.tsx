@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { loadTeams, loadDraw, loadScores } from '../data/loaders'
-import type { Team, DrawResult, ScoresData, Standing } from '../types'
+import type { Team, DrawResult, ScoresData, Standing, Match } from '../types'
 
 interface Prize {
   id: string
@@ -8,6 +8,42 @@ interface Prize {
   title: string
   subtitle: string
   compute: (standings: Standing[], draw: DrawResult, teams: Team[], scores: ScoresData) => { player: string; team: Team; stat: string } | null
+}
+
+// Winner of a knockout match, accounting for extra time and penalty shootouts.
+// Full-time scores can be level when a tie is decided on penalties, so we trust
+// the API's resolved `winner` field first and only fall back to the score line.
+function matchWinnerId(m: Match): string | null {
+  if (m.winner === 'HOME_TEAM') return m.homeTeamId
+  if (m.winner === 'AWAY_TEAM') return m.awayTeamId
+  if (m.homeScore != null && m.awayScore != null && m.homeScore !== m.awayScore) {
+    return m.homeScore > m.awayScore ? m.homeTeamId : m.awayTeamId
+  }
+  return null
+}
+
+function matchLoserId(m: Match): string | null {
+  const winnerId = matchWinnerId(m)
+  if (!winnerId) return null
+  return winnerId === m.homeTeamId ? m.awayTeamId : m.homeTeamId
+}
+
+// Tournament-wide goals scored/conceded per team, aggregated from every finished
+// match (group stage + knockouts). Standings only carry group-stage totals, so we
+// compute from matches instead. Penalty-shootout goals are excluded — football-data
+// keeps those in score.penalties, not in the full-time score we read here.
+function goalTotals(scores: ScoresData): Record<string, { for: number; against: number }> {
+  const totals: Record<string, { for: number; against: number }> = {}
+  for (const m of scores.matches ?? []) {
+    if (m.status !== 'FINISHED' || m.homeScore == null || m.awayScore == null) continue
+    const home = (totals[m.homeTeamId] ??= { for: 0, against: 0 })
+    const away = (totals[m.awayTeamId] ??= { for: 0, against: 0 })
+    home.for += m.homeScore
+    home.against += m.awayScore
+    away.for += m.awayScore
+    away.against += m.homeScore
+  }
+  return totals
 }
 
 const PRIZES: Prize[] = [
@@ -19,7 +55,8 @@ const PRIZES: Prize[] = [
     compute: (_, draw, teams, scores) => {
       const final = scores.matches?.find(m => m.stage === 'F' && m.status === 'FINISHED')
       if (!final) return null
-      const winnerId = final.homeScore! > final.awayScore! ? final.homeTeamId : final.awayTeamId
+      const winnerId = matchWinnerId(final)
+      if (!winnerId) return null
       const team = teams.find(t => t.id === winnerId)
       if (!team) return null
       return { player: draw[team.id] ?? '—', team, stat: 'Tournament Winner 🏆' }
@@ -33,7 +70,8 @@ const PRIZES: Prize[] = [
     compute: (_, draw, teams, scores) => {
       const final = scores.matches?.find(m => m.stage === 'F' && m.status === 'FINISHED')
       if (!final) return null
-      const loserId = final.homeScore! < final.awayScore! ? final.homeTeamId : final.awayTeamId
+      const loserId = matchLoserId(final)
+      if (!loserId) return null
       const team = teams.find(t => t.id === loserId)
       if (!team) return null
       return { player: draw[team.id] ?? '—', team, stat: 'Runner-Up 🥈' }
@@ -44,14 +82,15 @@ const PRIZES: Prize[] = [
     icon: '⚽',
     title: 'Most Goals Scored',
     subtitle: 'Highest scoring team',
-    compute: (standings, draw, teams) => {
-      const all = Object.values(standings).flat() as Standing[]
-      if (!all.length) return null
-      const top = all.reduce((a, b) => a.goalsFor > b.goalsFor ? a : b)
-      if (top.goalsFor === 0) return null
-      const team = teams.find(t => t.id === top.teamId)
+    compute: (_, draw, teams, scores) => {
+      const totals = goalTotals(scores)
+      const entries = Object.entries(totals)
+      if (!entries.length) return null
+      const [teamId, t] = entries.reduce((a, b) => b[1].for > a[1].for ? b : a)
+      if (t.for === 0) return null
+      const team = teams.find(t => t.id === teamId)
       if (!team) return null
-      return { player: draw[team.id] ?? '—', team, stat: `${top.goalsFor} goals scored` }
+      return { player: draw[team.id] ?? '—', team, stat: `${t.for} goals scored` }
     },
   },
   {
@@ -59,14 +98,15 @@ const PRIZES: Prize[] = [
     icon: '🫣',
     title: 'Most Goals Conceded',
     subtitle: 'Leakiest defence',
-    compute: (standings, draw, teams) => {
-      const all = Object.values(standings).flat() as Standing[]
-      if (!all.length) return null
-      const top = all.reduce((a, b) => a.goalsAgainst > b.goalsAgainst ? a : b)
-      if (top.goalsAgainst === 0) return null
-      const team = teams.find(t => t.id === top.teamId)
+    compute: (_, draw, teams, scores) => {
+      const totals = goalTotals(scores)
+      const entries = Object.entries(totals)
+      if (!entries.length) return null
+      const [teamId, t] = entries.reduce((a, b) => b[1].against > a[1].against ? b : a)
+      if (t.against === 0) return null
+      const team = teams.find(t => t.id === teamId)
       if (!team) return null
-      return { player: draw[team.id] ?? '—', team, stat: `${top.goalsAgainst} goals conceded` }
+      return { player: draw[team.id] ?? '—', team, stat: `${t.against} goals conceded` }
     },
   },
   {
