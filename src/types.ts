@@ -34,7 +34,7 @@ export interface Match {
   awayScore: number | null
   date: string
   venue: string
-  status: 'SCHEDULED' | 'LIVE' | 'FINISHED'
+  status: 'SCHEDULED' | 'TIMED' | 'LIVE' | 'FINISHED'
 }
 
 export interface ScoresData {

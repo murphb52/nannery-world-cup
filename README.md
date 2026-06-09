@@ -1,73 +1,69 @@
-# React + TypeScript + Vite
+# Nannery World Cup 2026
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A family sweepstakes app for the 2026 FIFA World Cup. 48 players each draw a team at random; the app tracks live standings, fixtures, and prizes throughout the tournament.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+### Pages
 
-## React Compiler
+| Page | Description |
+|------|-------------|
+| **Groups** | Live group-stage standings for all 12 groups (A–L). Highlights the player assigned to each team. "Find Me" search filters all groups to your name. |
+| **Fixtures** | Full match schedule grouped by day. A scrollable date-chip strip auto-selects today (or the next upcoming match day). Shows live scores with a pulsing indicator, final scores, and the player behind each team. "Find Me" dims all other matches. |
+| **Bracket** | Full 64-team knockout bracket (R32 → R16 → QF → SF → Final) rendered as an SVG with connector lines. Click any match card for a detail modal showing the teams, scores, and sweepstakes owner. |
+| **Players** | Grid of all 41 sweepstakes players with their drawn team's flag and group. Searchable. Shows "Awaiting the draw" before the draw runs. |
+| **Prizes** | Live prize leaderboard showing who is currently winning each special prize category (see below). Updates daily as scores come in. |
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Prize Categories
 
-## Expanding the ESLint configuration
+- 🏆 **Winner** — team wins the tournament
+- 🥈 **2nd Place** — team reaches the final
+- ⚽ **Most Goals Scored** — highest-scoring team
+- 🫣 **Most Goals Conceded** — leakiest defence
+- 🟨 **Most Yellow Cards** — dirtiest team
+- 🟥 **First Red Card** — first team to see red
+- 👋 **First Eliminated** — first team out of the group stage
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Admin (hidden)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Tap the 🏆 logo 5 times to access the admin panel. From there you can:
+- Manage the player list
+- Manage teams and group assignments
+- Run the animated draw ceremony (name-by-name and team-by-team reveal)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Draw Ceremony
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+An animated reveal experience that draws each player's team one at a time with transitions. Designed to be projected during a live draw event.
+
+### Data Pipeline
+
+Scores and standings are fetched automatically from [football-data.org](https://www.football-data.org/) via a `scripts/fetch-scores.js` script (Node.js). A GitHub Actions workflow runs this on a schedule during the tournament and commits the updated `data/scores.json` to the repo, which is then deployed to GitHub Pages.
+
+## Tech Stack
+
+- **React 19** + **TypeScript** — component framework
+- **Vite** — build tooling and dev server
+- **Tailwind CSS v4** — styling
+- **React Router** (HashRouter) — client-side routing, hash-based for GitHub Pages compatibility
+- **football-data.org API** — live match and standings data
+
+## Development
+
+```bash
+npm install
+npm run dev       # start dev server
+npm run build     # production build → dist/
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Updating scores manually
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+FOOTBALL_DATA_API_KEY=your_key node scripts/fetch-scores.js
 ```
+
+## Deployment
+
+The app deploys to GitHub Pages from the `dist/` folder. The GitHub Actions workflow:
+1. Fetches fresh scores on a cron schedule
+2. Commits `data/scores.json` if changed
+3. Builds and deploys to Pages on every push to `main`
