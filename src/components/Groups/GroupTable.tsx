@@ -35,7 +35,8 @@ export default function GroupTable({ group, teams, draw, standings, highlight }:
         <h3 className="font-bold text-yellow-400 text-sm uppercase tracking-wider">Group {group}</h3>
       </div>
 
-      <table className="w-full text-sm table-fixed">
+      <div className="overflow-x-auto no-scrollbar">
+      <table className={`w-full text-sm table-fixed ${tournamentStarted ? 'min-w-[26rem]' : ''}`}>
         <colgroup>
           <col className="w-8" />        {/* flag */}
           <col />                         {/* team name — takes remaining space */}
@@ -78,7 +79,7 @@ export default function GroupTable({ group, teams, draw, standings, highlight }:
                 <img
                   src={team.flag}
                   alt={team.name}
-                  className={`w-8 h-5 object-cover rounded transition-all ${isEliminated ? 'grayscale' : ''}`}
+                  className={`w-8 h-5 min-w-8 max-w-none shrink-0 object-cover rounded transition-all ${isEliminated ? 'grayscale' : ''}`}
                 />
               </td>
               <td className="px-2 py-2.5">
@@ -107,6 +108,7 @@ export default function GroupTable({ group, teams, draw, standings, highlight }:
           ))}
         </tbody>
       </table>
+      </div>
     </div>
   )
 }
