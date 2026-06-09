@@ -1,6 +1,7 @@
 import { HashRouter, Routes, Route, NavLink, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import GroupsPage from './pages/GroupsPage'
+import FixturesPage from './pages/FixturesPage'
 import KnockoutPage from './pages/KnockoutPage'
 import PrizesPage from './pages/PrizesPage'
 import PlayersPage from './pages/PlayersPage'
@@ -29,6 +30,7 @@ function Nav() {
         <div className="flex items-center gap-1 overflow-x-auto no-scrollbar -mx-1 px-1">
           {[
             { to: '/groups', label: 'Groups' },
+            { to: '/fixtures', label: 'Fixtures' },
             { to: '/bracket', label: 'Bracket' },
             { to: '/players', label: 'Players' },
             { to: '/prizes', label: 'Prizes' },
@@ -63,6 +65,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<GroupsPage />} />
             <Route path="/groups" element={<GroupsPage />} />
+            <Route path="/fixtures" element={<FixturesPage />} />
             <Route path="/bracket" element={<KnockoutPage />} />
             <Route path="/players" element={<PlayersPage />} />
             <Route path="/prizes" element={<PrizesPage />} />
