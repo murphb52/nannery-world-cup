@@ -37,7 +37,14 @@ An animated reveal experience that draws each player's team one at a time with t
 
 ### Data Pipeline
 
-Scores and standings are fetched automatically from [football-data.org](https://www.football-data.org/) via a `scripts/fetch-scores.js` script (Node.js). A GitHub Actions workflow runs this on a schedule during the tournament and commits the updated `data/scores.json` to the repo, which is then deployed to GitHub Pages.
+Scores, standings, and prize stats are fetched automatically from [football-data.org](https://www.football-data.org/) (free tier) via `scripts/fetch-scores.js` (Node.js). The script:
+
+- pulls all matches and group standings in two API calls
+- fetches per-match **bookings** (yellow/red cards) for finished and in-play matches, caching finished ones in `data/bookings.json` so each run stays well inside the free 10 requests/minute limit
+- computes tournament-wide card totals per team, the first red card, and group-stage eliminations (2026 format: top two per group plus the 8 best third-placed teams advance)
+- writes everything to `data/scores.json`, skipping the write when nothing changed
+
+The `fetch-scores.yml` GitHub Actions workflow runs every 30 minutes during the tournament (11 June – 19 July 2026) and daily otherwise. When the data changes it commits and explicitly triggers the Pages deploy (`gh workflow run deploy.yml`), since pushes made with `GITHUB_TOKEN` don't fire `on: push` workflows. The whole pipeline is free: football-data.org free tier covers the World Cup, and GitHub Actions/Pages are free for public repos.
 
 ## Tech Stack
 

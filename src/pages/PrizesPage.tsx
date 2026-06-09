@@ -8,7 +8,7 @@ interface Prize {
   title: string
   subtitle: string
   amount: number
-  compute: (standings: Standing[], playerNames: Record<string, string>, teams: Team[], scores: ScoresData) => { player: string; team: Team; stat: string } | null
+  compute: (standings: Record<string, Standing[]>, playerNames: Record<string, string>, teams: Team[], scores: ScoresData) => { player: string; team: Team; stat: string } | null
 }
 
 // Winner of a knockout match, accounting for extra time and penalty shootouts.
@@ -120,14 +120,15 @@ const PRIZES: Prize[] = [
     title: 'Most Yellow Cards',
     subtitle: 'Dirtiest team',
     amount: 20,
-    compute: (standings, playerNames, teams) => {
-      const all = Object.values(standings).flat() as Standing[]
-      if (!all.length) return null
-      const top = all.reduce((a, b) => a.yellowCards > b.yellowCards ? a : b)
-      if (top.yellowCards === 0) return null
-      const team = teams.find(t => t.id === top.teamId)
+    compute: (_, playerNames, teams, scores) => {
+      // Tournament-wide totals from match bookings (standings only cover groups)
+      const entries = Object.entries(scores.cards ?? {})
+      if (!entries.length) return null
+      const [teamId, top] = entries.reduce((a, b) => b[1].yellow > a[1].yellow ? b : a)
+      if (top.yellow === 0) return null
+      const team = teams.find(t => t.id === teamId)
       if (!team) return null
-      return { player: playerNames[team.id] ?? '—', team, stat: `${top.yellowCards} yellow cards` }
+      return { player: playerNames[team.id] ?? '—', team, stat: `${top.yellow} yellow cards` }
     },
   },
   {
@@ -136,14 +137,15 @@ const PRIZES: Prize[] = [
     title: 'First Red Card',
     subtitle: 'First team to see red',
     amount: 10,
-    compute: (standings, playerNames, teams) => {
-      const all = Object.values(standings).flat() as Standing[]
-      const withRed = all.filter(s => s.redCards > 0)
-      if (!withRed.length) return null
-      const top = withRed[0]
-      const team = teams.find(t => t.id === top.teamId)
+    compute: (_, playerNames, teams, scores) => {
+      const red = scores.firstRedCard
+      if (!red) return null
+      const team = teams.find(t => t.id === red.teamId)
       if (!team) return null
-      return { player: playerNames[team.id] ?? '—', team, stat: 'First red card of the tournament' }
+      const stat = red.player
+        ? `${red.player}${red.minute != null ? ` (${red.minute}')` : ''}`
+        : 'First red card of the tournament'
+      return { player: playerNames[team.id] ?? '—', team, stat }
     },
   },
   {
@@ -153,10 +155,17 @@ const PRIZES: Prize[] = [
     subtitle: 'First team out',
     amount: 10,
     compute: (standings, playerNames, teams) => {
-      const all = Object.values(standings).flat() as Standing[]
+      const all = Object.values(standings).flat()
       const eliminated = all.filter(s => s.eliminated)
       if (!eliminated.length) return null
-      const bottom = eliminated.reduce((a, b) => a.points < b.points ? a : b)
+      // Earliest confirmed elimination; ties broken by worst record
+      const bottom = eliminated.reduce((a, b) => {
+        const aAt = a.eliminatedAt ?? ''
+        const bAt = b.eliminatedAt ?? ''
+        if (aAt !== bAt) return aAt && (!bAt || aAt < bAt) ? a : b
+        if (a.points !== b.points) return a.points < b.points ? a : b
+        return a.goalDiff <= b.goalDiff ? a : b
+      })
       const team = teams.find(t => t.id === bottom.teamId)
       if (!team) return null
       return { player: playerNames[team.id] ?? '—', team, stat: 'Eliminated in group stage' }
@@ -196,7 +205,7 @@ export default function PrizesPage() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {PRIZES.map(prize => {
-          const result = prize.compute(allStandings as any, playerNames, teams, scores!)
+          const result = prize.compute(allStandings, playerNames, teams, scores!)
           return (
             <div
               key={prize.id}
