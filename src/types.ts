@@ -27,6 +27,20 @@ export interface Standing {
   yellowCards: number
   redCards: number
   eliminated: boolean
+  eliminatedAt?: string | null
+}
+
+export interface CardTotals {
+  yellow: number
+  red: number
+}
+
+export interface FirstRedCard {
+  teamId: string
+  matchId: number
+  date: string | null
+  minute: number | null
+  player: string | null
 }
 
 export interface Match {
@@ -47,4 +61,7 @@ export interface ScoresData {
   lastUpdated: string | null
   matches: Match[]
   standings: { [group: string]: Standing[] }
+  /** Tournament-wide card totals per team (group stage + knockouts). */
+  cards?: { [teamId: string]: CardTotals }
+  firstRedCard?: FirstRedCard | null
 }
