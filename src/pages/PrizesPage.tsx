@@ -48,6 +48,7 @@ const PRIZES: Prize[] = [
       const all = Object.values(standings).flat() as Standing[]
       if (!all.length) return null
       const top = all.reduce((a, b) => a.goalsFor > b.goalsFor ? a : b)
+      if (top.goalsFor === 0) return null
       const team = teams.find(t => t.id === top.teamId)
       if (!team) return null
       return { player: draw[team.id] ?? '—', team, stat: `${top.goalsFor} goals scored` }
@@ -62,6 +63,7 @@ const PRIZES: Prize[] = [
       const all = Object.values(standings).flat() as Standing[]
       if (!all.length) return null
       const top = all.reduce((a, b) => a.goalsAgainst > b.goalsAgainst ? a : b)
+      if (top.goalsAgainst === 0) return null
       const team = teams.find(t => t.id === top.teamId)
       if (!team) return null
       return { player: draw[team.id] ?? '—', team, stat: `${top.goalsAgainst} goals conceded` }
@@ -76,6 +78,7 @@ const PRIZES: Prize[] = [
       const all = Object.values(standings).flat() as Standing[]
       if (!all.length) return null
       const top = all.reduce((a, b) => a.yellowCards > b.yellowCards ? a : b)
+      if (top.yellowCards === 0) return null
       const team = teams.find(t => t.id === top.teamId)
       if (!team) return null
       return { player: draw[team.id] ?? '—', team, stat: `${top.yellowCards} yellow cards` }
