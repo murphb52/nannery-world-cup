@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react'
-import { loadTeams, loadDraw, loadScores } from '../data/loaders'
-import type { Team, DrawResult, Match } from '../types'
+import { useState, useEffect, useMemo } from 'react'
+import { loadTeams, loadDraw, loadScores, loadPlayers, resolveNames } from '../data/loaders'
+import type { Team, DrawResult, Match, Player } from '../types'
 
 interface MatchData {
   id: string
@@ -223,14 +223,16 @@ function BracketColumn({ rounds, bracket, teams, leftSide, onMatchClick }: {
 export default function KnockoutPage() {
   const [teams, setTeams] = useState<Team[]>([])
   const [draw, setDraw] = useState<DrawResult>({})
+  const [players, setPlayers] = useState<Player[]>([])
   const [bracket, setBracket] = useState<Record<string, MatchData[]>>(buildPlaceholderBracket())
   const [zoom, setZoom] = useState<ZoomMatch | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    Promise.all([loadTeams(), loadDraw(), loadScores()]).then(([t, d, s]) => {
+    Promise.all([loadTeams(), loadDraw(), loadScores(), loadPlayers()]).then(([t, d, s, p]) => {
       setTeams(t)
       setDraw(d)
+      setPlayers(p)
       if (s.matches?.length) {
         const updated = { ...buildPlaceholderBracket() }
         for (const m of s.matches.filter((m: Match) => m.stage !== 'GROUP')) {
@@ -246,6 +248,8 @@ export default function KnockoutPage() {
       setLoading(false)
     })
   }, [])
+
+  const playerNames = useMemo(() => resolveNames(draw, players), [draw, players])
 
   if (loading) {
     return <div className="flex items-center justify-center min-h-[80vh] text-white/50 animate-pulse">Loading bracket…</div>
@@ -315,7 +319,7 @@ export default function KnockoutPage() {
             </div>
             {[{ teamId: zoom.homeTeamId, score: zoom.homeScore }, { teamId: zoom.awayTeamId, score: zoom.awayScore }].map(({ teamId, score }, i) => {
               const team = teams.find(t => t.id === teamId)
-              const player = teamId ? draw[teamId] : null
+              const player = teamId ? playerNames[teamId] : null
               return (
                 <div key={i} className="flex items-center gap-3 p-3 rounded-xl bg-white/5 mb-2">
                   {team ? <>

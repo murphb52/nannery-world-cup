@@ -1,19 +1,19 @@
-import type { Team, Standing, DrawResult } from '../../types'
+import type { Team, Standing } from '../../types'
 
 interface Props {
   group: string
   teams: Team[]
-  draw: DrawResult
+  playerNames: Record<string, string>
   standings: Standing[] | null
   highlight: string
 }
 
-export default function GroupTable({ group, teams, draw, standings, highlight }: Props) {
+export default function GroupTable({ group, teams, playerNames, standings, highlight }: Props) {
   const tournamentStarted = standings !== null && standings.length > 0
 
   const rows = teams.map(team => {
     const standing = standings?.find(s => s.teamId === team.id)
-    const player = draw[team.id]
+    const player = playerNames[team.id]
     const isEliminated = standing?.eliminated ?? false
     const isHighlighted = highlight && (
       player?.toLowerCase().includes(highlight.toLowerCase()) ||

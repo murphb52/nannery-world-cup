@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import DrawCeremony from '../components/Draw/DrawCeremony'
 import { loadPlayers, loadTeams, loadDraw } from '../data/loaders'
-import type { Team, DrawResult } from '../types'
+import type { Team, DrawResult, Player } from '../types'
 
 type AppState = 'loading' | 'already-drawn' | 'mode-select' | 'drawing' | 'done'
 
@@ -16,7 +16,7 @@ const SPEEDS = [
 export default function DrawPage() {
   const navigate = useNavigate()
   const [appState, setAppState] = useState<AppState>('loading')
-  const [players, setPlayers] = useState<string[]>([])
+  const [players, setPlayers] = useState<Player[]>([])
   const [teams, setTeams] = useState<Team[]>([])
   const [isLiveMode, setIsLiveMode] = useState(false)
   const [speed, setSpeed] = useState(1)

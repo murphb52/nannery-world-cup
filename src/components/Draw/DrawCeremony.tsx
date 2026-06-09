@@ -1,18 +1,18 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import confetti from 'canvas-confetti'
-import type { Team, DrawResult } from '../../types'
+import type { Team, DrawResult, Player } from '../../types'
 import GroupsBoard from './GroupsBoard'
 import { exportGroupsPng } from '../../lib/exportPng'
 
 type Phase = 'idle' | 'shuffling' | 'reveal-name' | 'reveal-team' | 'done'
 
 interface Pairing {
-  player: string
+  player: Player
   team: Team
 }
 
 interface Props {
-  players: string[]
+  players: Player[]
   teams: Team[]
   onComplete: (result: DrawResult) => void
   isLiveMode?: boolean
@@ -49,11 +49,11 @@ export default function DrawCeremony({
   autoPlay = false,
   onExit,
 }: Props) {
-  const [remainingPlayers, setRemainingPlayers] = useState<string[]>(() => [...players])
+  const [remainingPlayers, setRemainingPlayers] = useState<Player[]>(() => [...players])
   const [remainingTeams, setRemainingTeams] = useState<Team[]>(() => [...teams])
   const [completed, setCompleted] = useState<Pairing[]>([])
   const [phase, setPhase] = useState<Phase>('idle')
-  const [currentPlayer, setCurrentPlayer] = useState<string | null>(null)
+  const [currentPlayer, setCurrentPlayer] = useState<Player | null>(null)
   const [currentTeam, setCurrentTeam] = useState<Team | null>(null)
   const [flicker, setFlicker] = useState<string>('')
   const [running, setRunning] = useState(autoPlay)
@@ -87,7 +87,7 @@ export default function DrawCeremony({
     }
     setStarted(true)
     setCurrentPlayer(remainingPlayers[pickIndex(remainingPlayers.length)])
-    setFlicker(remainingPlayers[pickIndex(remainingPlayers.length)])
+    setFlicker(remainingPlayers[pickIndex(remainingPlayers.length)].name)
     setPhase('shuffling')
   }, [remainingPlayers, remainingTeams.length, finish])
 
@@ -106,9 +106,9 @@ export default function DrawCeremony({
 
   const confirmAndNext = useCallback(() => {
     if (!currentPlayer || !currentTeam) return
-    drawResult.current[currentTeam.id] = currentPlayer
+    drawResult.current[currentTeam.id] = currentPlayer.id
     setCompleted(prev => [...prev, { player: currentPlayer, team: currentTeam }])
-    setRemainingPlayers(prev => prev.filter(p => p !== currentPlayer))
+    setRemainingPlayers(prev => prev.filter(p => p.id !== currentPlayer.id))
     setRemainingTeams(prev => prev.filter(t => t.id !== currentTeam.id))
     setCurrentPlayer(null)
     setCurrentTeam(null)
@@ -119,7 +119,7 @@ export default function DrawCeremony({
   useEffect(() => {
     if (phase !== 'shuffling') return
     const id = setInterval(() => {
-      setFlicker(remainingPlayers[pickIndex(remainingPlayers.length)] ?? '')
+      setFlicker(remainingPlayers[pickIndex(remainingPlayers.length)]?.name ?? '')
     }, Math.max(28, FLICKER_MS / speed))
     return () => clearInterval(id)
   }, [phase, remainingPlayers, speed])
@@ -159,18 +159,18 @@ export default function DrawCeremony({
     const shuffledPlayers = [...remainingPlayers].sort(() => Math.random() - 0.5)
     const shuffledTeams = [...remainingTeams].sort(() => Math.random() - 0.5)
     // Fold in whatever's mid-reveal so nothing is lost
-    if (currentPlayer && currentTeam) drawResult.current[currentTeam.id] = currentPlayer
-    const leftoverPlayers = currentPlayer ? shuffledPlayers.filter(p => p !== currentPlayer) : shuffledPlayers
+    if (currentPlayer && currentTeam) drawResult.current[currentTeam.id] = currentPlayer.id
+    const leftoverPlayers = currentPlayer ? shuffledPlayers.filter(p => p.id !== currentPlayer.id) : shuffledPlayers
     const leftoverTeams = currentTeam ? shuffledTeams.filter(t => t.id !== currentTeam.id) : shuffledTeams
     const n = Math.min(leftoverPlayers.length, leftoverTeams.length)
-    for (let i = 0; i < n; i++) drawResult.current[leftoverTeams[i].id] = leftoverPlayers[i]
+    for (let i = 0; i < n; i++) drawResult.current[leftoverTeams[i].id] = leftoverPlayers[i].id
     finish()
   }, [remainingPlayers, remainingTeams, currentPlayer, currentTeam, finish])
 
   async function handleExport() {
     setExporting(true)
     try {
-      await exportGroupsPng(teams, drawResult.current)
+      await exportGroupsPng(teams, drawResult.current, players)
     } catch (e) {
       alert(e instanceof Error ? e.message : 'Export failed')
     } finally {
@@ -178,11 +178,11 @@ export default function DrawCeremony({
     }
   }
 
-  // Live assignment map (includes the team currently being revealed)
+  // Live assignment map: teamId -> player display name (for GroupsBoard)
   const assignments = useMemo(() => {
     const a: Record<string, string> = {}
-    completed.forEach(p => { a[p.team.id] = p.player })
-    if (currentTeam && currentPlayer && phase === 'reveal-team') a[currentTeam.id] = currentPlayer
+    completed.forEach(p => { a[p.team.id] = p.player.name })
+    if (currentTeam && currentPlayer && phase === 'reveal-team') a[currentTeam.id] = currentPlayer.name
     return a
   }, [completed, currentTeam, currentPlayer, phase])
 
@@ -217,7 +217,7 @@ export default function DrawCeremony({
 
         <div className="w-full">
           {/* Read the authoritative result ref so Skip-to-results is reflected too */}
-          <GroupsBoard teams={teams} assignments={drawResult.current} />
+          <GroupsBoard teams={teams} assignments={assignments} />
         </div>
       </div>
     )
@@ -272,7 +272,7 @@ export default function DrawCeremony({
 
   // ── Live ceremony ──────────────────────────────────────────────────
   const showName = phase === 'shuffling' || phase === 'reveal-name' || phase === 'reveal-team'
-  const nameText = phase === 'shuffling' ? flicker : currentPlayer
+  const nameText = phase === 'shuffling' ? flicker : currentPlayer?.name ?? ''
 
   return (
     <div className="flex flex-col items-center gap-6 w-full max-w-6xl mx-auto px-2">

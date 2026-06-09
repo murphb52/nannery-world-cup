@@ -1,7 +1,7 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useMemo } from 'react'
 import GroupTable from '../components/Groups/GroupTable'
-import { loadTeams, loadDraw, loadScores } from '../data/loaders'
-import type { Team, DrawResult, ScoresData, Match } from '../types'
+import { loadTeams, loadDraw, loadScores, loadPlayers, resolveNames } from '../data/loaders'
+import type { Team, DrawResult, ScoresData, Match, Player } from '../types'
 
 function useCountdown(targetIso: string | null) {
   const [secondsLeft, setSecondsLeft] = useState<number | null>(null)
@@ -38,7 +38,7 @@ const STAGE_LABELS: Record<string, string> = {
   QF: 'Quarter-Final', SF: 'Semi-Final', F: 'Final',
 }
 
-function NextMatchBanner({ matches, teams, draw }: { matches: Match[]; teams: Team[]; draw: DrawResult }) {
+function NextMatchBanner({ matches, teams, playerNames }: { matches: Match[]; teams: Team[]; playerNames: Record<string, string> }) {
   const liveMatch = matches.find(m => m.status === 'LIVE')
   const nextMatch = liveMatch ?? matches.find(m => (m.status === 'SCHEDULED' || m.status === 'TIMED') && new Date(m.date) > new Date())
   const secondsLeft = useCountdown((!liveMatch && nextMatch) ? nextMatch.date : null)
@@ -47,8 +47,8 @@ function NextMatchBanner({ matches, teams, draw }: { matches: Match[]; teams: Te
 
   const home = teams.find(t => t.id === nextMatch.homeTeamId)
   const away = teams.find(t => t.id === nextMatch.awayTeamId)
-  const homePlayer = nextMatch.homeTeamId ? draw[nextMatch.homeTeamId] : null
-  const awayPlayer = nextMatch.awayTeamId ? draw[nextMatch.awayTeamId] : null
+  const homePlayer = nextMatch.homeTeamId ? playerNames[nextMatch.homeTeamId] : null
+  const awayPlayer = nextMatch.awayTeamId ? playerNames[nextMatch.awayTeamId] : null
   const stageLabel = STAGE_LABELS[nextMatch.stage] ?? nextMatch.stage
   const groupLetter = nextMatch.group?.replace('GROUP_', '') ?? ''
   const groupSuffix = nextMatch.stage === 'GROUP' && groupLetter ? ` ${groupLetter}` : ''
@@ -114,18 +114,22 @@ function NextMatchBanner({ matches, teams, draw }: { matches: Match[]; teams: Te
 export default function GroupsPage() {
   const [teams, setTeams] = useState<Team[]>([])
   const [draw, setDraw] = useState<DrawResult>({})
+  const [players, setPlayers] = useState<Player[]>([])
   const [scores, setScores] = useState<ScoresData | null>(null)
   const [search, setSearch] = useState('')
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    Promise.all([loadTeams(), loadDraw(), loadScores()]).then(([t, d, s]) => {
+    Promise.all([loadTeams(), loadDraw(), loadScores(), loadPlayers()]).then(([t, d, s, p]) => {
       setTeams(t)
       setDraw(d)
       setScores(s)
+      setPlayers(p)
       setLoading(false)
     })
   }, [])
+
+  const playerNames = useMemo(() => resolveNames(draw, players), [draw, players])
 
   const groups = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L']
   const drawEmpty = Object.keys(draw).length === 0
@@ -147,7 +151,7 @@ export default function GroupsPage() {
         <NextMatchBanner
           matches={scores.matches}
           teams={teams}
-          draw={draw}
+          playerNames={playerNames}
         />
       )}
 
@@ -177,7 +181,7 @@ export default function GroupsPage() {
               key={group}
               group={group}
               teams={groupTeams}
-              draw={draw}
+              playerNames={playerNames}
               standings={standings}
               highlight={search}
             />

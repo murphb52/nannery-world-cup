@@ -1,4 +1,5 @@
-import type { Team, DrawResult } from '../types'
+import type { Team, DrawResult, Player } from '../types'
+import { resolveNames } from '../data/loaders'
 
 const GROUPS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L']
 
@@ -36,7 +37,8 @@ function fitText(ctx: CanvasRenderingContext2D, text: string, maxW: number): str
  * on the page's CSS (Tailwind v4 oklch colours break DOM-snapshot libraries)
  * and so it always produces a clean, consistent share graphic.
  */
-export async function exportGroupsPng(teams: Team[], draw: DrawResult): Promise<void> {
+export async function exportGroupsPng(teams: Team[], draw: DrawResult, players: Player[]): Promise<void> {
+  const playerNames = resolveNames(draw, players)
   const scale = Math.min(2, window.devicePixelRatio || 1) * 1.5
   const COLS = 4
   const ROWS = 3
@@ -158,7 +160,7 @@ export async function exportGroupsPng(teams: Team[], draw: DrawResult): Promise<
       ctx.fillText(fitText(ctx, team.name, nameMaxW), nameX, midY + 1)
 
       // Player name (right-aligned)
-      const player = draw[team.id]
+      const player = playerNames[team.id]
       ctx.textAlign = 'right'
       ctx.font = '500 17px Inter, system-ui, sans-serif'
       if (player) {

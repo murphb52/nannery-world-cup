@@ -1,9 +1,9 @@
 import { useState, useEffect, useMemo } from 'react'
 import { loadPlayers, loadTeams, loadDraw } from '../data/loaders'
-import type { Team, DrawResult } from '../types'
+import type { Team, DrawResult, Player } from '../types'
 
 export default function PlayersPage() {
-  const [players, setPlayers] = useState<string[]>([])
+  const [players, setPlayers] = useState<Player[]>([])
   const [teams, setTeams] = useState<Team[]>([])
   const [draw, setDraw] = useState<DrawResult>({})
   const [search, setSearch] = useState('')
@@ -18,12 +18,12 @@ export default function PlayersPage() {
     })
   }, [])
 
-  // Invert the draw (teamId -> player) into player -> team
-  const teamByPlayer = useMemo(() => {
+  // Invert the draw (teamId -> playerId) into playerId -> team
+  const teamByPlayerId = useMemo(() => {
     const map = new Map<string, Team>()
-    for (const [teamId, player] of Object.entries(draw)) {
+    for (const [teamId, playerId] of Object.entries(draw)) {
       const team = teams.find(t => t.id === teamId)
-      if (team) map.set(player, team)
+      if (team) map.set(playerId, team)
     }
     return map
   }, [draw, teams])
@@ -32,22 +32,17 @@ export default function PlayersPage() {
     return <PageCenter><div className="text-white/50 animate-pulse">Loading players…</div></PageCenter>
   }
 
-  const realPlayers = players.filter(p => !p.startsWith('TBD-'))
-  const tbdCount = players.length - realPlayers.length
-  const drawDone = teamByPlayer.size > 0
+  const drawDone = teamByPlayerId.size > 0
 
-  const filtered = realPlayers
-    .filter(p => p.toLowerCase().includes(search.toLowerCase()))
-    .sort((a, b) => a.localeCompare(b))
+  const filtered = players
+    .filter(p => p.name.toLowerCase().includes(search.toLowerCase()))
+    .sort((a, b) => a.name.localeCompare(b.name))
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-8">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-white mb-2">Players</h1>
-        <p className="text-white/40 text-sm">
-          {realPlayers.length} players in the draw
-          {tbdCount > 0 && ` · ${tbdCount} slot${tbdCount === 1 ? '' : 's'} still to be filled`}
-        </p>
+        <p className="text-white/40 text-sm">{players.length} players in the draw</p>
       </div>
 
       {/* Find Me */}
@@ -62,14 +57,14 @@ export default function PlayersPage() {
       </div>
 
       {filtered.length === 0 ? (
-        <div className="text-white/30 text-sm">No players match “{search}”.</div>
+        <div className="text-white/30 text-sm">No players match "{search}".</div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {filtered.map(player => {
-            const team = teamByPlayer.get(player)
+            const team = teamByPlayerId.get(player.id)
             return (
               <div
-                key={player}
+                key={player.id}
                 className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 p-3"
               >
                 {team ? (
@@ -82,7 +77,7 @@ export default function PlayersPage() {
                   <div className="w-10 h-7 rounded bg-white/5 border border-white/10 shrink-0" />
                 )}
                 <div className="flex-1 min-w-0">
-                  <p className="font-semibold text-white truncate">{player}</p>
+                  <p className="font-semibold text-white truncate">{player.name}</p>
                   {team ? (
                     <p className="text-xs text-white/50 truncate">
                       {team.name} · Group {team.group}

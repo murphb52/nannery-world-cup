@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo, useRef } from 'react'
-import { loadTeams, loadDraw, loadScores } from '../data/loaders'
-import type { Team, DrawResult, Match } from '../types'
+import { loadTeams, loadDraw, loadScores, loadPlayers, resolveNames } from '../data/loaders'
+import type { Team, DrawResult, Match, Player } from '../types'
 
 const STAGE_LABELS: Record<string, string> = {
   R32: 'Round of 32',
@@ -34,6 +34,7 @@ function kickoffTime(iso: string): string {
 export default function FixturesPage() {
   const [teams, setTeams] = useState<Team[]>([])
   const [draw, setDraw] = useState<DrawResult>({})
+  const [players, setPlayers] = useState<Player[]>([])
   const [matches, setMatches] = useState<Match[]>([])
   const [lastUpdated, setLastUpdated] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
@@ -43,9 +44,10 @@ export default function FixturesPage() {
   const todayChipRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
-    Promise.all([loadTeams(), loadDraw(), loadScores()]).then(([t, d, s]) => {
+    Promise.all([loadTeams(), loadDraw(), loadScores(), loadPlayers()]).then(([t, d, s, p]) => {
       setTeams(t)
       setDraw(d)
+      setPlayers(p)
       setMatches([...(s.matches ?? [])].sort((a, b) => a.date.localeCompare(b.date)))
       setLastUpdated(s.lastUpdated)
       setLoading(false)
@@ -57,6 +59,8 @@ export default function FixturesPage() {
     for (const t of teams) map.set(t.id, t)
     return map
   }, [teams])
+
+  const playerNames = useMemo(() => resolveNames(draw, players), [draw, players])
 
   // Unique match days in chronological order
   const days = useMemo(() => {
@@ -156,8 +160,8 @@ export default function FixturesPage() {
                 match={m}
                 home={teamById.get(m.homeTeamId) ?? null}
                 away={teamById.get(m.awayTeamId) ?? null}
-                homePlayer={draw[m.homeTeamId] ?? null}
-                awayPlayer={draw[m.awayTeamId] ?? null}
+                homePlayer={playerNames[m.homeTeamId] ?? null}
+                awayPlayer={playerNames[m.awayTeamId] ?? null}
                 highlight={search.trim().toLowerCase()}
               />
             ))}

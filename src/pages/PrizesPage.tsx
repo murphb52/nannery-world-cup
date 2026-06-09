@@ -1,13 +1,13 @@
-import { useState, useEffect } from 'react'
-import { loadTeams, loadDraw, loadScores } from '../data/loaders'
-import type { Team, DrawResult, ScoresData, Standing, Match } from '../types'
+import { useState, useEffect, useMemo } from 'react'
+import { loadTeams, loadDraw, loadScores, loadPlayers, resolveNames } from '../data/loaders'
+import type { Team, DrawResult, ScoresData, Standing, Match, Player } from '../types'
 
 interface Prize {
   id: string
   icon: string
   title: string
   subtitle: string
-  compute: (standings: Standing[], draw: DrawResult, teams: Team[], scores: ScoresData) => { player: string; team: Team; stat: string } | null
+  compute: (standings: Standing[], playerNames: Record<string, string>, teams: Team[], scores: ScoresData) => { player: string; team: Team; stat: string } | null
 }
 
 // Winner of a knockout match, accounting for extra time and penalty shootouts.
@@ -52,14 +52,14 @@ const PRIZES: Prize[] = [
     icon: '🏆',
     title: 'Winner',
     subtitle: 'Team wins the tournament',
-    compute: (_, draw, teams, scores) => {
+    compute: (_, playerNames, teams, scores) => {
       const final = scores.matches?.find(m => m.stage === 'F' && m.status === 'FINISHED')
       if (!final) return null
       const winnerId = matchWinnerId(final)
       if (!winnerId) return null
       const team = teams.find(t => t.id === winnerId)
       if (!team) return null
-      return { player: draw[team.id] ?? '—', team, stat: 'Tournament Winner 🏆' }
+      return { player: playerNames[team.id] ?? '—', team, stat: 'Tournament Winner 🏆' }
     },
   },
   {
@@ -67,14 +67,14 @@ const PRIZES: Prize[] = [
     icon: '🥈',
     title: '2nd Place',
     subtitle: 'Team reaches the final',
-    compute: (_, draw, teams, scores) => {
+    compute: (_, playerNames, teams, scores) => {
       const final = scores.matches?.find(m => m.stage === 'F' && m.status === 'FINISHED')
       if (!final) return null
       const loserId = matchLoserId(final)
       if (!loserId) return null
       const team = teams.find(t => t.id === loserId)
       if (!team) return null
-      return { player: draw[team.id] ?? '—', team, stat: 'Runner-Up 🥈' }
+      return { player: playerNames[team.id] ?? '—', team, stat: 'Runner-Up 🥈' }
     },
   },
   {
@@ -82,7 +82,7 @@ const PRIZES: Prize[] = [
     icon: '⚽',
     title: 'Most Goals Scored',
     subtitle: 'Highest scoring team',
-    compute: (_, draw, teams, scores) => {
+    compute: (_, playerNames, teams, scores) => {
       const totals = goalTotals(scores)
       const entries = Object.entries(totals)
       if (!entries.length) return null
@@ -90,7 +90,7 @@ const PRIZES: Prize[] = [
       if (t.for === 0) return null
       const team = teams.find(t => t.id === teamId)
       if (!team) return null
-      return { player: draw[team.id] ?? '—', team, stat: `${t.for} goals scored` }
+      return { player: playerNames[team.id] ?? '—', team, stat: `${t.for} goals scored` }
     },
   },
   {
@@ -98,7 +98,7 @@ const PRIZES: Prize[] = [
     icon: '🫣',
     title: 'Most Goals Conceded',
     subtitle: 'Leakiest defence',
-    compute: (_, draw, teams, scores) => {
+    compute: (_, playerNames, teams, scores) => {
       const totals = goalTotals(scores)
       const entries = Object.entries(totals)
       if (!entries.length) return null
@@ -106,7 +106,7 @@ const PRIZES: Prize[] = [
       if (t.against === 0) return null
       const team = teams.find(t => t.id === teamId)
       if (!team) return null
-      return { player: draw[team.id] ?? '—', team, stat: `${t.against} goals conceded` }
+      return { player: playerNames[team.id] ?? '—', team, stat: `${t.against} goals conceded` }
     },
   },
   {
@@ -114,14 +114,14 @@ const PRIZES: Prize[] = [
     icon: '🟨',
     title: 'Most Yellow Cards',
     subtitle: 'Dirtiest team',
-    compute: (standings, draw, teams) => {
+    compute: (standings, playerNames, teams) => {
       const all = Object.values(standings).flat() as Standing[]
       if (!all.length) return null
       const top = all.reduce((a, b) => a.yellowCards > b.yellowCards ? a : b)
       if (top.yellowCards === 0) return null
       const team = teams.find(t => t.id === top.teamId)
       if (!team) return null
-      return { player: draw[team.id] ?? '—', team, stat: `${top.yellowCards} yellow cards` }
+      return { player: playerNames[team.id] ?? '—', team, stat: `${top.yellowCards} yellow cards` }
     },
   },
   {
@@ -129,14 +129,14 @@ const PRIZES: Prize[] = [
     icon: '🟥',
     title: 'First Red Card',
     subtitle: 'First team to see red',
-    compute: (standings, draw, teams) => {
+    compute: (standings, playerNames, teams) => {
       const all = Object.values(standings).flat() as Standing[]
       const withRed = all.filter(s => s.redCards > 0)
       if (!withRed.length) return null
       const top = withRed[0]
       const team = teams.find(t => t.id === top.teamId)
       if (!team) return null
-      return { player: draw[team.id] ?? '—', team, stat: 'First red card of the tournament' }
+      return { player: playerNames[team.id] ?? '—', team, stat: 'First red card of the tournament' }
     },
   },
   {
@@ -144,14 +144,14 @@ const PRIZES: Prize[] = [
     icon: '👋',
     title: 'First Eliminated',
     subtitle: 'First team out',
-    compute: (standings, draw, teams) => {
+    compute: (standings, playerNames, teams) => {
       const all = Object.values(standings).flat() as Standing[]
       const eliminated = all.filter(s => s.eliminated)
       if (!eliminated.length) return null
       const bottom = eliminated.reduce((a, b) => a.points < b.points ? a : b)
       const team = teams.find(t => t.id === bottom.teamId)
       if (!team) return null
-      return { player: draw[team.id] ?? '—', team, stat: 'Eliminated in group stage' }
+      return { player: playerNames[team.id] ?? '—', team, stat: 'Eliminated in group stage' }
     },
   },
 ]
@@ -159,17 +159,21 @@ const PRIZES: Prize[] = [
 export default function PrizesPage() {
   const [teams, setTeams] = useState<Team[]>([])
   const [draw, setDraw] = useState<DrawResult>({})
+  const [players, setPlayers] = useState<Player[]>([])
   const [scores, setScores] = useState<ScoresData | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    Promise.all([loadTeams(), loadDraw(), loadScores()]).then(([t, d, s]) => {
+    Promise.all([loadTeams(), loadDraw(), loadScores(), loadPlayers()]).then(([t, d, s, p]) => {
       setTeams(t)
       setDraw(d)
       setScores(s)
+      setPlayers(p)
       setLoading(false)
     })
   }, [])
+
+  const playerNames = useMemo(() => resolveNames(draw, players), [draw, players])
 
   if (loading) {
     return <PageCenter><div className="text-white/50 animate-pulse">Loading prizes…</div></PageCenter>
@@ -184,7 +188,7 @@ export default function PrizesPage() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {PRIZES.map(prize => {
-          const result = prize.compute(allStandings as any, draw, teams, scores!)
+          const result = prize.compute(allStandings as any, playerNames, teams, scores!)
           return (
             <div
               key={prize.id}

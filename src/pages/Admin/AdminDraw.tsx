@@ -3,13 +3,13 @@ import { loadTeams, loadDraw, loadPlayers } from '../../data/loaders'
 import { githubCommit, getPat } from '../../lib/github'
 import DrawCeremony from '../../components/Draw/DrawCeremony'
 import { exportGroupsPng } from '../../lib/exportPng'
-import type { Team, DrawResult } from '../../types'
+import type { Team, DrawResult, Player } from '../../types'
 
 type View = 'dashboard' | 'ceremony'
 
 export default function AdminDraw() {
   const [view, setView] = useState<View>('dashboard')
-  const [players, setPlayers] = useState<string[]>([])
+  const [players, setPlayers] = useState<Player[]>([])
   const [teams, setTeams] = useState<Team[]>([])
   const [draw, setDraw] = useState<DrawResult>({})
   const [loading, setLoading] = useState(true)
@@ -57,7 +57,7 @@ export default function AdminDraw() {
     if (!confirm(msg)) return
     const shuffledPlayers = [...players].sort(() => Math.random() - 0.5)
     const result: DrawResult = {}
-    teams.forEach((team, i) => { result[team.id] = shuffledPlayers[i] })
+    teams.forEach((team, i) => { result[team.id] = shuffledPlayers[i].id })
     await save(result, 'feat: instant draw — random assignment')
   }
 
@@ -77,7 +77,7 @@ export default function AdminDraw() {
   async function exportPng() {
     setExporting(true)
     try {
-      await exportGroupsPng(teams, draw)
+      await exportGroupsPng(teams, draw, players)
     } catch (e) {
       setSaveMsg(`⚠ ${e instanceof Error ? e.message : 'Export failed'}`)
     } finally {
@@ -87,7 +87,7 @@ export default function AdminDraw() {
 
   if (loading) return <div className="text-white/40 animate-pulse">Loading…</div>
 
-  const unassigned = players.filter(p => !Object.values(draw).includes(p))
+  const unassigned = players.filter(p => !Object.values(draw).includes(p.id))
 
   if (view === 'ceremony') {
     return (
@@ -176,8 +176,9 @@ export default function AdminDraw() {
                 </tr>
               </thead>
               <tbody>
-                {Object.entries(draw).map(([teamId, player]) => {
+                {Object.entries(draw).map(([teamId, playerId]) => {
                   const team = teams.find(t => t.id === teamId)
+                  const playerName = players.find(p => p.id === playerId)?.name ?? playerId
                   return (
                     <tr key={teamId} className="border-b border-white/5 last:border-0 hover:bg-white/5">
                       <td className="px-4 py-2.5">
@@ -194,10 +195,10 @@ export default function AdminDraw() {
                             onChange={e => setEditPairing({ teamId, player: e.target.value })}
                             className="bg-gray-800 border border-yellow-400/30 rounded px-2 py-1 text-white text-sm focus:outline-none"
                           >
-                            {players.map(p => <option key={p} value={p}>{p}</option>)}
+                            {players.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
                           </select>
                         ) : (
-                          <span className="text-yellow-400">{player}</span>
+                          <span className="text-yellow-400">{playerName}</span>
                         )}
                       </td>
                       <td className="px-4 py-2.5 text-right">
@@ -207,7 +208,7 @@ export default function AdminDraw() {
                             <button onClick={() => setEditPairing(null)} className="text-white/30 text-xs hover:text-white/60">Cancel</button>
                           </div>
                         ) : (
-                          <button onClick={() => setEditPairing({ teamId, player })} className="text-white/30 text-xs hover:text-yellow-400 transition-colors">Edit</button>
+                          <button onClick={() => setEditPairing({ teamId, player: playerId })} className="text-white/30 text-xs hover:text-yellow-400 transition-colors">Edit</button>
                         )}
                       </td>
                     </tr>
@@ -228,7 +229,7 @@ export default function AdminDraw() {
         <div className="rounded-xl border border-yellow-500/20 bg-yellow-500/5 p-4">
           <p className="text-yellow-400 text-sm font-medium mb-2">⚠ Unassigned players ({unassigned.length})</p>
           <div className="flex flex-wrap gap-2">
-            {unassigned.map(p => <span key={p} className="px-2 py-1 rounded bg-white/10 text-white/60 text-xs">{p}</span>)}
+            {unassigned.map(p => <span key={p.id} className="px-2 py-1 rounded bg-white/10 text-white/60 text-xs">{p.name}</span>)}
           </div>
         </div>
       )}

@@ -1,4 +1,4 @@
-import type { Team, DrawResult, ScoresData } from '../types'
+import type { Team, DrawResult, ScoresData, Player } from '../types'
 
 // Data files are served from public/data/ (symlinked to /data/ at repo root).
 // These JSON files live at stable URLs and change out-of-band from the hashed
@@ -12,7 +12,18 @@ async function fetchJson<T>(path: string): Promise<T> {
   return r.json()
 }
 
-export const loadPlayers = () => fetchJson<string[]>('players.json')
+export const loadPlayers = () => fetchJson<Player[]>('players.json')
 export const loadTeams = () => fetchJson<Team[]>('teams.json')
 export const loadDraw = () => fetchJson<DrawResult>('draw.json')
 export const loadScores = () => fetchJson<ScoresData>('scores.json')
+
+/** Build a teamId → player display name map from a draw and player list. */
+export function resolveNames(draw: DrawResult, players: Player[]): Record<string, string> {
+  const byId = new Map(players.map(p => [p.id, p.name]))
+  const result: Record<string, string> = {}
+  for (const [teamId, playerId] of Object.entries(draw)) {
+    const name = byId.get(playerId)
+    if (name) result[teamId] = name
+  }
+  return result
+}
