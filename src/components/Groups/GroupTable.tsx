@@ -36,9 +36,9 @@ export default function GroupTable({ group, teams, draw, standings, highlight }:
       </div>
 
       <div className="overflow-x-auto no-scrollbar">
-      <table className={`w-full text-sm table-fixed ${tournamentStarted ? 'min-w-[26rem]' : ''}`}>
+      <table className={`w-full text-sm table-fixed ${tournamentStarted ? 'min-w-[28rem]' : ''}`}>
         <colgroup>
-          <col className="w-8" />        {/* flag */}
+          <col className="w-14" />       {/* flag */}
           <col />                         {/* team name — takes remaining space */}
           <col className="w-28" />        {/* player */}
           {tournamentStarted && <>
@@ -52,7 +52,7 @@ export default function GroupTable({ group, teams, draw, standings, highlight }:
         </colgroup>
         <thead>
           <tr className="border-b border-white/5 text-white/30 text-xs uppercase tracking-wider">
-            <th className="px-3 py-2" />
+            <th className="px-2 py-2" />
             <th className="text-left px-2 py-2">Team</th>
             <th className="text-left px-2 py-2">Player</th>
             {tournamentStarted && (
@@ -75,7 +75,7 @@ export default function GroupTable({ group, teams, draw, standings, highlight }:
                 isHighlighted ? 'bg-yellow-400/10' : ''
               } ${isEliminated ? 'opacity-40' : ''}`}
             >
-              <td className="px-3 py-2.5">
+              <td className="pl-3 pr-2 py-2.5">
                 <img
                   src={team.flag}
                   alt={team.name}
