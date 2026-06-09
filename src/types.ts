@@ -35,6 +35,7 @@ export interface Match {
   date: string
   venue: string
   status: 'SCHEDULED' | 'TIMED' | 'LIVE' | 'FINISHED'
+  winner?: 'HOME_TEAM' | 'AWAY_TEAM' | 'DRAW' | null
 }
 
 export interface ScoresData {

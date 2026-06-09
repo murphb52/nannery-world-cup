@@ -40,6 +40,7 @@ async function main() {
     date: m.utcDate,
     venue: m.venue ?? null,
     status: m.status,
+    winner: m.score.winner ?? null,
   }))
 
   const standings = {}
