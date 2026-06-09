@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { loadTeams, loadDraw, loadPlayers } from '../../data/loaders'
 import { githubCommit, getPat } from '../../lib/github'
 import DrawCeremony from '../../components/Draw/DrawCeremony'
+import { exportGroupsPng } from '../../lib/exportPng'
 import type { Team, DrawResult } from '../../types'
 
 type View = 'dashboard' | 'ceremony'
@@ -15,6 +16,7 @@ export default function AdminDraw() {
   const [saving, setSaving] = useState(false)
   const [saveMsg, setSaveMsg] = useState('')
   const [editPairing, setEditPairing] = useState<{ teamId: string; player: string } | null>(null)
+  const [exporting, setExporting] = useState(false)
 
   useEffect(() => {
     Promise.all([loadPlayers(), loadTeams(), loadDraw()]).then(([p, t, d]) => {
@@ -67,8 +69,20 @@ export default function AdminDraw() {
   }
 
   async function handleDrawComplete(result: DrawResult) {
+    // Persist, but stay on the ceremony's finished screen so the reveal and
+    // PNG export are available. The user returns via the ceremony's Done button.
     await save(result, 'feat: save live draw results')
-    setView('dashboard')
+  }
+
+  async function exportPng() {
+    setExporting(true)
+    try {
+      await exportGroupsPng(teams, draw)
+    } catch (e) {
+      setSaveMsg(`⚠ ${e instanceof Error ? e.message : 'Export failed'}`)
+    } finally {
+      setExporting(false)
+    }
   }
 
   if (loading) return <div className="text-white/40 animate-pulse">Loading…</div>
@@ -86,8 +100,7 @@ export default function AdminDraw() {
           teams={teams}
           onComplete={handleDrawComplete}
           isLiveMode={true}
-          speedMultiplier={1}
-          autoPlay={false}
+          onExit={() => setView('dashboard')}
         />
       </div>
     )
@@ -124,6 +137,15 @@ export default function AdminDraw() {
         >
           ⚡ Instant Draw
         </button>
+        {drawDone && (
+          <button
+            onClick={exportPng}
+            disabled={exporting}
+            className="px-5 py-2.5 rounded-xl border border-white/20 text-white/70 text-sm hover:bg-white/10 disabled:opacity-40 transition-all"
+          >
+            {exporting ? 'Generating…' : '📸 Export PNG'}
+          </button>
+        )}
         {drawDone && (
           <button
             onClick={clearDraw}
