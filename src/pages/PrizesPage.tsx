@@ -7,6 +7,7 @@ interface Prize {
   icon: string
   title: string
   subtitle: string
+  amount: number
   compute: (standings: Standing[], playerNames: Record<string, string>, teams: Team[], scores: ScoresData) => { player: string; team: Team; stat: string } | null
 }
 
@@ -52,6 +53,7 @@ const PRIZES: Prize[] = [
     icon: '🏆',
     title: 'Winner',
     subtitle: 'Team wins the tournament',
+    amount: 100,
     compute: (_, playerNames, teams, scores) => {
       const final = scores.matches?.find(m => m.stage === 'F' && m.status === 'FINISHED')
       if (!final) return null
@@ -67,6 +69,7 @@ const PRIZES: Prize[] = [
     icon: '🥈',
     title: '2nd Place',
     subtitle: 'Team reaches the final',
+    amount: 50,
     compute: (_, playerNames, teams, scores) => {
       const final = scores.matches?.find(m => m.stage === 'F' && m.status === 'FINISHED')
       if (!final) return null
@@ -82,6 +85,7 @@ const PRIZES: Prize[] = [
     icon: '⚽',
     title: 'Most Goals Scored',
     subtitle: 'Highest scoring team',
+    amount: 30,
     compute: (_, playerNames, teams, scores) => {
       const totals = goalTotals(scores)
       const entries = Object.entries(totals)
@@ -98,6 +102,7 @@ const PRIZES: Prize[] = [
     icon: '🫣',
     title: 'Most Goals Conceded',
     subtitle: 'Leakiest defence',
+    amount: 20,
     compute: (_, playerNames, teams, scores) => {
       const totals = goalTotals(scores)
       const entries = Object.entries(totals)
@@ -114,6 +119,7 @@ const PRIZES: Prize[] = [
     icon: '🟨',
     title: 'Most Yellow Cards',
     subtitle: 'Dirtiest team',
+    amount: 20,
     compute: (standings, playerNames, teams) => {
       const all = Object.values(standings).flat() as Standing[]
       if (!all.length) return null
@@ -129,6 +135,7 @@ const PRIZES: Prize[] = [
     icon: '🟥',
     title: 'First Red Card',
     subtitle: 'First team to see red',
+    amount: 10,
     compute: (standings, playerNames, teams) => {
       const all = Object.values(standings).flat() as Standing[]
       const withRed = all.filter(s => s.redCards > 0)
@@ -144,6 +151,7 @@ const PRIZES: Prize[] = [
     icon: '👋',
     title: 'First Eliminated',
     subtitle: 'First team out',
+    amount: 10,
     compute: (standings, playerNames, teams) => {
       const all = Object.values(standings).flat() as Standing[]
       const eliminated = all.filter(s => s.eliminated)
@@ -196,10 +204,11 @@ export default function PrizesPage() {
             >
               <div className="flex items-start gap-3">
                 <span className="text-3xl">{prize.icon}</span>
-                <div>
+                <div className="flex-1 min-w-0">
                   <h3 className="font-bold text-white">{prize.title}</h3>
                   <p className="text-xs text-white/40">{prize.subtitle}</p>
                 </div>
+                <span className="text-sm font-bold text-yellow-400 shrink-0">€{prize.amount}</span>
               </div>
 
               {result ? (
