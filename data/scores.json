@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-11T19:58:53.400Z",
+  "lastUpdated": "2026-06-11T20:26:31.541Z",
   "matches": [
     {
       "id": 537327,
@@ -110,7 +110,7 @@
       "stage": "GROUP",
       "group": "GROUP_E",
       "homeTeamId": "GER",
-      "awayTeamId": "CUW",
+      "awayTeamId": "CUR",
       "homeScore": null,
       "awayScore": null,
       "date": "2026-06-14T17:00:00Z",
@@ -141,7 +141,7 @@
       "awayScore": null,
       "date": "2026-06-14T23:00:00Z",
       "venue": null,
-      "status": "TIMED",
+      "status": "SCHEDULED",
       "winner": null
     },
     {
@@ -448,7 +448,7 @@
       "stage": "GROUP",
       "group": "GROUP_E",
       "homeTeamId": "ECU",
-      "awayTeamId": "CUW",
+      "awayTeamId": "CUR",
       "homeScore": null,
       "awayScore": null,
       "date": "2026-06-21T00:00:00Z",
@@ -720,7 +720,7 @@
       "id": 537356,
       "stage": "GROUP",
       "group": "GROUP_E",
-      "homeTeamId": "CUW",
+      "homeTeamId": "CUR",
       "awayTeamId": "CIV",
       "homeScore": null,
       "awayScore": null,
@@ -1372,6 +1372,21 @@
         "eliminatedAt": null
       },
       {
+        "teamId": "KOR",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "goalsFor": 0,
+        "goalsAgainst": 0,
+        "goalDiff": 0,
+        "points": 0,
+        "yellowCards": 0,
+        "redCards": 0,
+        "eliminated": false,
+        "eliminatedAt": null
+      },
+      {
         "teamId": "CZE",
         "played": 0,
         "won": 0,
@@ -1395,21 +1410,6 @@
         "goalsFor": 0,
         "goalsAgainst": 1,
         "goalDiff": -1,
-        "points": 0,
-        "yellowCards": 0,
-        "redCards": 0,
-        "eliminated": false,
-        "eliminatedAt": null
-      },
-      {
-        "teamId": "KOR",
-        "played": 0,
-        "won": 0,
-        "drawn": 0,
-        "lost": 0,
-        "goalsFor": 0,
-        "goalsAgainst": 0,
-        "goalDiff": 0,
         "points": 0,
         "yellowCards": 0,
         "redCards": 0,
@@ -1496,7 +1496,7 @@
         "eliminatedAt": null
       },
       {
-        "teamId": "MAR",
+        "teamId": "HAI",
         "played": 0,
         "won": 0,
         "drawn": 0,
@@ -1511,7 +1511,7 @@
         "eliminatedAt": null
       },
       {
-        "teamId": "HAI",
+        "teamId": "MAR",
         "played": 0,
         "won": 0,
         "drawn": 0,
@@ -1543,22 +1543,7 @@
     ],
     "Group D": [
       {
-        "teamId": "TUR",
-        "played": 0,
-        "won": 0,
-        "drawn": 0,
-        "lost": 0,
-        "goalsFor": 0,
-        "goalsAgainst": 0,
-        "goalDiff": 0,
-        "points": 0,
-        "yellowCards": 0,
-        "redCards": 0,
-        "eliminated": false,
-        "eliminatedAt": null
-      },
-      {
-        "teamId": "USA",
+        "teamId": "AUS",
         "played": 0,
         "won": 0,
         "drawn": 0,
@@ -1588,7 +1573,22 @@
         "eliminatedAt": null
       },
       {
-        "teamId": "AUS",
+        "teamId": "TUR",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "goalsFor": 0,
+        "goalsAgainst": 0,
+        "goalDiff": 0,
+        "points": 0,
+        "yellowCards": 0,
+        "redCards": 0,
+        "eliminated": false,
+        "eliminatedAt": null
+      },
+      {
+        "teamId": "USA",
         "played": 0,
         "won": 0,
         "drawn": 0,
@@ -1605,21 +1605,6 @@
     ],
     "Group E": [
       {
-        "teamId": "GER",
-        "played": 0,
-        "won": 0,
-        "drawn": 0,
-        "lost": 0,
-        "goalsFor": 0,
-        "goalsAgainst": 0,
-        "goalDiff": 0,
-        "points": 0,
-        "yellowCards": 0,
-        "redCards": 0,
-        "eliminated": false,
-        "eliminatedAt": null
-      },
-      {
         "teamId": "CUW",
         "played": 0,
         "won": 0,
@@ -1635,7 +1620,7 @@
         "eliminatedAt": null
       },
       {
-        "teamId": "CIV",
+        "teamId": "GER",
         "played": 0,
         "won": 0,
         "drawn": 0,
@@ -1663,11 +1648,26 @@
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
+      },
+      {
+        "teamId": "CIV",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "goalsFor": 0,
+        "goalsAgainst": 0,
+        "goalDiff": 0,
+        "points": 0,
+        "yellowCards": 0,
+        "redCards": 0,
+        "eliminated": false,
+        "eliminatedAt": null
       }
     ],
     "Group F": [
       {
-        "teamId": "SWE",
+        "teamId": "JPN",
         "played": 0,
         "won": 0,
         "drawn": 0,
@@ -1697,7 +1697,7 @@
         "eliminatedAt": null
       },
       {
-        "teamId": "JPN",
+        "teamId": "SWE",
         "played": 0,
         "won": 0,
         "drawn": 0,
@@ -1729,7 +1729,7 @@
     ],
     "Group G": [
       {
-        "teamId": "BEL",
+        "teamId": "EGY",
         "played": 0,
         "won": 0,
         "drawn": 0,
@@ -1744,7 +1744,7 @@
         "eliminatedAt": null
       },
       {
-        "teamId": "EGY",
+        "teamId": "BEL",
         "played": 0,
         "won": 0,
         "drawn": 0,
@@ -1791,21 +1791,6 @@
     ],
     "Group H": [
       {
-        "teamId": "ESP",
-        "played": 0,
-        "won": 0,
-        "drawn": 0,
-        "lost": 0,
-        "goalsFor": 0,
-        "goalsAgainst": 0,
-        "goalDiff": 0,
-        "points": 0,
-        "yellowCards": 0,
-        "redCards": 0,
-        "eliminated": false,
-        "eliminatedAt": null
-      },
-      {
         "teamId": "CPV",
         "played": 0,
         "won": 0,
@@ -1822,6 +1807,21 @@
       },
       {
         "teamId": "KSA",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "goalsFor": 0,
+        "goalsAgainst": 0,
+        "goalDiff": 0,
+        "points": 0,
+        "yellowCards": 0,
+        "redCards": 0,
+        "eliminated": false,
+        "eliminatedAt": null
+      },
+      {
+        "teamId": "ESP",
         "played": 0,
         "won": 0,
         "drawn": 0,
@@ -1853,21 +1853,6 @@
     ],
     "Group I": [
       {
-        "teamId": "IRQ",
-        "played": 0,
-        "won": 0,
-        "drawn": 0,
-        "lost": 0,
-        "goalsFor": 0,
-        "goalsAgainst": 0,
-        "goalDiff": 0,
-        "points": 0,
-        "yellowCards": 0,
-        "redCards": 0,
-        "eliminated": false,
-        "eliminatedAt": null
-      },
-      {
         "teamId": "FRA",
         "played": 0,
         "won": 0,
@@ -1883,7 +1868,7 @@
         "eliminatedAt": null
       },
       {
-        "teamId": "SEN",
+        "teamId": "IRQ",
         "played": 0,
         "won": 0,
         "drawn": 0,
@@ -1899,6 +1884,21 @@
       },
       {
         "teamId": "NOR",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "goalsFor": 0,
+        "goalsAgainst": 0,
+        "goalDiff": 0,
+        "points": 0,
+        "yellowCards": 0,
+        "redCards": 0,
+        "eliminated": false,
+        "eliminatedAt": null
+      },
+      {
+        "teamId": "SEN",
         "played": 0,
         "won": 0,
         "drawn": 0,
@@ -1992,6 +1992,21 @@
         "eliminatedAt": null
       },
       {
+        "teamId": "COL",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "goalsFor": 0,
+        "goalsAgainst": 0,
+        "goalDiff": 0,
+        "points": 0,
+        "yellowCards": 0,
+        "redCards": 0,
+        "eliminated": false,
+        "eliminatedAt": null
+      },
+      {
         "teamId": "POR",
         "played": 0,
         "won": 0,
@@ -2008,21 +2023,6 @@
       },
       {
         "teamId": "UZB",
-        "played": 0,
-        "won": 0,
-        "drawn": 0,
-        "lost": 0,
-        "goalsFor": 0,
-        "goalsAgainst": 0,
-        "goalDiff": 0,
-        "points": 0,
-        "yellowCards": 0,
-        "redCards": 0,
-        "eliminated": false,
-        "eliminatedAt": null
-      },
-      {
-        "teamId": "COL",
         "played": 0,
         "won": 0,
         "drawn": 0,
@@ -2054,7 +2054,7 @@
         "eliminatedAt": null
       },
       {
-        "teamId": "CRO",
+        "teamId": "GHA",
         "played": 0,
         "won": 0,
         "drawn": 0,
@@ -2069,7 +2069,7 @@
         "eliminatedAt": null
       },
       {
-        "teamId": "GHA",
+        "teamId": "CRO",
         "played": 0,
         "won": 0,
         "drawn": 0,
