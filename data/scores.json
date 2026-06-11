@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-11T19:41:47.838Z",
+  "lastUpdated": "2026-06-11T19:58:53.400Z",
   "matches": [
     {
       "id": 537327,
@@ -7,12 +7,12 @@
       "group": "GROUP_A",
       "homeTeamId": "MEX",
       "awayTeamId": "RSA",
-      "homeScore": 1,
-      "awayScore": 0,
+      "homeScore": null,
+      "awayScore": null,
       "date": "2026-06-11T19:00:00Z",
       "venue": null,
-      "status": "IN_PLAY",
-      "winner": "HOME_TEAM"
+      "status": "TIMED",
+      "winner": null
     },
     {
       "id": 537328,
