@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-11T20:26:31.541Z",
+  "lastUpdated": "2026-06-11T22:09:54.200Z",
   "matches": [
     {
       "id": 537327,
@@ -7,12 +7,12 @@
       "group": "GROUP_A",
       "homeTeamId": "MEX",
       "awayTeamId": "RSA",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 2,
+      "awayScore": 0,
       "date": "2026-06-11T19:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null
+      "status": "FINISHED",
+      "winner": "HOME_TEAM"
     },
     {
       "id": 537328,
@@ -110,7 +110,7 @@
       "stage": "GROUP",
       "group": "GROUP_E",
       "homeTeamId": "GER",
-      "awayTeamId": "CUR",
+      "awayTeamId": "CUW",
       "homeScore": null,
       "awayScore": null,
       "date": "2026-06-14T17:00:00Z",
@@ -141,7 +141,7 @@
       "awayScore": null,
       "date": "2026-06-14T23:00:00Z",
       "venue": null,
-      "status": "SCHEDULED",
+      "status": "TIMED",
       "winner": null
     },
     {
@@ -448,7 +448,7 @@
       "stage": "GROUP",
       "group": "GROUP_E",
       "homeTeamId": "ECU",
-      "awayTeamId": "CUR",
+      "awayTeamId": "CUW",
       "homeScore": null,
       "awayScore": null,
       "date": "2026-06-21T00:00:00Z",
@@ -720,7 +720,7 @@
       "id": 537356,
       "stage": "GROUP",
       "group": "GROUP_E",
-      "homeTeamId": "CUR",
+      "homeTeamId": "CUW",
       "awayTeamId": "CIV",
       "homeScore": null,
       "awayScore": null,
@@ -1362,9 +1362,9 @@
         "won": 1,
         "drawn": 0,
         "lost": 0,
-        "goalsFor": 1,
+        "goalsFor": 2,
         "goalsAgainst": 0,
-        "goalDiff": 1,
+        "goalDiff": 2,
         "points": 3,
         "yellowCards": 0,
         "redCards": 0,
@@ -1408,8 +1408,8 @@
         "drawn": 0,
         "lost": 1,
         "goalsFor": 0,
-        "goalsAgainst": 1,
-        "goalDiff": -1,
+        "goalsAgainst": 2,
+        "goalDiff": -2,
         "points": 0,
         "yellowCards": 0,
         "redCards": 0,
@@ -1915,21 +1915,6 @@
     ],
     "Group J": [
       {
-        "teamId": "ARG",
-        "played": 0,
-        "won": 0,
-        "drawn": 0,
-        "lost": 0,
-        "goalsFor": 0,
-        "goalsAgainst": 0,
-        "goalDiff": 0,
-        "points": 0,
-        "yellowCards": 0,
-        "redCards": 0,
-        "eliminated": false,
-        "eliminatedAt": null
-      },
-      {
         "teamId": "ALG",
         "played": 0,
         "won": 0,
@@ -1945,7 +1930,7 @@
         "eliminatedAt": null
       },
       {
-        "teamId": "AUT",
+        "teamId": "ARG",
         "played": 0,
         "won": 0,
         "drawn": 0,
@@ -1961,6 +1946,21 @@
       },
       {
         "teamId": "JOR",
+        "played": 0,
+        "won": 0,
+        "drawn": 0,
+        "lost": 0,
+        "goalsFor": 0,
+        "goalsAgainst": 0,
+        "goalDiff": 0,
+        "points": 0,
+        "yellowCards": 0,
+        "redCards": 0,
+        "eliminated": false,
+        "eliminatedAt": null
+      },
+      {
+        "teamId": "AUT",
         "played": 0,
         "won": 0,
         "drawn": 0,
