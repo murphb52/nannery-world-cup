@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-10T00:07:31.083Z",
+  "lastUpdated": "2026-06-11T19:41:47.838Z",
   "matches": [
     {
       "id": 537327,
@@ -7,12 +7,12 @@
       "group": "GROUP_A",
       "homeTeamId": "MEX",
       "awayTeamId": "RSA",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 1,
+      "awayScore": 0,
       "date": "2026-06-11T19:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null
+      "status": "IN_PLAY",
+      "winner": "HOME_TEAM"
     },
     {
       "id": 537328,
@@ -1357,6 +1357,21 @@
   "standings": {
     "Group A": [
       {
+        "teamId": "MEX",
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0,
+        "goalsFor": 1,
+        "goalsAgainst": 0,
+        "goalDiff": 1,
+        "points": 3,
+        "yellowCards": 0,
+        "redCards": 0,
+        "eliminated": false,
+        "eliminatedAt": null
+      },
+      {
         "teamId": "CZE",
         "played": 0,
         "won": 0,
@@ -1372,29 +1387,14 @@
         "eliminatedAt": null
       },
       {
-        "teamId": "MEX",
-        "played": 0,
-        "won": 0,
-        "drawn": 0,
-        "lost": 0,
-        "goalsFor": 0,
-        "goalsAgainst": 0,
-        "goalDiff": 0,
-        "points": 0,
-        "yellowCards": 0,
-        "redCards": 0,
-        "eliminated": false,
-        "eliminatedAt": null
-      },
-      {
         "teamId": "RSA",
-        "played": 0,
+        "played": 1,
         "won": 0,
         "drawn": 0,
-        "lost": 0,
+        "lost": 1,
         "goalsFor": 0,
-        "goalsAgainst": 0,
-        "goalDiff": 0,
+        "goalsAgainst": 1,
+        "goalDiff": -1,
         "points": 0,
         "yellowCards": 0,
         "redCards": 0,
