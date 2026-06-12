@@ -129,7 +129,7 @@ async function updateBookings(matches) {
     const live = LIVE_STATUSES.has(m.status)
     if (!finished && !live) continue
 
-    if (finished && cache[m.id] != null) {
+    if (finished && cache[m.id]) {
       bookings[m.id] = cache[m.id]
       continue
     }
@@ -155,11 +155,12 @@ async function updateBookings(matches) {
     }
   }
 
-  // Persist only finished matches so live bookings keep refreshing.
+  // Persist only finished matches with actual bookings. Skipping empty results
+  // lets the next run re-fetch matches where the API hadn't populated cards yet.
   const finishedIds = new Set(matches.filter(m => m.status === 'FINISHED').map(m => m.id))
   const newCache = {}
   for (const [id, list] of Object.entries(bookings)) {
-    if (finishedIds.has(Number(id))) newCache[id] = list
+    if (finishedIds.has(Number(id)) && list.length > 0) newCache[id] = list
   }
   fs.writeFileSync(bookingsPath, JSON.stringify(newCache, null, 2))
   if (fetched) console.log(`Fetched booking details for ${fetched} matches`)
