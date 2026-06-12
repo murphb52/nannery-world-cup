@@ -2100,6 +2100,14 @@
       }
     ]
   },
-  "cards": {},
-  "firstRedCard": null
+  "cards": {
+    "RSA": { "yellow": 0, "red": 1 }
+  },
+  "firstRedCard": {
+    "teamId": "RSA",
+    "matchId": 537327,
+    "date": "2026-06-11T19:00:00Z",
+    "minute": null,
+    "player": null
+  }
 }
