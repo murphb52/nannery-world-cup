@@ -6,10 +6,10 @@ interface Props {
   playerNames: Record<string, string>
   standings: Standing[] | null
   highlight: string
+  tournamentStarted: boolean
 }
 
-export default function GroupTable({ group, teams, playerNames, standings, highlight }: Props) {
-  const tournamentStarted = standings !== null && standings.length > 0
+export default function GroupTable({ group, teams, playerNames, standings, highlight, tournamentStarted }: Props) {
 
   const rows = teams.map(team => {
     const standing = standings?.find(s => s.teamId === team.id)
@@ -96,18 +96,18 @@ export default function GroupTable({ group, teams, playerNames, standings, highl
                   {player ?? '—'}
                 </span>
               </td>
-              {tournamentStarted && standing && (
+              {tournamentStarted && (
                 <>
-                  <td className="text-center py-2 text-white/60">{standing.played}</td>
-                  <td className="text-center py-2 text-green-400">{standing.won}</td>
-                  <td className="text-center py-2 text-white/50">{standing.drawn}</td>
-                  <td className="text-center py-2 text-red-400">{standing.lost}</td>
-                  <td className="text-center py-2 text-white/60">{standing.goalsFor}</td>
-                  <td className="text-center py-2 text-white/60">{standing.goalsAgainst}</td>
+                  <td className="text-center py-2 text-white/60">{standing?.played ?? 0}</td>
+                  <td className="text-center py-2 text-green-400">{standing?.won ?? 0}</td>
+                  <td className="text-center py-2 text-white/50">{standing?.drawn ?? 0}</td>
+                  <td className="text-center py-2 text-red-400">{standing?.lost ?? 0}</td>
+                  <td className="text-center py-2 text-white/60">{standing?.goalsFor ?? 0}</td>
+                  <td className="text-center py-2 text-white/60">{standing?.goalsAgainst ?? 0}</td>
                   <td className="text-center py-2 text-white/60 text-xs">
-                    {standing.goalDiff > 0 ? `+${standing.goalDiff}` : standing.goalDiff}
+                    {(standing?.goalDiff ?? 0) > 0 ? `+${standing!.goalDiff}` : (standing?.goalDiff ?? 0)}
                   </td>
-                  <td className="text-center py-2 font-bold text-white">{standing.points}</td>
+                  <td className="text-center py-2 font-bold text-white">{standing?.points ?? 0}</td>
                 </>
               )}
             </tr>

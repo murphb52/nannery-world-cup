@@ -133,6 +133,9 @@ export default function GroupsPage() {
 
   const groups = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L']
   const drawEmpty = Object.keys(draw).length === 0
+  const tournamentStarted = scores?.matches?.some(
+    m => m.status === 'FINISHED' || m.status === 'LIVE'
+  ) ?? false
 
   if (loading) {
     return <PageCenter><div className="text-white/50 animate-pulse">Loading groups…</div></PageCenter>
@@ -184,6 +187,7 @@ export default function GroupsPage() {
               playerNames={playerNames}
               standings={standings}
               highlight={search}
+              tournamentStarted={tournamentStarted}
             />
           )
         })}
