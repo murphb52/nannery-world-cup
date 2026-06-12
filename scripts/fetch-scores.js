@@ -129,7 +129,7 @@ async function updateBookings(matches) {
     const live = LIVE_STATUSES.has(m.status)
     if (!finished && !live) continue
 
-    if (finished && cache[m.id]) {
+    if (finished && cache[m.id] != null) {
       bookings[m.id] = cache[m.id]
       continue
     }

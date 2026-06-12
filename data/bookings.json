@@ -1,4 +1,11 @@
 {
-  "537327": [],
+  "537327": [
+    {
+      "minute": null,
+      "teamId": "RSA",
+      "player": null,
+      "card": "RED"
+    }
+  ],
   "537328": []
 }
