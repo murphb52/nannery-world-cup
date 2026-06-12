@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-11T22:09:54.200Z",
+  "lastUpdated": "2026-06-12T04:45:11.546Z",
   "matches": [
     {
       "id": 537327,
@@ -20,12 +20,12 @@
       "group": "GROUP_A",
       "homeTeamId": "KOR",
       "awayTeamId": "CZE",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 2,
+      "awayScore": 1,
       "date": "2026-06-12T02:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null
+      "status": "FINISHED",
+      "winner": "HOME_TEAM"
     },
     {
       "id": 537333,
@@ -1373,14 +1373,14 @@
       },
       {
         "teamId": "KOR",
-        "played": 0,
-        "won": 0,
+        "played": 1,
+        "won": 1,
         "drawn": 0,
         "lost": 0,
-        "goalsFor": 0,
-        "goalsAgainst": 0,
-        "goalDiff": 0,
-        "points": 0,
+        "goalsFor": 2,
+        "goalsAgainst": 1,
+        "goalDiff": 1,
+        "points": 3,
         "yellowCards": 0,
         "redCards": 0,
         "eliminated": false,
@@ -1388,13 +1388,13 @@
       },
       {
         "teamId": "CZE",
-        "played": 0,
+        "played": 1,
         "won": 0,
         "drawn": 0,
-        "lost": 0,
-        "goalsFor": 0,
-        "goalsAgainst": 0,
-        "goalDiff": 0,
+        "lost": 1,
+        "goalsFor": 1,
+        "goalsAgainst": 2,
+        "goalDiff": -1,
         "points": 0,
         "yellowCards": 0,
         "redCards": 0,
