@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-12T20:31:20.449Z",
+  "lastUpdated": "2026-06-12T21:14:54.186Z",
   "matches": [
     {
       "id": 537327,
@@ -33,12 +33,12 @@
       "group": "GROUP_B",
       "homeTeamId": "CAN",
       "awayTeamId": "BIH",
-      "homeScore": 0,
+      "homeScore": 1,
       "awayScore": 1,
       "date": "2026-06-12T19:00:00Z",
       "venue": null,
-      "status": "IN_PLAY",
-      "winner": "AWAY_TEAM"
+      "status": "FINISHED",
+      "winner": "DRAW"
     },
     {
       "id": 537345,
@@ -1421,13 +1421,28 @@
       {
         "teamId": "BIH",
         "played": 1,
-        "won": 1,
-        "drawn": 0,
+        "won": 0,
+        "drawn": 1,
         "lost": 0,
         "goalsFor": 1,
-        "goalsAgainst": 0,
-        "goalDiff": 1,
-        "points": 3,
+        "goalsAgainst": 1,
+        "goalDiff": 0,
+        "points": 1,
+        "yellowCards": 0,
+        "redCards": 0,
+        "eliminated": false,
+        "eliminatedAt": null
+      },
+      {
+        "teamId": "CAN",
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0,
+        "goalsFor": 1,
+        "goalsAgainst": 1,
+        "goalDiff": 0,
+        "points": 1,
         "yellowCards": 0,
         "redCards": 0,
         "eliminated": false,
@@ -1457,21 +1472,6 @@
         "goalsFor": 0,
         "goalsAgainst": 0,
         "goalDiff": 0,
-        "points": 0,
-        "yellowCards": 0,
-        "redCards": 0,
-        "eliminated": false,
-        "eliminatedAt": null
-      },
-      {
-        "teamId": "CAN",
-        "played": 1,
-        "won": 0,
-        "drawn": 0,
-        "lost": 1,
-        "goalsFor": 0,
-        "goalsAgainst": 1,
-        "goalDiff": -1,
         "points": 0,
         "yellowCards": 0,
         "redCards": 0,
