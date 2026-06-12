@@ -28,7 +28,7 @@ export default function GroupTable({ group, teams, playerNames, standings, highl
   const dimmed = highlight && !rows.some(r => r.isHighlighted)
 
   return (
-    <div className={`rounded-xl border overflow-hidden transition-all duration-300 ${
+    <div className={`rounded-xl border [overflow:clip] transition-all duration-300 ${
       dimmed ? 'border-white/5 opacity-40' : 'border-white/10 bg-white/3'
     }`}>
       <div className="bg-gradient-to-r from-yellow-500/20 to-red-500/20 px-4 py-3 border-b border-white/10">
