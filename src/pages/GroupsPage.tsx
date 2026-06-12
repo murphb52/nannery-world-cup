@@ -178,7 +178,7 @@ export default function GroupsPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
         {groups.map(group => {
           const groupTeams = teams.filter(t => t.group === group)
-          const standings = scores?.standings?.[group] ?? null
+          const standings = scores?.standings?.[`Group ${group}`] ?? null
           return (
             <GroupTable
               key={group}
