@@ -36,12 +36,14 @@ export default function GroupTable({ group, teams, playerNames, standings, highl
       </div>
 
       <div className="overflow-x-auto no-scrollbar">
-      <table className={`w-full text-sm table-fixed ${tournamentStarted ? 'min-w-[28rem]' : ''}`}>
+      <table className={`w-full text-sm table-fixed ${tournamentStarted ? 'min-w-[34rem]' : ''}`}>
         <colgroup>
           <col className="w-14" />       {/* flag */}
           <col />                         {/* team name — takes remaining space */}
           <col className="w-28" />        {/* player */}
           {tournamentStarted && <>
+            <col className="w-7" />
+            <col className="w-7" />
             <col className="w-7" />
             <col className="w-7" />
             <col className="w-7" />
@@ -61,6 +63,8 @@ export default function GroupTable({ group, teams, playerNames, standings, highl
                 <th className="text-center py-2">W</th>
                 <th className="text-center py-2">D</th>
                 <th className="text-center py-2">L</th>
+                <th className="text-center py-2">GF</th>
+                <th className="text-center py-2">GA</th>
                 <th className="text-center py-2">GD</th>
                 <th className="text-center py-2">Pts</th>
               </>
@@ -98,6 +102,8 @@ export default function GroupTable({ group, teams, playerNames, standings, highl
                   <td className="text-center py-2 text-green-400">{standing.won}</td>
                   <td className="text-center py-2 text-white/50">{standing.drawn}</td>
                   <td className="text-center py-2 text-red-400">{standing.lost}</td>
+                  <td className="text-center py-2 text-white/60">{standing.goalsFor}</td>
+                  <td className="text-center py-2 text-white/60">{standing.goalsAgainst}</td>
                   <td className="text-center py-2 text-white/60 text-xs">
                     {standing.goalDiff > 0 ? `+${standing.goalDiff}` : standing.goalDiff}
                   </td>

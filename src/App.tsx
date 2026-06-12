@@ -6,6 +6,7 @@ import KnockoutPage from './pages/KnockoutPage'
 import PrizesPage from './pages/PrizesPage'
 import PlayersPage from './pages/PlayersPage'
 import AdminPage from './pages/Admin/AdminPage'
+import StatsPage from './pages/StatsPage'
 
 function Nav() {
   const navigate = useNavigate()
@@ -34,6 +35,7 @@ function Nav() {
             { to: '/bracket', label: 'Bracket' },
             { to: '/players', label: 'Players' },
             { to: '/prizes', label: 'Prizes' },
+            { to: '/stats', label: 'Stats' },
           ].map(({ to, label }) => (
             <NavLink
               key={to}
@@ -69,6 +71,7 @@ export default function App() {
             <Route path="/bracket" element={<KnockoutPage />} />
             <Route path="/players" element={<PlayersPage />} />
             <Route path="/prizes" element={<PrizesPage />} />
+            <Route path="/stats" element={<StatsPage />} />
             <Route path="/admin" element={<AdminPage />} />
           </Routes>
         </main>
