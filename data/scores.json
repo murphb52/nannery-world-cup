@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-13T21:47:39.867Z",
+  "lastUpdated": "2026-06-13T23:11:30.977Z",
   "matches": [
     {
       "id": 537327,
@@ -33,12 +33,12 @@
       "group": "GROUP_B",
       "homeTeamId": "CAN",
       "awayTeamId": "BIH",
-      "homeScore": 1,
-      "awayScore": 1,
+      "homeScore": null,
+      "awayScore": null,
       "date": "2026-06-12T19:00:00Z",
       "venue": null,
       "status": "FINISHED",
-      "winner": "DRAW"
+      "winner": null
     },
     {
       "id": 537345,
@@ -72,12 +72,12 @@
       "group": "GROUP_C",
       "homeTeamId": "BRA",
       "awayTeamId": "MAR",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 1,
+      "awayScore": 1,
       "date": "2026-06-13T22:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null
+      "status": "PAUSED",
+      "winner": "DRAW"
     },
     {
       "id": 537340,
@@ -110,7 +110,7 @@
       "stage": "GROUP",
       "group": "GROUP_E",
       "homeTeamId": "GER",
-      "awayTeamId": "CUR",
+      "awayTeamId": "CUW",
       "homeScore": null,
       "awayScore": null,
       "date": "2026-06-14T17:00:00Z",
@@ -141,7 +141,7 @@
       "awayScore": null,
       "date": "2026-06-14T23:00:00Z",
       "venue": null,
-      "status": "SCHEDULED",
+      "status": "TIMED",
       "winner": null
     },
     {
@@ -448,7 +448,7 @@
       "stage": "GROUP",
       "group": "GROUP_E",
       "homeTeamId": "ECU",
-      "awayTeamId": "CUR",
+      "awayTeamId": "CUW",
       "homeScore": null,
       "awayScore": null,
       "date": "2026-06-21T00:00:00Z",
@@ -720,7 +720,7 @@
       "id": 537356,
       "stage": "GROUP",
       "group": "GROUP_E",
-      "homeTeamId": "CUR",
+      "homeTeamId": "CUW",
       "awayTeamId": "CIV",
       "homeScore": null,
       "awayScore": null,
@@ -1482,29 +1482,14 @@
     "Group C": [
       {
         "teamId": "BRA",
-        "played": 0,
+        "played": 1,
         "won": 0,
-        "drawn": 0,
+        "drawn": 1,
         "lost": 0,
-        "goalsFor": 0,
-        "goalsAgainst": 0,
+        "goalsFor": 1,
+        "goalsAgainst": 1,
         "goalDiff": 0,
-        "points": 0,
-        "yellowCards": 0,
-        "redCards": 0,
-        "eliminated": false,
-        "eliminatedAt": null
-      },
-      {
-        "teamId": "HAI",
-        "played": 0,
-        "won": 0,
-        "drawn": 0,
-        "lost": 0,
-        "goalsFor": 0,
-        "goalsAgainst": 0,
-        "goalDiff": 0,
-        "points": 0,
+        "points": 1,
         "yellowCards": 0,
         "redCards": 0,
         "eliminated": false,
@@ -1512,6 +1497,21 @@
       },
       {
         "teamId": "MAR",
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0,
+        "goalsFor": 1,
+        "goalsAgainst": 1,
+        "goalDiff": 0,
+        "points": 1,
+        "yellowCards": 0,
+        "redCards": 0,
+        "eliminated": false,
+        "eliminatedAt": null
+      },
+      {
+        "teamId": "HAI",
         "played": 0,
         "won": 0,
         "drawn": 0,
