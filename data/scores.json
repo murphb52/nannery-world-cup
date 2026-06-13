@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-13T05:06:36.843Z",
+  "lastUpdated": "2026-06-13T08:19:38.434Z",
   "matches": [
     {
       "id": 537327,
@@ -1366,8 +1366,8 @@
         "goalsAgainst": 0,
         "goalDiff": 2,
         "points": 3,
-        "yellowCards": 0,
-        "redCards": 0,
+        "yellowCards": 1,
+        "redCards": 1,
         "eliminated": false,
         "eliminatedAt": null
       },
@@ -1381,7 +1381,7 @@
         "goalsAgainst": 1,
         "goalDiff": 1,
         "points": 3,
-        "yellowCards": 0,
+        "yellowCards": 1,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -1411,8 +1411,8 @@
         "goalsAgainst": 2,
         "goalDiff": -2,
         "points": 0,
-        "yellowCards": 0,
-        "redCards": 0,
+        "yellowCards": 2,
+        "redCards": 2,
         "eliminated": false,
         "eliminatedAt": null
       }
@@ -1428,7 +1428,7 @@
         "goalsAgainst": 1,
         "goalDiff": 0,
         "points": 1,
-        "yellowCards": 0,
+        "yellowCards": 3,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -1443,7 +1443,7 @@
         "goalsAgainst": 1,
         "goalDiff": 0,
         "points": 1,
-        "yellowCards": 0,
+        "yellowCards": 2,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -1552,7 +1552,7 @@
         "goalsAgainst": 1,
         "goalDiff": 3,
         "points": 3,
-        "yellowCards": 0,
+        "yellowCards": 1,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -1597,7 +1597,7 @@
         "goalsAgainst": 4,
         "goalDiff": -3,
         "points": 0,
-        "yellowCards": 0,
+        "yellowCards": 5,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -2100,6 +2100,41 @@
       }
     ]
   },
-  "cards": {},
-  "firstRedCard": null
+  "cards": {
+    "RSA": {
+      "yellow": 2,
+      "red": 2
+    },
+    "MEX": {
+      "yellow": 1,
+      "red": 1
+    },
+    "KOR": {
+      "yellow": 1,
+      "red": 0
+    },
+    "CAN": {
+      "yellow": 2,
+      "red": 0
+    },
+    "BIH": {
+      "yellow": 3,
+      "red": 0
+    },
+    "PAR": {
+      "yellow": 5,
+      "red": 0
+    },
+    "USA": {
+      "yellow": 1,
+      "red": 0
+    }
+  },
+  "firstRedCard": {
+    "teamId": "RSA",
+    "matchId": 537327,
+    "date": "2026-06-11T19:00:00Z",
+    "minute": 49,
+    "player": "Sphephelo Sithole"
+  }
 }

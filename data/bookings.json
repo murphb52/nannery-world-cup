@@ -1,1 +1,118 @@
-{}
+{
+  "537327": [
+    {
+      "minute": 17,
+      "teamId": "RSA",
+      "player": "Teboho Mokoena",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 23,
+      "teamId": "MEX",
+      "player": "Brian Gutiérrez",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 49,
+      "teamId": "RSA",
+      "player": "Sphephelo Sithole",
+      "card": "RED"
+    },
+    {
+      "minute": 74,
+      "teamId": "RSA",
+      "player": "Nkosinathi Sibisi",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 84,
+      "teamId": "RSA",
+      "player": "Themba Zwane",
+      "card": "RED"
+    },
+    {
+      "minute": 90,
+      "teamId": "MEX",
+      "player": "César Montes",
+      "card": "RED"
+    }
+  ],
+  "537328": [
+    {
+      "minute": 90,
+      "teamId": "KOR",
+      "player": "Lee Gi-Hyuk",
+      "card": "YELLOW"
+    }
+  ],
+  "537333": [
+    {
+      "minute": 11,
+      "teamId": "CAN",
+      "player": "Alistair Johnston",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 45,
+      "teamId": "BIH",
+      "player": "Ermedin Demirovic",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 45,
+      "teamId": "BIH",
+      "player": "Jovo Lukic",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 53,
+      "teamId": "CAN",
+      "player": "Luc de Fougerolles",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 90,
+      "teamId": "BIH",
+      "player": "Nikola Katic",
+      "card": "YELLOW"
+    }
+  ],
+  "537345": [
+    {
+      "minute": 10,
+      "teamId": "PAR",
+      "player": "Juan Jose Cáceres",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 53,
+      "teamId": "PAR",
+      "player": "Miguel Almirón",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 59,
+      "teamId": "USA",
+      "player": "Tyler Adams",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 79,
+      "teamId": "PAR",
+      "player": "Diego Gómez",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 88,
+      "teamId": "PAR",
+      "player": "Alex Arce",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 90,
+      "teamId": "PAR",
+      "player": "Júnior Alonso",
+      "card": "YELLOW"
+    }
+  ]
+}
