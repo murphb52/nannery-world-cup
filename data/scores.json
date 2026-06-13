@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-12T21:14:54.186Z",
+  "lastUpdated": "2026-06-13T05:06:36.843Z",
   "matches": [
     {
       "id": 537327,
@@ -46,12 +46,12 @@
       "group": "GROUP_D",
       "homeTeamId": "USA",
       "awayTeamId": "PAR",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 4,
+      "awayScore": 1,
       "date": "2026-06-13T01:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null
+      "status": "FINISHED",
+      "winner": "HOME_TEAM"
     },
     {
       "id": 537334,
@@ -1543,22 +1543,22 @@
     ],
     "Group D": [
       {
-        "teamId": "AUS",
-        "played": 0,
-        "won": 0,
+        "teamId": "USA",
+        "played": 1,
+        "won": 1,
         "drawn": 0,
         "lost": 0,
-        "goalsFor": 0,
-        "goalsAgainst": 0,
-        "goalDiff": 0,
-        "points": 0,
+        "goalsFor": 4,
+        "goalsAgainst": 1,
+        "goalDiff": 3,
+        "points": 3,
         "yellowCards": 0,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
       },
       {
-        "teamId": "PAR",
+        "teamId": "AUS",
         "played": 0,
         "won": 0,
         "drawn": 0,
@@ -1588,14 +1588,14 @@
         "eliminatedAt": null
       },
       {
-        "teamId": "USA",
-        "played": 0,
+        "teamId": "PAR",
+        "played": 1,
         "won": 0,
         "drawn": 0,
-        "lost": 0,
-        "goalsFor": 0,
-        "goalsAgainst": 0,
-        "goalDiff": 0,
+        "lost": 1,
+        "goalsFor": 1,
+        "goalsAgainst": 4,
+        "goalDiff": -3,
         "points": 0,
         "yellowCards": 0,
         "redCards": 0,
