@@ -6,15 +6,21 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const dataDir = path.join(__dirname, '..', 'data')
 const scoresPath = path.join(dataDir, 'scores.json')
 const bookingsPath = path.join(dataDir, 'bookings.json')
+const fixtureMapPath = path.join(dataDir, 'fixture-map.json')
 
 const API_KEY = process.env.FOOTBALL_DATA_API_KEY
 const COMPETITION_ID = 2000 // FIFA World Cup on football-data.org
 
-// Free tier allows 10 requests/minute. Match details are fetched one at a
-// time with a delay, and capped per run — finished matches are cached in
-// data/bookings.json so each run only pays for matches it hasn't seen yet.
-const DETAIL_DELAY_MS = 6500
-const MAX_DETAIL_FETCHES = 20
+// API-Football (api-football.com) — used for match events (cards).
+// Free tier: 100 requests/day. We only fetch events once per finished match
+// and cache them, so the total over the tournament is ≤104 event calls + a
+// handful of fixture-list refreshes. Well within the daily limit.
+const AF_KEY = process.env.API_FOOTBALL_KEY
+const AF_BASE = 'https://v3.football.api-sports.io'
+const AF_LEAGUE = 1    // FIFA World Cup
+const AF_SEASON = 2026
+const AF_EVENT_DELAY_MS = 1200  // ~50 req/min, well under the free-tier limit
+const MAX_EVENT_FETCHES = 10    // cap per run to spread load across runs
 
 if (!API_KEY) {
   console.error('FOOTBALL_DATA_API_KEY is not set')
@@ -28,6 +34,14 @@ async function apiFetch(endpoint) {
     headers: { 'X-Auth-Token': API_KEY },
   })
   if (!res.ok) throw new Error(`API error ${res.status}: ${endpoint}`)
+  return res.json()
+}
+
+async function afFetch(endpoint) {
+  const res = await fetch(`${AF_BASE}/${endpoint}`, {
+    headers: { 'x-apisports-key': AF_KEY },
+  })
+  if (!res.ok) throw new Error(`API-Football ${res.status}: ${endpoint}`)
   return res.json()
 }
 
@@ -116,11 +130,18 @@ function sameIgnoringTimestamp(a, b) {
   return JSON.stringify(strip(a)) === JSON.stringify(strip(b))
 }
 
-// Card data (bookings) only appears on the per-match detail endpoint, so we
-// fetch details for matches that have started and cache finished ones in
-// data/bookings.json. Live matches are refetched every run until they finish.
+// Fetch card events from API-Football for finished/live matches.
+// Finished matches are cached in data/bookings.json (only written when the
+// API returns at least one card, so matches with no cards are retried each
+// run until real data arrives).
 async function updateBookings(matches) {
+  if (!AF_KEY) {
+    console.warn('API_FOOTBALL_KEY not set — skipping card fetch')
+    return readJson(bookingsPath, {})
+  }
+
   const cache = readJson(bookingsPath, {})
+  const fixtureMap = await loadFixtureMap(matches)
   const bookings = {}
   let fetched = 0
 
@@ -133,39 +154,95 @@ async function updateBookings(matches) {
       bookings[m.id] = cache[m.id]
       continue
     }
-    if (fetched >= MAX_DETAIL_FETCHES) continue
+    if (fetched >= MAX_EVENT_FETCHES) continue
 
-    await sleep(DETAIL_DELAY_MS)
+    const entry = fixtureMap[m.id]
+    if (!entry) continue
+
+    await sleep(AF_EVENT_DELAY_MS)
     fetched++
     try {
-      const data = await apiFetch(`matches/${m.id}`)
-      const detail = data.match ?? data
-      const teamIdByApiId = {
-        [detail.homeTeam?.id]: m.homeTeamId,
-        [detail.awayTeam?.id]: m.awayTeamId,
-      }
-      bookings[m.id] = (detail.bookings ?? []).map(b => ({
-        minute: b.minute ?? null,
-        teamId: teamIdByApiId[b.team?.id] ?? b.team?.tla ?? null,
-        player: b.player?.name ?? null,
-        card: b.card, // YELLOW | YELLOW_RED | RED
-      }))
+      const data = await afFetch(`fixtures/events?fixture=${entry.fixtureId}`)
+      bookings[m.id] = (data.response ?? [])
+        .filter(e => e.type === 'Card')
+        .map(e => ({
+          minute: e.time?.elapsed ?? null,
+          teamId: e.team?.id === entry.homeApiId ? m.homeTeamId
+            : e.team?.id === entry.awayApiId ? m.awayTeamId
+            : null,
+          player: e.player?.name ?? null,
+          card: normaliseCard(e.detail),
+        }))
     } catch (err) {
-      console.warn(`Could not fetch details for match ${m.id}: ${err.message}`)
+      console.warn(`Could not fetch events for match ${m.id}: ${err.message}`)
     }
   }
 
-  // Persist only finished matches with actual bookings. Skipping empty results
-  // lets the next run re-fetch matches where the API hadn't populated cards yet.
+  // Persist only finished matches with actual bookings so that matches where
+  // the API hasn't yet populated card data get retried on the next run.
   const finishedIds = new Set(matches.filter(m => m.status === 'FINISHED').map(m => m.id))
   const newCache = {}
   for (const [id, list] of Object.entries(bookings)) {
     if (finishedIds.has(Number(id)) && list.length > 0) newCache[id] = list
   }
   fs.writeFileSync(bookingsPath, JSON.stringify(newCache, null, 2))
-  if (fetched) console.log(`Fetched booking details for ${fetched} matches`)
+  if (fetched) console.log(`Fetched card events for ${fetched} matches`)
 
   return bookings
+}
+
+// Build/update a mapping from football-data.org match IDs to API-Football
+// fixture IDs. Stored in data/fixture-map.json so we only pay for the
+// bulk fixture-list call when new finished matches appear that aren't mapped yet.
+async function loadFixtureMap(matches) {
+  const map = readJson(fixtureMapPath, {})
+
+  const unmapped = matches.filter(m => m.status === 'FINISHED' && !map[m.id])
+  if (!unmapped.length) return map
+
+  try {
+    console.log(`Fetching API-Football fixture list to map ${unmapped.length} match(es)…`)
+    const data = await afFetch(`fixtures?league=${AF_LEAGUE}&season=${AF_SEASON}`)
+
+    // Index by date + home TLA + away TLA so we can cross-reference with
+    // football-data.org matches (both use FIFA 3-letter team codes).
+    const byKey = {}
+    for (const f of data.response ?? []) {
+      const date = f.fixture?.date?.split('T')[0]
+      if (!date) continue
+      const key = `${date}|${f.teams.home.code}|${f.teams.away.code}`
+      byKey[key] = {
+        fixtureId: f.fixture.id,
+        homeApiId: f.teams.home.id,
+        awayApiId: f.teams.away.id,
+      }
+    }
+
+    let updated = false
+    for (const m of unmapped) {
+      const date = m.date.split('T')[0]
+      const key = `${date}|${m.homeTeamId}|${m.awayTeamId}`
+      if (byKey[key]) {
+        map[m.id] = byKey[key]
+        updated = true
+      } else {
+        console.warn(`No API-Football fixture found for ${m.homeTeamId} vs ${m.awayTeamId} on ${date}`)
+      }
+    }
+
+    if (updated) fs.writeFileSync(fixtureMapPath, JSON.stringify(map, null, 2))
+  } catch (err) {
+    console.warn(`Could not fetch API-Football fixture list: ${err.message}`)
+  }
+
+  return map
+}
+
+function normaliseCard(detail) {
+  if (detail === 'Yellow Card') return 'YELLOW'
+  if (detail === 'Red Card') return 'RED'
+  if (detail === 'Yellow Red Card') return 'YELLOW_RED'
+  return detail ?? 'YELLOW'
 }
 
 function aggregateCards(matches, bookings) {
