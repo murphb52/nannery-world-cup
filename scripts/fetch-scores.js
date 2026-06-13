@@ -41,7 +41,10 @@ async function afFetch(endpoint) {
   const res = await fetch(`${AF_BASE}/${endpoint}`, {
     headers: { 'x-apisports-key': AF_KEY },
   })
-  if (!res.ok) throw new Error(`API-Football ${res.status}: ${endpoint}`)
+  if (!res.ok) {
+    const body = await res.text().catch(() => '')
+    throw new Error(`API-Football ${res.status}: ${endpoint} — ${body.slice(0, 200)}`)
+  }
   return res.json()
 }
 
@@ -216,7 +219,10 @@ async function loadFixtureMap(matches, teamNames = {}) {
     console.log(`Fetching API-Football fixture list to map ${unmapped.length} match(es)…`)
     const data = await afFetch(`fixtures?league=${AF_LEAGUE}&season=${AF_SEASON}`)
     const fixtures = data.response ?? []
-    console.log(`API-Football returned ${fixtures.length} fixture(s) for WC${AF_SEASON}`)
+    console.log(`API-Football returned ${fixtures.length} fixture(s) for WC${AF_SEASON} (results: ${data.results ?? '?'})`)
+    if (data.errors && (Array.isArray(data.errors) ? data.errors.length : Object.keys(data.errors).length)) {
+      console.warn('  API-Football errors:', JSON.stringify(data.errors))
+    }
     if (fixtures.length > 0) {
       const s = fixtures[0]
       console.log(`  Sample: ${s.fixture.date} | ${s.teams.home.name}(${s.teams.home.code}) vs ${s.teams.away.name}(${s.teams.away.code})`)
