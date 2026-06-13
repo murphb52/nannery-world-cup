@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-13T08:19:38.434Z",
+  "lastUpdated": "2026-06-13T18:18:14.500Z",
   "matches": [
     {
       "id": 537327,
@@ -110,7 +110,7 @@
       "stage": "GROUP",
       "group": "GROUP_E",
       "homeTeamId": "GER",
-      "awayTeamId": "CUW",
+      "awayTeamId": "CUR",
       "homeScore": null,
       "awayScore": null,
       "date": "2026-06-14T17:00:00Z",
@@ -141,7 +141,7 @@
       "awayScore": null,
       "date": "2026-06-14T23:00:00Z",
       "venue": null,
-      "status": "TIMED",
+      "status": "SCHEDULED",
       "winner": null
     },
     {
@@ -448,7 +448,7 @@
       "stage": "GROUP",
       "group": "GROUP_E",
       "homeTeamId": "ECU",
-      "awayTeamId": "CUW",
+      "awayTeamId": "CUR",
       "homeScore": null,
       "awayScore": null,
       "date": "2026-06-21T00:00:00Z",
@@ -720,7 +720,7 @@
       "id": 537356,
       "stage": "GROUP",
       "group": "GROUP_E",
-      "homeTeamId": "CUW",
+      "homeTeamId": "CUR",
       "awayTeamId": "CIV",
       "homeScore": null,
       "awayScore": null,
