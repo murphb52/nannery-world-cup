@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-13T20:03:51.021Z",
+  "lastUpdated": "2026-06-13T21:47:39.867Z",
   "matches": [
     {
       "id": 537327,
@@ -59,12 +59,12 @@
       "group": "GROUP_B",
       "homeTeamId": "QAT",
       "awayTeamId": "SUI",
-      "homeScore": 0,
+      "homeScore": 1,
       "awayScore": 1,
       "date": "2026-06-13T19:00:00Z",
       "venue": null,
-      "status": "PAUSED",
-      "winner": "AWAY_TEAM"
+      "status": "FINISHED",
+      "winner": "DRAW"
     },
     {
       "id": 537339,
@@ -110,7 +110,7 @@
       "stage": "GROUP",
       "group": "GROUP_E",
       "homeTeamId": "GER",
-      "awayTeamId": "CUW",
+      "awayTeamId": "CUR",
       "homeScore": null,
       "awayScore": null,
       "date": "2026-06-14T17:00:00Z",
@@ -141,7 +141,7 @@
       "awayScore": null,
       "date": "2026-06-14T23:00:00Z",
       "venue": null,
-      "status": "TIMED",
+      "status": "SCHEDULED",
       "winner": null
     },
     {
@@ -448,7 +448,7 @@
       "stage": "GROUP",
       "group": "GROUP_E",
       "homeTeamId": "ECU",
-      "awayTeamId": "CUW",
+      "awayTeamId": "CUR",
       "homeScore": null,
       "awayScore": null,
       "date": "2026-06-21T00:00:00Z",
@@ -720,7 +720,7 @@
       "id": 537356,
       "stage": "GROUP",
       "group": "GROUP_E",
-      "homeTeamId": "CUW",
+      "homeTeamId": "CUR",
       "awayTeamId": "CIV",
       "homeScore": null,
       "awayScore": null,
@@ -1419,21 +1419,6 @@
     ],
     "Group B": [
       {
-        "teamId": "SUI",
-        "played": 1,
-        "won": 1,
-        "drawn": 0,
-        "lost": 0,
-        "goalsFor": 1,
-        "goalsAgainst": 0,
-        "goalDiff": 1,
-        "points": 3,
-        "yellowCards": 0,
-        "redCards": 0,
-        "eliminated": false,
-        "eliminatedAt": null
-      },
-      {
         "teamId": "BIH",
         "played": 1,
         "won": 0,
@@ -1467,13 +1452,28 @@
         "teamId": "QAT",
         "played": 1,
         "won": 0,
-        "drawn": 0,
-        "lost": 1,
-        "goalsFor": 0,
+        "drawn": 1,
+        "lost": 0,
+        "goalsFor": 1,
         "goalsAgainst": 1,
-        "goalDiff": -1,
-        "points": 0,
-        "yellowCards": 0,
+        "goalDiff": 0,
+        "points": 1,
+        "yellowCards": 2,
+        "redCards": 0,
+        "eliminated": false,
+        "eliminatedAt": null
+      },
+      {
+        "teamId": "SUI",
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0,
+        "goalsFor": 1,
+        "goalsAgainst": 1,
+        "goalDiff": 0,
+        "points": 1,
+        "yellowCards": 1,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -2119,6 +2119,14 @@
     },
     "BIH": {
       "yellow": 3,
+      "red": 0
+    },
+    "QAT": {
+      "yellow": 2,
+      "red": 0
+    },
+    "SUI": {
+      "yellow": 1,
       "red": 0
     },
     "PAR": {

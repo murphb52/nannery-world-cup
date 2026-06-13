@@ -77,6 +77,26 @@
       "card": "YELLOW"
     }
   ],
+  "537334": [
+    {
+      "minute": 16,
+      "teamId": "QAT",
+      "player": "Mahmoud Abunada",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 23,
+      "teamId": "QAT",
+      "player": "Jassem Gaber",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 42,
+      "teamId": "SUI",
+      "player": "Denis Zakaria",
+      "card": "YELLOW"
+    }
+  ],
   "537345": [
     {
       "minute": 10,
