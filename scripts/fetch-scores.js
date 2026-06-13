@@ -1,6 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import { fetchCardsFromEspn } from './fetch-cards.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const dataDir = path.join(__dirname, '..', 'data')
@@ -53,8 +54,17 @@ async function main() {
     winner: m.score.winner ?? null,
   }))
 
-  // Card data is maintained manually in data/bookings.json.
-  const bookings = readJson(bookingsPath, {})
+  const existingBookings = readJson(bookingsPath, {})
+  let bookings = existingBookings
+  try {
+    bookings = await fetchCardsFromEspn(matches, existingBookings)
+    if (JSON.stringify(bookings) !== JSON.stringify(existingBookings)) {
+      fs.writeFileSync(bookingsPath, JSON.stringify(bookings, null, 2))
+    }
+  } catch (err) {
+    console.warn(`ESPN card fetch failed, using existing bookings: ${err.message}`)
+    bookings = existingBookings
+  }
   const { cards, groupCards, firstRedCard } = aggregateCards(matches, bookings)
   const eliminations = computeEliminations(matches)
 
