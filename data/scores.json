@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-14T01:56:31.323Z",
+  "lastUpdated": "2026-06-14T06:50:19.859Z",
   "matches": [
     {
       "id": 537327,
@@ -89,7 +89,7 @@
       "awayScore": 1,
       "date": "2026-06-14T01:00:00Z",
       "venue": null,
-      "status": "TIMED",
+      "status": "FINISHED",
       "winner": "AWAY_TEAM"
     },
     {
@@ -98,12 +98,12 @@
       "group": "GROUP_D",
       "homeTeamId": "AUS",
       "awayTeamId": "TUR",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 2,
+      "awayScore": 0,
       "date": "2026-06-14T04:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null
+      "status": "FINISHED",
+      "winner": "HOME_TEAM"
     },
     {
       "id": 537351,
@@ -1481,6 +1481,21 @@
     ],
     "Group C": [
       {
+        "teamId": "SCO",
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0,
+        "goalsFor": 1,
+        "goalsAgainst": 0,
+        "goalDiff": 1,
+        "points": 3,
+        "yellowCards": 3,
+        "redCards": 0,
+        "eliminated": false,
+        "eliminatedAt": null
+      },
+      {
         "teamId": "BRA",
         "played": 1,
         "won": 0,
@@ -1514,28 +1529,13 @@
         "teamId": "HAI",
         "played": 1,
         "won": 0,
-        "drawn": 1,
-        "lost": 0,
+        "drawn": 0,
+        "lost": 1,
         "goalsFor": 0,
-        "goalsAgainst": 0,
-        "goalDiff": 0,
-        "points": 1,
-        "yellowCards": 0,
-        "redCards": 0,
-        "eliminated": false,
-        "eliminatedAt": null
-      },
-      {
-        "teamId": "SCO",
-        "played": 1,
-        "won": 0,
-        "drawn": 1,
-        "lost": 0,
-        "goalsFor": 0,
-        "goalsAgainst": 0,
-        "goalDiff": 0,
-        "points": 1,
-        "yellowCards": 0,
+        "goalsAgainst": 1,
+        "goalDiff": -1,
+        "points": 0,
+        "yellowCards": 1,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -1559,14 +1559,14 @@
       },
       {
         "teamId": "AUS",
-        "played": 0,
-        "won": 0,
+        "played": 1,
+        "won": 1,
         "drawn": 0,
         "lost": 0,
-        "goalsFor": 0,
+        "goalsFor": 2,
         "goalsAgainst": 0,
-        "goalDiff": 0,
-        "points": 0,
+        "goalDiff": 2,
+        "points": 3,
         "yellowCards": 0,
         "redCards": 0,
         "eliminated": false,
@@ -1574,15 +1574,15 @@
       },
       {
         "teamId": "TUR",
-        "played": 0,
+        "played": 1,
         "won": 0,
         "drawn": 0,
-        "lost": 0,
+        "lost": 1,
         "goalsFor": 0,
-        "goalsAgainst": 0,
-        "goalDiff": 0,
+        "goalsAgainst": 2,
+        "goalDiff": -2,
         "points": 0,
-        "yellowCards": 0,
+        "yellowCards": 1,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -2133,11 +2133,23 @@
       "yellow": 2,
       "red": 0
     },
+    "HAI": {
+      "yellow": 1,
+      "red": 0
+    },
+    "SCO": {
+      "yellow": 3,
+      "red": 0
+    },
     "PAR": {
       "yellow": 5,
       "red": 0
     },
     "USA": {
+      "yellow": 1,
+      "red": 0
+    },
+    "TUR": {
       "yellow": 1,
       "red": 0
     }

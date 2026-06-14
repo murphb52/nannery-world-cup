@@ -111,6 +111,32 @@
       "card": "YELLOW"
     }
   ],
+  "537340": [
+    {
+      "minute": 39,
+      "teamId": "HAI",
+      "player": "Jean-Ricner Bellegarde",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 46,
+      "teamId": "SCO",
+      "player": "Aaron Hickey",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 90,
+      "teamId": "SCO",
+      "player": "Findlay Curtis",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 90,
+      "teamId": "SCO",
+      "player": "Kenny McLean",
+      "card": "YELLOW"
+    }
+  ],
   "537345": [
     {
       "minute": 10,
@@ -146,6 +172,14 @@
       "minute": 90,
       "teamId": "PAR",
       "player": "Júnior Alonso",
+      "card": "YELLOW"
+    }
+  ],
+  "537346": [
+    {
+      "minute": 86,
+      "teamId": "TUR",
+      "player": "Yunus Akgün",
       "card": "YELLOW"
     }
   ]
