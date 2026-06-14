@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-13T23:11:30.977Z",
+  "lastUpdated": "2026-06-14T00:02:26.370Z",
   "matches": [
     {
       "id": 537327,
@@ -33,12 +33,12 @@
       "group": "GROUP_B",
       "homeTeamId": "CAN",
       "awayTeamId": "BIH",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 1,
+      "awayScore": 1,
       "date": "2026-06-12T19:00:00Z",
       "venue": null,
       "status": "FINISHED",
-      "winner": null
+      "winner": "DRAW"
     },
     {
       "id": 537345,
@@ -76,7 +76,7 @@
       "awayScore": 1,
       "date": "2026-06-13T22:00:00Z",
       "venue": null,
-      "status": "PAUSED",
+      "status": "IN_PLAY",
       "winner": "DRAW"
     },
     {
