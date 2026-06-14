@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-14T00:02:26.370Z",
+  "lastUpdated": "2026-06-14T01:56:31.323Z",
   "matches": [
     {
       "id": 537327,
@@ -76,7 +76,7 @@
       "awayScore": 1,
       "date": "2026-06-13T22:00:00Z",
       "venue": null,
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "winner": "DRAW"
     },
     {
@@ -85,12 +85,12 @@
       "group": "GROUP_C",
       "homeTeamId": "HAI",
       "awayTeamId": "SCO",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 1,
       "date": "2026-06-14T01:00:00Z",
       "venue": null,
       "status": "TIMED",
-      "winner": null
+      "winner": "AWAY_TEAM"
     },
     {
       "id": 537346,
@@ -1490,7 +1490,7 @@
         "goalsAgainst": 1,
         "goalDiff": 0,
         "points": 1,
-        "yellowCards": 0,
+        "yellowCards": 2,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -1512,14 +1512,14 @@
       },
       {
         "teamId": "HAI",
-        "played": 0,
+        "played": 1,
         "won": 0,
-        "drawn": 0,
+        "drawn": 1,
         "lost": 0,
         "goalsFor": 0,
         "goalsAgainst": 0,
         "goalDiff": 0,
-        "points": 0,
+        "points": 1,
         "yellowCards": 0,
         "redCards": 0,
         "eliminated": false,
@@ -1527,14 +1527,14 @@
       },
       {
         "teamId": "SCO",
-        "played": 0,
+        "played": 1,
         "won": 0,
-        "drawn": 0,
+        "drawn": 1,
         "lost": 0,
         "goalsFor": 0,
         "goalsAgainst": 0,
         "goalDiff": 0,
-        "points": 0,
+        "points": 1,
         "yellowCards": 0,
         "redCards": 0,
         "eliminated": false,
@@ -2127,6 +2127,10 @@
     },
     "SUI": {
       "yellow": 1,
+      "red": 0
+    },
+    "BRA": {
+      "yellow": 2,
       "red": 0
     },
     "PAR": {
