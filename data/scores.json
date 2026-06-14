@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-14T19:42:35.197Z",
+  "lastUpdated": "2026-06-14T20:07:28.944Z",
   "matches": [
     {
       "id": 537327,
@@ -124,12 +124,12 @@
       "group": "GROUP_F",
       "homeTeamId": "NED",
       "awayTeamId": "JPN",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 0,
       "date": "2026-06-14T20:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null
+      "status": "IN_PLAY",
+      "winner": "DRAW"
     },
     {
       "id": 537352,
@@ -1668,14 +1668,14 @@
     "Group F": [
       {
         "teamId": "JPN",
-        "played": 0,
+        "played": 1,
         "won": 0,
-        "drawn": 0,
+        "drawn": 1,
         "lost": 0,
         "goalsFor": 0,
         "goalsAgainst": 0,
         "goalDiff": 0,
-        "points": 0,
+        "points": 1,
         "yellowCards": 0,
         "redCards": 0,
         "eliminated": false,
@@ -1683,14 +1683,14 @@
       },
       {
         "teamId": "NED",
-        "played": 0,
+        "played": 1,
         "won": 0,
-        "drawn": 0,
+        "drawn": 1,
         "lost": 0,
         "goalsFor": 0,
         "goalsAgainst": 0,
         "goalDiff": 0,
-        "points": 0,
+        "points": 1,
         "yellowCards": 0,
         "redCards": 0,
         "eliminated": false,
