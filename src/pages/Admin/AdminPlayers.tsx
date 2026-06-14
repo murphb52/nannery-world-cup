@@ -1,23 +1,16 @@
 import { useState, useEffect } from 'react'
-import { loadPlayers } from '../../data/loaders'
 import { githubCommit, getPat } from '../../lib/github'
+import { useSweepstakes } from '../../contexts/SweepstakesContext'
 import type { Player } from '../../types'
 
 export default function AdminPlayers() {
-  const [players, setPlayers] = useState<Player[]>([])
-  const [edited, setEdited] = useState<Player[]>([])
-  const [loading, setLoading] = useState(true)
+  const { config, players: contextPlayers } = useSweepstakes()
+  const [edited, setEdited] = useState<Player[]>([...contextPlayers])
   const [saving, setSaving] = useState(false)
   const [msg, setMsg] = useState('')
   const [dirty, setDirty] = useState(false)
 
-  useEffect(() => {
-    loadPlayers().then(p => {
-      setPlayers(p)
-      setEdited([...p])
-      setLoading(false)
-    })
-  }, [])
+  useEffect(() => { setEdited([...contextPlayers]) }, [contextPlayers])
 
   function update(i: number, name: string) {
     const next = [...edited]
@@ -32,8 +25,7 @@ export default function AdminPlayers() {
     setSaving(true)
     setMsg('')
     try {
-      await githubCommit(pat, 'data/players.json', edited, 'chore: update player list')
-      setPlayers([...edited])
+      await githubCommit(pat, `data/${config.dataDir}/players.json`, edited, 'chore: update player list')
       setDirty(false)
       setMsg('✓ Saved to GitHub')
     } catch (e: unknown) {
@@ -43,9 +35,7 @@ export default function AdminPlayers() {
     }
   }
 
-  function reset() { setEdited([...players]); setDirty(false); setMsg('') }
-
-  if (loading) return <div className="text-white/40 animate-pulse">Loading…</div>
+  function reset() { setEdited([...contextPlayers]); setDirty(false); setMsg('') }
 
   return (
     <div className="space-y-4">

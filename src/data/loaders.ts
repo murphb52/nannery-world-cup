@@ -12,9 +12,9 @@ async function fetchJson<T>(path: string): Promise<T> {
   return r.json()
 }
 
-export const loadPlayers = () => fetchJson<Player[]>('players.json')
+export const loadPlayersFor = (dataDir: string) => fetchJson<Player[]>(`${dataDir}/players.json`)
+export const loadDrawFor = (dataDir: string) => fetchJson<DrawResult>(`${dataDir}/draw.json`)
 export const loadTeams = () => fetchJson<Team[]>('teams.json')
-export const loadDraw = () => fetchJson<DrawResult>('draw.json')
 export const loadScores = () => fetchJson<ScoresData>('scores.json')
 
 /** Build a teamId → player display name map from a draw and player list. */

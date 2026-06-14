@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import DrawCeremony from '../components/Draw/DrawCeremony'
-import { loadPlayers, loadTeams, loadDraw } from '../data/loaders'
+import { loadPlayersFor, loadTeams, loadDrawFor } from '../data/loaders'
 import type { Team, DrawResult, Player } from '../types'
 
 type AppState = 'loading' | 'already-drawn' | 'mode-select' | 'drawing' | 'done'
@@ -26,7 +26,7 @@ export default function DrawPage() {
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle')
 
   useEffect(() => {
-    Promise.all([loadPlayers(), loadTeams(), loadDraw()]).then(([p, t, draw]) => {
+    Promise.all([loadPlayersFor('nannery'), loadTeams(), loadDrawFor('nannery')]).then(([p, t, draw]) => {
       setPlayers(p)
       setTeams(t)
       if (Object.keys(draw).length > 0) {

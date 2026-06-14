@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo, useRef } from 'react'
-import { loadTeams, loadDraw, loadScores, loadPlayers, resolveNames } from '../data/loaders'
-import type { Team, DrawResult, Match, Player } from '../types'
+import { loadTeams, loadScores, resolveNames } from '../data/loaders'
+import { useSweepstakes } from '../contexts/SweepstakesContext'
+import type { Team, Match } from '../types'
 
 const STAGE_LABELS: Record<string, string> = {
   R32: 'Round of 32',
@@ -32,9 +33,8 @@ function kickoffTime(iso: string): string {
 }
 
 export default function FixturesPage() {
+  const { players, draw } = useSweepstakes()
   const [teams, setTeams] = useState<Team[]>([])
-  const [draw, setDraw] = useState<DrawResult>({})
-  const [players, setPlayers] = useState<Player[]>([])
   const [matches, setMatches] = useState<Match[]>([])
   const [lastUpdated, setLastUpdated] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
@@ -44,10 +44,8 @@ export default function FixturesPage() {
   const todayChipRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
-    Promise.all([loadTeams(), loadDraw(), loadScores(), loadPlayers()]).then(([t, d, s, p]) => {
+    Promise.all([loadTeams(), loadScores()]).then(([t, s]) => {
       setTeams(t)
-      setDraw(d)
-      setPlayers(p)
       setMatches([...(s.matches ?? [])].sort((a, b) => a.date.localeCompare(b.date)))
       setLastUpdated(s.lastUpdated)
       setLoading(false)

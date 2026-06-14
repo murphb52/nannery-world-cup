@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo } from 'react'
-import { loadTeams, loadDraw, loadScores, loadPlayers, resolveNames } from '../data/loaders'
-import type { Team, DrawResult, Match, Player } from '../types'
+import { loadTeams, loadScores, resolveNames } from '../data/loaders'
+import { useSweepstakes } from '../contexts/SweepstakesContext'
+import type { Team, Match } from '../types'
 
 interface MatchData {
   id: string
@@ -221,18 +222,15 @@ function BracketColumn({ rounds, bracket, teams, leftSide, onMatchClick }: {
 }
 
 export default function KnockoutPage() {
+  const { players, draw } = useSweepstakes()
   const [teams, setTeams] = useState<Team[]>([])
-  const [draw, setDraw] = useState<DrawResult>({})
-  const [players, setPlayers] = useState<Player[]>([])
   const [bracket, setBracket] = useState<Record<string, MatchData[]>>(buildPlaceholderBracket())
   const [zoom, setZoom] = useState<ZoomMatch | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    Promise.all([loadTeams(), loadDraw(), loadScores(), loadPlayers()]).then(([t, d, s, p]) => {
+    Promise.all([loadTeams(), loadScores()]).then(([t, s]) => {
       setTeams(t)
-      setDraw(d)
-      setPlayers(p)
       if (s.matches?.length) {
         const updated = { ...buildPlaceholderBracket() }
         for (const m of s.matches.filter((m: Match) => m.stage !== 'GROUP')) {

@@ -57,6 +57,12 @@ export interface Match {
   winner?: 'HOME_TEAM' | 'AWAY_TEAM' | 'DRAW' | null
 }
 
+export interface TeamStats {
+  scored: number
+  conceded: number
+  ownGoals: number
+}
+
 export interface ScoresData {
   lastUpdated: string | null
   matches: Match[]
@@ -64,4 +70,6 @@ export interface ScoresData {
   /** Tournament-wide card totals per team (group stage + knockouts). */
   cards?: { [teamId: string]: CardTotals }
   firstRedCard?: FirstRedCard | null
+  /** Tournament-wide goals scored/conceded/own-goals per team. */
+  teamStats?: { [teamId: string]: TeamStats }
 }

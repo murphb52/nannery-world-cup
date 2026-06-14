@@ -1,17 +1,18 @@
 import { useState, useEffect } from 'react'
-import { loadTeams, loadDraw, loadPlayers } from '../../data/loaders'
+import { loadTeams } from '../../data/loaders'
 import { githubCommit, getPat } from '../../lib/github'
+import { useSweepstakes } from '../../contexts/SweepstakesContext'
 import DrawCeremony from '../../components/Draw/DrawCeremony'
 import { exportGroupsPng } from '../../lib/exportPng'
-import type { Team, DrawResult, Player } from '../../types'
+import type { Team, DrawResult } from '../../types'
 
 type View = 'dashboard' | 'ceremony'
 
 export default function AdminDraw() {
+  const { config, players, draw: contextDraw } = useSweepstakes()
   const [view, setView] = useState<View>('dashboard')
-  const [players, setPlayers] = useState<Player[]>([])
   const [teams, setTeams] = useState<Team[]>([])
-  const [draw, setDraw] = useState<DrawResult>({})
+  const [draw, setDraw] = useState<DrawResult>(contextDraw)
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [saveMsg, setSaveMsg] = useState('')
@@ -19,13 +20,14 @@ export default function AdminDraw() {
   const [exporting, setExporting] = useState(false)
 
   useEffect(() => {
-    Promise.all([loadPlayers(), loadTeams(), loadDraw()]).then(([p, t, d]) => {
-      setPlayers(p)
+    loadTeams().then(t => {
       setTeams(t)
-      setDraw(d)
       setLoading(false)
     })
   }, [])
+
+  // Keep local draw in sync with context (e.g. when switching sweepstakes)
+  useEffect(() => { setDraw(contextDraw) }, [contextDraw])
 
   const drawDone = Object.keys(draw).length > 0
 
@@ -35,7 +37,7 @@ export default function AdminDraw() {
     setSaving(true)
     setSaveMsg('')
     try {
-      await githubCommit(pat, 'data/draw.json', data, msg)
+      await githubCommit(pat, `data/${config.dataDir}/draw.json`, data, msg)
       setDraw(data)
       setSaveMsg('✓ Saved to GitHub')
     } catch (e: unknown) {
@@ -77,7 +79,7 @@ export default function AdminDraw() {
   async function exportPng() {
     setExporting(true)
     try {
-      await exportGroupsPng(teams, draw, players)
+      await exportGroupsPng(teams, draw, players, `${config.name} ${config.year}`)
     } catch (e) {
       setSaveMsg(`⚠ ${e instanceof Error ? e.message : 'Export failed'}`)
     } finally {

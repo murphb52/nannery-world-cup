@@ -40,7 +40,8 @@ async function main() {
     apiFetch(`competitions/${COMPETITION_ID}/standings`),
   ])
 
-  const matches = matchesData.matches.map(m => ({
+  const rawMatches = matchesData.matches
+  const matches = rawMatches.map(m => ({
     id: m.id,
     stage: normaliseStage(m.stage),
     group: m.group ?? null,
@@ -53,6 +54,7 @@ async function main() {
     status: m.status,
     winner: m.score.winner ?? null,
   }))
+  const teamStats = computeTeamStats(rawMatches)
 
   const existingBookings = readJson(bookingsPath, {})
   let bookings = existingBookings
@@ -98,6 +100,7 @@ async function main() {
     standings,
     cards,
     firstRedCard,
+    teamStats,
   }
 
   // Only rewrite scores.json when something other than the timestamp changed,
@@ -215,6 +218,39 @@ function miniTable(groupMatches) {
   }
   return Object.values(rows).sort((a, b) =>
     b.points - a.points || b.goalDiff - a.goalDiff || b.goalsFor - a.goalsFor)
+}
+
+// Aggregate per-team goals scored, conceded, and own goals from raw API match data.
+// The football-data.org API includes a `goals` array per match where each entry has:
+//   type: "REGULAR" | "OWN_GOAL" | "PENALTY" | "EXTRA_TIME"
+//   team: the team that BENEFITED from the goal (scored into the opponent's net)
+// For an OWN_GOAL, team = the team that gained the goal, so the committing team is the other one.
+function computeTeamStats(rawMatches) {
+  const stats = {}
+  for (const m of rawMatches) {
+    if (m.status !== 'FINISHED') continue
+    const home = m.homeTeam?.tla
+    const away = m.awayTeam?.tla
+    if (!home || !away) continue
+    ;(stats[home] ??= { scored: 0, conceded: 0, ownGoals: 0 })
+    ;(stats[away] ??= { scored: 0, conceded: 0, ownGoals: 0 })
+
+    const hs = m.score?.fullTime?.home ?? 0
+    const as_ = m.score?.fullTime?.away ?? 0
+    stats[home].scored += hs
+    stats[home].conceded += as_
+    stats[away].scored += as_
+    stats[away].conceded += hs
+
+    // Own goals: goal.team is the benefiting team, committing team is the other
+    for (const goal of m.goals ?? []) {
+      if (goal.type !== 'OWN_GOAL') continue
+      const benefitingTla = goal.team?.tla
+      const committingTla = benefitingTla === home ? away : home
+      if (stats[committingTla]) stats[committingTla].ownGoals++
+    }
+  }
+  return stats
 }
 
 function normaliseStage(stage) {

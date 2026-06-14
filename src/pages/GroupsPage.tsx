@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef, useMemo } from 'react'
 import GroupTable from '../components/Groups/GroupTable'
-import { loadTeams, loadDraw, loadScores, loadPlayers, resolveNames } from '../data/loaders'
-import type { Team, DrawResult, ScoresData, Match, Player } from '../types'
+import { loadTeams, loadScores, resolveNames } from '../data/loaders'
+import { useSweepstakes } from '../contexts/SweepstakesContext'
+import type { Team, ScoresData, Match } from '../types'
 
 function useCountdown(targetIso: string | null) {
   const [secondsLeft, setSecondsLeft] = useState<number | null>(null)
@@ -112,19 +113,16 @@ function NextMatchBanner({ matches, teams, playerNames }: { matches: Match[]; te
 }
 
 export default function GroupsPage() {
+  const { players, draw } = useSweepstakes()
   const [teams, setTeams] = useState<Team[]>([])
-  const [draw, setDraw] = useState<DrawResult>({})
-  const [players, setPlayers] = useState<Player[]>([])
   const [scores, setScores] = useState<ScoresData | null>(null)
   const [search, setSearch] = useState('')
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    Promise.all([loadTeams(), loadDraw(), loadScores(), loadPlayers()]).then(([t, d, s, p]) => {
+    Promise.all([loadTeams(), loadScores()]).then(([t, s]) => {
       setTeams(t)
-      setDraw(d)
       setScores(s)
-      setPlayers(p)
       setLoading(false)
     })
   }, [])

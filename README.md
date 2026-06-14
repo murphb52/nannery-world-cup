@@ -1,6 +1,13 @@
 # Nannery World Cup 2026
 
-A family sweepstakes app for the 2026 FIFA World Cup. 48 players each draw a team at random; the app tracks live standings, fixtures, and prizes throughout the tournament.
+A family sweepstakes app for the 2026 FIFA World Cup. The app tracks live standings, fixtures, and prizes throughout the tournament.
+
+## Live Sites
+
+| Sweepstakes | URL |
+|-------------|-----|
+| 🏆 Nannery World Cup | https://murphb52.github.io/nannery-world-cup/#/nannery/groups |
+| ⚽ Last Man Standing | https://murphb52.github.io/nannery-world-cup/#/last-man-standing/groups |
 
 ## Features
 
