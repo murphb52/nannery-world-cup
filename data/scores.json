@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-14T18:17:21.464Z",
+  "lastUpdated": "2026-06-14T19:42:35.197Z",
   "matches": [
     {
       "id": 537327,
@@ -111,11 +111,11 @@
       "group": "GROUP_E",
       "homeTeamId": "GER",
       "awayTeamId": "CUW",
-      "homeScore": 4,
+      "homeScore": 7,
       "awayScore": 1,
       "date": "2026-06-14T17:00:00Z",
       "venue": null,
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "winner": "HOME_TEAM"
     },
     {
@@ -1610,9 +1610,9 @@
         "won": 1,
         "drawn": 0,
         "lost": 0,
-        "goalsFor": 3,
+        "goalsFor": 7,
         "goalsAgainst": 1,
-        "goalDiff": 2,
+        "goalDiff": 6,
         "points": 3,
         "yellowCards": 0,
         "redCards": 0,
@@ -1656,8 +1656,8 @@
         "drawn": 0,
         "lost": 1,
         "goalsFor": 1,
-        "goalsAgainst": 3,
-        "goalDiff": -2,
+        "goalsAgainst": 7,
+        "goalDiff": -6,
         "points": 0,
         "yellowCards": 0,
         "redCards": 0,
