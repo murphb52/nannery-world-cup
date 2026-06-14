@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-14T12:26:04.172Z",
+  "lastUpdated": "2026-06-14T18:17:21.464Z",
   "matches": [
     {
       "id": 537327,
@@ -111,12 +111,12 @@
       "group": "GROUP_E",
       "homeTeamId": "GER",
       "awayTeamId": "CUW",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 4,
+      "awayScore": 1,
       "date": "2026-06-14T17:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null
+      "status": "IN_PLAY",
+      "winner": "HOME_TEAM"
     },
     {
       "id": 537357,
@@ -1605,30 +1605,15 @@
     ],
     "Group E": [
       {
-        "teamId": "CUW",
-        "played": 0,
-        "won": 0,
-        "drawn": 0,
-        "lost": 0,
-        "goalsFor": 0,
-        "goalsAgainst": 0,
-        "goalDiff": 0,
-        "points": 0,
-        "yellowCards": 0,
-        "redCards": 0,
-        "eliminated": false,
-        "eliminatedAt": null
-      },
-      {
         "teamId": "GER",
-        "played": 0,
-        "won": 0,
+        "played": 1,
+        "won": 1,
         "drawn": 0,
         "lost": 0,
-        "goalsFor": 0,
-        "goalsAgainst": 0,
-        "goalDiff": 0,
-        "points": 0,
+        "goalsFor": 3,
+        "goalsAgainst": 1,
+        "goalDiff": 2,
+        "points": 3,
         "yellowCards": 0,
         "redCards": 0,
         "eliminated": false,
@@ -1658,6 +1643,21 @@
         "goalsFor": 0,
         "goalsAgainst": 0,
         "goalDiff": 0,
+        "points": 0,
+        "yellowCards": 0,
+        "redCards": 0,
+        "eliminated": false,
+        "eliminatedAt": null
+      },
+      {
+        "teamId": "CUW",
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1,
+        "goalsFor": 1,
+        "goalsAgainst": 3,
+        "goalDiff": -2,
         "points": 0,
         "yellowCards": 0,
         "redCards": 0,
