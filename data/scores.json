@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-14T21:52:47.648Z",
+  "lastUpdated": "2026-06-14T23:13:52.124Z",
   "matches": [
     {
       "id": 537327,
@@ -125,11 +125,11 @@
       "homeTeamId": "NED",
       "awayTeamId": "JPN",
       "homeScore": 2,
-      "awayScore": 1,
+      "awayScore": 2,
       "date": "2026-06-14T20:00:00Z",
       "venue": null,
-      "status": "IN_PLAY",
-      "winner": "HOME_TEAM"
+      "status": "FINISHED",
+      "winner": "DRAW"
     },
     {
       "id": 537352,
@@ -1621,14 +1621,14 @@
       },
       {
         "teamId": "ECU",
-        "played": 0,
+        "played": 1,
         "won": 0,
-        "drawn": 0,
+        "drawn": 1,
         "lost": 0,
         "goalsFor": 0,
         "goalsAgainst": 0,
         "goalDiff": 0,
-        "points": 0,
+        "points": 1,
         "yellowCards": 0,
         "redCards": 0,
         "eliminated": false,
@@ -1636,14 +1636,14 @@
       },
       {
         "teamId": "CIV",
-        "played": 0,
+        "played": 1,
         "won": 0,
-        "drawn": 0,
+        "drawn": 1,
         "lost": 0,
         "goalsFor": 0,
         "goalsAgainst": 0,
         "goalDiff": 0,
-        "points": 0,
+        "points": 1,
         "yellowCards": 0,
         "redCards": 0,
         "eliminated": false,
@@ -1667,16 +1667,31 @@
     ],
     "Group F": [
       {
-        "teamId": "NED",
+        "teamId": "JPN",
         "played": 1,
-        "won": 1,
-        "drawn": 0,
+        "won": 0,
+        "drawn": 1,
         "lost": 0,
         "goalsFor": 2,
-        "goalsAgainst": 1,
-        "goalDiff": 1,
-        "points": 3,
+        "goalsAgainst": 2,
+        "goalDiff": 0,
+        "points": 1,
         "yellowCards": 0,
+        "redCards": 0,
+        "eliminated": false,
+        "eliminatedAt": null
+      },
+      {
+        "teamId": "NED",
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0,
+        "goalsFor": 2,
+        "goalsAgainst": 2,
+        "goalDiff": 0,
+        "points": 1,
+        "yellowCards": 3,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -1705,21 +1720,6 @@
         "goalsFor": 0,
         "goalsAgainst": 0,
         "goalDiff": 0,
-        "points": 0,
-        "yellowCards": 0,
-        "redCards": 0,
-        "eliminated": false,
-        "eliminatedAt": null
-      },
-      {
-        "teamId": "JPN",
-        "played": 1,
-        "won": 0,
-        "drawn": 0,
-        "lost": 1,
-        "goalsFor": 1,
-        "goalsAgainst": 2,
-        "goalDiff": -1,
         "points": 0,
         "yellowCards": 0,
         "redCards": 0,
@@ -2152,6 +2152,10 @@
     "TUR": {
       "yellow": 1,
       "red": 0
+    },
+    "NED": {
+      "yellow": 3,
+      "red": 0
     }
   },
   "firstRedCard": {
@@ -2250,6 +2254,16 @@
     "CUW": {
       "scored": 1,
       "conceded": 7,
+      "ownGoals": 0
+    },
+    "NED": {
+      "scored": 2,
+      "conceded": 2,
+      "ownGoals": 0
+    },
+    "JPN": {
+      "scored": 2,
+      "conceded": 2,
       "ownGoals": 0
     }
   }

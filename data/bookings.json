@@ -183,5 +183,25 @@
       "card": "YELLOW"
     }
   ],
-  "537351": []
+  "537351": [],
+  "537357": [
+    {
+      "minute": 61,
+      "teamId": "NED",
+      "player": "Crysencio Summerville",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 83,
+      "teamId": "NED",
+      "player": "Memphis Depay",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 90,
+      "teamId": "NED",
+      "player": "Micky van de Ven",
+      "card": "YELLOW"
+    }
+  ]
 }
