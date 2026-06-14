@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-14T06:50:19.859Z",
+  "lastUpdated": "2026-06-14T10:28:14.980Z",
   "matches": [
     {
       "id": 537327,
@@ -33,12 +33,12 @@
       "group": "GROUP_B",
       "homeTeamId": "CAN",
       "awayTeamId": "BIH",
-      "homeScore": 1,
-      "awayScore": 1,
+      "homeScore": null,
+      "awayScore": null,
       "date": "2026-06-12T19:00:00Z",
       "venue": null,
       "status": "FINISHED",
-      "winner": "DRAW"
+      "winner": null
     },
     {
       "id": 537345,
@@ -1419,7 +1419,7 @@
     ],
     "Group B": [
       {
-        "teamId": "BIH",
+        "teamId": "SUI",
         "played": 1,
         "won": 0,
         "drawn": 1,
@@ -1428,7 +1428,7 @@
         "goalsAgainst": 1,
         "goalDiff": 0,
         "points": 1,
-        "yellowCards": 3,
+        "yellowCards": 1,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -1464,7 +1464,7 @@
         "eliminatedAt": null
       },
       {
-        "teamId": "SUI",
+        "teamId": "BIH",
         "played": 1,
         "won": 0,
         "drawn": 1,
@@ -1473,7 +1473,7 @@
         "goalsAgainst": 1,
         "goalDiff": 0,
         "points": 1,
-        "yellowCards": 1,
+        "yellowCards": 3,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -1496,21 +1496,6 @@
         "eliminatedAt": null
       },
       {
-        "teamId": "BRA",
-        "played": 1,
-        "won": 0,
-        "drawn": 1,
-        "lost": 0,
-        "goalsFor": 1,
-        "goalsAgainst": 1,
-        "goalDiff": 0,
-        "points": 1,
-        "yellowCards": 2,
-        "redCards": 0,
-        "eliminated": false,
-        "eliminatedAt": null
-      },
-      {
         "teamId": "MAR",
         "played": 1,
         "won": 0,
@@ -1521,6 +1506,21 @@
         "goalDiff": 0,
         "points": 1,
         "yellowCards": 0,
+        "redCards": 0,
+        "eliminated": false,
+        "eliminatedAt": null
+      },
+      {
+        "teamId": "BRA",
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0,
+        "goalsFor": 1,
+        "goalsAgainst": 1,
+        "goalDiff": 0,
+        "points": 1,
+        "yellowCards": 2,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
