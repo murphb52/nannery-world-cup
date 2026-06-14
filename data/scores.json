@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-14T20:07:28.944Z",
+  "lastUpdated": "2026-06-14T21:52:47.648Z",
   "matches": [
     {
       "id": 537327,
@@ -124,12 +124,12 @@
       "group": "GROUP_F",
       "homeTeamId": "NED",
       "awayTeamId": "JPN",
-      "homeScore": 0,
-      "awayScore": 0,
+      "homeScore": 2,
+      "awayScore": 1,
       "date": "2026-06-14T20:00:00Z",
       "venue": null,
       "status": "IN_PLAY",
-      "winner": "DRAW"
+      "winner": "HOME_TEAM"
     },
     {
       "id": 537352,
@@ -1667,30 +1667,15 @@
     ],
     "Group F": [
       {
-        "teamId": "JPN",
-        "played": 1,
-        "won": 0,
-        "drawn": 1,
-        "lost": 0,
-        "goalsFor": 0,
-        "goalsAgainst": 0,
-        "goalDiff": 0,
-        "points": 1,
-        "yellowCards": 0,
-        "redCards": 0,
-        "eliminated": false,
-        "eliminatedAt": null
-      },
-      {
         "teamId": "NED",
         "played": 1,
-        "won": 0,
-        "drawn": 1,
+        "won": 1,
+        "drawn": 0,
         "lost": 0,
-        "goalsFor": 0,
-        "goalsAgainst": 0,
-        "goalDiff": 0,
-        "points": 1,
+        "goalsFor": 2,
+        "goalsAgainst": 1,
+        "goalDiff": 1,
+        "points": 3,
         "yellowCards": 0,
         "redCards": 0,
         "eliminated": false,
@@ -1720,6 +1705,21 @@
         "goalsFor": 0,
         "goalsAgainst": 0,
         "goalDiff": 0,
+        "points": 0,
+        "yellowCards": 0,
+        "redCards": 0,
+        "eliminated": false,
+        "eliminatedAt": null
+      },
+      {
+        "teamId": "JPN",
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1,
+        "goalsFor": 1,
+        "goalsAgainst": 2,
+        "goalDiff": -1,
         "points": 0,
         "yellowCards": 0,
         "redCards": 0,
@@ -2160,5 +2160,97 @@
     "date": "2026-06-11T19:00:00Z",
     "minute": 49,
     "player": "Sphephelo Sithole"
+  },
+  "teamStats": {
+    "MEX": {
+      "scored": 2,
+      "conceded": 0,
+      "ownGoals": 0
+    },
+    "RSA": {
+      "scored": 0,
+      "conceded": 2,
+      "ownGoals": 0
+    },
+    "KOR": {
+      "scored": 2,
+      "conceded": 1,
+      "ownGoals": 0
+    },
+    "CZE": {
+      "scored": 1,
+      "conceded": 2,
+      "ownGoals": 0
+    },
+    "CAN": {
+      "scored": 1,
+      "conceded": 1,
+      "ownGoals": 0
+    },
+    "BIH": {
+      "scored": 1,
+      "conceded": 1,
+      "ownGoals": 0
+    },
+    "USA": {
+      "scored": 4,
+      "conceded": 1,
+      "ownGoals": 0
+    },
+    "PAR": {
+      "scored": 1,
+      "conceded": 4,
+      "ownGoals": 0
+    },
+    "QAT": {
+      "scored": 1,
+      "conceded": 1,
+      "ownGoals": 0
+    },
+    "SUI": {
+      "scored": 1,
+      "conceded": 1,
+      "ownGoals": 0
+    },
+    "BRA": {
+      "scored": 1,
+      "conceded": 1,
+      "ownGoals": 0
+    },
+    "MAR": {
+      "scored": 1,
+      "conceded": 1,
+      "ownGoals": 0
+    },
+    "HAI": {
+      "scored": 0,
+      "conceded": 1,
+      "ownGoals": 0
+    },
+    "SCO": {
+      "scored": 1,
+      "conceded": 0,
+      "ownGoals": 0
+    },
+    "AUS": {
+      "scored": 2,
+      "conceded": 0,
+      "ownGoals": 0
+    },
+    "TUR": {
+      "scored": 0,
+      "conceded": 2,
+      "ownGoals": 0
+    },
+    "GER": {
+      "scored": 7,
+      "conceded": 1,
+      "ownGoals": 0
+    },
+    "CUW": {
+      "scored": 1,
+      "conceded": 7,
+      "ownGoals": 0
+    }
   }
 }
