@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo } from 'react'
-import { loadPlayers, loadTeams, loadDraw, loadScores } from '../data/loaders'
-import type { Team, DrawResult, Player, Match } from '../types'
+import { loadTeams, loadScores } from '../data/loaders'
+import { useSweepstakes } from '../contexts/SweepstakesContext'
+import type { Team, Match, Player } from '../types'
 
 const STAGE_LABELS: Record<string, string> = {
   R32: 'Round of 32', R16: 'Round of 16', QF: 'Quarter-Final', SF: 'Semi-Final', F: 'Final',
@@ -22,29 +23,29 @@ function matchDateLabel(iso: string): string {
 }
 
 export default function PlayersPage() {
-  const [players, setPlayers] = useState<Player[]>([])
+  const { players, draw } = useSweepstakes()
   const [teams, setTeams] = useState<Team[]>([])
-  const [draw, setDraw] = useState<DrawResult>({})
   const [matches, setMatches] = useState<Match[]>([])
   const [search, setSearch] = useState('')
   const [loading, setLoading] = useState(true)
   const [selectedPlayer, setSelectedPlayer] = useState<Player | null>(null)
 
   useEffect(() => {
-    Promise.all([loadPlayers(), loadTeams(), loadDraw(), loadScores()]).then(([p, t, d, s]) => {
-      setPlayers(p)
+    Promise.all([loadTeams(), loadScores()]).then(([t, s]) => {
       setTeams(t)
-      setDraw(d)
       setMatches([...(s.matches ?? [])].sort((a, b) => a.date.localeCompare(b.date)))
       setLoading(false)
     })
   }, [])
 
-  const teamByPlayerId = useMemo(() => {
-    const map = new Map<string, Team>()
+  // Map playerId → all their teams (supports multiple teams per player)
+  const teamsByPlayerId = useMemo(() => {
+    const map = new Map<string, Team[]>()
     for (const [teamId, playerId] of Object.entries(draw)) {
       const team = teams.find(t => t.id === teamId)
-      if (team) map.set(playerId, team)
+      if (!team) continue
+      const existing = map.get(playerId) ?? []
+      map.set(playerId, [...existing, team])
     }
     return map
   }, [draw, teams])
@@ -66,16 +67,15 @@ export default function PlayersPage() {
     return <PageCenter><div className="text-white/50 animate-pulse">Loading players…</div></PageCenter>
   }
 
-  const drawDone = teamByPlayerId.size > 0
+  const drawDone = teamsByPlayerId.size > 0
 
   const filtered = players
     .filter(p => p.name.toLowerCase().includes(search.toLowerCase()))
     .sort((a, b) => a.name.localeCompare(b.name))
 
-  const selectedTeam = selectedPlayer ? (teamByPlayerId.get(selectedPlayer.id) ?? null) : null
-  const selectedMatches = selectedTeam
-    ? matches.filter(m => m.homeTeamId === selectedTeam.id || m.awayTeamId === selectedTeam.id)
-    : []
+  const selectedTeams = selectedPlayer ? (teamsByPlayerId.get(selectedPlayer.id) ?? []) : []
+  const selectedTeamIds = new Set(selectedTeams.map(t => t.id))
+  const selectedMatches = matches.filter(m => selectedTeamIds.has(m.homeTeamId) || selectedTeamIds.has(m.awayTeamId))
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-8">
@@ -84,7 +84,6 @@ export default function PlayersPage() {
         <p className="text-white/40 text-sm">{players.length} players in the draw</p>
       </div>
 
-      {/* Find Me */}
       <div className="mb-8 max-w-sm">
         <input
           type="text"
@@ -100,27 +99,26 @@ export default function PlayersPage() {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {filtered.map(player => {
-            const team = teamByPlayerId.get(player.id)
+            const playerTeams = teamsByPlayerId.get(player.id) ?? []
+            const primaryTeam = playerTeams[0] ?? null
             return (
               <button
                 key={player.id}
                 onClick={() => setSelectedPlayer(player)}
                 className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 p-3 text-left w-full transition-all hover:border-white/25 hover:bg-white/10 active:scale-[0.98] cursor-pointer"
               >
-                {team ? (
-                  <img
-                    src={team.flag}
-                    alt={team.name}
-                    className="w-10 h-7 object-cover rounded shrink-0"
-                  />
-                ) : (
-                  <div className="w-10 h-7 rounded bg-white/5 border border-white/10 shrink-0" />
-                )}
+                <div className="flex gap-1 shrink-0">
+                  {playerTeams.length > 0 ? playerTeams.map(t => (
+                    <img key={t.id} src={t.flag} alt={t.name} className="w-10 h-7 object-cover rounded" />
+                  )) : (
+                    <div className="w-10 h-7 rounded bg-white/5 border border-white/10" />
+                  )}
+                </div>
                 <div className="flex-1 min-w-0">
                   <p className="font-semibold text-white truncate">{player.name}</p>
-                  {team ? (
+                  {primaryTeam ? (
                     <p className="text-xs text-white/50 truncate">
-                      {team.name} · Group {team.group}
+                      {playerTeams.map(t => t.name).join(' · ')}
                     </p>
                   ) : (
                     <p className="text-xs text-white/30">
@@ -137,7 +135,7 @@ export default function PlayersPage() {
       {selectedPlayer && (
         <PlayerModal
           player={selectedPlayer}
-          team={selectedTeam}
+          teams={selectedTeams}
           matches={selectedMatches}
           teamById={teamById}
           onClose={() => setSelectedPlayer(null)}
@@ -147,15 +145,16 @@ export default function PlayersPage() {
   )
 }
 
-function PlayerModal({ player, team, matches, teamById, onClose }: {
+function PlayerModal({ player, teams, matches, teamById, onClose }: {
   player: Player
-  team: Team | null
+  teams: Team[]
   matches: Match[]
   teamById: Map<string, Team>
   onClose: () => void
 }) {
   const completed = matches.filter(m => m.status === 'FINISHED')
   const upcoming = matches.filter(m => m.status !== 'FINISHED')
+  const teamIds = new Set(teams.map(t => t.id))
 
   return (
     <div
@@ -163,17 +162,18 @@ function PlayerModal({ player, team, matches, teamById, onClose }: {
       onClick={e => { if (e.target === e.currentTarget) onClose() }}
     >
       <div className="w-full max-w-lg bg-[#1a1f2e] border border-white/15 rounded-2xl overflow-hidden shadow-2xl max-h-[85vh] flex flex-col">
-        {/* Header */}
         <div className="flex items-center gap-3 px-5 py-4 border-b border-white/10">
-          {team ? (
-            <img src={team.flag} alt={team.name} className="w-10 h-7 object-cover rounded shrink-0" />
-          ) : (
-            <div className="w-10 h-7 rounded bg-white/10 shrink-0" />
-          )}
+          <div className="flex gap-1 shrink-0">
+            {teams.length > 0 ? teams.map(t => (
+              <img key={t.id} src={t.flag} alt={t.name} className="w-10 h-7 object-cover rounded" />
+            )) : (
+              <div className="w-10 h-7 rounded bg-white/10" />
+            )}
+          </div>
           <div className="flex-1 min-w-0">
             <p className="font-bold text-white text-lg leading-tight">{player.name}</p>
-            {team ? (
-              <p className="text-sm text-white/50">{team.name} · Group {team.group}</p>
+            {teams.length > 0 ? (
+              <p className="text-sm text-white/50">{teams.map(t => `${t.name} (Grp ${t.group})`).join(' · ')}</p>
             ) : (
               <p className="text-sm text-white/30">No team assigned</p>
             )}
@@ -189,7 +189,6 @@ function PlayerModal({ player, team, matches, teamById, onClose }: {
           </button>
         </div>
 
-        {/* Matches */}
         <div className="overflow-y-auto flex-1 px-5 py-4 space-y-5">
           {matches.length === 0 && (
             <p className="text-white/30 text-sm text-center py-8">No fixtures found.</p>
@@ -200,7 +199,7 @@ function PlayerModal({ player, team, matches, teamById, onClose }: {
               <h3 className="text-xs uppercase tracking-wider text-white/30 mb-3 font-semibold">Results</h3>
               <div className="space-y-2">
                 {completed.map(m => (
-                  <ModalMatchRow key={m.id} match={m} focusTeamId={team?.id ?? null} teamById={teamById} />
+                  <ModalMatchRow key={m.id} match={m} focusTeamIds={teamIds} teamById={teamById} />
                 ))}
               </div>
             </section>
@@ -211,7 +210,7 @@ function PlayerModal({ player, team, matches, teamById, onClose }: {
               <h3 className="text-xs uppercase tracking-wider text-white/30 mb-3 font-semibold">Upcoming</h3>
               <div className="space-y-2">
                 {upcoming.map(m => (
-                  <ModalMatchRow key={m.id} match={m} focusTeamId={team?.id ?? null} teamById={teamById} />
+                  <ModalMatchRow key={m.id} match={m} focusTeamIds={teamIds} teamById={teamById} />
                 ))}
               </div>
             </section>
@@ -222,9 +221,9 @@ function PlayerModal({ player, team, matches, teamById, onClose }: {
   )
 }
 
-function ModalMatchRow({ match, focusTeamId, teamById }: {
+function ModalMatchRow({ match, focusTeamIds, teamById }: {
   match: Match
-  focusTeamId: string | null
+  focusTeamIds: Set<string>
   teamById: Map<string, Team>
 }) {
   const home = teamById.get(match.homeTeamId) ?? null
@@ -235,12 +234,16 @@ function ModalMatchRow({ match, focusTeamId, teamById }: {
   const homeWon = finished && match.homeScore! > match.awayScore!
   const awayWon = finished && match.awayScore! > match.homeScore!
 
-  const focusIsHome = focusTeamId === match.homeTeamId
+  // If the player owns both teams in this match, just use home perspective
+  const focusIsHome = focusTeamIds.has(match.homeTeamId)
   const opponentTeam = focusIsHome ? away : home
   const focusWon = focusIsHome ? homeWon : awayWon
   const focusLost = focusIsHome ? awayWon : homeWon
   const focusScore = focusIsHome ? match.homeScore : match.awayScore
   const oppScore = focusIsHome ? match.awayScore : match.homeScore
+
+  // Both teams are owned by this player
+  const bothOwned = focusTeamIds.has(match.homeTeamId) && focusTeamIds.has(match.awayTeamId)
 
   return (
     <div className="rounded-xl border border-white/10 bg-white/5 overflow-hidden">
@@ -248,39 +251,53 @@ function ModalMatchRow({ match, focusTeamId, teamById }: {
         <span className="text-[11px] uppercase tracking-wider text-white/35">{stageLabel(match)}</span>
         <span className="text-[11px] text-white/35">{matchDateLabel(match.date)}</span>
       </div>
-      <div className="flex items-center gap-3 px-3 py-2.5">
-        {opponentTeam ? (
-          <img
-            src={opponentTeam.flag}
-            alt={opponentTeam.name}
-            className={`w-8 h-[22px] object-cover rounded shrink-0 ${focusLost ? 'grayscale opacity-60' : ''}`}
-          />
-        ) : (
-          <div className="w-8 h-[22px] rounded bg-white/10 shrink-0" />
-        )}
-        <div className="flex-1 min-w-0">
-          <p className={`text-sm font-semibold truncate ${focusLost ? 'text-white/40' : 'text-white'}`}>
-            {focusIsHome ? 'vs ' : 'vs '}{opponentTeam?.name ?? 'TBD'}
-          </p>
-          <p className="text-[11px] text-white/35">
-            {focusIsHome ? 'Home' : 'Away'} · {kickoffTime(match.date)}
-          </p>
-        </div>
-        <div className="shrink-0 text-right">
-          {live ? (
-            <div className="flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
-              <span className="text-sm font-bold text-red-400 tabular-nums">{focusScore} – {oppScore}</span>
-            </div>
-          ) : hasScore ? (
-            <span className={`text-sm font-bold tabular-nums ${focusWon ? 'text-yellow-400' : focusLost ? 'text-white/40' : 'text-white'}`}>
-              {focusScore} – {oppScore}
-            </span>
-          ) : (
-            <span className="text-xs text-white/30">–</span>
+      {bothOwned ? (
+        <div className="flex items-center gap-2 px-3 py-2.5">
+          {home && <img src={home.flag} alt={home.name} className="w-8 h-[22px] object-cover rounded shrink-0" />}
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-semibold text-white truncate">{home?.name ?? 'TBD'} vs {away?.name ?? 'TBD'}</p>
+            <p className="text-[11px] text-yellow-400/70">Both your teams! · {kickoffTime(match.date)}</p>
+          </div>
+          {away && <img src={away.flag} alt={away.name} className="w-8 h-[22px] object-cover rounded shrink-0" />}
+          {hasScore && (
+            <span className="text-sm font-bold text-white tabular-nums shrink-0">{match.homeScore} – {match.awayScore}</span>
           )}
         </div>
-      </div>
+      ) : (
+        <div className="flex items-center gap-3 px-3 py-2.5">
+          {opponentTeam ? (
+            <img
+              src={opponentTeam.flag}
+              alt={opponentTeam.name}
+              className={`w-8 h-[22px] object-cover rounded shrink-0 ${focusLost ? 'grayscale opacity-60' : ''}`}
+            />
+          ) : (
+            <div className="w-8 h-[22px] rounded bg-white/10 shrink-0" />
+          )}
+          <div className="flex-1 min-w-0">
+            <p className={`text-sm font-semibold truncate ${focusLost ? 'text-white/40' : 'text-white'}`}>
+              vs {opponentTeam?.name ?? 'TBD'}
+            </p>
+            <p className="text-[11px] text-white/35">
+              {focusIsHome ? 'Home' : 'Away'} · {kickoffTime(match.date)}
+            </p>
+          </div>
+          <div className="shrink-0 text-right">
+            {live ? (
+              <div className="flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
+                <span className="text-sm font-bold text-red-400 tabular-nums">{focusScore} – {oppScore}</span>
+              </div>
+            ) : hasScore ? (
+              <span className={`text-sm font-bold tabular-nums ${focusWon ? 'text-yellow-400' : focusLost ? 'text-white/40' : 'text-white'}`}>
+                {focusScore} – {oppScore}
+              </span>
+            ) : (
+              <span className="text-xs text-white/30">–</span>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   )
 }

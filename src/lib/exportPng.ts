@@ -37,7 +37,7 @@ function fitText(ctx: CanvasRenderingContext2D, text: string, maxW: number): str
  * on the page's CSS (Tailwind v4 oklch colours break DOM-snapshot libraries)
  * and so it always produces a clean, consistent share graphic.
  */
-export async function exportGroupsPng(teams: Team[], draw: DrawResult, players: Player[]): Promise<void> {
+export async function exportGroupsPng(teams: Team[], draw: DrawResult, players: Player[], sweepstakesName = 'World Cup 2026'): Promise<void> {
   const playerNames = resolveNames(draw, players)
   const scale = Math.min(2, window.devicePixelRatio || 1) * 1.5
   const COLS = 4
@@ -83,7 +83,7 @@ export async function exportGroupsPng(teams: Team[], draw: DrawResult, players: 
   ctx.textAlign = 'center'
   ctx.fillStyle = titleGrad
   ctx.font = '800 46px Inter, system-ui, sans-serif'
-  ctx.fillText('🏆 Nannery World Cup 2026', width / 2, PAD + 30)
+  ctx.fillText(`🏆 ${sweepstakesName}`, width / 2, PAD + 30)
   ctx.fillStyle = 'rgba(255,255,255,0.55)'
   ctx.font = '500 22px Inter, system-ui, sans-serif'
   ctx.fillText('The Official Draw', width / 2, PAD + 74)
@@ -180,7 +180,8 @@ export async function exportGroupsPng(teams: Team[], draw: DrawResult, players: 
     throw new Error('Could not export image (flag images blocked export). Try again.')
   }
   const a = document.createElement('a')
-  a.download = 'nannery-world-cup-draw.png'
+  const slug = sweepstakesName.toLowerCase().replace(/\s+/g, '-')
+  a.download = `${slug}-draw.png`
   a.href = url
   a.click()
 }

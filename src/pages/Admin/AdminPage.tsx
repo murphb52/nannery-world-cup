@@ -3,8 +3,8 @@ import AdminDraw from './AdminDraw'
 import AdminPlayers from './AdminPlayers'
 import AdminTeams from './AdminTeams'
 import { getPat, setPat } from '../../lib/github'
+import { useSweepstakes } from '../../contexts/SweepstakesContext'
 
-const PASSPHRASE = 'nannery2026'
 const ADMIN_TABS = ['Draw', 'Players', 'Teams'] as const
 type AdminTab = typeof ADMIN_TABS[number]
 
@@ -14,6 +14,7 @@ function masked(token: string) {
 }
 
 export default function AdminPage() {
+  const { config } = useSweepstakes()
   const [authed, setAuthed] = useState(false)
   const [input, setInput] = useState('')
   const [error, setError] = useState(false)
@@ -25,13 +26,16 @@ export default function AdminPage() {
   const sessionPat = getPat() !== bakedPat ? getPat() : ''
   const activePat = getPat()
 
+  // Use a sweepstakes-scoped auth key so each sweepstakes has its own session
+  const authKey = `admin_authed_${config.id}`
+
   useEffect(() => {
-    setAuthed(sessionStorage.getItem('admin_authed') === '1')
-  }, [])
+    setAuthed(sessionStorage.getItem(authKey) === '1')
+  }, [authKey])
 
   function login() {
-    if (input === PASSPHRASE) {
-      sessionStorage.setItem('admin_authed', '1')
+    if (input === config.passphrase) {
+      sessionStorage.setItem(authKey, '1')
       setAuthed(true)
       setError(false)
     } else {
@@ -59,7 +63,7 @@ export default function AdminPage() {
           <div className="text-center mb-8">
             <div className="text-4xl mb-3">🔐</div>
             <h2 className="text-2xl font-bold text-white">Admin Access</h2>
-            <p className="text-white/40 text-sm mt-1">Nannery World Cup</p>
+            <p className="text-white/40 text-sm mt-1">{config.name}</p>
           </div>
           <input
             type="password"
@@ -88,10 +92,10 @@ export default function AdminPage() {
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="text-3xl font-bold text-white">Admin</h1>
-          <p className="text-white/40 text-sm mt-1">Nannery World Cup 2026</p>
+          <p className="text-white/40 text-sm mt-1">{config.name} {config.year}</p>
         </div>
         <button
-          onClick={() => { sessionStorage.removeItem('admin_authed'); setAuthed(false) }}
+          onClick={() => { sessionStorage.removeItem(authKey); setAuthed(false) }}
           className="px-4 py-2 rounded-lg border border-white/20 text-white/50 hover:text-white hover:border-white/40 text-sm transition-all"
         >
           Log out

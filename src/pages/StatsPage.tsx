@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo } from 'react'
-import { loadTeams, loadDraw, loadScores, loadPlayers, resolveNames } from '../data/loaders'
-import type { Team, DrawResult, ScoresData, Player } from '../types'
+import { loadTeams, loadScores, resolveNames } from '../data/loaders'
+import { useSweepstakes } from '../contexts/SweepstakesContext'
+import type { Team, ScoresData } from '../types'
 
 function goalTotals(scores: ScoresData): Record<string, { for: number; against: number }> {
   const totals: Record<string, { for: number; against: number }> = {}
@@ -88,18 +89,15 @@ function LeaderboardCard({ icon, title, entries, teams, playerNames }: Leaderboa
 }
 
 export default function StatsPage() {
+  const { players, draw } = useSweepstakes()
   const [teams, setTeams] = useState<Team[]>([])
-  const [draw, setDraw] = useState<DrawResult>({})
-  const [players, setPlayers] = useState<Player[]>([])
   const [scores, setScores] = useState<ScoresData | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    Promise.all([loadTeams(), loadDraw(), loadScores(), loadPlayers()]).then(([t, d, s, p]) => {
+    Promise.all([loadTeams(), loadScores()]).then(([t, s]) => {
       setTeams(t)
-      setDraw(d)
       setScores(s)
-      setPlayers(p)
       setLoading(false)
     })
   }, [])
