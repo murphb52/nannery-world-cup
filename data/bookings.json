@@ -238,6 +238,32 @@
       "card": "YELLOW"
     }
   ],
+  "537363": [
+    {
+      "minute": 13,
+      "teamId": "EGY",
+      "player": "Marawan Attia",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 14,
+      "teamId": "BEL",
+      "player": "Timothy Castagne",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 34,
+      "teamId": "EGY",
+      "player": "Ahmed Fatouh",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 75,
+      "teamId": "BEL",
+      "player": "Maxim De Cuyper",
+      "card": "YELLOW"
+    }
+  ],
   "537369": [
     {
       "minute": 16,

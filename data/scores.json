@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-15T19:12:50.307Z",
+  "lastUpdated": "2026-06-15T22:01:06.167Z",
   "matches": [
     {
       "id": 537327,
@@ -176,11 +176,11 @@
       "group": "GROUP_G",
       "homeTeamId": "BEL",
       "awayTeamId": "EGY",
-      "homeScore": 0,
-      "awayScore": 0,
+      "homeScore": 1,
+      "awayScore": 1,
       "date": "2026-06-15T19:00:00Z",
       "venue": null,
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "winner": "DRAW"
     },
     {
@@ -1729,31 +1729,31 @@
     ],
     "Group G": [
       {
-        "teamId": "EGY",
-        "played": 1,
-        "won": 0,
-        "drawn": 1,
-        "lost": 0,
-        "goalsFor": 0,
-        "goalsAgainst": 0,
-        "goalDiff": 0,
-        "points": 1,
-        "yellowCards": 0,
-        "redCards": 0,
-        "eliminated": false,
-        "eliminatedAt": null
-      },
-      {
         "teamId": "BEL",
         "played": 1,
         "won": 0,
         "drawn": 1,
         "lost": 0,
-        "goalsFor": 0,
-        "goalsAgainst": 0,
+        "goalsFor": 1,
+        "goalsAgainst": 1,
         "goalDiff": 0,
         "points": 1,
-        "yellowCards": 0,
+        "yellowCards": 2,
+        "redCards": 0,
+        "eliminated": false,
+        "eliminatedAt": null
+      },
+      {
+        "teamId": "EGY",
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0,
+        "goalsFor": 1,
+        "goalsAgainst": 1,
+        "goalDiff": 0,
+        "points": 1,
+        "yellowCards": 2,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -1791,7 +1791,7 @@
     ],
     "Group H": [
       {
-        "teamId": "CPV",
+        "teamId": "KSA",
         "played": 1,
         "won": 0,
         "drawn": 1,
@@ -1800,7 +1800,22 @@
         "goalsAgainst": 0,
         "goalDiff": 0,
         "points": 1,
-        "yellowCards": 1,
+        "yellowCards": 0,
+        "redCards": 0,
+        "eliminated": false,
+        "eliminatedAt": null
+      },
+      {
+        "teamId": "URY",
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0,
+        "goalsFor": 0,
+        "goalsAgainst": 0,
+        "goalDiff": 0,
+        "points": 1,
+        "yellowCards": 0,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -1821,31 +1836,16 @@
         "eliminatedAt": null
       },
       {
-        "teamId": "KSA",
-        "played": 0,
+        "teamId": "CPV",
+        "played": 1,
         "won": 0,
-        "drawn": 0,
+        "drawn": 1,
         "lost": 0,
         "goalsFor": 0,
         "goalsAgainst": 0,
         "goalDiff": 0,
-        "points": 0,
-        "yellowCards": 0,
-        "redCards": 0,
-        "eliminated": false,
-        "eliminatedAt": null
-      },
-      {
-        "teamId": "URY",
-        "played": 0,
-        "won": 0,
-        "drawn": 0,
-        "lost": 0,
-        "goalsFor": 0,
-        "goalsAgainst": 0,
-        "goalDiff": 0,
-        "points": 0,
-        "yellowCards": 0,
+        "points": 1,
+        "yellowCards": 1,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -2169,6 +2169,14 @@
       "yellow": 1,
       "red": 0
     },
+    "EGY": {
+      "yellow": 2,
+      "red": 0
+    },
+    "BEL": {
+      "yellow": 2,
+      "red": 0
+    },
     "CPV": {
       "yellow": 1,
       "red": 0
@@ -2314,6 +2322,16 @@
     "CPV": {
       "scored": 0,
       "conceded": 0,
+      "ownGoals": 0
+    },
+    "BEL": {
+      "scored": 1,
+      "conceded": 1,
+      "ownGoals": 0
+    },
+    "EGY": {
+      "scored": 1,
+      "conceded": 1,
       "ownGoals": 0
     }
   }
