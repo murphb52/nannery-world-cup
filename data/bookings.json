@@ -184,6 +184,32 @@
     }
   ],
   "537351": [],
+  "537352": [
+    {
+      "minute": 28,
+      "teamId": "CIV",
+      "player": "Seko Fofana",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 38,
+      "teamId": "CIV",
+      "player": "Franck Kessié",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 40,
+      "teamId": "CIV",
+      "player": "Guela Doué",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 73,
+      "teamId": "ECU",
+      "player": "Jackson Porozo",
+      "card": "YELLOW"
+    }
+  ],
   "537357": [
     {
       "minute": 61,

@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-14T23:13:52.124Z",
+  "lastUpdated": "2026-06-15T02:01:14.028Z",
   "matches": [
     {
       "id": 537327,
@@ -137,12 +137,12 @@
       "group": "GROUP_E",
       "homeTeamId": "CIV",
       "awayTeamId": "ECU",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 1,
+      "awayScore": 0,
       "date": "2026-06-14T23:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null
+      "status": "FINISHED",
+      "winner": "HOME_TEAM"
     },
     {
       "id": 537358,
@@ -1620,31 +1620,31 @@
         "eliminatedAt": null
       },
       {
-        "teamId": "ECU",
+        "teamId": "CIV",
         "played": 1,
-        "won": 0,
-        "drawn": 1,
+        "won": 1,
+        "drawn": 0,
         "lost": 0,
-        "goalsFor": 0,
+        "goalsFor": 1,
         "goalsAgainst": 0,
-        "goalDiff": 0,
-        "points": 1,
-        "yellowCards": 0,
+        "goalDiff": 1,
+        "points": 3,
+        "yellowCards": 3,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
       },
       {
-        "teamId": "CIV",
+        "teamId": "ECU",
         "played": 1,
         "won": 0,
-        "drawn": 1,
-        "lost": 0,
+        "drawn": 0,
+        "lost": 1,
         "goalsFor": 0,
-        "goalsAgainst": 0,
-        "goalDiff": 0,
-        "points": 1,
-        "yellowCards": 0,
+        "goalsAgainst": 1,
+        "goalDiff": -1,
+        "points": 0,
+        "yellowCards": 1,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -1698,14 +1698,14 @@
       },
       {
         "teamId": "SWE",
-        "played": 0,
+        "played": 1,
         "won": 0,
-        "drawn": 0,
+        "drawn": 1,
         "lost": 0,
         "goalsFor": 0,
         "goalsAgainst": 0,
         "goalDiff": 0,
-        "points": 0,
+        "points": 1,
         "yellowCards": 0,
         "redCards": 0,
         "eliminated": false,
@@ -1713,14 +1713,14 @@
       },
       {
         "teamId": "TUN",
-        "played": 0,
+        "played": 1,
         "won": 0,
-        "drawn": 0,
+        "drawn": 1,
         "lost": 0,
         "goalsFor": 0,
         "goalsAgainst": 0,
         "goalDiff": 0,
-        "points": 0,
+        "points": 1,
         "yellowCards": 0,
         "redCards": 0,
         "eliminated": false,
@@ -2153,6 +2153,14 @@
       "yellow": 1,
       "red": 0
     },
+    "CIV": {
+      "yellow": 3,
+      "red": 0
+    },
+    "ECU": {
+      "yellow": 1,
+      "red": 0
+    },
     "NED": {
       "yellow": 3,
       "red": 0
@@ -2264,6 +2272,16 @@
     "JPN": {
       "scored": 2,
       "conceded": 2,
+      "ownGoals": 0
+    },
+    "CIV": {
+      "scored": 1,
+      "conceded": 0,
+      "ownGoals": 0
+    },
+    "ECU": {
+      "scored": 0,
+      "conceded": 1,
       "ownGoals": 0
     }
   }
