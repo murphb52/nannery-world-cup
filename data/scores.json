@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-15T04:31:45.738Z",
+  "lastUpdated": "2026-06-15T08:37:39.075Z",
   "matches": [
     {
       "id": 537327,
@@ -110,7 +110,7 @@
       "stage": "GROUP",
       "group": "GROUP_E",
       "homeTeamId": "GER",
-      "awayTeamId": "CUW",
+      "awayTeamId": "CUR",
       "homeScore": 7,
       "awayScore": 1,
       "date": "2026-06-14T17:00:00Z",
@@ -141,7 +141,7 @@
       "awayScore": 0,
       "date": "2026-06-14T23:00:00Z",
       "venue": null,
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "winner": "HOME_TEAM"
     },
     {
@@ -448,7 +448,7 @@
       "stage": "GROUP",
       "group": "GROUP_E",
       "homeTeamId": "ECU",
-      "awayTeamId": "CUW",
+      "awayTeamId": "CUR",
       "homeScore": null,
       "awayScore": null,
       "date": "2026-06-21T00:00:00Z",
@@ -720,7 +720,7 @@
       "id": 537356,
       "stage": "GROUP",
       "group": "GROUP_E",
-      "homeTeamId": "CUW",
+      "homeTeamId": "CUR",
       "awayTeamId": "CIV",
       "homeScore": null,
       "awayScore": null,
@@ -2263,7 +2263,7 @@
       "conceded": 1,
       "ownGoals": 0
     },
-    "CUW": {
+    "CUR": {
       "scored": 1,
       "conceded": 7,
       "ownGoals": 0
@@ -2276,6 +2276,16 @@
     "JPN": {
       "scored": 2,
       "conceded": 2,
+      "ownGoals": 0
+    },
+    "CIV": {
+      "scored": 1,
+      "conceded": 0,
+      "ownGoals": 0
+    },
+    "ECU": {
+      "scored": 0,
+      "conceded": 1,
       "ownGoals": 0
     },
     "SWE": {
