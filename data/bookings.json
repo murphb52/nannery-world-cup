@@ -237,5 +237,19 @@
       "player": "Rani Khedira",
       "card": "YELLOW"
     }
+  ],
+  "537369": [
+    {
+      "minute": 16,
+      "teamId": "CPV",
+      "player": "Sidny Lopes Cabral",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 90,
+      "teamId": "ESP",
+      "player": "Pedri",
+      "card": "YELLOW"
+    }
   ]
 }
