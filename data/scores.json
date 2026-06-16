@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-15T22:01:06.167Z",
+  "lastUpdated": "2026-06-16T00:13:02.196Z",
   "matches": [
     {
       "id": 537327,
@@ -33,12 +33,12 @@
       "group": "GROUP_B",
       "homeTeamId": "CAN",
       "awayTeamId": "BIH",
-      "homeScore": 1,
-      "awayScore": 1,
+      "homeScore": null,
+      "awayScore": null,
       "date": "2026-06-12T19:00:00Z",
       "venue": null,
       "status": "FINISHED",
-      "winner": "DRAW"
+      "winner": null
     },
     {
       "id": 537345,
@@ -189,12 +189,12 @@
       "group": "GROUP_H",
       "homeTeamId": "KSA",
       "awayTeamId": "URY",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 1,
+      "awayScore": 1,
       "date": "2026-06-15T22:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null
+      "status": "FINISHED",
+      "winner": "DRAW"
     },
     {
       "id": 537364,
@@ -1796,8 +1796,8 @@
         "won": 0,
         "drawn": 1,
         "lost": 0,
-        "goalsFor": 0,
-        "goalsAgainst": 0,
+        "goalsFor": 1,
+        "goalsAgainst": 1,
         "goalDiff": 0,
         "points": 1,
         "yellowCards": 0,
@@ -1806,13 +1806,13 @@
         "eliminatedAt": null
       },
       {
-        "teamId": "URY",
+        "teamId": "URU",
         "played": 1,
         "won": 0,
         "drawn": 1,
         "lost": 0,
-        "goalsFor": 0,
-        "goalsAgainst": 0,
+        "goalsFor": 1,
+        "goalsAgainst": 1,
         "goalDiff": 0,
         "points": 1,
         "yellowCards": 0,
@@ -2215,13 +2215,13 @@
       "ownGoals": 0
     },
     "CAN": {
-      "scored": 1,
-      "conceded": 1,
+      "scored": 0,
+      "conceded": 0,
       "ownGoals": 0
     },
     "BIH": {
-      "scored": 1,
-      "conceded": 1,
+      "scored": 0,
+      "conceded": 0,
       "ownGoals": 0
     },
     "USA": {
@@ -2330,6 +2330,16 @@
       "ownGoals": 0
     },
     "EGY": {
+      "scored": 1,
+      "conceded": 1,
+      "ownGoals": 0
+    },
+    "KSA": {
+      "scored": 1,
+      "conceded": 1,
+      "ownGoals": 0
+    },
+    "URY": {
       "scored": 1,
       "conceded": 1,
       "ownGoals": 0
