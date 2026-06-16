@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-16T20:25:15.476Z",
+  "lastUpdated": "2026-06-16T22:30:49.317Z",
   "matches": [
     {
       "id": 537327,
@@ -33,12 +33,12 @@
       "group": "GROUP_B",
       "homeTeamId": "CAN",
       "awayTeamId": "BIH",
-      "homeScore": 1,
-      "awayScore": 1,
+      "homeScore": null,
+      "awayScore": null,
       "date": "2026-06-12T19:00:00Z",
       "venue": null,
       "status": "FINISHED",
-      "winner": "DRAW"
+      "winner": null
     },
     {
       "id": 537345,
@@ -110,7 +110,7 @@
       "stage": "GROUP",
       "group": "GROUP_E",
       "homeTeamId": "GER",
-      "awayTeamId": "CUR",
+      "awayTeamId": "CUW",
       "homeScore": 7,
       "awayScore": 1,
       "date": "2026-06-14T17:00:00Z",
@@ -215,12 +215,12 @@
       "group": "GROUP_I",
       "homeTeamId": "FRA",
       "awayTeamId": "SEN",
-      "homeScore": 0,
-      "awayScore": 0,
+      "homeScore": 3,
+      "awayScore": 1,
       "date": "2026-06-16T19:00:00Z",
       "venue": null,
-      "status": "IN_PLAY",
-      "winner": "DRAW"
+      "status": "FINISHED",
+      "winner": "HOME_TEAM"
     },
     {
       "id": 537392,
@@ -228,12 +228,12 @@
       "group": "GROUP_I",
       "homeTeamId": "IRQ",
       "awayTeamId": "NOR",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 0,
       "date": "2026-06-16T22:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null
+      "status": "IN_PLAY",
+      "winner": "DRAW"
     },
     {
       "id": 537397,
@@ -448,7 +448,7 @@
       "stage": "GROUP",
       "group": "GROUP_E",
       "homeTeamId": "ECU",
-      "awayTeamId": "CUR",
+      "awayTeamId": "CUW",
       "homeScore": null,
       "awayScore": null,
       "date": "2026-06-21T00:00:00Z",
@@ -720,7 +720,7 @@
       "id": 537356,
       "stage": "GROUP",
       "group": "GROUP_E",
-      "homeTeamId": "CUR",
+      "homeTeamId": "CUW",
       "awayTeamId": "CIV",
       "homeScore": null,
       "awayScore": null,
@@ -1855,6 +1855,36 @@
       {
         "teamId": "FRA",
         "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0,
+        "goalsFor": 3,
+        "goalsAgainst": 1,
+        "goalDiff": 2,
+        "points": 3,
+        "yellowCards": 0,
+        "redCards": 0,
+        "eliminated": false,
+        "eliminatedAt": null
+      },
+      {
+        "teamId": "IRQ",
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0,
+        "goalsFor": 0,
+        "goalsAgainst": 0,
+        "goalDiff": 0,
+        "points": 1,
+        "yellowCards": 0,
+        "redCards": 0,
+        "eliminated": false,
+        "eliminatedAt": null
+      },
+      {
+        "teamId": "NOR",
+        "played": 1,
         "won": 0,
         "drawn": 1,
         "lost": 0,
@@ -1871,41 +1901,11 @@
         "teamId": "SEN",
         "played": 1,
         "won": 0,
-        "drawn": 1,
-        "lost": 0,
-        "goalsFor": 0,
-        "goalsAgainst": 0,
-        "goalDiff": 0,
-        "points": 1,
-        "yellowCards": 0,
-        "redCards": 0,
-        "eliminated": false,
-        "eliminatedAt": null
-      },
-      {
-        "teamId": "IRQ",
-        "played": 0,
-        "won": 0,
         "drawn": 0,
-        "lost": 0,
-        "goalsFor": 0,
-        "goalsAgainst": 0,
-        "goalDiff": 0,
-        "points": 0,
-        "yellowCards": 0,
-        "redCards": 0,
-        "eliminated": false,
-        "eliminatedAt": null
-      },
-      {
-        "teamId": "NOR",
-        "played": 0,
-        "won": 0,
-        "drawn": 0,
-        "lost": 0,
-        "goalsFor": 0,
-        "goalsAgainst": 0,
-        "goalDiff": 0,
+        "lost": 1,
+        "goalsFor": 1,
+        "goalsAgainst": 3,
+        "goalDiff": -2,
         "points": 0,
         "yellowCards": 0,
         "redCards": 0,
@@ -2219,13 +2219,13 @@
       "ownGoals": 0
     },
     "CAN": {
-      "scored": 1,
-      "conceded": 1,
+      "scored": 0,
+      "conceded": 0,
       "ownGoals": 0
     },
     "BIH": {
-      "scored": 1,
-      "conceded": 1,
+      "scored": 0,
+      "conceded": 0,
       "ownGoals": 0
     },
     "USA": {
@@ -2283,7 +2283,7 @@
       "conceded": 1,
       "ownGoals": 0
     },
-    "CUR": {
+    "CUW": {
       "scored": 1,
       "conceded": 7,
       "ownGoals": 0
@@ -2356,6 +2356,16 @@
     "NZL": {
       "scored": 2,
       "conceded": 2,
+      "ownGoals": 0
+    },
+    "FRA": {
+      "scored": 3,
+      "conceded": 1,
+      "ownGoals": 0
+    },
+    "SEN": {
+      "scored": 1,
+      "conceded": 3,
       "ownGoals": 0
     }
   }
