@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-16T00:26:47.164Z",
+  "lastUpdated": "2026-06-16T06:09:19.772Z",
   "matches": [
     {
       "id": 537327,
@@ -202,12 +202,12 @@
       "group": "GROUP_G",
       "homeTeamId": "IRN",
       "awayTeamId": "NZL",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 2,
+      "awayScore": 2,
       "date": "2026-06-16T01:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null
+      "status": "FINISHED",
+      "winner": "DRAW"
     },
     {
       "id": 537391,
@@ -1729,6 +1729,36 @@
     ],
     "Group G": [
       {
+        "teamId": "IRN",
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0,
+        "goalsFor": 2,
+        "goalsAgainst": 2,
+        "goalDiff": 0,
+        "points": 1,
+        "yellowCards": 1,
+        "redCards": 0,
+        "eliminated": false,
+        "eliminatedAt": null
+      },
+      {
+        "teamId": "NZL",
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0,
+        "goalsFor": 2,
+        "goalsAgainst": 2,
+        "goalDiff": 0,
+        "points": 1,
+        "yellowCards": 0,
+        "redCards": 0,
+        "eliminated": false,
+        "eliminatedAt": null
+      },
+      {
         "teamId": "BEL",
         "played": 1,
         "won": 0,
@@ -1754,36 +1784,6 @@
         "goalDiff": 0,
         "points": 1,
         "yellowCards": 2,
-        "redCards": 0,
-        "eliminated": false,
-        "eliminatedAt": null
-      },
-      {
-        "teamId": "IRN",
-        "played": 0,
-        "won": 0,
-        "drawn": 0,
-        "lost": 0,
-        "goalsFor": 0,
-        "goalsAgainst": 0,
-        "goalDiff": 0,
-        "points": 0,
-        "yellowCards": 0,
-        "redCards": 0,
-        "eliminated": false,
-        "eliminatedAt": null
-      },
-      {
-        "teamId": "NZL",
-        "played": 0,
-        "won": 0,
-        "drawn": 0,
-        "lost": 0,
-        "goalsFor": 0,
-        "goalsAgainst": 0,
-        "goalDiff": 0,
-        "points": 0,
-        "yellowCards": 0,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -2177,6 +2177,10 @@
       "yellow": 2,
       "red": 0
     },
+    "IRN": {
+      "yellow": 1,
+      "red": 0
+    },
     "CPV": {
       "yellow": 1,
       "red": 0
@@ -2342,6 +2346,16 @@
     "URY": {
       "scored": 1,
       "conceded": 1,
+      "ownGoals": 0
+    },
+    "IRN": {
+      "scored": 2,
+      "conceded": 2,
+      "ownGoals": 0
+    },
+    "NZL": {
+      "scored": 2,
+      "conceded": 2,
       "ownGoals": 0
     }
   }
