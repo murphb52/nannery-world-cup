@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-16T06:09:19.772Z",
+  "lastUpdated": "2026-06-16T11:42:23.438Z",
   "matches": [
     {
       "id": 537327,
@@ -1729,21 +1729,6 @@
     ],
     "Group G": [
       {
-        "teamId": "IRN",
-        "played": 1,
-        "won": 0,
-        "drawn": 1,
-        "lost": 0,
-        "goalsFor": 2,
-        "goalsAgainst": 2,
-        "goalDiff": 0,
-        "points": 1,
-        "yellowCards": 1,
-        "redCards": 0,
-        "eliminated": false,
-        "eliminatedAt": null
-      },
-      {
         "teamId": "NZL",
         "played": 1,
         "won": 0,
@@ -1754,6 +1739,21 @@
         "goalDiff": 0,
         "points": 1,
         "yellowCards": 0,
+        "redCards": 0,
+        "eliminated": false,
+        "eliminatedAt": null
+      },
+      {
+        "teamId": "IRN",
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0,
+        "goalsFor": 2,
+        "goalsAgainst": 2,
+        "goalDiff": 0,
+        "points": 1,
+        "yellowCards": 1,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -1791,7 +1791,7 @@
     ],
     "Group H": [
       {
-        "teamId": "KSA",
+        "teamId": "URU",
         "played": 1,
         "won": 0,
         "drawn": 1,
@@ -1806,7 +1806,7 @@
         "eliminatedAt": null
       },
       {
-        "teamId": "URU",
+        "teamId": "KSA",
         "played": 1,
         "won": 0,
         "drawn": 1,
