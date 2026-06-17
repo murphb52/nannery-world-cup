@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-17T20:21:06.753Z",
+  "lastUpdated": "2026-06-17T22:21:29.096Z",
   "matches": [
     {
       "id": 537327,
@@ -110,7 +110,7 @@
       "stage": "GROUP",
       "group": "GROUP_E",
       "homeTeamId": "GER",
-      "awayTeamId": "CUR",
+      "awayTeamId": "CUW",
       "homeScore": 7,
       "awayScore": 1,
       "date": "2026-06-14T17:00:00Z",
@@ -280,11 +280,11 @@
       "group": "GROUP_L",
       "homeTeamId": "ENG",
       "awayTeamId": "CRO",
-      "homeScore": 1,
-      "awayScore": 0,
+      "homeScore": 4,
+      "awayScore": 2,
       "date": "2026-06-17T20:00:00Z",
       "venue": null,
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "winner": "HOME_TEAM"
     },
     {
@@ -448,7 +448,7 @@
       "stage": "GROUP",
       "group": "GROUP_E",
       "homeTeamId": "ECU",
-      "awayTeamId": "CUR",
+      "awayTeamId": "CUW",
       "homeScore": null,
       "awayScore": null,
       "date": "2026-06-21T00:00:00Z",
@@ -720,7 +720,7 @@
       "id": 537356,
       "stage": "GROUP",
       "group": "GROUP_E",
-      "homeTeamId": "CUR",
+      "homeTeamId": "CUW",
       "awayTeamId": "CIV",
       "homeScore": null,
       "awayScore": null,
@@ -2041,28 +2041,13 @@
       {
         "teamId": "ENG",
         "played": 1,
-        "won": 0,
-        "drawn": 1,
+        "won": 1,
+        "drawn": 0,
         "lost": 0,
-        "goalsFor": 0,
-        "goalsAgainst": 0,
-        "goalDiff": 0,
-        "points": 1,
-        "yellowCards": 0,
-        "redCards": 0,
-        "eliminated": false,
-        "eliminatedAt": null
-      },
-      {
-        "teamId": "CRO",
-        "played": 1,
-        "won": 0,
-        "drawn": 1,
-        "lost": 0,
-        "goalsFor": 0,
-        "goalsAgainst": 0,
-        "goalDiff": 0,
-        "points": 1,
+        "goalsFor": 4,
+        "goalsAgainst": 2,
+        "goalDiff": 2,
+        "points": 3,
         "yellowCards": 0,
         "redCards": 0,
         "eliminated": false,
@@ -2092,6 +2077,21 @@
         "goalsFor": 0,
         "goalsAgainst": 0,
         "goalDiff": 0,
+        "points": 0,
+        "yellowCards": 0,
+        "redCards": 0,
+        "eliminated": false,
+        "eliminatedAt": null
+      },
+      {
+        "teamId": "CRO",
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1,
+        "goalsFor": 2,
+        "goalsAgainst": 4,
+        "goalDiff": -2,
         "points": 0,
         "yellowCards": 0,
         "redCards": 0,
@@ -2303,7 +2303,7 @@
       "conceded": 1,
       "ownGoals": 0
     },
-    "CUR": {
+    "CUW": {
       "scored": 1,
       "conceded": 7,
       "ownGoals": 0
@@ -2426,6 +2426,16 @@
     "COD": {
       "scored": 1,
       "conceded": 1,
+      "ownGoals": 0
+    },
+    "ENG": {
+      "scored": 4,
+      "conceded": 2,
+      "ownGoals": 0
+    },
+    "CRO": {
+      "scored": 2,
+      "conceded": 4,
       "ownGoals": 0
     }
   }
