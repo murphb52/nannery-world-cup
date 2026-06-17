@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-17T14:08:46.153Z",
+  "lastUpdated": "2026-06-17T17:30:57.097Z",
   "matches": [
     {
       "id": 537327,
@@ -188,7 +188,7 @@
       "stage": "GROUP",
       "group": "GROUP_H",
       "homeTeamId": "KSA",
-      "awayTeamId": "URU",
+      "awayTeamId": "URY",
       "homeScore": 1,
       "awayScore": 1,
       "date": "2026-06-15T22:00:00Z",
@@ -267,12 +267,12 @@
       "group": "GROUP_K",
       "homeTeamId": "POR",
       "awayTeamId": "COD",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 1,
+      "awayScore": 0,
       "date": "2026-06-17T17:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null
+      "status": "IN_PLAY",
+      "winner": "HOME_TEAM"
     },
     {
       "id": 537409,
@@ -499,7 +499,7 @@
       "id": 537372,
       "stage": "GROUP",
       "group": "GROUP_H",
-      "homeTeamId": "URU",
+      "homeTeamId": "URY",
       "awayTeamId": "CPV",
       "homeScore": null,
       "awayScore": null,
@@ -811,7 +811,7 @@
       "id": 537373,
       "stage": "GROUP",
       "group": "GROUP_H",
-      "homeTeamId": "URU",
+      "homeTeamId": "URY",
       "awayTeamId": "ESP",
       "homeScore": null,
       "awayScore": null,
@@ -1977,15 +1977,15 @@
     ],
     "Group K": [
       {
-        "teamId": "COD",
-        "played": 0,
-        "won": 0,
+        "teamId": "POR",
+        "played": 1,
+        "won": 1,
         "drawn": 0,
         "lost": 0,
-        "goalsFor": 0,
+        "goalsFor": 1,
         "goalsAgainst": 0,
-        "goalDiff": 0,
-        "points": 0,
+        "goalDiff": 1,
+        "points": 3,
         "yellowCards": 0,
         "redCards": 0,
         "eliminated": false,
@@ -1993,21 +1993,6 @@
       },
       {
         "teamId": "COL",
-        "played": 0,
-        "won": 0,
-        "drawn": 0,
-        "lost": 0,
-        "goalsFor": 0,
-        "goalsAgainst": 0,
-        "goalDiff": 0,
-        "points": 0,
-        "yellowCards": 0,
-        "redCards": 0,
-        "eliminated": false,
-        "eliminatedAt": null
-      },
-      {
-        "teamId": "POR",
         "played": 0,
         "won": 0,
         "drawn": 0,
@@ -2030,6 +2015,21 @@
         "goalsFor": 0,
         "goalsAgainst": 0,
         "goalDiff": 0,
+        "points": 0,
+        "yellowCards": 0,
+        "redCards": 0,
+        "eliminated": false,
+        "eliminatedAt": null
+      },
+      {
+        "teamId": "COD",
+        "played": 1,
+        "won": 0,
+        "drawn": 0,
+        "lost": 1,
+        "goalsFor": 0,
+        "goalsAgainst": 1,
+        "goalDiff": -1,
         "points": 0,
         "yellowCards": 0,
         "redCards": 0,
@@ -2355,7 +2355,7 @@
       "conceded": 1,
       "ownGoals": 0
     },
-    "URU": {
+    "URY": {
       "scored": 1,
       "conceded": 1,
       "ownGoals": 0
