@@ -286,5 +286,13 @@
       "card": "YELLOW"
     }
   ],
-  "537391": []
+  "537391": [],
+  "537392": [
+    {
+      "minute": 86,
+      "teamId": "IRQ",
+      "player": "Zaid Tahseen",
+      "card": "YELLOW"
+    }
+  ]
 }
