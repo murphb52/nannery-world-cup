@@ -311,5 +311,31 @@
       "player": "Marcel Sabitzer",
       "card": "YELLOW"
     }
+  ],
+  "537403": [
+    {
+      "minute": 13,
+      "teamId": "POR",
+      "player": "Bernardo Silva",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 32,
+      "teamId": "COD",
+      "player": "Chancel Mbemba",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 88,
+      "teamId": "POR",
+      "player": "Nélson Semedo",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 90,
+      "teamId": "POR",
+      "player": "Tomás Araújo",
+      "card": "YELLOW"
+    }
   ]
 }

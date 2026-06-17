@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-17T17:30:57.097Z",
+  "lastUpdated": "2026-06-17T20:21:06.753Z",
   "matches": [
     {
       "id": 537327,
@@ -110,7 +110,7 @@
       "stage": "GROUP",
       "group": "GROUP_E",
       "homeTeamId": "GER",
-      "awayTeamId": "CUW",
+      "awayTeamId": "CUR",
       "homeScore": 7,
       "awayScore": 1,
       "date": "2026-06-14T17:00:00Z",
@@ -268,11 +268,11 @@
       "homeTeamId": "POR",
       "awayTeamId": "COD",
       "homeScore": 1,
-      "awayScore": 0,
+      "awayScore": 1,
       "date": "2026-06-17T17:00:00Z",
       "venue": null,
-      "status": "IN_PLAY",
-      "winner": "HOME_TEAM"
+      "status": "FINISHED",
+      "winner": "DRAW"
     },
     {
       "id": 537409,
@@ -280,12 +280,12 @@
       "group": "GROUP_L",
       "homeTeamId": "ENG",
       "awayTeamId": "CRO",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 1,
+      "awayScore": 0,
       "date": "2026-06-17T20:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null
+      "status": "IN_PLAY",
+      "winner": "HOME_TEAM"
     },
     {
       "id": 537410,
@@ -448,7 +448,7 @@
       "stage": "GROUP",
       "group": "GROUP_E",
       "homeTeamId": "ECU",
-      "awayTeamId": "CUW",
+      "awayTeamId": "CUR",
       "homeScore": null,
       "awayScore": null,
       "date": "2026-06-21T00:00:00Z",
@@ -720,7 +720,7 @@
       "id": 537356,
       "stage": "GROUP",
       "group": "GROUP_E",
-      "homeTeamId": "CUW",
+      "homeTeamId": "CUR",
       "awayTeamId": "CIV",
       "homeScore": null,
       "awayScore": null,
@@ -1977,16 +1977,31 @@
     ],
     "Group K": [
       {
-        "teamId": "POR",
+        "teamId": "COD",
         "played": 1,
-        "won": 1,
-        "drawn": 0,
+        "won": 0,
+        "drawn": 1,
         "lost": 0,
         "goalsFor": 1,
-        "goalsAgainst": 0,
-        "goalDiff": 1,
-        "points": 3,
-        "yellowCards": 0,
+        "goalsAgainst": 1,
+        "goalDiff": 0,
+        "points": 1,
+        "yellowCards": 1,
+        "redCards": 0,
+        "eliminated": false,
+        "eliminatedAt": null
+      },
+      {
+        "teamId": "POR",
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0,
+        "goalsFor": 1,
+        "goalsAgainst": 1,
+        "goalDiff": 0,
+        "points": 1,
+        "yellowCards": 3,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -2020,49 +2035,19 @@
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
-      },
-      {
-        "teamId": "COD",
-        "played": 1,
-        "won": 0,
-        "drawn": 0,
-        "lost": 1,
-        "goalsFor": 0,
-        "goalsAgainst": 1,
-        "goalDiff": -1,
-        "points": 0,
-        "yellowCards": 0,
-        "redCards": 0,
-        "eliminated": false,
-        "eliminatedAt": null
       }
     ],
     "Group L": [
       {
         "teamId": "ENG",
-        "played": 0,
+        "played": 1,
         "won": 0,
-        "drawn": 0,
+        "drawn": 1,
         "lost": 0,
         "goalsFor": 0,
         "goalsAgainst": 0,
         "goalDiff": 0,
-        "points": 0,
-        "yellowCards": 0,
-        "redCards": 0,
-        "eliminated": false,
-        "eliminatedAt": null
-      },
-      {
-        "teamId": "GHA",
-        "played": 0,
-        "won": 0,
-        "drawn": 0,
-        "lost": 0,
-        "goalsFor": 0,
-        "goalsAgainst": 0,
-        "goalDiff": 0,
-        "points": 0,
+        "points": 1,
         "yellowCards": 0,
         "redCards": 0,
         "eliminated": false,
@@ -2070,6 +2055,21 @@
       },
       {
         "teamId": "CRO",
+        "played": 1,
+        "won": 0,
+        "drawn": 1,
+        "lost": 0,
+        "goalsFor": 0,
+        "goalsAgainst": 0,
+        "goalDiff": 0,
+        "points": 1,
+        "yellowCards": 0,
+        "redCards": 0,
+        "eliminated": false,
+        "eliminatedAt": null
+      },
+      {
+        "teamId": "GHA",
         "played": 0,
         "won": 0,
         "drawn": 0,
@@ -2200,6 +2200,14 @@
     "AUT": {
       "yellow": 1,
       "red": 0
+    },
+    "POR": {
+      "yellow": 3,
+      "red": 0
+    },
+    "COD": {
+      "yellow": 1,
+      "red": 0
     }
   },
   "firstRedCard": {
@@ -2295,7 +2303,7 @@
       "conceded": 1,
       "ownGoals": 0
     },
-    "CUW": {
+    "CUR": {
       "scored": 1,
       "conceded": 7,
       "ownGoals": 0
@@ -2408,6 +2416,16 @@
     "JOR": {
       "scored": 1,
       "conceded": 3,
+      "ownGoals": 0
+    },
+    "POR": {
+      "scored": 1,
+      "conceded": 1,
+      "ownGoals": 0
+    },
+    "COD": {
+      "scored": 1,
+      "conceded": 1,
       "ownGoals": 0
     }
   }
