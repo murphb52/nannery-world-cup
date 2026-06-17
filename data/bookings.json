@@ -286,6 +286,14 @@
       "card": "YELLOW"
     }
   ],
+  "537370": [
+    {
+      "minute": 44,
+      "teamId": "KSA",
+      "player": "Abdulelah Al-Amri",
+      "card": "YELLOW"
+    }
+  ],
   "537391": [],
   "537392": [
     {
@@ -294,5 +302,6 @@
       "player": "Zaid Tahseen",
       "card": "YELLOW"
     }
-  ]
+  ],
+  "537397": []
 }
