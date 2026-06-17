@@ -303,5 +303,13 @@
       "card": "YELLOW"
     }
   ],
-  "537397": []
+  "537397": [],
+  "537398": [
+    {
+      "minute": 77,
+      "teamId": "AUT",
+      "player": "Marcel Sabitzer",
+      "card": "YELLOW"
+    }
+  ]
 }

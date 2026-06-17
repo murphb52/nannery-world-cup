@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-17T05:26:21.451Z",
+  "lastUpdated": "2026-06-17T10:16:34.894Z",
   "matches": [
     {
       "id": 537327,
@@ -188,7 +188,7 @@
       "stage": "GROUP",
       "group": "GROUP_H",
       "homeTeamId": "KSA",
-      "awayTeamId": "URU",
+      "awayTeamId": "URY",
       "homeScore": 1,
       "awayScore": 1,
       "date": "2026-06-15T22:00:00Z",
@@ -254,12 +254,12 @@
       "group": "GROUP_J",
       "homeTeamId": "AUT",
       "awayTeamId": "JOR",
-      "homeScore": 1,
+      "homeScore": 3,
       "awayScore": 1,
       "date": "2026-06-17T04:00:00Z",
       "venue": null,
-      "status": "IN_PLAY",
-      "winner": "DRAW"
+      "status": "FINISHED",
+      "winner": "HOME_TEAM"
     },
     {
       "id": 537403,
@@ -499,7 +499,7 @@
       "id": 537372,
       "stage": "GROUP",
       "group": "GROUP_H",
-      "homeTeamId": "URU",
+      "homeTeamId": "URY",
       "awayTeamId": "CPV",
       "homeScore": null,
       "awayScore": null,
@@ -811,7 +811,7 @@
       "id": 537373,
       "stage": "GROUP",
       "group": "GROUP_H",
-      "homeTeamId": "URU",
+      "homeTeamId": "URY",
       "awayTeamId": "ESP",
       "homeScore": null,
       "awayScore": null,
@@ -1935,11 +1935,11 @@
         "won": 1,
         "drawn": 0,
         "lost": 0,
-        "goalsFor": 1,
-        "goalsAgainst": 0,
-        "goalDiff": 1,
+        "goalsFor": 3,
+        "goalsAgainst": 1,
+        "goalDiff": 2,
         "points": 3,
-        "yellowCards": 0,
+        "yellowCards": 1,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -1950,9 +1950,9 @@
         "won": 0,
         "drawn": 0,
         "lost": 1,
-        "goalsFor": 0,
-        "goalsAgainst": 1,
-        "goalDiff": -1,
+        "goalsFor": 1,
+        "goalsAgainst": 3,
+        "goalDiff": -2,
         "points": 0,
         "yellowCards": 0,
         "redCards": 0,
@@ -2196,6 +2196,10 @@
     "IRQ": {
       "yellow": 1,
       "red": 0
+    },
+    "AUT": {
+      "yellow": 1,
+      "red": 0
     }
   },
   "firstRedCard": {
@@ -2351,7 +2355,7 @@
       "conceded": 1,
       "ownGoals": 0
     },
-    "URU": {
+    "URY": {
       "scored": 1,
       "conceded": 1,
       "ownGoals": 0
@@ -2393,6 +2397,16 @@
     },
     "ALG": {
       "scored": 0,
+      "conceded": 3,
+      "ownGoals": 0
+    },
+    "AUT": {
+      "scored": 3,
+      "conceded": 1,
+      "ownGoals": 0
+    },
+    "JOR": {
+      "scored": 1,
       "conceded": 3,
       "ownGoals": 0
     }
