@@ -117,6 +117,32 @@
       "card": "YELLOW"
     }
   ],
+  "537335": [
+    {
+      "minute": 59,
+      "teamId": "BIH",
+      "player": "Amar Dedic",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 61,
+      "teamId": "BIH",
+      "player": "Edin Dzeko",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 65,
+      "teamId": "SUI",
+      "player": "Nico Elvedi",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 80,
+      "teamId": "BIH",
+      "player": "Tarik Muharemovic",
+      "card": "RED"
+    }
+  ],
   "537339": [
     {
       "minute": 37,
