@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-18T12:37:44.344Z",
+  "lastUpdated": "2026-06-18T16:37:45.578Z",
   "matches": [
     {
       "id": 537327,
@@ -319,12 +319,12 @@
       "group": "GROUP_A",
       "homeTeamId": "CZE",
       "awayTeamId": "RSA",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 1,
+      "awayScore": 0,
       "date": "2026-06-18T16:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null
+      "status": "IN_PLAY",
+      "winner": "HOME_TEAM"
     },
     {
       "id": 537335,
@@ -1388,14 +1388,14 @@
       },
       {
         "teamId": "CZE",
-        "played": 1,
-        "won": 0,
+        "played": 2,
+        "won": 1,
         "drawn": 0,
         "lost": 1,
-        "goalsFor": 1,
+        "goalsFor": 2,
         "goalsAgainst": 2,
-        "goalDiff": -1,
-        "points": 0,
+        "goalDiff": 0,
+        "points": 3,
         "yellowCards": 0,
         "redCards": 0,
         "eliminated": false,
@@ -1403,13 +1403,13 @@
       },
       {
         "teamId": "RSA",
-        "played": 1,
+        "played": 2,
         "won": 0,
         "drawn": 0,
-        "lost": 1,
+        "lost": 2,
         "goalsFor": 0,
-        "goalsAgainst": 2,
-        "goalDiff": -2,
+        "goalsAgainst": 3,
+        "goalDiff": -3,
         "points": 0,
         "yellowCards": 2,
         "redCards": 2,
