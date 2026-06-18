@@ -352,5 +352,25 @@
       "card": "YELLOW"
     }
   ],
-  "537409": []
+  "537409": [],
+  "537410": [
+    {
+      "minute": 16,
+      "teamId": "GHA",
+      "player": "Caleb Yirenkyi",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 72,
+      "teamId": "PAN",
+      "player": "César Blackman",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 90,
+      "teamId": "PAN",
+      "player": "Carlos Harvey",
+      "card": "YELLOW"
+    }
+  ]
 }

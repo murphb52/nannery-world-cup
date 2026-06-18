@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-18T04:54:49.494Z",
+  "lastUpdated": "2026-06-18T12:37:44.344Z",
   "matches": [
     {
       "id": 537327,
@@ -297,7 +297,7 @@
       "awayScore": 0,
       "date": "2026-06-17T23:00:00Z",
       "venue": null,
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "winner": "HOME_TEAM"
     },
     {
@@ -2063,7 +2063,7 @@
         "goalsAgainst": 0,
         "goalDiff": 1,
         "points": 3,
-        "yellowCards": 0,
+        "yellowCards": 1,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -2078,7 +2078,7 @@
         "goalsAgainst": 1,
         "goalDiff": -1,
         "points": 0,
-        "yellowCards": 0,
+        "yellowCards": 2,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -2215,6 +2215,14 @@
     },
     "UZB": {
       "yellow": 1,
+      "red": 0
+    },
+    "GHA": {
+      "yellow": 1,
+      "red": 0
+    },
+    "PAN": {
+      "yellow": 2,
       "red": 0
     }
   },
@@ -2444,6 +2452,16 @@
     "CRO": {
       "scored": 2,
       "conceded": 4,
+      "ownGoals": 0
+    },
+    "GHA": {
+      "scored": 1,
+      "conceded": 0,
+      "ownGoals": 0
+    },
+    "PAN": {
+      "scored": 0,
+      "conceded": 1,
       "ownGoals": 0
     },
     "UZB": {
