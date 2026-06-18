@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-18T00:13:22.312Z",
+  "lastUpdated": "2026-06-18T04:54:49.494Z",
   "matches": [
     {
       "id": 537327,
@@ -293,12 +293,12 @@
       "group": "GROUP_L",
       "homeTeamId": "GHA",
       "awayTeamId": "PAN",
-      "homeScore": 0,
+      "homeScore": 1,
       "awayScore": 0,
       "date": "2026-06-17T23:00:00Z",
       "venue": null,
       "status": "IN_PLAY",
-      "winner": "DRAW"
+      "winner": "HOME_TEAM"
     },
     {
       "id": 537404,
@@ -306,12 +306,12 @@
       "group": "GROUP_K",
       "homeTeamId": "UZB",
       "awayTeamId": "COL",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 1,
+      "awayScore": 3,
       "date": "2026-06-18T02:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null
+      "status": "FINISHED",
+      "winner": "AWAY_TEAM"
     },
     {
       "id": 537329,
@@ -1977,6 +1977,21 @@
     ],
     "Group K": [
       {
+        "teamId": "COL",
+        "played": 1,
+        "won": 1,
+        "drawn": 0,
+        "lost": 0,
+        "goalsFor": 3,
+        "goalsAgainst": 1,
+        "goalDiff": 2,
+        "points": 3,
+        "yellowCards": 1,
+        "redCards": 0,
+        "eliminated": false,
+        "eliminatedAt": null
+      },
+      {
         "teamId": "COD",
         "played": 1,
         "won": 0,
@@ -2007,31 +2022,16 @@
         "eliminatedAt": null
       },
       {
-        "teamId": "COL",
-        "played": 0,
-        "won": 0,
-        "drawn": 0,
-        "lost": 0,
-        "goalsFor": 0,
-        "goalsAgainst": 0,
-        "goalDiff": 0,
-        "points": 0,
-        "yellowCards": 0,
-        "redCards": 0,
-        "eliminated": false,
-        "eliminatedAt": null
-      },
-      {
         "teamId": "UZB",
-        "played": 0,
+        "played": 1,
         "won": 0,
         "drawn": 0,
-        "lost": 0,
-        "goalsFor": 0,
-        "goalsAgainst": 0,
-        "goalDiff": 0,
+        "lost": 1,
+        "goalsFor": 1,
+        "goalsAgainst": 3,
+        "goalDiff": -2,
         "points": 0,
-        "yellowCards": 0,
+        "yellowCards": 1,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -2056,13 +2056,13 @@
       {
         "teamId": "GHA",
         "played": 1,
-        "won": 0,
-        "drawn": 1,
+        "won": 1,
+        "drawn": 0,
         "lost": 0,
-        "goalsFor": 0,
+        "goalsFor": 1,
         "goalsAgainst": 0,
-        "goalDiff": 0,
-        "points": 1,
+        "goalDiff": 1,
+        "points": 3,
         "yellowCards": 0,
         "redCards": 0,
         "eliminated": false,
@@ -2072,12 +2072,12 @@
         "teamId": "PAN",
         "played": 1,
         "won": 0,
-        "drawn": 1,
-        "lost": 0,
+        "drawn": 0,
+        "lost": 1,
         "goalsFor": 0,
-        "goalsAgainst": 0,
-        "goalDiff": 0,
-        "points": 1,
+        "goalsAgainst": 1,
+        "goalDiff": -1,
+        "points": 0,
         "yellowCards": 0,
         "redCards": 0,
         "eliminated": false,
@@ -2206,6 +2206,14 @@
       "red": 0
     },
     "COD": {
+      "yellow": 1,
+      "red": 0
+    },
+    "COL": {
+      "yellow": 1,
+      "red": 0
+    },
+    "UZB": {
       "yellow": 1,
       "red": 0
     }
@@ -2436,6 +2444,16 @@
     "CRO": {
       "scored": 2,
       "conceded": 4,
+      "ownGoals": 0
+    },
+    "UZB": {
+      "scored": 1,
+      "conceded": 3,
+      "ownGoals": 0
+    },
+    "COL": {
+      "scored": 3,
+      "conceded": 1,
       "ownGoals": 0
     }
   }

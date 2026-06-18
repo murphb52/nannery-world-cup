@@ -338,5 +338,19 @@
       "card": "YELLOW"
     }
   ],
+  "537404": [
+    {
+      "minute": 7,
+      "teamId": "COL",
+      "player": "Johan Mojica",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 34,
+      "teamId": "UZB",
+      "player": "Abdukodir Khusanov",
+      "card": "YELLOW"
+    }
+  ],
   "537409": []
 }
