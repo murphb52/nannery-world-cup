@@ -45,6 +45,26 @@
       "card": "YELLOW"
     }
   ],
+  "537329": [
+    {
+      "minute": 33,
+      "teamId": "RSA",
+      "player": "Teboho Mokoena",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 40,
+      "teamId": "RSA",
+      "player": "Thalente Mbatha",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 75,
+      "teamId": "CZE",
+      "player": "Ladislav Krejcí",
+      "card": "YELLOW"
+    }
+  ],
   "537333": [
     {
       "minute": 11,
