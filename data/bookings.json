@@ -143,6 +143,32 @@
       "card": "RED"
     }
   ],
+  "537336": [
+    {
+      "minute": 9,
+      "teamId": "CAN",
+      "player": "Derek Cornelius",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 33,
+      "teamId": "QAT",
+      "player": "Homam Ahmed",
+      "card": "RED"
+    },
+    {
+      "minute": 53,
+      "teamId": "QAT",
+      "player": "Assim Madibo",
+      "card": "RED"
+    },
+    {
+      "minute": 62,
+      "teamId": "QAT",
+      "player": "Ahmed Fathy",
+      "card": "YELLOW"
+    }
+  ],
   "537339": [
     {
       "minute": 37,
