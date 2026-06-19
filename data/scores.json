@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-19T00:22:32.115Z",
+  "lastUpdated": "2026-06-19T05:34:52.950Z",
   "matches": [
     {
       "id": 537327,
@@ -188,7 +188,7 @@
       "stage": "GROUP",
       "group": "GROUP_H",
       "homeTeamId": "KSA",
-      "awayTeamId": "URU",
+      "awayTeamId": "URY",
       "homeScore": 1,
       "awayScore": 1,
       "date": "2026-06-15T22:00:00Z",
@@ -358,12 +358,12 @@
       "group": "GROUP_A",
       "homeTeamId": "MEX",
       "awayTeamId": "KOR",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 1,
+      "awayScore": 0,
       "date": "2026-06-19T01:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null
+      "status": "FINISHED",
+      "winner": "HOME_TEAM"
     },
     {
       "id": 537348,
@@ -499,7 +499,7 @@
       "id": 537372,
       "stage": "GROUP",
       "group": "GROUP_H",
-      "homeTeamId": "URU",
+      "homeTeamId": "URY",
       "awayTeamId": "CPV",
       "homeScore": null,
       "awayScore": null,
@@ -811,7 +811,7 @@
       "id": 537373,
       "stage": "GROUP",
       "group": "GROUP_H",
-      "homeTeamId": "URU",
+      "homeTeamId": "URY",
       "awayTeamId": "ESP",
       "homeScore": null,
       "awayScore": null,
@@ -1358,14 +1358,14 @@
     "Group A": [
       {
         "teamId": "MEX",
-        "played": 1,
-        "won": 1,
+        "played": 2,
+        "won": 2,
         "drawn": 0,
         "lost": 0,
-        "goalsFor": 2,
+        "goalsFor": 3,
         "goalsAgainst": 0,
-        "goalDiff": 2,
-        "points": 3,
+        "goalDiff": 3,
+        "points": 6,
         "yellowCards": 1,
         "redCards": 1,
         "eliminated": false,
@@ -1373,15 +1373,15 @@
       },
       {
         "teamId": "KOR",
-        "played": 1,
+        "played": 2,
         "won": 1,
         "drawn": 0,
-        "lost": 0,
+        "lost": 1,
         "goalsFor": 2,
-        "goalsAgainst": 1,
-        "goalDiff": 1,
+        "goalsAgainst": 2,
+        "goalDiff": 0,
         "points": 3,
-        "yellowCards": 1,
+        "yellowCards": 3,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -2110,7 +2110,7 @@
       "red": 1
     },
     "KOR": {
-      "yellow": 1,
+      "yellow": 3,
       "red": 0
     },
     "CZE": {
@@ -2239,7 +2239,7 @@
   },
   "teamStats": {
     "MEX": {
-      "scored": 2,
+      "scored": 3,
       "conceded": 0,
       "ownGoals": 0
     },
@@ -2250,7 +2250,7 @@
     },
     "KOR": {
       "scored": 2,
-      "conceded": 1,
+      "conceded": 2,
       "ownGoals": 0
     },
     "CZE": {
@@ -2383,7 +2383,7 @@
       "conceded": 1,
       "ownGoals": 0
     },
-    "URU": {
+    "URY": {
       "scored": 1,
       "conceded": 1,
       "ownGoals": 0

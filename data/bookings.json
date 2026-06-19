@@ -65,6 +65,20 @@
       "card": "YELLOW"
     }
   ],
+  "537330": [
+    {
+      "minute": 4,
+      "teamId": "KOR",
+      "player": "Lee Kang-In",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 58,
+      "teamId": "KOR",
+      "player": "Paik Seung-Ho",
+      "card": "YELLOW"
+    }
+  ],
   "537333": [
     {
       "minute": 11,
