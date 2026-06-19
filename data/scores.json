@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-19T19:05:07.779Z",
+  "lastUpdated": "2026-06-19T20:52:50.157Z",
   "matches": [
     {
       "id": 537327,
@@ -188,7 +188,7 @@
       "stage": "GROUP",
       "group": "GROUP_H",
       "homeTeamId": "KSA",
-      "awayTeamId": "URU",
+      "awayTeamId": "URY",
       "homeScore": 1,
       "awayScore": 1,
       "date": "2026-06-15T22:00:00Z",
@@ -371,12 +371,12 @@
       "group": "GROUP_D",
       "homeTeamId": "USA",
       "awayTeamId": "AUS",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 2,
+      "awayScore": 0,
       "date": "2026-06-19T19:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null
+      "status": "IN_PLAY",
+      "winner": "HOME_TEAM"
     },
     {
       "id": 537342,
@@ -499,7 +499,7 @@
       "id": 537372,
       "stage": "GROUP",
       "group": "GROUP_H",
-      "homeTeamId": "URU",
+      "homeTeamId": "URY",
       "awayTeamId": "CPV",
       "homeScore": null,
       "awayScore": null,
@@ -811,7 +811,7 @@
       "id": 537373,
       "stage": "GROUP",
       "group": "GROUP_H",
-      "homeTeamId": "URU",
+      "homeTeamId": "URY",
       "awayTeamId": "ESP",
       "homeScore": null,
       "awayScore": null,
@@ -1545,13 +1545,13 @@
       {
         "teamId": "USA",
         "played": 2,
-        "won": 1,
-        "drawn": 1,
+        "won": 2,
+        "drawn": 0,
         "lost": 0,
-        "goalsFor": 4,
+        "goalsFor": 6,
         "goalsAgainst": 1,
-        "goalDiff": 3,
-        "points": 4,
+        "goalDiff": 5,
+        "points": 6,
         "yellowCards": 1,
         "redCards": 0,
         "eliminated": false,
@@ -1561,12 +1561,12 @@
         "teamId": "AUS",
         "played": 2,
         "won": 1,
-        "drawn": 1,
-        "lost": 0,
+        "drawn": 0,
+        "lost": 1,
         "goalsFor": 2,
-        "goalsAgainst": 0,
-        "goalDiff": 2,
-        "points": 4,
+        "goalsAgainst": 2,
+        "goalDiff": 0,
+        "points": 3,
         "yellowCards": 0,
         "redCards": 0,
         "eliminated": false,
@@ -2383,7 +2383,7 @@
       "conceded": 1,
       "ownGoals": 0
     },
-    "URU": {
+    "URY": {
       "scored": 1,
       "conceded": 1,
       "ownGoals": 0
