@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-19T16:59:31.057Z",
+  "lastUpdated": "2026-06-19T19:05:07.779Z",
   "matches": [
     {
       "id": 537327,
@@ -1544,14 +1544,14 @@
     "Group D": [
       {
         "teamId": "USA",
-        "played": 1,
+        "played": 2,
         "won": 1,
-        "drawn": 0,
+        "drawn": 1,
         "lost": 0,
         "goalsFor": 4,
         "goalsAgainst": 1,
         "goalDiff": 3,
-        "points": 3,
+        "points": 4,
         "yellowCards": 1,
         "redCards": 0,
         "eliminated": false,
@@ -1559,14 +1559,14 @@
       },
       {
         "teamId": "AUS",
-        "played": 1,
+        "played": 2,
         "won": 1,
-        "drawn": 0,
+        "drawn": 1,
         "lost": 0,
         "goalsFor": 2,
         "goalsAgainst": 0,
         "goalDiff": 2,
-        "points": 3,
+        "points": 4,
         "yellowCards": 0,
         "redCards": 0,
         "eliminated": false,
