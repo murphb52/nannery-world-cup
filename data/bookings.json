@@ -269,6 +269,50 @@
       "card": "YELLOW"
     }
   ],
+  "537348": [
+    {
+      "minute": 16,
+      "teamId": "AUS",
+      "player": "Jordan Bos",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 32,
+      "teamId": "AUS",
+      "player": "Alessandro Circati",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 56,
+      "teamId": "USA",
+      "player": "Antonee Robinson",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 88,
+      "teamId": "AUS",
+      "player": "Harry Souttar",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 89,
+      "teamId": "USA",
+      "player": "Folarin Balogun",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 89,
+      "teamId": "AUS",
+      "player": "Jacob Italiano",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 90,
+      "teamId": "USA",
+      "player": "Chris Richards",
+      "card": "YELLOW"
+    }
+  ],
   "537351": [],
   "537352": [
     {
