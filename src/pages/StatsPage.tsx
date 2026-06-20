@@ -21,6 +21,14 @@ interface LeaderboardEntry {
   teamId: string
   value: number
   label: string
+  rank: number
+}
+
+function withRanks(entries: Omit<LeaderboardEntry, 'rank'>[]): LeaderboardEntry[] {
+  return entries.map((entry, _, arr) => ({
+    ...entry,
+    rank: arr.findIndex(e => e.value === entry.value) + 1,
+  }))
 }
 
 interface LeaderboardCardProps {
@@ -48,21 +56,22 @@ function LeaderboardCard({ icon, title, entries, teams, playerNames }: Leaderboa
         </div>
       ) : (
         <div className="divide-y divide-white/5">
-          {entries.map((entry, i) => {
+          {entries.map((entry) => {
             const team = teams.find(t => t.id === entry.teamId)
             if (!team) return null
             const player = playerNames[entry.teamId]
-            const isFirst = i === 0
+            const isFirst = entry.rank === 1
+            const isTied = entries.filter(e => e.rank === entry.rank).length > 1
 
             return (
               <div
                 key={entry.teamId}
                 className={`flex items-center gap-3 px-4 py-2.5 ${isFirst ? 'bg-yellow-400/5' : ''}`}
               >
-                <span className={`text-xs font-bold w-4 shrink-0 text-right ${
-                  i === 0 ? 'text-yellow-400' : i === 1 ? 'text-white/50' : i === 2 ? 'text-orange-400/70' : 'text-white/25'
+                <span className={`text-xs font-bold w-5 shrink-0 text-right ${
+                  entry.rank === 1 ? 'text-yellow-400' : entry.rank === 2 ? 'text-white/50' : entry.rank === 3 ? 'text-orange-400/70' : 'text-white/25'
                 }`}>
-                  {i + 1}
+                  {isTied ? `=${entry.rank}` : entry.rank}
                 </span>
                 <img
                   src={team.flag}
@@ -118,29 +127,37 @@ export default function StatsPage() {
       ? (totalGoals / finishedMatches.length).toFixed(2)
       : null
 
-    const topScorers: LeaderboardEntry[] = Object.entries(goals)
-      .filter(([, t]) => t.for > 0)
-      .sort((a, b) => b[1].for - a[1].for)
-      .slice(0, 5)
-      .map(([teamId, t]) => ({ teamId, value: t.for, label: 'goals' }))
+    const topScorers: LeaderboardEntry[] = withRanks(
+      Object.entries(goals)
+        .filter(([, t]) => t.for > 0)
+        .sort((a, b) => b[1].for - a[1].for)
+        .slice(0, 5)
+        .map(([teamId, t]) => ({ teamId, value: t.for, label: 'goals' }))
+    )
 
-    const bestDefence: LeaderboardEntry[] = Object.entries(goals)
-      .filter(([, t]) => t.against >= 0)
-      .sort((a, b) => a[1].against - b[1].against || b[1].for - a[1].for)
-      .slice(0, 5)
-      .map(([teamId, t]) => ({ teamId, value: t.against, label: 'conceded' }))
+    const bestDefence: LeaderboardEntry[] = withRanks(
+      Object.entries(goals)
+        .filter(([, t]) => t.against >= 0)
+        .sort((a, b) => a[1].against - b[1].against || b[1].for - a[1].for)
+        .slice(0, 5)
+        .map(([teamId, t]) => ({ teamId, value: t.against, label: 'conceded' }))
+    )
 
-    const yellowCards: LeaderboardEntry[] = Object.entries(scores.cards ?? {})
-      .filter(([, c]) => c.yellow > 0)
-      .sort((a, b) => b[1].yellow - a[1].yellow)
-      .slice(0, 5)
-      .map(([teamId, c]) => ({ teamId, value: c.yellow, label: 'yellows' }))
+    const yellowCards: LeaderboardEntry[] = withRanks(
+      Object.entries(scores.cards ?? {})
+        .filter(([, c]) => c.yellow > 0)
+        .sort((a, b) => b[1].yellow - a[1].yellow)
+        .slice(0, 5)
+        .map(([teamId, c]) => ({ teamId, value: c.yellow, label: 'yellows' }))
+    )
 
-    const redCards: LeaderboardEntry[] = Object.entries(scores.cards ?? {})
-      .filter(([, c]) => c.red > 0)
-      .sort((a, b) => b[1].red - a[1].red)
-      .slice(0, 5)
-      .map(([teamId, c]) => ({ teamId, value: c.red, label: 'reds' }))
+    const redCards: LeaderboardEntry[] = withRanks(
+      Object.entries(scores.cards ?? {})
+        .filter(([, c]) => c.red > 0)
+        .sort((a, b) => b[1].red - a[1].red)
+        .slice(0, 5)
+        .map(([teamId, c]) => ({ teamId, value: c.red, label: 'reds' }))
+    )
 
     const winsByTeam: Record<string, number> = {}
     for (const group of Object.values(scores.standings ?? {})) {
@@ -148,11 +165,13 @@ export default function StatsPage() {
         winsByTeam[s.teamId] = (winsByTeam[s.teamId] ?? 0) + s.won
       }
     }
-    const mostWins: LeaderboardEntry[] = Object.entries(winsByTeam)
-      .filter(([, w]) => w > 0)
-      .sort((a, b) => b[1] - a[1])
-      .slice(0, 5)
-      .map(([teamId, w]) => ({ teamId, value: w, label: 'wins' }))
+    const mostWins: LeaderboardEntry[] = withRanks(
+      Object.entries(winsByTeam)
+        .filter(([, w]) => w > 0)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 5)
+        .map(([teamId, w]) => ({ teamId, value: w, label: 'wins' }))
+    )
 
     return {
       totalGoals,
