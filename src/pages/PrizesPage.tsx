@@ -91,35 +91,47 @@ const mostGoalsScored: PrizeComputer = (scores, draw, players, teams) => {
   const totals = goalTotals(scores)
   const entries = Object.entries(totals)
   if (!entries.length) return null
-  const [teamId, t] = entries.reduce((a, b) => b[1].for > a[1].for ? b : a)
-  if (t.for === 0) return null
-  const team = teams.find(t => t.id === teamId)
-  if (!team) return null
+  const maxFor = Math.max(...entries.map(([, t]) => t.for))
+  if (maxFor === 0) return null
+  const tiedTeams = entries
+    .filter(([, t]) => t.for === maxFor)
+    .map(([id]) => teams.find(t => t.id === id))
+    .filter(Boolean) as Team[]
+  if (!tiedTeams.length) return null
   const names = resolveNames(draw, players)
-  return { player: names[team.id] ?? '—', team, stat: `${t.for} goals scored` }
+  const uniquePlayers = [...new Set(tiedTeams.map(t => names[t.id] ?? '—'))]
+  return { player: uniquePlayers.join(' & '), teams: tiedTeams, stat: `${maxFor} goals scored` }
 }
 
 const mostConceded: PrizeComputer = (scores, draw, players, teams) => {
   const totals = goalTotals(scores)
   const entries = Object.entries(totals)
   if (!entries.length) return null
-  const [teamId, t] = entries.reduce((a, b) => b[1].against > a[1].against ? b : a)
-  if (t.against === 0) return null
-  const team = teams.find(t => t.id === teamId)
-  if (!team) return null
+  const maxAgainst = Math.max(...entries.map(([, t]) => t.against))
+  if (maxAgainst === 0) return null
+  const tiedTeams = entries
+    .filter(([, t]) => t.against === maxAgainst)
+    .map(([id]) => teams.find(t => t.id === id))
+    .filter(Boolean) as Team[]
+  if (!tiedTeams.length) return null
   const names = resolveNames(draw, players)
-  return { player: names[team.id] ?? '—', team, stat: `${t.against} goals conceded` }
+  const uniquePlayers = [...new Set(tiedTeams.map(t => names[t.id] ?? '—'))]
+  return { player: uniquePlayers.join(' & '), teams: tiedTeams, stat: `${maxAgainst} goals conceded` }
 }
 
 const mostYellows: PrizeComputer = (scores, draw, players, teams) => {
   const entries = Object.entries(scores.cards ?? {})
   if (!entries.length) return null
-  const [teamId, top] = entries.reduce((a, b) => b[1].yellow > a[1].yellow ? b : a)
-  if (top.yellow === 0) return null
-  const team = teams.find(t => t.id === teamId)
-  if (!team) return null
+  const maxYellow = Math.max(...entries.map(([, c]) => c.yellow))
+  if (maxYellow === 0) return null
+  const tiedTeams = entries
+    .filter(([, c]) => c.yellow === maxYellow)
+    .map(([id]) => teams.find(t => t.id === id))
+    .filter(Boolean) as Team[]
+  if (!tiedTeams.length) return null
   const names = resolveNames(draw, players)
-  return { player: names[team.id] ?? '—', team, stat: `${top.yellow} yellow cards` }
+  const uniquePlayers = [...new Set(tiedTeams.map(t => names[t.id] ?? '—'))]
+  return { player: uniquePlayers.join(' & '), teams: tiedTeams, stat: `${maxYellow} yellow cards` }
 }
 
 const firstRed: PrizeComputer = (scores, draw, players, teams) => {
@@ -157,27 +169,35 @@ const firstEliminated: PrizeComputer = (scores, draw, players, teams) => {
 const lmsMostGoalsScored: PrizeComputer = (scores, draw, players, teams) => {
   const totals = goalTotals(scores)
   const ptm = playerTeamMap(draw)
-  let best: { playerId: string; val: number; teamIds: string[] } | null = null
-  for (const [playerId, teamIds] of ptm) {
-    const val = teamIds.reduce((s, id) => s + (totals[id]?.for ?? 0), 0)
-    if (!best || val > best.val) best = { playerId, val, teamIds }
-  }
-  if (!best || best.val === 0) return null
-  const playerTeams = best.teamIds.map(id => teams.find(t => t.id === id)).filter(Boolean) as Team[]
-  return { player: playerName(best.playerId, players), teams: playerTeams, stat: `${best.val} goals scored` }
+  const playerTotals = Array.from(ptm.entries()).map(([playerId, teamIds]) => ({
+    playerId,
+    val: teamIds.reduce((s, id) => s + (totals[id]?.for ?? 0), 0),
+    teamIds,
+  }))
+  if (!playerTotals.length) return null
+  const maxVal = Math.max(...playerTotals.map(p => p.val))
+  if (maxVal === 0) return null
+  const tied = playerTotals.filter(p => p.val === maxVal)
+  const allTeams = tied.flatMap(p => p.teamIds.map(id => teams.find(t => t.id === id)).filter(Boolean) as Team[])
+  const tiedPlayerNames = tied.map(p => playerName(p.playerId, players)).join(' & ')
+  return { player: tiedPlayerNames, teams: allTeams, stat: `${maxVal} goals scored` }
 }
 
 const lmsMostConceded: PrizeComputer = (scores, draw, players, teams) => {
   const totals = goalTotals(scores)
   const ptm = playerTeamMap(draw)
-  let best: { playerId: string; val: number; teamIds: string[] } | null = null
-  for (const [playerId, teamIds] of ptm) {
-    const val = teamIds.reduce((s, id) => s + (totals[id]?.against ?? 0), 0)
-    if (!best || val > best.val) best = { playerId, val, teamIds }
-  }
-  if (!best || best.val === 0) return null
-  const playerTeams = best.teamIds.map(id => teams.find(t => t.id === id)).filter(Boolean) as Team[]
-  return { player: playerName(best.playerId, players), teams: playerTeams, stat: `${best.val} goals conceded` }
+  const playerTotals = Array.from(ptm.entries()).map(([playerId, teamIds]) => ({
+    playerId,
+    val: teamIds.reduce((s, id) => s + (totals[id]?.against ?? 0), 0),
+    teamIds,
+  }))
+  if (!playerTotals.length) return null
+  const maxVal = Math.max(...playerTotals.map(p => p.val))
+  if (maxVal === 0) return null
+  const tied = playerTotals.filter(p => p.val === maxVal)
+  const allTeams = tied.flatMap(p => p.teamIds.map(id => teams.find(t => t.id === id)).filter(Boolean) as Team[])
+  const tiedPlayerNames = tied.map(p => playerName(p.playerId, players)).join(' & ')
+  return { player: tiedPlayerNames, teams: allTeams, stat: `${maxVal} goals conceded` }
 }
 
 const lmsMostOwnGoals: PrizeComputer = (scores, draw, players, teams) => {
