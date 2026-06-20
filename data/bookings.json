@@ -223,6 +223,46 @@
       "card": "YELLOW"
     }
   ],
+  "537341": [
+    {
+      "minute": 4,
+      "teamId": "HAI",
+      "player": "Carlens Arcus",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 45,
+      "teamId": "HAI",
+      "player": "Frantzdy Pierrot",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 65,
+      "teamId": "BRA",
+      "player": "Douglas Santos",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 72,
+      "teamId": "HAI",
+      "player": "Danley Jean Jacques",
+      "card": "YELLOW"
+    }
+  ],
+  "537342": [
+    {
+      "minute": 23,
+      "teamId": "MAR",
+      "player": "Issa Diop",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 65,
+      "teamId": "SCO",
+      "player": "Andy Robertson",
+      "card": "YELLOW"
+    }
+  ],
   "537345": [
     {
       "minute": 10,
