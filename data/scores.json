@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-20T21:48:51.624Z",
+  "lastUpdated": "2026-06-20T23:14:55.170Z",
   "matches": [
     {
       "id": 537327,
@@ -188,7 +188,7 @@
       "stage": "GROUP",
       "group": "GROUP_H",
       "homeTeamId": "KSA",
-      "awayTeamId": "URY",
+      "awayTeamId": "URU",
       "homeScore": 1,
       "awayScore": 1,
       "date": "2026-06-15T22:00:00Z",
@@ -436,12 +436,12 @@
       "group": "GROUP_E",
       "homeTeamId": "GER",
       "awayTeamId": "CIV",
-      "homeScore": 1,
+      "homeScore": 2,
       "awayScore": 1,
       "date": "2026-06-20T20:00:00Z",
       "venue": null,
-      "status": "IN_PLAY",
-      "winner": "DRAW"
+      "status": "FINISHED",
+      "winner": "HOME_TEAM"
     },
     {
       "id": 537354,
@@ -499,7 +499,7 @@
       "id": 537372,
       "stage": "GROUP",
       "group": "GROUP_H",
-      "homeTeamId": "URY",
+      "homeTeamId": "URU",
       "awayTeamId": "CPV",
       "homeScore": null,
       "awayScore": null,
@@ -811,7 +811,7 @@
       "id": 537373,
       "stage": "GROUP",
       "group": "GROUP_H",
-      "homeTeamId": "URY",
+      "homeTeamId": "URU",
       "awayTeamId": "ESP",
       "homeScore": null,
       "awayScore": null,
@@ -1605,31 +1605,31 @@
     ],
     "Group E": [
       {
-        "teamId": "CIV",
+        "teamId": "GER",
         "played": 2,
         "won": 2,
         "drawn": 0,
         "lost": 0,
-        "goalsFor": 2,
-        "goalsAgainst": 0,
-        "goalDiff": 2,
+        "goalsFor": 9,
+        "goalsAgainst": 2,
+        "goalDiff": 7,
         "points": 6,
-        "yellowCards": 3,
+        "yellowCards": 0,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
       },
       {
-        "teamId": "GER",
+        "teamId": "CIV",
         "played": 2,
         "won": 1,
         "drawn": 0,
         "lost": 1,
-        "goalsFor": 7,
+        "goalsFor": 2,
         "goalsAgainst": 2,
-        "goalDiff": 5,
+        "goalDiff": 0,
         "points": 3,
-        "yellowCards": 0,
+        "yellowCards": 3,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -2331,8 +2331,8 @@
       "ownGoals": 0
     },
     "GER": {
-      "scored": 7,
-      "conceded": 1,
+      "scored": 9,
+      "conceded": 2,
       "ownGoals": 0
     },
     "CUW": {
@@ -2351,8 +2351,8 @@
       "ownGoals": 0
     },
     "CIV": {
-      "scored": 1,
-      "conceded": 0,
+      "scored": 2,
+      "conceded": 2,
       "ownGoals": 0
     },
     "ECU": {
@@ -2395,7 +2395,7 @@
       "conceded": 1,
       "ownGoals": 0
     },
-    "URY": {
+    "URU": {
       "scored": 1,
       "conceded": 1,
       "ownGoals": 0
