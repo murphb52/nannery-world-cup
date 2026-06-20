@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-20T15:07:02.477Z",
+  "lastUpdated": "2026-06-20T17:04:42.844Z",
   "matches": [
     {
       "id": 537327,
@@ -1668,15 +1668,30 @@
     "Group F": [
       {
         "teamId": "SWE",
-        "played": 1,
+        "played": 2,
         "won": 1,
-        "drawn": 0,
+        "drawn": 1,
         "lost": 0,
         "goalsFor": 5,
         "goalsAgainst": 1,
         "goalDiff": 4,
-        "points": 3,
+        "points": 4,
         "yellowCards": 0,
+        "redCards": 0,
+        "eliminated": false,
+        "eliminatedAt": null
+      },
+      {
+        "teamId": "NED",
+        "played": 2,
+        "won": 0,
+        "drawn": 2,
+        "lost": 0,
+        "goalsFor": 2,
+        "goalsAgainst": 2,
+        "goalDiff": 0,
+        "points": 2,
+        "yellowCards": 3,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -1692,21 +1707,6 @@
         "goalDiff": 0,
         "points": 1,
         "yellowCards": 0,
-        "redCards": 0,
-        "eliminated": false,
-        "eliminatedAt": null
-      },
-      {
-        "teamId": "NED",
-        "played": 1,
-        "won": 0,
-        "drawn": 1,
-        "lost": 0,
-        "goalsFor": 2,
-        "goalsAgainst": 2,
-        "goalDiff": 0,
-        "points": 1,
-        "yellowCards": 3,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
