@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-20T04:11:53.722Z",
+  "lastUpdated": "2026-06-20T08:03:06.568Z",
   "matches": [
     {
       "id": 537327,
@@ -414,7 +414,7 @@
       "awayScore": 1,
       "date": "2026-06-20T03:00:00Z",
       "venue": null,
-      "status": "PAUSED",
+      "status": "FINISHED",
       "winner": "AWAY_TEAM"
     },
     {
@@ -1582,8 +1582,8 @@
         "goalsAgainst": 4,
         "goalDiff": -2,
         "points": 3,
-        "yellowCards": 5,
-        "redCards": 0,
+        "yellowCards": 6,
+        "redCards": 1,
         "eliminated": false,
         "eliminatedAt": null
       },
@@ -1597,7 +1597,7 @@
         "goalsAgainst": 3,
         "goalDiff": -3,
         "points": 0,
-        "yellowCards": 1,
+        "yellowCards": 2,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -2150,15 +2150,15 @@
       "red": 0
     },
     "PAR": {
-      "yellow": 5,
-      "red": 0
+      "yellow": 6,
+      "red": 1
     },
     "USA": {
       "yellow": 4,
       "red": 0
     },
     "TUR": {
-      "yellow": 1,
+      "yellow": 2,
       "red": 0
     },
     "AUS": {
@@ -2282,7 +2282,7 @@
       "ownGoals": 0
     },
     "PAR": {
-      "scored": 1,
+      "scored": 2,
       "conceded": 4,
       "ownGoals": 0
     },
@@ -2323,7 +2323,7 @@
     },
     "TUR": {
       "scored": 0,
-      "conceded": 2,
+      "conceded": 3,
       "ownGoals": 0
     },
     "GER": {

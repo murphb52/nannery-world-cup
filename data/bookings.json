@@ -309,6 +309,26 @@
       "card": "YELLOW"
     }
   ],
+  "537347": [
+    {
+      "minute": 4,
+      "teamId": "PAR",
+      "player": "Matías Galarza",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 45,
+      "teamId": "PAR",
+      "player": "Miguel Almirón",
+      "card": "RED"
+    },
+    {
+      "minute": 71,
+      "teamId": "TUR",
+      "player": "Eren Elmali",
+      "card": "YELLOW"
+    }
+  ],
   "537348": [
     {
       "minute": 16,
