@@ -428,6 +428,26 @@
       "card": "YELLOW"
     }
   ],
+  "537359": [
+    {
+      "minute": 53,
+      "teamId": "SWE",
+      "player": "Gabriel Gudmundsson",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 75,
+      "teamId": "SWE",
+      "player": "Yasin Ayari",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 80,
+      "teamId": "SWE",
+      "player": "Lucas Bergvall",
+      "card": "YELLOW"
+    }
+  ],
   "537363": [
     {
       "minute": 13,
