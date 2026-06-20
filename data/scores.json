@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-19T23:38:00.025Z",
+  "lastUpdated": "2026-06-20T00:04:50.741Z",
   "matches": [
     {
       "id": 537327,
@@ -33,12 +33,12 @@
       "group": "GROUP_B",
       "homeTeamId": "CAN",
       "awayTeamId": "BIH",
-      "homeScore": 1,
-      "awayScore": 1,
+      "homeScore": null,
+      "awayScore": null,
       "date": "2026-06-12T19:00:00Z",
       "venue": null,
       "status": "FINISHED",
-      "winner": "DRAW"
+      "winner": null
     },
     {
       "id": 537345,
@@ -2263,13 +2263,13 @@
       "ownGoals": 0
     },
     "CAN": {
-      "scored": 7,
-      "conceded": 1,
+      "scored": 6,
+      "conceded": 0,
       "ownGoals": 0
     },
     "BIH": {
-      "scored": 2,
-      "conceded": 5,
+      "scored": 1,
+      "conceded": 4,
       "ownGoals": 0
     },
     "USA": {
