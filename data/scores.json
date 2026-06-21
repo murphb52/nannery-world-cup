@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-21T19:02:49.139Z",
+  "lastUpdated": "2026-06-21T20:53:41.328Z",
   "matches": [
     {
       "id": 537327,
@@ -110,7 +110,7 @@
       "stage": "GROUP",
       "group": "GROUP_E",
       "homeTeamId": "GER",
-      "awayTeamId": "CUR",
+      "awayTeamId": "CUW",
       "homeScore": 7,
       "awayScore": 1,
       "date": "2026-06-14T17:00:00Z",
@@ -188,7 +188,7 @@
       "stage": "GROUP",
       "group": "GROUP_H",
       "homeTeamId": "KSA",
-      "awayTeamId": "URY",
+      "awayTeamId": "URU",
       "homeScore": 1,
       "awayScore": 1,
       "date": "2026-06-15T22:00:00Z",
@@ -448,7 +448,7 @@
       "stage": "GROUP",
       "group": "GROUP_E",
       "homeTeamId": "ECU",
-      "awayTeamId": "CUR",
+      "awayTeamId": "CUW",
       "homeScore": 0,
       "awayScore": 0,
       "date": "2026-06-21T00:00:00Z",
@@ -475,7 +475,7 @@
       "group": "GROUP_H",
       "homeTeamId": "ESP",
       "awayTeamId": "KSA",
-      "homeScore": 5,
+      "homeScore": 4,
       "awayScore": 0,
       "date": "2026-06-21T16:00:00Z",
       "venue": null,
@@ -488,18 +488,18 @@
       "group": "GROUP_G",
       "homeTeamId": "BEL",
       "awayTeamId": "IRN",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 0,
       "date": "2026-06-21T19:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null
+      "status": "IN_PLAY",
+      "winner": "DRAW"
     },
     {
       "id": 537372,
       "stage": "GROUP",
       "group": "GROUP_H",
-      "homeTeamId": "URY",
+      "homeTeamId": "URU",
       "awayTeamId": "CPV",
       "homeScore": null,
       "awayScore": null,
@@ -720,7 +720,7 @@
       "id": 537356,
       "stage": "GROUP",
       "group": "GROUP_E",
-      "homeTeamId": "CUR",
+      "homeTeamId": "CUW",
       "awayTeamId": "CIV",
       "homeScore": null,
       "awayScore": null,
@@ -811,7 +811,7 @@
       "id": 537373,
       "stage": "GROUP",
       "group": "GROUP_H",
-      "homeTeamId": "URY",
+      "homeTeamId": "URU",
       "awayTeamId": "ESP",
       "homeScore": null,
       "awayScore": null,
@@ -2339,7 +2339,7 @@
       "conceded": 2,
       "ownGoals": 0
     },
-    "CUR": {
+    "CUW": {
       "scored": 1,
       "conceded": 7,
       "ownGoals": 0
@@ -2375,7 +2375,7 @@
       "ownGoals": 0
     },
     "ESP": {
-      "scored": 5,
+      "scored": 4,
       "conceded": 0,
       "ownGoals": 0
     },
@@ -2396,10 +2396,10 @@
     },
     "KSA": {
       "scored": 1,
-      "conceded": 6,
+      "conceded": 5,
       "ownGoals": 0
     },
-    "URY": {
+    "URU": {
       "scored": 1,
       "conceded": 1,
       "ownGoals": 0
