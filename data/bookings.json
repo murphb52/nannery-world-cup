@@ -544,6 +544,20 @@
       "card": "YELLOW"
     }
   ],
+  "537371": [
+    {
+      "minute": 30,
+      "teamId": "KSA",
+      "player": "Salem Al-Dawsari",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 60,
+      "teamId": "KSA",
+      "player": "Mohamed Kanno",
+      "card": "YELLOW"
+    }
+  ],
   "537391": [],
   "537392": [
     {

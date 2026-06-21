@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-21T17:08:04.701Z",
+  "lastUpdated": "2026-06-21T19:02:49.139Z",
   "matches": [
     {
       "id": 537327,
@@ -110,7 +110,7 @@
       "stage": "GROUP",
       "group": "GROUP_E",
       "homeTeamId": "GER",
-      "awayTeamId": "CUW",
+      "awayTeamId": "CUR",
       "homeScore": 7,
       "awayScore": 1,
       "date": "2026-06-14T17:00:00Z",
@@ -188,7 +188,7 @@
       "stage": "GROUP",
       "group": "GROUP_H",
       "homeTeamId": "KSA",
-      "awayTeamId": "URU",
+      "awayTeamId": "URY",
       "homeScore": 1,
       "awayScore": 1,
       "date": "2026-06-15T22:00:00Z",
@@ -448,7 +448,7 @@
       "stage": "GROUP",
       "group": "GROUP_E",
       "homeTeamId": "ECU",
-      "awayTeamId": "CUW",
+      "awayTeamId": "CUR",
       "homeScore": 0,
       "awayScore": 0,
       "date": "2026-06-21T00:00:00Z",
@@ -475,11 +475,11 @@
       "group": "GROUP_H",
       "homeTeamId": "ESP",
       "awayTeamId": "KSA",
-      "homeScore": 3,
+      "homeScore": 5,
       "awayScore": 0,
       "date": "2026-06-21T16:00:00Z",
       "venue": null,
-      "status": "PAUSED",
+      "status": "FINISHED",
       "winner": "HOME_TEAM"
     },
     {
@@ -499,7 +499,7 @@
       "id": 537372,
       "stage": "GROUP",
       "group": "GROUP_H",
-      "homeTeamId": "URU",
+      "homeTeamId": "URY",
       "awayTeamId": "CPV",
       "homeScore": null,
       "awayScore": null,
@@ -720,7 +720,7 @@
       "id": 537356,
       "stage": "GROUP",
       "group": "GROUP_E",
-      "homeTeamId": "CUW",
+      "homeTeamId": "CUR",
       "awayTeamId": "CIV",
       "homeScore": null,
       "awayScore": null,
@@ -811,7 +811,7 @@
       "id": 537373,
       "stage": "GROUP",
       "group": "GROUP_H",
-      "homeTeamId": "URU",
+      "homeTeamId": "URY",
       "awayTeamId": "ESP",
       "homeScore": null,
       "awayScore": null,
@@ -1729,6 +1729,36 @@
     ],
     "Group G": [
       {
+        "teamId": "IRN",
+        "played": 2,
+        "won": 0,
+        "drawn": 2,
+        "lost": 0,
+        "goalsFor": 2,
+        "goalsAgainst": 2,
+        "goalDiff": 0,
+        "points": 2,
+        "yellowCards": 1,
+        "redCards": 0,
+        "eliminated": false,
+        "eliminatedAt": null
+      },
+      {
+        "teamId": "BEL",
+        "played": 2,
+        "won": 0,
+        "drawn": 2,
+        "lost": 0,
+        "goalsFor": 1,
+        "goalsAgainst": 1,
+        "goalDiff": 0,
+        "points": 2,
+        "yellowCards": 2,
+        "redCards": 0,
+        "eliminated": false,
+        "eliminatedAt": null
+      },
+      {
         "teamId": "NZL",
         "played": 1,
         "won": 0,
@@ -1739,36 +1769,6 @@
         "goalDiff": 0,
         "points": 1,
         "yellowCards": 0,
-        "redCards": 0,
-        "eliminated": false,
-        "eliminatedAt": null
-      },
-      {
-        "teamId": "IRN",
-        "played": 1,
-        "won": 0,
-        "drawn": 1,
-        "lost": 0,
-        "goalsFor": 2,
-        "goalsAgainst": 2,
-        "goalDiff": 0,
-        "points": 1,
-        "yellowCards": 1,
-        "redCards": 0,
-        "eliminated": false,
-        "eliminatedAt": null
-      },
-      {
-        "teamId": "BEL",
-        "played": 1,
-        "won": 0,
-        "drawn": 1,
-        "lost": 0,
-        "goalsFor": 1,
-        "goalsAgainst": 1,
-        "goalDiff": 0,
-        "points": 1,
-        "yellowCards": 2,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -1796,9 +1796,9 @@
         "won": 1,
         "drawn": 1,
         "lost": 0,
-        "goalsFor": 3,
+        "goalsFor": 4,
         "goalsAgainst": 0,
-        "goalDiff": 3,
+        "goalDiff": 4,
         "points": 4,
         "yellowCards": 1,
         "redCards": 0,
@@ -1827,10 +1827,10 @@
         "drawn": 1,
         "lost": 1,
         "goalsFor": 1,
-        "goalsAgainst": 4,
-        "goalDiff": -3,
+        "goalsAgainst": 5,
+        "goalDiff": -4,
         "points": 1,
-        "yellowCards": 1,
+        "yellowCards": 3,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -2210,7 +2210,7 @@
       "red": 0
     },
     "KSA": {
-      "yellow": 1,
+      "yellow": 3,
       "red": 0
     },
     "IRQ": {
@@ -2339,7 +2339,7 @@
       "conceded": 2,
       "ownGoals": 0
     },
-    "CUW": {
+    "CUR": {
       "scored": 1,
       "conceded": 7,
       "ownGoals": 0
@@ -2375,7 +2375,7 @@
       "ownGoals": 0
     },
     "ESP": {
-      "scored": 0,
+      "scored": 5,
       "conceded": 0,
       "ownGoals": 0
     },
@@ -2396,10 +2396,10 @@
     },
     "KSA": {
       "scored": 1,
-      "conceded": 1,
+      "conceded": 6,
       "ownGoals": 0
     },
-    "URU": {
+    "URY": {
       "scored": 1,
       "conceded": 1,
       "ownGoals": 0
