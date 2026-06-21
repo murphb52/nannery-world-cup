@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-21T07:01:26.129Z",
+  "lastUpdated": "2026-06-21T17:08:04.701Z",
   "matches": [
     {
       "id": 537327,
@@ -475,12 +475,12 @@
       "group": "GROUP_H",
       "homeTeamId": "ESP",
       "awayTeamId": "KSA",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 3,
+      "awayScore": 0,
       "date": "2026-06-21T16:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null
+      "status": "PAUSED",
+      "winner": "HOME_TEAM"
     },
     {
       "id": 537365,
@@ -1791,6 +1791,21 @@
     ],
     "Group H": [
       {
+        "teamId": "ESP",
+        "played": 2,
+        "won": 1,
+        "drawn": 1,
+        "lost": 0,
+        "goalsFor": 3,
+        "goalsAgainst": 0,
+        "goalDiff": 3,
+        "points": 4,
+        "yellowCards": 1,
+        "redCards": 0,
+        "eliminated": false,
+        "eliminatedAt": null
+      },
+      {
         "teamId": "URU",
         "played": 1,
         "won": 0,
@@ -1807,28 +1822,13 @@
       },
       {
         "teamId": "KSA",
-        "played": 1,
+        "played": 2,
         "won": 0,
         "drawn": 1,
-        "lost": 0,
+        "lost": 1,
         "goalsFor": 1,
-        "goalsAgainst": 1,
-        "goalDiff": 0,
-        "points": 1,
-        "yellowCards": 1,
-        "redCards": 0,
-        "eliminated": false,
-        "eliminatedAt": null
-      },
-      {
-        "teamId": "ESP",
-        "played": 1,
-        "won": 0,
-        "drawn": 1,
-        "lost": 0,
-        "goalsFor": 0,
-        "goalsAgainst": 0,
-        "goalDiff": 0,
+        "goalsAgainst": 4,
+        "goalDiff": -3,
         "points": 1,
         "yellowCards": 1,
         "redCards": 0,
