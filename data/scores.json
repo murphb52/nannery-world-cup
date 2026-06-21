@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-20T23:14:55.170Z",
+  "lastUpdated": "2026-06-21T00:02:12.163Z",
   "matches": [
     {
       "id": 537327,
@@ -1636,14 +1636,14 @@
       },
       {
         "teamId": "ECU",
-        "played": 1,
+        "played": 2,
         "won": 0,
-        "drawn": 0,
+        "drawn": 1,
         "lost": 1,
         "goalsFor": 0,
         "goalsAgainst": 1,
         "goalDiff": -1,
-        "points": 0,
+        "points": 1,
         "yellowCards": 1,
         "redCards": 0,
         "eliminated": false,
@@ -1651,14 +1651,14 @@
       },
       {
         "teamId": "CUW",
-        "played": 1,
+        "played": 2,
         "won": 0,
-        "drawn": 0,
+        "drawn": 1,
         "lost": 1,
         "goalsFor": 1,
         "goalsAgainst": 7,
         "goalDiff": -6,
-        "points": 0,
+        "points": 1,
         "yellowCards": 0,
         "redCards": 0,
         "eliminated": false,
