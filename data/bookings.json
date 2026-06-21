@@ -401,6 +401,44 @@
     }
   ],
   "537353": [],
+  "537354": [
+    {
+      "minute": 38,
+      "teamId": "ECU",
+      "player": "Jordy Alcívar",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 39,
+      "teamId": "CUW",
+      "player": "Leandro Bacuna",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 53,
+      "teamId": "CUW",
+      "player": "Juninho Bacuna",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 56,
+      "teamId": "CUW",
+      "player": "Livano Comenencia",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 75,
+      "teamId": "CUW",
+      "player": "Juriën Gaari",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 90,
+      "teamId": "CUW",
+      "player": "Gervane Kastaneer",
+      "card": "YELLOW"
+    }
+  ],
   "537357": [
     {
       "minute": 61,
@@ -449,6 +487,7 @@
       "card": "YELLOW"
     }
   ],
+  "537360": [],
   "537363": [
     {
       "minute": 13,
