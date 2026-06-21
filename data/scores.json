@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-21T20:53:41.328Z",
+  "lastUpdated": "2026-06-21T22:18:31.044Z",
   "matches": [
     {
       "id": 537327,
@@ -33,12 +33,12 @@
       "group": "GROUP_B",
       "homeTeamId": "CAN",
       "awayTeamId": "BIH",
-      "homeScore": 1,
-      "awayScore": 1,
+      "homeScore": null,
+      "awayScore": null,
       "date": "2026-06-12T19:00:00Z",
       "venue": null,
       "status": "FINISHED",
-      "winner": "DRAW"
+      "winner": null
     },
     {
       "id": 537345,
@@ -188,7 +188,7 @@
       "stage": "GROUP",
       "group": "GROUP_H",
       "homeTeamId": "KSA",
-      "awayTeamId": "URU",
+      "awayTeamId": "URY",
       "homeScore": 1,
       "awayScore": 1,
       "date": "2026-06-15T22:00:00Z",
@@ -492,21 +492,21 @@
       "awayScore": 0,
       "date": "2026-06-21T19:00:00Z",
       "venue": null,
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "winner": "DRAW"
     },
     {
       "id": 537372,
       "stage": "GROUP",
       "group": "GROUP_H",
-      "homeTeamId": "URU",
+      "homeTeamId": "URY",
       "awayTeamId": "CPV",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 0,
       "date": "2026-06-21T22:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null
+      "status": "IN_PLAY",
+      "winner": "DRAW"
     },
     {
       "id": 537366,
@@ -811,7 +811,7 @@
       "id": 537373,
       "stage": "GROUP",
       "group": "GROUP_H",
-      "homeTeamId": "URU",
+      "homeTeamId": "URY",
       "awayTeamId": "ESP",
       "homeScore": null,
       "awayScore": null,
@@ -1738,7 +1738,7 @@
         "goalsAgainst": 2,
         "goalDiff": 0,
         "points": 2,
-        "yellowCards": 1,
+        "yellowCards": 2,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -1753,8 +1753,8 @@
         "goalsAgainst": 1,
         "goalDiff": 0,
         "points": 2,
-        "yellowCards": 2,
-        "redCards": 0,
+        "yellowCards": 3,
+        "redCards": 1,
         "eliminated": false,
         "eliminatedAt": null
       },
@@ -1807,15 +1807,30 @@
       },
       {
         "teamId": "URU",
-        "played": 1,
+        "played": 2,
         "won": 0,
-        "drawn": 1,
+        "drawn": 2,
         "lost": 0,
         "goalsFor": 1,
         "goalsAgainst": 1,
         "goalDiff": 0,
-        "points": 1,
+        "points": 2,
         "yellowCards": 0,
+        "redCards": 0,
+        "eliminated": false,
+        "eliminatedAt": null
+      },
+      {
+        "teamId": "CPV",
+        "played": 2,
+        "won": 0,
+        "drawn": 2,
+        "lost": 0,
+        "goalsFor": 0,
+        "goalsAgainst": 0,
+        "goalDiff": 0,
+        "points": 2,
+        "yellowCards": 1,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -1831,21 +1846,6 @@
         "goalDiff": -4,
         "points": 1,
         "yellowCards": 3,
-        "redCards": 0,
-        "eliminated": false,
-        "eliminatedAt": null
-      },
-      {
-        "teamId": "CPV",
-        "played": 1,
-        "won": 0,
-        "drawn": 1,
-        "lost": 0,
-        "goalsFor": 0,
-        "goalsAgainst": 0,
-        "goalDiff": 0,
-        "points": 1,
-        "yellowCards": 1,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -2194,11 +2194,11 @@
       "red": 0
     },
     "BEL": {
-      "yellow": 2,
-      "red": 0
+      "yellow": 3,
+      "red": 1
     },
     "IRN": {
-      "yellow": 1,
+      "yellow": 2,
       "red": 0
     },
     "CPV": {
@@ -2275,13 +2275,13 @@
       "ownGoals": 0
     },
     "CAN": {
-      "scored": 7,
-      "conceded": 1,
+      "scored": 6,
+      "conceded": 0,
       "ownGoals": 0
     },
     "BIH": {
-      "scored": 2,
-      "conceded": 5,
+      "scored": 1,
+      "conceded": 4,
       "ownGoals": 0
     },
     "USA": {
@@ -2399,7 +2399,7 @@
       "conceded": 5,
       "ownGoals": 0
     },
-    "URU": {
+    "URY": {
       "scored": 1,
       "conceded": 1,
       "ownGoals": 0

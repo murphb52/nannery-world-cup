@@ -522,6 +522,26 @@
       "card": "YELLOW"
     }
   ],
+  "537365": [
+    {
+      "minute": 3,
+      "teamId": "BEL",
+      "player": "Romelu Lukaku",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 33,
+      "teamId": "IRN",
+      "player": "Saeid Ezatolahi",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 66,
+      "teamId": "BEL",
+      "player": "Nathan Ngoy",
+      "card": "RED"
+    }
+  ],
   "537369": [
     {
       "minute": 16,
