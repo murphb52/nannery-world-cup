@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-21T00:02:12.163Z",
+  "lastUpdated": "2026-06-21T01:59:38.984Z",
   "matches": [
     {
       "id": 537327,
@@ -449,12 +449,12 @@
       "group": "GROUP_E",
       "homeTeamId": "ECU",
       "awayTeamId": "CUW",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 0,
       "date": "2026-06-21T00:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null
+      "status": "IN_PLAY",
+      "winner": "DRAW"
     },
     {
       "id": 537360,
