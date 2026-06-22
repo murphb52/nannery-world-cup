@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-22T16:12:17.001Z",
+  "lastUpdated": "2026-06-22T19:54:24.870Z",
   "matches": [
     {
       "id": 537327,
@@ -527,12 +527,12 @@
       "group": "GROUP_J",
       "homeTeamId": "ARG",
       "awayTeamId": "AUT",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 2,
+      "awayScore": 0,
       "date": "2026-06-22T17:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null
+      "status": "FINISHED",
+      "winner": "HOME_TEAM"
     },
     {
       "id": 537393,
@@ -1916,30 +1916,30 @@
     "Group J": [
       {
         "teamId": "ARG",
-        "played": 1,
-        "won": 1,
+        "played": 2,
+        "won": 2,
         "drawn": 0,
         "lost": 0,
-        "goalsFor": 3,
+        "goalsFor": 5,
         "goalsAgainst": 0,
-        "goalDiff": 3,
-        "points": 3,
-        "yellowCards": 0,
+        "goalDiff": 5,
+        "points": 6,
+        "yellowCards": 2,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
       },
       {
         "teamId": "AUT",
-        "played": 1,
+        "played": 2,
         "won": 1,
         "drawn": 0,
-        "lost": 0,
+        "lost": 1,
         "goalsFor": 3,
-        "goalsAgainst": 1,
-        "goalDiff": 2,
+        "goalsAgainst": 3,
+        "goalDiff": 0,
         "points": 3,
-        "yellowCards": 1,
+        "yellowCards": 3,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -2226,7 +2226,11 @@
       "red": 0
     },
     "AUT": {
-      "yellow": 1,
+      "yellow": 3,
+      "red": 0
+    },
+    "ARG": {
+      "yellow": 2,
       "red": 0
     },
     "POR": {
@@ -2443,7 +2447,7 @@
       "ownGoals": 0
     },
     "ARG": {
-      "scored": 3,
+      "scored": 5,
       "conceded": 0,
       "ownGoals": 0
     },
@@ -2454,7 +2458,7 @@
     },
     "AUT": {
       "scored": 3,
-      "conceded": 1,
+      "conceded": 3,
       "ownGoals": 0
     },
     "JOR": {

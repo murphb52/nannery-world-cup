@@ -642,6 +642,32 @@
       "card": "YELLOW"
     }
   ],
+  "537399": [
+    {
+      "minute": 40,
+      "teamId": "AUT",
+      "player": "Stefan Posch",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 76,
+      "teamId": "ARG",
+      "player": "Facundo Medina",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 76,
+      "teamId": "AUT",
+      "player": "Konrad Laimer",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 90,
+      "teamId": "ARG",
+      "player": "Leandro Paredes",
+      "card": "YELLOW"
+    }
+  ],
   "537403": [
     {
       "minute": 13,
