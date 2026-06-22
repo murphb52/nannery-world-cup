@@ -542,6 +542,26 @@
       "card": "RED"
     }
   ],
+  "537366": [
+    {
+      "minute": 17,
+      "teamId": "EGY",
+      "player": "Mohanad Lashin",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 20,
+      "teamId": "NZL",
+      "player": "Sarpreet Singh",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 34,
+      "teamId": "NZL",
+      "player": "Callum McCowatt",
+      "card": "YELLOW"
+    }
+  ],
   "537369": [
     {
       "minute": 16,
@@ -575,6 +595,32 @@
       "minute": 60,
       "teamId": "KSA",
       "player": "Mohamed Kanno",
+      "card": "YELLOW"
+    }
+  ],
+  "537372": [
+    {
+      "minute": 5,
+      "teamId": "CPV",
+      "player": "Sidny Lopes Cabral",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 20,
+      "teamId": "URU",
+      "player": "Rodrigo Bentancur",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 58,
+      "teamId": "URU",
+      "player": "Mathías Olivera",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 90,
+      "teamId": "CPV",
+      "player": "Diney Borges",
       "card": "YELLOW"
     }
   ],
