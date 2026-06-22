@@ -37,7 +37,7 @@
   { "id": "ESP", "name": "Spain", "group": "H", "flag": "https://flagcdn.com/w80/es.png" },
   { "id": "CPV", "name": "Cape Verde", "group": "H", "flag": "https://flagcdn.com/w80/cv.png" },
   { "id": "KSA", "name": "Saudi Arabia", "group": "H", "flag": "https://flagcdn.com/w80/sa.png" },
-  { "id": "URY", "name": "Uruguay", "group": "H", "flag": "https://flagcdn.com/w80/uy.png" },
+  { "id": "URU", "name": "Uruguay", "group": "H", "flag": "https://flagcdn.com/w80/uy.png" },
 
   { "id": "FRA", "name": "France", "group": "I", "flag": "https://flagcdn.com/w80/fr.png" },
   { "id": "SEN", "name": "Senegal", "group": "I", "flag": "https://flagcdn.com/w80/sn.png" },
