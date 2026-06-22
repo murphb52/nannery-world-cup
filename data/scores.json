@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-22T11:15:43.816Z",
+  "lastUpdated": "2026-06-22T16:12:17.001Z",
   "matches": [
     {
       "id": 537327,
@@ -33,12 +33,12 @@
       "group": "GROUP_B",
       "homeTeamId": "CAN",
       "awayTeamId": "BIH",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 1,
+      "awayScore": 1,
       "date": "2026-06-12T19:00:00Z",
       "venue": null,
       "status": "FINISHED",
-      "winner": null
+      "winner": "DRAW"
     },
     {
       "id": 537345,
@@ -188,7 +188,7 @@
       "stage": "GROUP",
       "group": "GROUP_H",
       "homeTeamId": "KSA",
-      "awayTeamId": "URY",
+      "awayTeamId": "URU",
       "homeScore": 1,
       "awayScore": 1,
       "date": "2026-06-15T22:00:00Z",
@@ -499,7 +499,7 @@
       "id": 537372,
       "stage": "GROUP",
       "group": "GROUP_H",
-      "homeTeamId": "URY",
+      "homeTeamId": "URU",
       "awayTeamId": "CPV",
       "homeScore": 2,
       "awayScore": 2,
@@ -811,7 +811,7 @@
       "id": 537373,
       "stage": "GROUP",
       "group": "GROUP_H",
-      "homeTeamId": "URY",
+      "homeTeamId": "URU",
       "awayTeamId": "ESP",
       "homeScore": null,
       "awayScore": null,
@@ -2283,13 +2283,13 @@
       "ownGoals": 0
     },
     "CAN": {
-      "scored": 6,
-      "conceded": 0,
+      "scored": 7,
+      "conceded": 1,
       "ownGoals": 0
     },
     "BIH": {
-      "scored": 1,
-      "conceded": 4,
+      "scored": 2,
+      "conceded": 5,
       "ownGoals": 0
     },
     "USA": {
@@ -2407,7 +2407,7 @@
       "conceded": 5,
       "ownGoals": 0
     },
-    "URY": {
+    "URU": {
       "scored": 3,
       "conceded": 3,
       "ownGoals": 0
