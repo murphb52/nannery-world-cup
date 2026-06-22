@@ -1537,8 +1537,8 @@
         "points": 0,
         "yellowCards": 4,
         "redCards": 0,
-        "eliminated": false,
-        "eliminatedAt": null
+        "eliminated": true,
+        "eliminatedAt": "2026-06-20T00:30:00Z"
       }
     ],
     "Group D": [

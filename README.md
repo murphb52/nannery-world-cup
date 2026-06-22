@@ -53,6 +53,33 @@ Scores, standings, and prize stats are fetched automatically from [football-data
 
 The `fetch-scores.yml` GitHub Actions workflow runs every 30 minutes during the tournament (11 June – 19 July 2026) and daily otherwise. When the data changes it commits and explicitly triggers the Pages deploy (`gh workflow run deploy.yml`), since pushes made with `GITHUB_TOKEN` don't fire `on: push` workflows. The whole pipeline is free: football-data.org free tier covers the World Cup, and GitHub Actions/Pages are free for public repos.
 
+### Team ID gotcha
+
+Team IDs must match the **TLA** (three-letter code) returned by the football-data.org API, because `scores.json` is generated from those values. The static files that must stay in sync are:
+
+| File | Purpose |
+|------|---------|
+| `data/teams.json` | `id` field on each team object |
+| `data/draw.json` | keys in the draw map |
+| `data/nannery/draw.json` | keys in the draw map |
+| `data/lms/draw.json` | keys in the draw map |
+
+If a team's stats show as all-zeros in the group table, it's almost certainly an ID mismatch — the `GroupTable` component looks up standings by exact `teamId`. Cross-check the team's TLA in the API response (or in `data/scores.json`) against the `id` in `teams.json`.
+
+Example: Uruguay's ISO code is `URY` but the API TLA is `URU`. Using `URY` in the static files caused the standings lookup to silently return `undefined` and render 0 for every stat.
+
+### Manual elimination overrides
+
+The auto-detection in `fetch-scores.js` only marks a team as eliminated once **their entire group has finished**. For teams that are mathematically out before their final group game (e.g. two losses, zero points), add them to the `MANUAL_ELIMINATIONS` map at the top of `scripts/fetch-scores.js`:
+
+```js
+const MANUAL_ELIMINATIONS = {
+  HAI: '2026-06-20T00:30:00Z', // out after two losses; Group C still had one game left
+}
+```
+
+The date should be the ISO timestamp of the match that confirmed elimination. This map is merged into the computed eliminations on every fetch run, so it survives future data refreshes.
+
 ## Tech Stack
 
 - **React 19** + **TypeScript** — component framework
