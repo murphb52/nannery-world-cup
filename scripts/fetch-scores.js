@@ -11,6 +11,12 @@ const bookingsPath = path.join(dataDir, 'bookings.json')
 const API_KEY = process.env.FOOTBALL_DATA_API_KEY
 const COMPETITION_ID = 2000 // FIFA World Cup on football-data.org
 
+// Teams mathematically eliminated before their group finishes (0 pts, 2 losses in 3).
+// The auto-detection only fires when a whole group completes, so we hardcode these.
+const MANUAL_ELIMINATIONS = {
+  HAI: '2026-06-20T00:30:00Z', // Haiti out after two losses (0–1 vs SCO, 0–3 vs BRA)
+}
+
 if (!API_KEY) {
   console.error('FOOTBALL_DATA_API_KEY is not set')
   process.exit(1)
@@ -68,7 +74,7 @@ async function main() {
     bookings = existingBookings
   }
   const { cards, groupCards, firstRedCard } = aggregateCards(matches, bookings)
-  const eliminations = computeEliminations(matches)
+  const eliminations = { ...computeEliminations(matches), ...MANUAL_ELIMINATIONS }
 
   const standings = {}
   for (const group of (standingsData.standings ?? [])) {
