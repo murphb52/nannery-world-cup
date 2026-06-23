@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-23T17:27:02.313Z",
+  "lastUpdated": "2026-06-23T19:28:43.040Z",
   "matches": [
     {
       "id": 537327,
@@ -579,11 +579,11 @@
       "group": "GROUP_K",
       "homeTeamId": "POR",
       "awayTeamId": "UZB",
-      "homeScore": 2,
+      "homeScore": 5,
       "awayScore": 0,
       "date": "2026-06-23T17:00:00Z",
       "venue": null,
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "winner": "HOME_TEAM"
     },
     {
@@ -967,7 +967,7 @@
       "id": 537415,
       "stage": "R32",
       "group": null,
-      "homeTeamId": "GER",
+      "homeTeamId": null,
       "awayTeamId": null,
       "homeScore": null,
       "awayScore": null,
@@ -1019,7 +1019,7 @@
       "id": 537425,
       "stage": "R32",
       "group": null,
-      "homeTeamId": "MEX",
+      "homeTeamId": null,
       "awayTeamId": null,
       "homeScore": null,
       "awayScore": null,
@@ -1058,7 +1058,7 @@
       "id": 537421,
       "stage": "R32",
       "group": null,
-      "homeTeamId": "USA",
+      "homeTeamId": null,
       "awayTeamId": null,
       "homeScore": null,
       "awayScore": null,
@@ -1977,6 +1977,21 @@
     ],
     "Group K": [
       {
+        "teamId": "POR",
+        "played": 2,
+        "won": 1,
+        "drawn": 1,
+        "lost": 0,
+        "goalsFor": 6,
+        "goalsAgainst": 1,
+        "goalDiff": 5,
+        "points": 4,
+        "yellowCards": 4,
+        "redCards": 0,
+        "eliminated": false,
+        "eliminatedAt": null
+      },
+      {
         "teamId": "COL",
         "played": 1,
         "won": 1,
@@ -1987,21 +2002,6 @@
         "goalDiff": 2,
         "points": 3,
         "yellowCards": 1,
-        "redCards": 0,
-        "eliminated": false,
-        "eliminatedAt": null
-      },
-      {
-        "teamId": "POR",
-        "played": 2,
-        "won": 0,
-        "drawn": 2,
-        "lost": 0,
-        "goalsFor": 1,
-        "goalsAgainst": 1,
-        "goalDiff": 0,
-        "points": 2,
-        "yellowCards": 3,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -2025,13 +2025,13 @@
         "teamId": "UZB",
         "played": 2,
         "won": 0,
-        "drawn": 1,
-        "lost": 1,
+        "drawn": 0,
+        "lost": 2,
         "goalsFor": 1,
-        "goalsAgainst": 3,
-        "goalDiff": -2,
-        "points": 1,
-        "yellowCards": 1,
+        "goalsAgainst": 8,
+        "goalDiff": -7,
+        "points": 0,
+        "yellowCards": 2,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -2242,7 +2242,7 @@
       "red": 0
     },
     "POR": {
-      "yellow": 3,
+      "yellow": 4,
       "red": 0
     },
     "COD": {
@@ -2254,7 +2254,7 @@
       "red": 0
     },
     "UZB": {
-      "yellow": 1,
+      "yellow": 2,
       "red": 0
     },
     "GHA": {
@@ -2475,7 +2475,7 @@
       "ownGoals": 0
     },
     "POR": {
-      "scored": 1,
+      "scored": 6,
       "conceded": 1,
       "ownGoals": 0
     },
@@ -2506,7 +2506,7 @@
     },
     "UZB": {
       "scored": 1,
-      "conceded": 3,
+      "conceded": 8,
       "ownGoals": 0
     },
     "COL": {
