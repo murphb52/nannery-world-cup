@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-23T04:01:48.052Z",
+  "lastUpdated": "2026-06-23T08:04:07.275Z",
   "matches": [
     {
       "id": 537327,
@@ -567,11 +567,11 @@
       "homeTeamId": "JOR",
       "awayTeamId": "ALG",
       "homeScore": 1,
-      "awayScore": 0,
+      "awayScore": 2,
       "date": "2026-06-23T03:00:00Z",
       "venue": null,
-      "status": "PAUSED",
-      "winner": "HOME_TEAM"
+      "status": "FINISHED",
+      "winner": "AWAY_TEAM"
     },
     {
       "id": 537405,
@@ -967,7 +967,7 @@
       "id": 537415,
       "stage": "R32",
       "group": null,
-      "homeTeamId": null,
+      "homeTeamId": "GER",
       "awayTeamId": null,
       "homeScore": null,
       "awayScore": null,
@@ -1019,7 +1019,7 @@
       "id": 537425,
       "stage": "R32",
       "group": null,
-      "homeTeamId": null,
+      "homeTeamId": "MEX",
       "awayTeamId": null,
       "homeScore": null,
       "awayScore": null,
@@ -1058,7 +1058,7 @@
       "id": 537421,
       "stage": "R32",
       "group": null,
-      "homeTeamId": null,
+      "homeTeamId": "USA",
       "awayTeamId": null,
       "homeScore": null,
       "awayScore": null,
@@ -1945,31 +1945,31 @@
         "eliminatedAt": null
       },
       {
-        "teamId": "JOR",
+        "teamId": "ALG",
         "played": 2,
         "won": 1,
         "drawn": 0,
         "lost": 1,
         "goalsFor": 2,
-        "goalsAgainst": 3,
-        "goalDiff": -1,
+        "goalsAgainst": 4,
+        "goalDiff": -2,
         "points": 3,
-        "yellowCards": 0,
+        "yellowCards": 1,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
       },
       {
-        "teamId": "ALG",
+        "teamId": "JOR",
         "played": 2,
         "won": 0,
         "drawn": 0,
         "lost": 2,
-        "goalsFor": 0,
-        "goalsAgainst": 4,
-        "goalDiff": -4,
+        "goalsFor": 2,
+        "goalsAgainst": 5,
+        "goalDiff": -3,
         "points": 0,
-        "yellowCards": 0,
+        "yellowCards": 1,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -2233,6 +2233,14 @@
       "yellow": 2,
       "red": 0
     },
+    "ALG": {
+      "yellow": 1,
+      "red": 0
+    },
+    "JOR": {
+      "yellow": 1,
+      "red": 0
+    },
     "POR": {
       "yellow": 3,
       "red": 0
@@ -2452,8 +2460,8 @@
       "ownGoals": 0
     },
     "ALG": {
-      "scored": 0,
-      "conceded": 3,
+      "scored": 2,
+      "conceded": 4,
       "ownGoals": 0
     },
     "AUT": {
@@ -2462,8 +2470,8 @@
       "ownGoals": 0
     },
     "JOR": {
-      "scored": 1,
-      "conceded": 3,
+      "scored": 2,
+      "conceded": 5,
       "ownGoals": 0
     },
     "POR": {

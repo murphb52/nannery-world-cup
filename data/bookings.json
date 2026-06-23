@@ -677,6 +677,20 @@
       "card": "YELLOW"
     }
   ],
+  "537400": [
+    {
+      "minute": 44,
+      "teamId": "ALG",
+      "player": "Ramiz Zerrouki",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 64,
+      "teamId": "JOR",
+      "player": "Husam Abu Dahab",
+      "card": "YELLOW"
+    }
+  ],
   "537403": [
     {
       "minute": 13,
