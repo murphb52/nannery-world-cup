@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-23T08:04:07.275Z",
+  "lastUpdated": "2026-06-23T11:40:21.223Z",
   "matches": [
     {
       "id": 537327,
@@ -188,7 +188,7 @@
       "stage": "GROUP",
       "group": "GROUP_H",
       "homeTeamId": "KSA",
-      "awayTeamId": "URU",
+      "awayTeamId": "URY",
       "homeScore": 1,
       "awayScore": 1,
       "date": "2026-06-15T22:00:00Z",
@@ -499,7 +499,7 @@
       "id": 537372,
       "stage": "GROUP",
       "group": "GROUP_H",
-      "homeTeamId": "URU",
+      "homeTeamId": "URY",
       "awayTeamId": "CPV",
       "homeScore": 2,
       "awayScore": 2,
@@ -811,7 +811,7 @@
       "id": 537373,
       "stage": "GROUP",
       "group": "GROUP_H",
-      "homeTeamId": "URU",
+      "homeTeamId": "URY",
       "awayTeamId": "ESP",
       "homeScore": null,
       "awayScore": null,
@@ -967,7 +967,7 @@
       "id": 537415,
       "stage": "R32",
       "group": null,
-      "homeTeamId": "GER",
+      "homeTeamId": null,
       "awayTeamId": null,
       "homeScore": null,
       "awayScore": null,
@@ -1019,7 +1019,7 @@
       "id": 537425,
       "stage": "R32",
       "group": null,
-      "homeTeamId": "MEX",
+      "homeTeamId": null,
       "awayTeamId": null,
       "homeScore": null,
       "awayScore": null,
@@ -1058,7 +1058,7 @@
       "id": 537421,
       "stage": "R32",
       "group": null,
-      "homeTeamId": "USA",
+      "homeTeamId": null,
       "awayTeamId": null,
       "homeScore": null,
       "awayScore": null,
@@ -2419,7 +2419,7 @@
       "conceded": 5,
       "ownGoals": 0
     },
-    "URU": {
+    "URY": {
       "scored": 3,
       "conceded": 3,
       "ownGoals": 0
