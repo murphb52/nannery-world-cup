@@ -765,5 +765,19 @@
       "player": "Carlos Harvey",
       "card": "YELLOW"
     }
+  ],
+  "537411": [
+    {
+      "minute": 41,
+      "teamId": "ENG",
+      "player": "Declan Rice",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 60,
+      "teamId": "GHA",
+      "player": "Iñaki Williams",
+      "card": "YELLOW"
+    }
   ]
 }

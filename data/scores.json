@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-23T21:16:47.062Z",
+  "lastUpdated": "2026-06-23T22:48:00.120Z",
   "matches": [
     {
       "id": 537327,
@@ -596,7 +596,7 @@
       "awayScore": 0,
       "date": "2026-06-23T20:00:00Z",
       "venue": null,
-      "status": "LIVE",
+      "status": "FINISHED",
       "winner": "DRAW"
     },
     {
@@ -967,7 +967,7 @@
       "id": 537415,
       "stage": "R32",
       "group": null,
-      "homeTeamId": "GER",
+      "homeTeamId": null,
       "awayTeamId": null,
       "homeScore": null,
       "awayScore": null,
@@ -1019,7 +1019,7 @@
       "id": 537425,
       "stage": "R32",
       "group": null,
-      "homeTeamId": "MEX",
+      "homeTeamId": null,
       "awayTeamId": null,
       "homeScore": null,
       "awayScore": null,
@@ -1058,7 +1058,7 @@
       "id": 537421,
       "stage": "R32",
       "group": null,
-      "homeTeamId": "USA",
+      "homeTeamId": null,
       "awayTeamId": null,
       "homeScore": null,
       "awayScore": null,
@@ -2048,7 +2048,7 @@
         "goalsAgainst": 2,
         "goalDiff": 2,
         "points": 4,
-        "yellowCards": 0,
+        "yellowCards": 1,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -2063,7 +2063,7 @@
         "goalsAgainst": 0,
         "goalDiff": 1,
         "points": 4,
-        "yellowCards": 1,
+        "yellowCards": 2,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -2258,11 +2258,15 @@
       "red": 0
     },
     "GHA": {
-      "yellow": 1,
+      "yellow": 2,
       "red": 0
     },
     "PAN": {
       "yellow": 2,
+      "red": 0
+    },
+    "ENG": {
+      "yellow": 1,
       "red": 0
     }
   },
