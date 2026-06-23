@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-23T22:48:00.120Z",
+  "lastUpdated": "2026-06-23T23:52:19.509Z",
   "matches": [
     {
       "id": 537327,
@@ -605,12 +605,12 @@
       "group": "GROUP_L",
       "homeTeamId": "PAN",
       "awayTeamId": "CRO",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 0,
       "date": "2026-06-23T23:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null
+      "status": "LIVE",
+      "winner": "DRAW"
     },
     {
       "id": 537406,
@@ -2070,14 +2070,14 @@
       },
       {
         "teamId": "PAN",
-        "played": 1,
+        "played": 2,
         "won": 0,
-        "drawn": 0,
+        "drawn": 1,
         "lost": 1,
         "goalsFor": 0,
         "goalsAgainst": 1,
         "goalDiff": -1,
-        "points": 0,
+        "points": 1,
         "yellowCards": 2,
         "redCards": 0,
         "eliminated": false,
@@ -2085,14 +2085,14 @@
       },
       {
         "teamId": "CRO",
-        "played": 1,
+        "played": 2,
         "won": 0,
-        "drawn": 0,
+        "drawn": 1,
         "lost": 1,
         "goalsFor": 2,
         "goalsAgainst": 4,
         "goalDiff": -2,
-        "points": 0,
+        "points": 1,
         "yellowCards": 0,
         "redCards": 0,
         "eliminated": false,
