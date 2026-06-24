@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-24T18:19:25.771Z",
+  "lastUpdated": "2026-06-24T20:19:03.510Z",
   "matches": [
     {
       "id": 537327,
@@ -33,12 +33,12 @@
       "group": "GROUP_B",
       "homeTeamId": "CAN",
       "awayTeamId": "BIH",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 1,
+      "awayScore": 1,
       "date": "2026-06-12T19:00:00Z",
       "venue": null,
       "status": "FINISHED",
-      "winner": null
+      "winner": "DRAW"
     },
     {
       "id": 537345,
@@ -631,12 +631,12 @@
       "group": "GROUP_B",
       "homeTeamId": "SUI",
       "awayTeamId": "CAN",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 1,
+      "awayScore": 0,
       "date": "2026-06-24T19:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null
+      "status": "IN_PLAY",
+      "winner": "HOME_TEAM"
     },
     {
       "id": 537338,
@@ -644,12 +644,12 @@
       "group": "GROUP_B",
       "homeTeamId": "BIH",
       "awayTeamId": "QAT",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 2,
+      "awayScore": 1,
       "date": "2026-06-24T19:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null
+      "status": "IN_PLAY",
+      "winner": "HOME_TEAM"
     },
     {
       "id": 537344,
@@ -1420,14 +1420,14 @@
     "Group B": [
       {
         "teamId": "CAN",
-        "played": 2,
+        "played": 3,
         "won": 1,
-        "drawn": 1,
+        "drawn": 2,
         "lost": 0,
         "goalsFor": 7,
         "goalsAgainst": 1,
         "goalDiff": 6,
-        "points": 4,
+        "points": 5,
         "yellowCards": 3,
         "redCards": 0,
         "eliminated": false,
@@ -1435,14 +1435,14 @@
       },
       {
         "teamId": "SUI",
-        "played": 2,
+        "played": 3,
         "won": 1,
-        "drawn": 1,
+        "drawn": 2,
         "lost": 0,
         "goalsFor": 5,
         "goalsAgainst": 2,
         "goalDiff": 3,
-        "points": 4,
+        "points": 5,
         "yellowCards": 2,
         "redCards": 0,
         "eliminated": false,
@@ -1450,14 +1450,14 @@
       },
       {
         "teamId": "BIH",
-        "played": 2,
-        "won": 0,
+        "played": 3,
+        "won": 1,
         "drawn": 1,
         "lost": 1,
-        "goalsFor": 2,
-        "goalsAgainst": 5,
-        "goalDiff": -3,
-        "points": 1,
+        "goalsFor": 4,
+        "goalsAgainst": 6,
+        "goalDiff": -2,
+        "points": 4,
         "yellowCards": 5,
         "redCards": 1,
         "eliminated": false,
@@ -1465,13 +1465,13 @@
       },
       {
         "teamId": "QAT",
-        "played": 2,
+        "played": 3,
         "won": 0,
         "drawn": 1,
-        "lost": 1,
-        "goalsFor": 1,
-        "goalsAgainst": 7,
-        "goalDiff": -6,
+        "lost": 2,
+        "goalsFor": 2,
+        "goalsAgainst": 9,
+        "goalDiff": -7,
         "points": 1,
         "yellowCards": 3,
         "redCards": 2,
@@ -2303,13 +2303,13 @@
       "ownGoals": 0
     },
     "CAN": {
-      "scored": 6,
-      "conceded": 0,
+      "scored": 7,
+      "conceded": 1,
       "ownGoals": 0
     },
     "BIH": {
-      "scored": 1,
-      "conceded": 4,
+      "scored": 2,
+      "conceded": 5,
       "ownGoals": 0
     },
     "USA": {
