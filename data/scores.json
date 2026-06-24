@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-24T00:02:57.338Z",
+  "lastUpdated": "2026-06-24T04:47:32.698Z",
   "matches": [
     {
       "id": 537327,
@@ -188,7 +188,7 @@
       "stage": "GROUP",
       "group": "GROUP_H",
       "homeTeamId": "KSA",
-      "awayTeamId": "URU",
+      "awayTeamId": "URY",
       "homeScore": 1,
       "awayScore": 1,
       "date": "2026-06-15T22:00:00Z",
@@ -499,7 +499,7 @@
       "id": 537372,
       "stage": "GROUP",
       "group": "GROUP_H",
-      "homeTeamId": "URU",
+      "homeTeamId": "URY",
       "awayTeamId": "CPV",
       "homeScore": 2,
       "awayScore": 2,
@@ -606,11 +606,11 @@
       "homeTeamId": "PAN",
       "awayTeamId": "CRO",
       "homeScore": 0,
-      "awayScore": 0,
+      "awayScore": 1,
       "date": "2026-06-23T23:00:00Z",
       "venue": null,
-      "status": "PAUSED",
-      "winner": "DRAW"
+      "status": "FINISHED",
+      "winner": "AWAY_TEAM"
     },
     {
       "id": 537406,
@@ -618,12 +618,12 @@
       "group": "GROUP_K",
       "homeTeamId": "COL",
       "awayTeamId": "COD",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 1,
+      "awayScore": 0,
       "date": "2026-06-24T02:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null
+      "status": "FINISHED",
+      "winner": "HOME_TEAM"
     },
     {
       "id": 537337,
@@ -811,7 +811,7 @@
       "id": 537373,
       "stage": "GROUP",
       "group": "GROUP_H",
-      "homeTeamId": "URU",
+      "homeTeamId": "URY",
       "awayTeamId": "ESP",
       "homeScore": null,
       "awayScore": null,
@@ -1977,6 +1977,21 @@
     ],
     "Group K": [
       {
+        "teamId": "COL",
+        "played": 2,
+        "won": 2,
+        "drawn": 0,
+        "lost": 0,
+        "goalsFor": 4,
+        "goalsAgainst": 1,
+        "goalDiff": 3,
+        "points": 6,
+        "yellowCards": 3,
+        "redCards": 0,
+        "eliminated": false,
+        "eliminatedAt": null
+      },
+      {
         "teamId": "POR",
         "played": 2,
         "won": 1,
@@ -1992,31 +2007,16 @@
         "eliminatedAt": null
       },
       {
-        "teamId": "COL",
-        "played": 1,
-        "won": 1,
-        "drawn": 0,
-        "lost": 0,
-        "goalsFor": 3,
-        "goalsAgainst": 1,
-        "goalDiff": 2,
-        "points": 3,
-        "yellowCards": 1,
-        "redCards": 0,
-        "eliminated": false,
-        "eliminatedAt": null
-      },
-      {
         "teamId": "COD",
-        "played": 1,
+        "played": 2,
         "won": 0,
         "drawn": 1,
-        "lost": 0,
+        "lost": 1,
         "goalsFor": 1,
-        "goalsAgainst": 1,
-        "goalDiff": 0,
+        "goalsAgainst": 2,
+        "goalDiff": -1,
         "points": 1,
-        "yellowCards": 1,
+        "yellowCards": 2,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -2069,31 +2069,31 @@
         "eliminatedAt": null
       },
       {
-        "teamId": "PAN",
+        "teamId": "CRO",
         "played": 2,
-        "won": 0,
-        "drawn": 1,
+        "won": 1,
+        "drawn": 0,
         "lost": 1,
-        "goalsFor": 0,
-        "goalsAgainst": 1,
+        "goalsFor": 3,
+        "goalsAgainst": 4,
         "goalDiff": -1,
-        "points": 1,
-        "yellowCards": 2,
+        "points": 3,
+        "yellowCards": 1,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
       },
       {
-        "teamId": "CRO",
+        "teamId": "PAN",
         "played": 2,
         "won": 0,
-        "drawn": 1,
-        "lost": 1,
-        "goalsFor": 2,
-        "goalsAgainst": 4,
+        "drawn": 0,
+        "lost": 2,
+        "goalsFor": 0,
+        "goalsAgainst": 2,
         "goalDiff": -2,
-        "points": 1,
-        "yellowCards": 0,
+        "points": 0,
+        "yellowCards": 3,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -2246,11 +2246,11 @@
       "red": 0
     },
     "COD": {
-      "yellow": 1,
+      "yellow": 2,
       "red": 0
     },
     "COL": {
-      "yellow": 1,
+      "yellow": 3,
       "red": 0
     },
     "UZB": {
@@ -2262,10 +2262,14 @@
       "red": 0
     },
     "PAN": {
-      "yellow": 2,
+      "yellow": 3,
       "red": 0
     },
     "ENG": {
+      "yellow": 1,
+      "red": 0
+    },
+    "CRO": {
       "yellow": 1,
       "red": 0
     }
@@ -2423,7 +2427,7 @@
       "conceded": 5,
       "ownGoals": 0
     },
-    "URU": {
+    "URY": {
       "scored": 3,
       "conceded": 3,
       "ownGoals": 0
@@ -2485,7 +2489,7 @@
     },
     "COD": {
       "scored": 1,
-      "conceded": 1,
+      "conceded": 2,
       "ownGoals": 0
     },
     "ENG": {
@@ -2494,7 +2498,7 @@
       "ownGoals": 0
     },
     "CRO": {
-      "scored": 2,
+      "scored": 3,
       "conceded": 4,
       "ownGoals": 0
     },
@@ -2505,7 +2509,7 @@
     },
     "PAN": {
       "scored": 0,
-      "conceded": 1,
+      "conceded": 2,
       "ownGoals": 0
     },
     "UZB": {
@@ -2514,7 +2518,7 @@
       "ownGoals": 0
     },
     "COL": {
-      "scored": 3,
+      "scored": 4,
       "conceded": 1,
       "ownGoals": 0
     }

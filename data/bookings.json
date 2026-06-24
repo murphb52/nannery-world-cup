@@ -745,6 +745,26 @@
       "card": "YELLOW"
     }
   ],
+  "537406": [
+    {
+      "minute": 56,
+      "teamId": "COL",
+      "player": "Jhon Lucumí",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 90,
+      "teamId": "COD",
+      "player": "Charles Pickel",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 90,
+      "teamId": "COL",
+      "player": "Jefferson Lerma",
+      "card": "YELLOW"
+    }
+  ],
   "537409": [],
   "537410": [
     {
@@ -777,6 +797,20 @@
       "minute": 60,
       "teamId": "GHA",
       "player": "Iñaki Williams",
+      "card": "YELLOW"
+    }
+  ],
+  "537412": [
+    {
+      "minute": 61,
+      "teamId": "PAN",
+      "player": "Édgar Yoel Bárcenas",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 90,
+      "teamId": "CRO",
+      "player": "Petar Sucic",
       "card": "YELLOW"
     }
   ]
