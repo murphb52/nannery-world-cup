@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-24T16:25:44.389Z",
+  "lastUpdated": "2026-06-24T18:19:25.771Z",
   "matches": [
     {
       "id": 537327,
@@ -33,12 +33,12 @@
       "group": "GROUP_B",
       "homeTeamId": "CAN",
       "awayTeamId": "BIH",
-      "homeScore": 1,
-      "awayScore": 1,
+      "homeScore": null,
+      "awayScore": null,
       "date": "2026-06-12T19:00:00Z",
       "venue": null,
       "status": "FINISHED",
-      "winner": "DRAW"
+      "winner": null
     },
     {
       "id": 537345,
@@ -188,7 +188,7 @@
       "stage": "GROUP",
       "group": "GROUP_H",
       "homeTeamId": "KSA",
-      "awayTeamId": "URU",
+      "awayTeamId": "URY",
       "homeScore": 1,
       "awayScore": 1,
       "date": "2026-06-15T22:00:00Z",
@@ -499,7 +499,7 @@
       "id": 537372,
       "stage": "GROUP",
       "group": "GROUP_H",
-      "homeTeamId": "URU",
+      "homeTeamId": "URY",
       "awayTeamId": "CPV",
       "homeScore": 2,
       "awayScore": 2,
@@ -811,7 +811,7 @@
       "id": 537373,
       "stage": "GROUP",
       "group": "GROUP_H",
-      "homeTeamId": "URU",
+      "homeTeamId": "URY",
       "awayTeamId": "ESP",
       "homeScore": null,
       "awayScore": null,
@@ -967,7 +967,7 @@
       "id": 537415,
       "stage": "R32",
       "group": null,
-      "homeTeamId": "GER",
+      "homeTeamId": null,
       "awayTeamId": null,
       "homeScore": null,
       "awayScore": null,
@@ -1019,7 +1019,7 @@
       "id": 537425,
       "stage": "R32",
       "group": null,
-      "homeTeamId": "MEX",
+      "homeTeamId": null,
       "awayTeamId": null,
       "homeScore": null,
       "awayScore": null,
@@ -1058,7 +1058,7 @@
       "id": 537421,
       "stage": "R32",
       "group": null,
-      "homeTeamId": "USA",
+      "homeTeamId": null,
       "awayTeamId": null,
       "homeScore": null,
       "awayScore": null,
@@ -1123,7 +1123,7 @@
       "id": 537427,
       "stage": "R32",
       "group": null,
-      "homeTeamId": "ARG",
+      "homeTeamId": null,
       "awayTeamId": null,
       "homeScore": null,
       "awayScore": null,
@@ -2303,13 +2303,13 @@
       "ownGoals": 0
     },
     "CAN": {
-      "scored": 7,
-      "conceded": 1,
+      "scored": 6,
+      "conceded": 0,
       "ownGoals": 0
     },
     "BIH": {
-      "scored": 2,
-      "conceded": 5,
+      "scored": 1,
+      "conceded": 4,
       "ownGoals": 0
     },
     "USA": {
@@ -2427,7 +2427,7 @@
       "conceded": 5,
       "ownGoals": 0
     },
-    "URU": {
+    "URY": {
       "scored": 3,
       "conceded": 3,
       "ownGoals": 0
