@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-23T23:52:19.509Z",
+  "lastUpdated": "2026-06-24T00:02:57.338Z",
   "matches": [
     {
       "id": 537327,
@@ -609,7 +609,7 @@
       "awayScore": 0,
       "date": "2026-06-23T23:00:00Z",
       "venue": null,
-      "status": "LIVE",
+      "status": "PAUSED",
       "winner": "DRAW"
     },
     {
