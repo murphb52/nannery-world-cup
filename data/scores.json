@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-24T20:19:03.510Z",
+  "lastUpdated": "2026-06-24T21:54:45.391Z",
   "matches": [
     {
       "id": 537327,
@@ -188,7 +188,7 @@
       "stage": "GROUP",
       "group": "GROUP_H",
       "homeTeamId": "KSA",
-      "awayTeamId": "URY",
+      "awayTeamId": "URU",
       "homeScore": 1,
       "awayScore": 1,
       "date": "2026-06-15T22:00:00Z",
@@ -499,7 +499,7 @@
       "id": 537372,
       "stage": "GROUP",
       "group": "GROUP_H",
-      "homeTeamId": "URY",
+      "homeTeamId": "URU",
       "awayTeamId": "CPV",
       "homeScore": 2,
       "awayScore": 2,
@@ -631,11 +631,11 @@
       "group": "GROUP_B",
       "homeTeamId": "SUI",
       "awayTeamId": "CAN",
-      "homeScore": 1,
-      "awayScore": 0,
+      "homeScore": 2,
+      "awayScore": 1,
       "date": "2026-06-24T19:00:00Z",
       "venue": null,
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "winner": "HOME_TEAM"
     },
     {
@@ -644,11 +644,11 @@
       "group": "GROUP_B",
       "homeTeamId": "BIH",
       "awayTeamId": "QAT",
-      "homeScore": 2,
+      "homeScore": 3,
       "awayScore": 1,
       "date": "2026-06-24T19:00:00Z",
       "venue": null,
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "winner": "HOME_TEAM"
     },
     {
@@ -811,7 +811,7 @@
       "id": 537373,
       "stage": "GROUP",
       "group": "GROUP_H",
-      "homeTeamId": "URY",
+      "homeTeamId": "URU",
       "awayTeamId": "ESP",
       "homeScore": null,
       "awayScore": null,
@@ -1419,31 +1419,31 @@
     ],
     "Group B": [
       {
-        "teamId": "CAN",
+        "teamId": "SUI",
         "played": 3,
-        "won": 1,
-        "drawn": 2,
+        "won": 2,
+        "drawn": 1,
         "lost": 0,
         "goalsFor": 7,
-        "goalsAgainst": 1,
-        "goalDiff": 6,
-        "points": 5,
+        "goalsAgainst": 3,
+        "goalDiff": 4,
+        "points": 7,
         "yellowCards": 3,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
       },
       {
-        "teamId": "SUI",
+        "teamId": "CAN",
         "played": 3,
         "won": 1,
-        "drawn": 2,
-        "lost": 0,
-        "goalsFor": 5,
-        "goalsAgainst": 2,
-        "goalDiff": 3,
-        "points": 5,
-        "yellowCards": 2,
+        "drawn": 1,
+        "lost": 1,
+        "goalsFor": 8,
+        "goalsAgainst": 3,
+        "goalDiff": 5,
+        "points": 4,
+        "yellowCards": 5,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -1454,11 +1454,11 @@
         "won": 1,
         "drawn": 1,
         "lost": 1,
-        "goalsFor": 4,
+        "goalsFor": 5,
         "goalsAgainst": 6,
-        "goalDiff": -2,
+        "goalDiff": -1,
         "points": 4,
-        "yellowCards": 5,
+        "yellowCards": 6,
         "redCards": 1,
         "eliminated": false,
         "eliminatedAt": null
@@ -1470,13 +1470,13 @@
         "drawn": 1,
         "lost": 2,
         "goalsFor": 2,
-        "goalsAgainst": 9,
-        "goalDiff": -7,
+        "goalsAgainst": 10,
+        "goalDiff": -8,
         "points": 1,
-        "yellowCards": 3,
+        "yellowCards": 4,
         "redCards": 2,
-        "eliminated": false,
-        "eliminatedAt": null
+        "eliminated": true,
+        "eliminatedAt": "2026-06-24T19:00:00Z"
       }
     ],
     "Group C": [
@@ -2118,19 +2118,19 @@
       "red": 0
     },
     "CAN": {
-      "yellow": 3,
+      "yellow": 5,
       "red": 0
     },
     "BIH": {
-      "yellow": 5,
+      "yellow": 6,
       "red": 1
     },
     "QAT": {
-      "yellow": 3,
+      "yellow": 4,
       "red": 2
     },
     "SUI": {
-      "yellow": 2,
+      "yellow": 3,
       "red": 0
     },
     "BRA": {
@@ -2303,13 +2303,13 @@
       "ownGoals": 0
     },
     "CAN": {
-      "scored": 7,
-      "conceded": 1,
+      "scored": 8,
+      "conceded": 3,
       "ownGoals": 0
     },
     "BIH": {
-      "scored": 2,
-      "conceded": 5,
+      "scored": 5,
+      "conceded": 6,
       "ownGoals": 0
     },
     "USA": {
@@ -2323,13 +2323,13 @@
       "ownGoals": 0
     },
     "QAT": {
-      "scored": 1,
-      "conceded": 7,
+      "scored": 2,
+      "conceded": 10,
       "ownGoals": 0
     },
     "SUI": {
-      "scored": 5,
-      "conceded": 2,
+      "scored": 7,
+      "conceded": 3,
       "ownGoals": 0
     },
     "BRA": {
@@ -2427,7 +2427,7 @@
       "conceded": 5,
       "ownGoals": 0
     },
-    "URY": {
+    "URU": {
       "scored": 3,
       "conceded": 3,
       "ownGoals": 0

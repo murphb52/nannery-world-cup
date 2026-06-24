@@ -183,6 +183,40 @@
       "card": "YELLOW"
     }
   ],
+  "537337": [
+    {
+      "minute": 32,
+      "teamId": "CAN",
+      "player": "Cyle Larin",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 32,
+      "teamId": "SUI",
+      "player": "Granit Xhaka",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 87,
+      "teamId": "CAN",
+      "player": "Liam Millar",
+      "card": "YELLOW"
+    }
+  ],
+  "537338": [
+    {
+      "minute": 78,
+      "teamId": "QAT",
+      "player": "Ahmed Fathy",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 82,
+      "teamId": "BIH",
+      "player": "Ermin Mahmic",
+      "card": "YELLOW"
+    }
+  ],
   "537339": [
     {
       "minute": 37,
