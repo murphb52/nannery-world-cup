@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-25T00:04:59.219Z",
+  "lastUpdated": "2026-06-25T01:32:43.816Z",
   "matches": [
     {
       "id": 537327,
@@ -661,7 +661,7 @@
       "awayScore": 2,
       "date": "2026-06-24T22:00:00Z",
       "venue": null,
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "winner": "HOME_TEAM"
     },
     {
@@ -674,7 +674,7 @@
       "awayScore": 3,
       "date": "2026-06-24T22:00:00Z",
       "venue": null,
-      "status": "PAUSED",
+      "status": "FINISHED",
       "winner": "AWAY_TEAM"
     },
     {
@@ -683,12 +683,12 @@
       "group": "GROUP_A",
       "homeTeamId": "CZE",
       "awayTeamId": "MEX",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 0,
       "date": "2026-06-25T01:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null
+      "status": "IN_PLAY",
+      "winner": "DRAW"
     },
     {
       "id": 537332,
@@ -696,12 +696,12 @@
       "group": "GROUP_A",
       "homeTeamId": "RSA",
       "awayTeamId": "KOR",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 0,
       "date": "2026-06-25T01:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null
+      "status": "IN_PLAY",
+      "winner": "DRAW"
     },
     {
       "id": 537355,
@@ -1358,14 +1358,14 @@
     "Group A": [
       {
         "teamId": "MEX",
-        "played": 2,
+        "played": 3,
         "won": 2,
-        "drawn": 0,
+        "drawn": 1,
         "lost": 0,
         "goalsFor": 3,
         "goalsAgainst": 0,
         "goalDiff": 3,
-        "points": 6,
+        "points": 7,
         "yellowCards": 1,
         "redCards": 1,
         "eliminated": false,
@@ -1373,14 +1373,14 @@
       },
       {
         "teamId": "KOR",
-        "played": 2,
+        "played": 3,
         "won": 1,
-        "drawn": 0,
+        "drawn": 1,
         "lost": 1,
         "goalsFor": 2,
         "goalsAgainst": 2,
         "goalDiff": 0,
-        "points": 3,
+        "points": 4,
         "yellowCards": 3,
         "redCards": 0,
         "eliminated": false,
@@ -1388,14 +1388,14 @@
       },
       {
         "teamId": "CZE",
-        "played": 2,
+        "played": 3,
         "won": 0,
-        "drawn": 1,
+        "drawn": 2,
         "lost": 1,
         "goalsFor": 2,
         "goalsAgainst": 3,
         "goalDiff": -1,
-        "points": 1,
+        "points": 2,
         "yellowCards": 1,
         "redCards": 0,
         "eliminated": false,
@@ -1403,14 +1403,14 @@
       },
       {
         "teamId": "RSA",
-        "played": 2,
+        "played": 3,
         "won": 0,
-        "drawn": 1,
+        "drawn": 2,
         "lost": 1,
         "goalsFor": 1,
         "goalsAgainst": 3,
         "goalDiff": -2,
-        "points": 1,
+        "points": 2,
         "yellowCards": 4,
         "redCards": 2,
         "eliminated": false,
@@ -1490,7 +1490,7 @@
         "goalsAgainst": 1,
         "goalDiff": 6,
         "points": 7,
-        "yellowCards": 3,
+        "yellowCards": 5,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -1520,7 +1520,7 @@
         "goalsAgainst": 4,
         "goalDiff": -3,
         "points": 3,
-        "yellowCards": 4,
+        "yellowCards": 5,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -1535,7 +1535,7 @@
         "goalsAgainst": 8,
         "goalDiff": -6,
         "points": 0,
-        "yellowCards": 4,
+        "yellowCards": 7,
         "redCards": 0,
         "eliminated": true,
         "eliminatedAt": "2026-06-20T00:30:00Z"
@@ -2134,15 +2134,15 @@
       "red": 0
     },
     "BRA": {
-      "yellow": 3,
+      "yellow": 5,
       "red": 0
     },
     "HAI": {
-      "yellow": 4,
+      "yellow": 7,
       "red": 0
     },
     "SCO": {
-      "yellow": 4,
+      "yellow": 5,
       "red": 0
     },
     "MAR": {
@@ -2333,23 +2333,23 @@
       "ownGoals": 0
     },
     "BRA": {
-      "scored": 4,
+      "scored": 7,
       "conceded": 1,
       "ownGoals": 0
     },
     "MAR": {
-      "scored": 2,
-      "conceded": 1,
+      "scored": 6,
+      "conceded": 3,
       "ownGoals": 0
     },
     "HAI": {
-      "scored": 0,
-      "conceded": 4,
+      "scored": 2,
+      "conceded": 8,
       "ownGoals": 0
     },
     "SCO": {
       "scored": 1,
-      "conceded": 1,
+      "conceded": 4,
       "ownGoals": 0
     },
     "AUS": {

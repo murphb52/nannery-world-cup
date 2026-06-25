@@ -297,6 +297,46 @@
       "card": "YELLOW"
     }
   ],
+  "537343": [
+    {
+      "minute": 62,
+      "teamId": "BRA",
+      "player": "Danilo",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 82,
+      "teamId": "BRA",
+      "player": "Fabinho",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 89,
+      "teamId": "SCO",
+      "player": "Ryan Christie",
+      "card": "YELLOW"
+    }
+  ],
+  "537344": [
+    {
+      "minute": 79,
+      "teamId": "HAI",
+      "player": "Johny Placide",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 80,
+      "teamId": "HAI",
+      "player": "Duckens Nazon",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 90,
+      "teamId": "HAI",
+      "player": "Josué Casimir",
+      "card": "YELLOW"
+    }
+  ],
   "537345": [
     {
       "minute": 10,
