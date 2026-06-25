@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-25T06:13:45.927Z",
+  "lastUpdated": "2026-06-25T09:53:31.243Z",
   "matches": [
     {
       "id": 537327,
@@ -188,7 +188,7 @@
       "stage": "GROUP",
       "group": "GROUP_H",
       "homeTeamId": "KSA",
-      "awayTeamId": "URY",
+      "awayTeamId": "URU",
       "homeScore": 1,
       "awayScore": 1,
       "date": "2026-06-15T22:00:00Z",
@@ -499,7 +499,7 @@
       "id": 537372,
       "stage": "GROUP",
       "group": "GROUP_H",
-      "homeTeamId": "URY",
+      "homeTeamId": "URU",
       "awayTeamId": "CPV",
       "homeScore": 2,
       "awayScore": 2,
@@ -811,7 +811,7 @@
       "id": 537373,
       "stage": "GROUP",
       "group": "GROUP_H",
-      "homeTeamId": "URY",
+      "homeTeamId": "URU",
       "awayTeamId": "ESP",
       "homeScore": null,
       "awayScore": null,
@@ -2427,7 +2427,7 @@
       "conceded": 5,
       "ownGoals": 0
     },
-    "URY": {
+    "URU": {
       "scored": 3,
       "conceded": 3,
       "ownGoals": 0
