@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-25T09:53:31.243Z",
+  "lastUpdated": "2026-06-25T12:26:24.872Z",
   "matches": [
     {
       "id": 537327,
@@ -967,7 +967,7 @@
       "id": 537415,
       "stage": "R32",
       "group": null,
-      "homeTeamId": null,
+      "homeTeamId": "GER",
       "awayTeamId": null,
       "homeScore": null,
       "awayScore": null,
@@ -1019,7 +1019,7 @@
       "id": 537425,
       "stage": "R32",
       "group": null,
-      "homeTeamId": null,
+      "homeTeamId": "MEX",
       "awayTeamId": null,
       "homeScore": null,
       "awayScore": null,
@@ -1058,7 +1058,7 @@
       "id": 537421,
       "stage": "R32",
       "group": null,
-      "homeTeamId": null,
+      "homeTeamId": "USA",
       "awayTeamId": null,
       "homeScore": null,
       "awayScore": null,
@@ -1123,7 +1123,7 @@
       "id": 537427,
       "stage": "R32",
       "group": null,
-      "homeTeamId": null,
+      "homeTeamId": "ARG",
       "awayTeamId": null,
       "homeScore": null,
       "awayScore": null,
