@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-25T22:05:38.175Z",
+  "lastUpdated": "2026-06-25T23:53:59.696Z",
   "matches": [
     {
       "id": 537327,
@@ -709,12 +709,12 @@
       "group": "GROUP_E",
       "homeTeamId": "ECU",
       "awayTeamId": "GER",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 2,
+      "awayScore": 1,
       "date": "2026-06-25T20:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null
+      "status": "FINISHED",
+      "winner": "HOME_TEAM"
     },
     {
       "id": 537356,
@@ -722,12 +722,12 @@
       "group": "GROUP_E",
       "homeTeamId": "CUW",
       "awayTeamId": "CIV",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 2,
       "date": "2026-06-25T20:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null
+      "status": "FINISHED",
+      "winner": "AWAY_TEAM"
     },
     {
       "id": 537361,
@@ -735,12 +735,12 @@
       "group": "GROUP_F",
       "homeTeamId": "TUN",
       "awayTeamId": "NED",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 2,
       "date": "2026-06-25T23:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null
+      "status": "PAUSED",
+      "winner": "AWAY_TEAM"
     },
     {
       "id": 537362,
@@ -748,12 +748,12 @@
       "group": "GROUP_F",
       "homeTeamId": "JPN",
       "awayTeamId": "SWE",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 0,
       "date": "2026-06-25T23:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null
+      "status": "IN_PLAY",
+      "winner": "DRAW"
     },
     {
       "id": 537349,
@@ -1614,7 +1614,7 @@
         "goalsAgainst": 4,
         "goalDiff": 6,
         "points": 6,
-        "yellowCards": 0,
+        "yellowCards": 1,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -1629,7 +1629,7 @@
         "goalsAgainst": 2,
         "goalDiff": 2,
         "points": 6,
-        "yellowCards": 3,
+        "yellowCards": 4,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -1644,7 +1644,7 @@
         "goalsAgainst": 2,
         "goalDiff": 0,
         "points": 4,
-        "yellowCards": 2,
+        "yellowCards": 5,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -1659,23 +1659,23 @@
         "goalsAgainst": 9,
         "goalDiff": -8,
         "points": 1,
-        "yellowCards": 5,
+        "yellowCards": 7,
         "redCards": 0,
-        "eliminated": false,
-        "eliminatedAt": null
+        "eliminated": true,
+        "eliminatedAt": "2026-06-25T20:00:00Z"
       }
     ],
     "Group F": [
       {
         "teamId": "NED",
-        "played": 2,
-        "won": 1,
+        "played": 3,
+        "won": 2,
         "drawn": 1,
         "lost": 0,
-        "goalsFor": 7,
+        "goalsFor": 9,
         "goalsAgainst": 3,
-        "goalDiff": 4,
-        "points": 4,
+        "goalDiff": 6,
+        "points": 7,
         "yellowCards": 3,
         "redCards": 0,
         "eliminated": false,
@@ -1683,14 +1683,14 @@
       },
       {
         "teamId": "JPN",
-        "played": 2,
+        "played": 3,
         "won": 1,
-        "drawn": 1,
+        "drawn": 2,
         "lost": 0,
         "goalsFor": 6,
         "goalsAgainst": 2,
         "goalDiff": 4,
-        "points": 4,
+        "points": 5,
         "yellowCards": 0,
         "redCards": 0,
         "eliminated": false,
@@ -1698,14 +1698,14 @@
       },
       {
         "teamId": "SWE",
-        "played": 2,
+        "played": 3,
         "won": 1,
-        "drawn": 0,
+        "drawn": 1,
         "lost": 1,
         "goalsFor": 6,
         "goalsAgainst": 6,
         "goalDiff": 0,
-        "points": 3,
+        "points": 4,
         "yellowCards": 3,
         "redCards": 0,
         "eliminated": false,
@@ -1713,13 +1713,13 @@
       },
       {
         "teamId": "TUN",
-        "played": 2,
+        "played": 3,
         "won": 0,
         "drawn": 0,
-        "lost": 2,
+        "lost": 3,
         "goalsFor": 1,
-        "goalsAgainst": 9,
-        "goalDiff": -8,
+        "goalsAgainst": 11,
+        "goalDiff": -10,
         "points": 0,
         "yellowCards": 1,
         "redCards": 0,
@@ -2166,15 +2166,19 @@
       "red": 0
     },
     "CIV": {
-      "yellow": 3,
+      "yellow": 4,
       "red": 0
     },
     "ECU": {
-      "yellow": 2,
+      "yellow": 5,
       "red": 0
     },
     "CUW": {
-      "yellow": 5,
+      "yellow": 7,
+      "red": 0
+    },
+    "GER": {
+      "yellow": 1,
       "red": 0
     },
     "NED": {
@@ -2363,13 +2367,13 @@
       "ownGoals": 0
     },
     "GER": {
-      "scored": 9,
-      "conceded": 2,
+      "scored": 10,
+      "conceded": 4,
       "ownGoals": 0
     },
     "CUW": {
       "scored": 1,
-      "conceded": 7,
+      "conceded": 9,
       "ownGoals": 0
     },
     "NED": {
@@ -2383,13 +2387,13 @@
       "ownGoals": 0
     },
     "CIV": {
-      "scored": 2,
+      "scored": 4,
       "conceded": 2,
       "ownGoals": 0
     },
     "ECU": {
-      "scored": 0,
-      "conceded": 1,
+      "scored": 2,
+      "conceded": 2,
       "ownGoals": 0
     },
     "SWE": {

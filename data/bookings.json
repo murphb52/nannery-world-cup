@@ -535,6 +535,52 @@
       "card": "YELLOW"
     }
   ],
+  "537355": [
+    {
+      "minute": 43,
+      "teamId": "ECU",
+      "player": "Piero Hincapié",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 44,
+      "teamId": "GER",
+      "player": "Aleksandar Pavlovic",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 50,
+      "teamId": "ECU",
+      "player": "Alan Franco",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 89,
+      "teamId": "ECU",
+      "player": "Gonzalo Plata",
+      "card": "YELLOW"
+    }
+  ],
+  "537356": [
+    {
+      "minute": 35,
+      "teamId": "CIV",
+      "player": "Nicolas Pépé",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 75,
+      "teamId": "CUW",
+      "player": "Juninho Bacuna",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 83,
+      "teamId": "CUW",
+      "player": "Gervane Kastaneer",
+      "card": "YELLOW"
+    }
+  ],
   "537357": [
     {
       "minute": 61,
