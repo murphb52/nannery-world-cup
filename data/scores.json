@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-25T17:32:21.228Z",
+  "lastUpdated": "2026-06-25T20:08:59.315Z",
   "matches": [
     {
       "id": 537327,
@@ -33,12 +33,12 @@
       "group": "GROUP_B",
       "homeTeamId": "CAN",
       "awayTeamId": "BIH",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 1,
+      "awayScore": 1,
       "date": "2026-06-12T19:00:00Z",
       "venue": null,
       "status": "FINISHED",
-      "winner": null
+      "winner": "DRAW"
     },
     {
       "id": 537345,
@@ -709,12 +709,12 @@
       "group": "GROUP_E",
       "homeTeamId": "ECU",
       "awayTeamId": "GER",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 1,
       "date": "2026-06-25T20:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null
+      "status": "LIVE",
+      "winner": "AWAY_TEAM"
     },
     {
       "id": 537356,
@@ -722,12 +722,12 @@
       "group": "GROUP_E",
       "homeTeamId": "CUW",
       "awayTeamId": "CIV",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 0,
       "date": "2026-06-25T20:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null
+      "status": "LIVE",
+      "winner": "DRAW"
     },
     {
       "id": 537361,
@@ -1606,14 +1606,14 @@
     "Group E": [
       {
         "teamId": "GER",
-        "played": 2,
+        "played": 3,
         "won": 2,
-        "drawn": 0,
+        "drawn": 1,
         "lost": 0,
         "goalsFor": 9,
         "goalsAgainst": 2,
         "goalDiff": 7,
-        "points": 6,
+        "points": 7,
         "yellowCards": 0,
         "redCards": 0,
         "eliminated": false,
@@ -1621,14 +1621,14 @@
       },
       {
         "teamId": "CIV",
-        "played": 2,
+        "played": 3,
         "won": 1,
-        "drawn": 0,
+        "drawn": 1,
         "lost": 1,
         "goalsFor": 2,
         "goalsAgainst": 2,
         "goalDiff": 0,
-        "points": 3,
+        "points": 4,
         "yellowCards": 3,
         "redCards": 0,
         "eliminated": false,
@@ -1636,14 +1636,14 @@
       },
       {
         "teamId": "ECU",
-        "played": 2,
+        "played": 3,
         "won": 0,
-        "drawn": 1,
+        "drawn": 2,
         "lost": 1,
         "goalsFor": 0,
         "goalsAgainst": 1,
         "goalDiff": -1,
-        "points": 1,
+        "points": 2,
         "yellowCards": 2,
         "redCards": 0,
         "eliminated": false,
@@ -1651,14 +1651,14 @@
       },
       {
         "teamId": "CUW",
-        "played": 2,
+        "played": 3,
         "won": 0,
-        "drawn": 1,
+        "drawn": 2,
         "lost": 1,
         "goalsFor": 1,
         "goalsAgainst": 7,
         "goalDiff": -6,
-        "points": 1,
+        "points": 2,
         "yellowCards": 5,
         "redCards": 0,
         "eliminated": false,
@@ -2303,13 +2303,13 @@
       "ownGoals": 0
     },
     "CAN": {
-      "scored": 7,
-      "conceded": 2,
+      "scored": 8,
+      "conceded": 3,
       "ownGoals": 0
     },
     "BIH": {
-      "scored": 4,
-      "conceded": 5,
+      "scored": 5,
+      "conceded": 6,
       "ownGoals": 0
     },
     "USA": {
