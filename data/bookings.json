@@ -79,6 +79,28 @@
       "card": "YELLOW"
     }
   ],
+  "537331": [
+    {
+      "minute": 64,
+      "teamId": "MEX",
+      "player": "Edson Álvarez",
+      "card": "YELLOW"
+    }
+  ],
+  "537332": [
+    {
+      "minute": 73,
+      "teamId": "RSA",
+      "player": "Aubrey Modiba",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 79,
+      "teamId": "KOR",
+      "player": "Cho Gue-Sung",
+      "card": "YELLOW"
+    }
+  ],
   "537333": [
     {
       "minute": 11,
