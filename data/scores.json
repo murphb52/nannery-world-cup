@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-26T20:18:57.799Z",
+  "lastUpdated": "2026-06-26T21:48:37.861Z",
   "matches": [
     {
       "id": 537327,
@@ -788,10 +788,10 @@
       "homeTeamId": "NOR",
       "awayTeamId": "FRA",
       "homeScore": 1,
-      "awayScore": 3,
+      "awayScore": 4,
       "date": "2026-06-26T19:00:00Z",
       "venue": null,
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "winner": "AWAY_TEAM"
     },
     {
@@ -800,11 +800,11 @@
       "group": "GROUP_I",
       "homeTeamId": "SEN",
       "awayTeamId": "IRQ",
-      "homeScore": 1,
+      "homeScore": 5,
       "awayScore": 0,
       "date": "2026-06-26T19:00:00Z",
       "venue": null,
-      "status": "LIVE",
+      "status": "FINISHED",
       "winner": "HOME_TEAM"
     },
     {
@@ -1858,11 +1858,11 @@
         "won": 3,
         "drawn": 0,
         "lost": 0,
-        "goalsFor": 9,
+        "goalsFor": 10,
         "goalsAgainst": 2,
-        "goalDiff": 7,
+        "goalDiff": 8,
         "points": 9,
-        "yellowCards": 0,
+        "yellowCards": 1,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -1874,10 +1874,10 @@
         "drawn": 0,
         "lost": 1,
         "goalsFor": 8,
-        "goalsAgainst": 6,
-        "goalDiff": 2,
+        "goalsAgainst": 7,
+        "goalDiff": 1,
         "points": 6,
-        "yellowCards": 0,
+        "yellowCards": 1,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -1888,11 +1888,11 @@
         "won": 1,
         "drawn": 0,
         "lost": 2,
-        "goalsFor": 4,
+        "goalsFor": 8,
         "goalsAgainst": 6,
-        "goalDiff": -2,
+        "goalDiff": 2,
         "points": 3,
-        "yellowCards": 0,
+        "yellowCards": 2,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -1904,13 +1904,13 @@
         "drawn": 0,
         "lost": 3,
         "goalsFor": 1,
-        "goalsAgainst": 8,
-        "goalDiff": -7,
+        "goalsAgainst": 12,
+        "goalDiff": -11,
         "points": 0,
-        "yellowCards": 2,
-        "redCards": 0,
-        "eliminated": false,
-        "eliminatedAt": null
+        "yellowCards": 4,
+        "redCards": 1,
+        "eliminated": true,
+        "eliminatedAt": "2026-06-26T19:00:00Z"
       }
     ],
     "Group J": [
@@ -2230,6 +2230,18 @@
       "red": 0
     },
     "IRQ": {
+      "yellow": 4,
+      "red": 1
+    },
+    "NOR": {
+      "yellow": 1,
+      "red": 0
+    },
+    "FRA": {
+      "yellow": 1,
+      "red": 0
+    },
+    "SEN": {
       "yellow": 2,
       "red": 0
     },
@@ -2451,23 +2463,23 @@
       "ownGoals": 0
     },
     "FRA": {
-      "scored": 6,
-      "conceded": 1,
+      "scored": 10,
+      "conceded": 2,
       "ownGoals": 0
     },
     "SEN": {
-      "scored": 3,
+      "scored": 8,
       "conceded": 6,
       "ownGoals": 0
     },
     "IRQ": {
       "scored": 1,
-      "conceded": 7,
+      "conceded": 12,
       "ownGoals": 0
     },
     "NOR": {
-      "scored": 7,
-      "conceded": 3,
+      "scored": 8,
+      "conceded": 7,
       "ownGoals": 0
     },
     "ARG": {

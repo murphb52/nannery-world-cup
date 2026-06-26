@@ -827,6 +827,52 @@
     }
   ],
   "537394": [],
+  "537395": [
+    {
+      "minute": 10,
+      "teamId": "NOR",
+      "player": "Patrick Berg",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 74,
+      "teamId": "FRA",
+      "player": "Aurélien Tchouaméni",
+      "card": "YELLOW"
+    }
+  ],
+  "537396": [
+    {
+      "minute": 13,
+      "teamId": "IRQ",
+      "player": "Rebin Sulaka",
+      "card": "RED"
+    },
+    {
+      "minute": 18,
+      "teamId": "SEN",
+      "player": "Abdoulaye Seck",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 75,
+      "teamId": "IRQ",
+      "player": "Amir Al-Ammari",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 81,
+      "teamId": "SEN",
+      "player": "Pape Gueye",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 90,
+      "teamId": "IRQ",
+      "player": "Merchas Doski",
+      "card": "YELLOW"
+    }
+  ],
   "537397": [],
   "537398": [
     {
