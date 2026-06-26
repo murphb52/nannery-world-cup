@@ -469,6 +469,28 @@
       "card": "YELLOW"
     }
   ],
+  "537349": [
+    {
+      "minute": 19,
+      "teamId": "USA",
+      "player": "Sebastian Berhalter",
+      "card": "YELLOW"
+    }
+  ],
+  "537350": [
+    {
+      "minute": 46,
+      "teamId": "AUS",
+      "player": "Jackson Irvine",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 77,
+      "teamId": "PAR",
+      "player": "Diego Gómez",
+      "card": "YELLOW"
+    }
+  ],
   "537351": [],
   "537352": [
     {
@@ -630,6 +652,27 @@
     }
   ],
   "537360": [],
+  "537361": [],
+  "537362": [
+    {
+      "minute": 32,
+      "teamId": "SWE",
+      "player": "Isak Hien",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 77,
+      "teamId": "JPN",
+      "player": "Shogo Taniguchi",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 85,
+      "teamId": "SWE",
+      "player": "Viktor Gyökeres",
+      "card": "YELLOW"
+    }
+  ],
   "537363": [
     {
       "minute": 13,
