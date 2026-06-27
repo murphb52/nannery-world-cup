@@ -747,6 +747,64 @@
       "card": "YELLOW"
     }
   ],
+  "537367": [
+    {
+      "minute": 46,
+      "teamId": "NZL",
+      "player": "Marko Stamenic",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 56,
+      "teamId": "NZL",
+      "player": "Elijah Just",
+      "card": "YELLOW"
+    }
+  ],
+  "537368": [
+    {
+      "minute": 19,
+      "teamId": "IRN",
+      "player": "Hossein Kanani",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 20,
+      "teamId": "EGY",
+      "player": "Mahmoud Saber",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 42,
+      "teamId": "EGY",
+      "player": "Yasser Ibrahim",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 43,
+      "teamId": "IRN",
+      "player": "Ali Nemati",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 79,
+      "teamId": "IRN",
+      "player": "Saeid Ezatolahi",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 90,
+      "teamId": "EGY",
+      "player": "Mohanad Lashin",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 90,
+      "teamId": "IRN",
+      "player": "Shoja Khalilzadeh",
+      "card": "YELLOW"
+    }
+  ],
   "537369": [
     {
       "minute": 16,
@@ -806,6 +864,64 @@
       "minute": 90,
       "teamId": "CPV",
       "player": "Diney Borges",
+      "card": "YELLOW"
+    }
+  ],
+  "537373": [
+    {
+      "minute": 46,
+      "teamId": "ESP",
+      "player": "Álex Baena",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 54,
+      "teamId": "URU",
+      "player": "Juan Manuel Sanabria",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 58,
+      "teamId": "URU",
+      "player": "Guillermo Varela",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 90,
+      "teamId": "URU",
+      "player": "Nicolás de la Cruz",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 90,
+      "teamId": "URU",
+      "player": "Agustín Canobbio",
+      "card": "RED"
+    }
+  ],
+  "537374": [
+    {
+      "minute": 4,
+      "teamId": "KSA",
+      "player": "Saud Abdulhamid",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 8,
+      "teamId": "CPV",
+      "player": "Wagner Pina",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 67,
+      "teamId": "KSA",
+      "player": "Nasser Al-Dawsari",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 90,
+      "teamId": "KSA",
+      "player": "Feras Al-Brikan",
       "card": "YELLOW"
     }
   ],

@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-27T01:29:16.397Z",
+  "lastUpdated": "2026-06-27T05:33:28.310Z",
   "matches": [
     {
       "id": 537327,
@@ -817,7 +817,7 @@
       "awayScore": 1,
       "date": "2026-06-27T00:00:00Z",
       "venue": null,
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "winner": "AWAY_TEAM"
     },
     {
@@ -830,7 +830,7 @@
       "awayScore": 0,
       "date": "2026-06-27T00:00:00Z",
       "venue": null,
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "winner": "DRAW"
     },
     {
@@ -839,12 +839,12 @@
       "group": "GROUP_G",
       "homeTeamId": "NZL",
       "awayTeamId": "BEL",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 1,
+      "awayScore": 5,
       "date": "2026-06-27T03:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null
+      "status": "FINISHED",
+      "winner": "AWAY_TEAM"
     },
     {
       "id": 537368,
@@ -852,12 +852,12 @@
       "group": "GROUP_G",
       "homeTeamId": "EGY",
       "awayTeamId": "IRN",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 1,
+      "awayScore": 1,
       "date": "2026-06-27T03:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null
+      "status": "FINISHED",
+      "winner": "DRAW"
     },
     {
       "id": 537413,
@@ -941,8 +941,8 @@
       "id": 537417,
       "stage": "R32",
       "group": null,
-      "homeTeamId": "RSA",
-      "awayTeamId": "CAN",
+      "homeTeamId": null,
+      "awayTeamId": null,
       "homeScore": null,
       "awayScore": null,
       "date": "2026-06-28T19:00:00Z",
@@ -954,8 +954,8 @@
       "id": 537423,
       "stage": "R32",
       "group": null,
-      "homeTeamId": "BRA",
-      "awayTeamId": "JPN",
+      "homeTeamId": null,
+      "awayTeamId": null,
       "homeScore": null,
       "awayScore": null,
       "date": "2026-06-29T17:00:00Z",
@@ -967,7 +967,7 @@
       "id": 537415,
       "stage": "R32",
       "group": null,
-      "homeTeamId": "GER",
+      "homeTeamId": null,
       "awayTeamId": null,
       "homeScore": null,
       "awayScore": null,
@@ -980,8 +980,8 @@
       "id": 537418,
       "stage": "R32",
       "group": null,
-      "homeTeamId": "NED",
-      "awayTeamId": "MAR",
+      "homeTeamId": null,
+      "awayTeamId": null,
       "homeScore": null,
       "awayScore": null,
       "date": "2026-06-30T01:00:00Z",
@@ -1019,7 +1019,7 @@
       "id": 537425,
       "stage": "R32",
       "group": null,
-      "homeTeamId": "MEX",
+      "homeTeamId": null,
       "awayTeamId": null,
       "homeScore": null,
       "awayScore": null,
@@ -1058,8 +1058,8 @@
       "id": 537421,
       "stage": "R32",
       "group": null,
-      "homeTeamId": "USA",
-      "awayTeamId": "BIH",
+      "homeTeamId": null,
+      "awayTeamId": null,
       "homeScore": null,
       "awayScore": null,
       "date": "2026-07-02T00:00:00Z",
@@ -1097,7 +1097,7 @@
       "id": 537429,
       "stage": "R32",
       "group": null,
-      "homeTeamId": "SUI",
+      "homeTeamId": null,
       "awayTeamId": null,
       "homeScore": null,
       "awayScore": null,
@@ -1110,7 +1110,7 @@
       "id": 537428,
       "stage": "R32",
       "group": null,
-      "homeTeamId": "AUS",
+      "homeTeamId": null,
       "awayTeamId": null,
       "homeScore": null,
       "awayScore": null,
@@ -1123,7 +1123,7 @@
       "id": 537427,
       "stage": "R32",
       "group": null,
-      "homeTeamId": "ARG",
+      "homeTeamId": null,
       "awayTeamId": null,
       "homeScore": null,
       "awayScore": null,
@@ -1729,64 +1729,64 @@
     ],
     "Group G": [
       {
-        "teamId": "EGY",
-        "played": 2,
-        "won": 1,
-        "drawn": 1,
-        "lost": 0,
-        "goalsFor": 4,
-        "goalsAgainst": 2,
-        "goalDiff": 2,
-        "points": 4,
-        "yellowCards": 3,
-        "redCards": 0,
-        "eliminated": false,
-        "eliminatedAt": null
-      },
-      {
-        "teamId": "IRN",
-        "played": 2,
-        "won": 0,
-        "drawn": 2,
-        "lost": 0,
-        "goalsFor": 2,
-        "goalsAgainst": 2,
-        "goalDiff": 0,
-        "points": 2,
-        "yellowCards": 2,
-        "redCards": 0,
-        "eliminated": false,
-        "eliminatedAt": null
-      },
-      {
         "teamId": "BEL",
-        "played": 2,
-        "won": 0,
+        "played": 3,
+        "won": 1,
         "drawn": 2,
         "lost": 0,
-        "goalsFor": 1,
-        "goalsAgainst": 1,
-        "goalDiff": 0,
-        "points": 2,
+        "goalsFor": 6,
+        "goalsAgainst": 2,
+        "goalDiff": 4,
+        "points": 5,
         "yellowCards": 3,
         "redCards": 1,
         "eliminated": false,
         "eliminatedAt": null
       },
       {
-        "teamId": "NZL",
-        "played": 2,
-        "won": 0,
-        "drawn": 1,
-        "lost": 1,
-        "goalsFor": 3,
-        "goalsAgainst": 5,
-        "goalDiff": -2,
-        "points": 1,
-        "yellowCards": 2,
+        "teamId": "EGY",
+        "played": 3,
+        "won": 1,
+        "drawn": 2,
+        "lost": 0,
+        "goalsFor": 5,
+        "goalsAgainst": 3,
+        "goalDiff": 2,
+        "points": 5,
+        "yellowCards": 6,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
+      },
+      {
+        "teamId": "IRN",
+        "played": 3,
+        "won": 0,
+        "drawn": 3,
+        "lost": 0,
+        "goalsFor": 3,
+        "goalsAgainst": 3,
+        "goalDiff": 0,
+        "points": 3,
+        "yellowCards": 6,
+        "redCards": 0,
+        "eliminated": false,
+        "eliminatedAt": null
+      },
+      {
+        "teamId": "NZL",
+        "played": 3,
+        "won": 0,
+        "drawn": 1,
+        "lost": 2,
+        "goalsFor": 4,
+        "goalsAgainst": 10,
+        "goalDiff": -6,
+        "points": 1,
+        "yellowCards": 4,
+        "redCards": 0,
+        "eliminated": true,
+        "eliminatedAt": "2026-06-27T03:00:00Z"
       }
     ],
     "Group H": [
@@ -1800,7 +1800,7 @@
         "goalsAgainst": 0,
         "goalDiff": 5,
         "points": 7,
-        "yellowCards": 1,
+        "yellowCards": 2,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -1815,7 +1815,7 @@
         "goalsAgainst": 2,
         "goalDiff": 0,
         "points": 3,
-        "yellowCards": 3,
+        "yellowCards": 4,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -1830,8 +1830,8 @@
         "goalsAgainst": 4,
         "goalDiff": -1,
         "points": 2,
-        "yellowCards": 2,
-        "redCards": 0,
+        "yellowCards": 5,
+        "redCards": 1,
         "eliminated": false,
         "eliminatedAt": null
       },
@@ -1845,10 +1845,10 @@
         "goalsAgainst": 5,
         "goalDiff": -4,
         "points": 2,
-        "yellowCards": 3,
+        "yellowCards": 6,
         "redCards": 0,
-        "eliminated": false,
-        "eliminatedAt": null
+        "eliminated": true,
+        "eliminatedAt": "2026-06-27T00:00:00Z"
       }
     ],
     "Group I": [
@@ -2198,7 +2198,7 @@
       "red": 0
     },
     "EGY": {
-      "yellow": 3,
+      "yellow": 6,
       "red": 0
     },
     "BEL": {
@@ -2206,28 +2206,28 @@
       "red": 1
     },
     "IRN": {
-      "yellow": 2,
+      "yellow": 6,
       "red": 0
     },
     "NZL": {
-      "yellow": 2,
+      "yellow": 4,
       "red": 0
     },
     "CPV": {
-      "yellow": 3,
+      "yellow": 4,
       "red": 0
     },
     "ESP": {
-      "yellow": 1,
+      "yellow": 2,
       "red": 0
     },
     "KSA": {
-      "yellow": 3,
+      "yellow": 6,
       "red": 0
     },
     "URU": {
-      "yellow": 2,
-      "red": 0
+      "yellow": 5,
+      "red": 1
     },
     "IRQ": {
       "yellow": 4,
@@ -2423,7 +2423,7 @@
       "ownGoals": 0
     },
     "ESP": {
-      "scored": 4,
+      "scored": 5,
       "conceded": 0,
       "ownGoals": 0
     },
@@ -2433,13 +2433,13 @@
       "ownGoals": 0
     },
     "BEL": {
-      "scored": 1,
-      "conceded": 1,
+      "scored": 6,
+      "conceded": 2,
       "ownGoals": 0
     },
     "EGY": {
-      "scored": 4,
-      "conceded": 2,
+      "scored": 5,
+      "conceded": 3,
       "ownGoals": 0
     },
     "KSA": {
@@ -2449,17 +2449,17 @@
     },
     "URU": {
       "scored": 3,
-      "conceded": 3,
+      "conceded": 4,
       "ownGoals": 0
     },
     "IRN": {
-      "scored": 2,
-      "conceded": 2,
+      "scored": 3,
+      "conceded": 3,
       "ownGoals": 0
     },
     "NZL": {
-      "scored": 3,
-      "conceded": 5,
+      "scored": 4,
+      "conceded": 10,
       "ownGoals": 0
     },
     "FRA": {
