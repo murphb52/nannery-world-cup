@@ -1160,5 +1160,39 @@
       "player": "Petar Sucic",
       "card": "YELLOW"
     }
+  ],
+  "537413": [
+    {
+      "minute": 53,
+      "teamId": "PAN",
+      "player": "José Fajardo",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 60,
+      "teamId": "ENG",
+      "player": "Jarell Quansah",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 84,
+      "teamId": "PAN",
+      "player": "Andrés Andrade",
+      "card": "YELLOW"
+    }
+  ],
+  "537414": [
+    {
+      "minute": 68,
+      "teamId": "CRO",
+      "player": "Ivan Perisic",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 90,
+      "teamId": "GHA",
+      "player": "Kojo Peprah Oppong",
+      "card": "YELLOW"
+    }
   ]
 }
