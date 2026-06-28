@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-28T07:51:18.162Z",
+  "lastUpdated": "2026-06-28T19:38:04.895Z",
   "matches": [
     {
       "id": 537327,
@@ -943,12 +943,12 @@
       "group": null,
       "homeTeamId": "RSA",
       "awayTeamId": "CAN",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 0,
       "date": "2026-06-28T19:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null
+      "status": "IN_PLAY",
+      "winner": "DRAW"
     },
     {
       "id": 537423,
