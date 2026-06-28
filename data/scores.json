@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-27T23:57:16.347Z",
+  "lastUpdated": "2026-06-28T00:07:29.136Z",
   "matches": [
     {
       "id": 537327,
@@ -2007,29 +2007,29 @@
         "eliminatedAt": null
       },
       {
-        "teamId": "COD",
+        "teamId": "UZB",
         "played": 3,
-        "won": 0,
-        "drawn": 2,
-        "lost": 1,
-        "goalsFor": 1,
-        "goalsAgainst": 2,
-        "goalDiff": -1,
-        "points": 2,
+        "won": 1,
+        "drawn": 0,
+        "lost": 2,
+        "goalsFor": 2,
+        "goalsAgainst": 8,
+        "goalDiff": -6,
+        "points": 3,
         "yellowCards": 2,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
       },
       {
-        "teamId": "UZB",
+        "teamId": "COD",
         "played": 3,
         "won": 0,
         "drawn": 1,
         "lost": 2,
         "goalsFor": 1,
-        "goalsAgainst": 8,
-        "goalDiff": -7,
+        "goalsAgainst": 3,
+        "goalDiff": -2,
         "points": 1,
         "yellowCards": 2,
         "redCards": 0,
