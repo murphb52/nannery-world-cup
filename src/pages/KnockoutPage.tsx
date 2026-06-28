@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo } from 'react'
 import { loadTeams, loadScores, resolveNames } from '../data/loaders'
 import { useSweepstakes } from '../contexts/SweepstakesContext'
+import { exportKnockoutPng } from '../lib/exportPng'
 import type { Team, Match } from '../types'
 
 interface MatchData {
@@ -228,15 +229,19 @@ function BracketColumn({ rounds, bracket, teams, playerNames, leftSide, onMatchC
 }
 
 export default function KnockoutPage() {
-  const { players, draw } = useSweepstakes()
+  const { config, players, draw } = useSweepstakes()
   const [teams, setTeams] = useState<Team[]>([])
   const [bracket, setBracket] = useState<Record<string, MatchData[]>>(buildPlaceholderBracket())
   const [zoom, setZoom] = useState<ZoomMatch | null>(null)
   const [loading, setLoading] = useState(true)
+  const [lastUpdated, setLastUpdated] = useState<string | null>(null)
+  const [exporting, setExporting] = useState(false)
+  const [exportError, setExportError] = useState<string | null>(null)
 
   useEffect(() => {
     Promise.all([loadTeams(), loadScores()]).then(([t, s]) => {
       setTeams(t)
+      setLastUpdated(s.lastUpdated ?? null)
       if (s.matches?.length) {
         const updated = { ...buildPlaceholderBracket() }
         // Group knockout matches by stage. The API match `id` is not the
@@ -263,6 +268,18 @@ export default function KnockoutPage() {
 
   const playerNames = useMemo(() => resolveNames(draw, players), [draw, players])
 
+  async function handleExport() {
+    setExporting(true)
+    setExportError(null)
+    try {
+      await exportKnockoutPng(teams, bracket, playerNames, `${config.name} ${config.year}`, lastUpdated)
+    } catch (e) {
+      setExportError(e instanceof Error ? e.message : 'Export failed')
+    } finally {
+      setExporting(false)
+    }
+  }
+
   if (loading) {
     return <div className="flex items-center justify-center min-h-[80vh] text-white/50 animate-pulse">Loading bracket…</div>
   }
@@ -271,8 +288,22 @@ export default function KnockoutPage() {
 
   return (
     <div className="px-4 py-8">
-      <h1 className="text-3xl font-bold text-white mb-2">Knockout Bracket</h1>
+      <div className="flex flex-wrap items-start justify-between gap-3 mb-2">
+        <h1 className="text-3xl font-bold text-white">Knockout Bracket</h1>
+        <button
+          onClick={handleExport}
+          disabled={exporting}
+          className="px-4 py-2 rounded-xl border border-white/20 text-white/70 text-sm hover:bg-white/10 disabled:opacity-40 transition-all shrink-0"
+        >
+          {exporting ? 'Generating…' : '📸 Share as image'}
+        </button>
+      </div>
       <p className="text-white/40 text-sm mb-10">Click any match for details</p>
+      {exportError && (
+        <div className="mb-6 px-4 py-3 rounded-xl border border-red-500/30 bg-red-500/5 text-red-400 text-sm">
+          ⚠ {exportError}
+        </div>
+      )}
 
       <div className="overflow-x-auto pb-6">
         <div style={{ position: 'relative', paddingTop: 24, minWidth: 'max-content', width: TOTAL_W }}>
