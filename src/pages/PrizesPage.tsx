@@ -35,6 +35,23 @@ function matchLoserId(m: Match): string | null {
   return winnerId === m.homeTeamId ? m.awayTeamId : m.homeTeamId
 }
 
+// Teams that can no longer win anything: group-stage eliminated, or losers of
+// a finished knockout match. Used to fade their flags on the prizes page.
+function eliminatedTeamIds(scores: ScoresData): Set<string> {
+  const out = new Set<string>()
+  for (const group of Object.values(scores.standings ?? {})) {
+    for (const s of group) {
+      if (s.eliminated) out.add(s.teamId)
+    }
+  }
+  for (const m of scores.matches ?? []) {
+    if (m.stage === 'GROUP' || m.status !== 'FINISHED') continue
+    const loser = matchLoserId(m)
+    if (loser) out.add(loser)
+  }
+  return out
+}
+
 function goalTotals(scores: ScoresData): Record<string, { for: number; against: number }> {
   const totals: Record<string, { for: number; against: number }> = {}
   for (const m of scores.matches ?? []) {
@@ -241,7 +258,17 @@ const PRIZE_COMPUTERS: Record<string, PrizeComputer> = {
   lmsMostRedCards,
 }
 
-function PrizeCard({ def, result }: { def: PrizeDefinition; result: PrizeResult | null }) {
+function PrizeCard({
+  def,
+  result,
+  teamToPlayer,
+  eliminated,
+}: {
+  def: PrizeDefinition
+  result: PrizeResult | null
+  teamToPlayer: Record<string, string>
+  eliminated: Set<string>
+}) {
   const displayTeams = result?.teams ?? (result?.team ? [result.team] : [])
   return (
     <div className="rounded-2xl border border-white/10 bg-white/5 p-5 flex flex-col gap-3">
@@ -257,17 +284,27 @@ function PrizeCard({ def, result }: { def: PrizeDefinition; result: PrizeResult 
       </div>
 
       {result ? (
-        <div className="flex items-center gap-3 bg-white/5 rounded-xl p-3">
-          <div className="flex gap-1 shrink-0">
-            {displayTeams.map(t => (
-              <img key={t.id} src={t.flag} alt={t.name} className="w-10 h-7 object-cover rounded" />
-            ))}
-          </div>
-          <div className="flex-1 min-w-0">
-            <p className="font-semibold text-yellow-400 truncate">{result.player}</p>
-            <p className="text-xs text-white/60 truncate">{displayTeams.map(t => t.name).join(' & ')}</p>
-          </div>
-          <p className="text-xs text-white/40 text-right shrink-0">{result.stat}</p>
+        <div className="bg-white/5 rounded-xl p-3 flex flex-col gap-2">
+          {displayTeams.map(t => {
+            const isOut = eliminated.has(t.id)
+            return (
+              <div key={t.id} className="flex items-center gap-3">
+                <img
+                  src={t.flag}
+                  alt={t.name}
+                  title={isOut ? `${t.name} (knocked out)` : t.name}
+                  className={`w-10 h-7 object-cover rounded shrink-0 transition-opacity ${
+                    isOut ? 'opacity-30 grayscale' : ''
+                  }`}
+                />
+                <div className="flex-1 min-w-0">
+                  <p className="font-semibold text-yellow-400 truncate">{teamToPlayer[t.id] ?? result.player}</p>
+                  <p className="text-xs text-white/60 truncate">{t.name}</p>
+                </div>
+              </div>
+            )
+          })}
+          <p className="text-xs text-white/40 text-right border-t border-white/5 pt-2 mt-1">{result.stat}</p>
         </div>
       ) : (
         <div className="bg-white/5 rounded-xl p-3 text-white/30 text-sm text-center">
@@ -291,6 +328,9 @@ export default function PrizesPage() {
       setLoading(false)
     })
   }, [])
+
+  const teamToPlayer = useMemo(() => resolveNames(draw, players), [draw, players])
+  const eliminated = useMemo(() => (scores ? eliminatedTeamIds(scores) : new Set<string>()), [scores])
 
   const results = useMemo(() => {
     if (!scores) return {}
@@ -318,7 +358,13 @@ export default function PrizesPage() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {config.prizes.map(def => (
-          <PrizeCard key={def.key} def={def} result={results[def.key] ?? null} />
+          <PrizeCard
+            key={def.key}
+            def={def}
+            result={results[def.key] ?? null}
+            teamToPlayer={teamToPlayer}
+            eliminated={eliminated}
+          />
         ))}
       </div>
     </div>
