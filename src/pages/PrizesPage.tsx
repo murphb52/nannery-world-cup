@@ -199,12 +199,20 @@ const firstEliminated: PrizeComputer = (scores, draw, players, teams) => {
 
 // --- Multi-team prize computers (LMS style, sums across all a player's teams) ---
 
-const lmsMostGoalsScored: PrizeComputer = (scores, draw, players, teams) => {
-  const totals = goalTotals(scores)
+// Each LMS player holds two teams, so a prize is the sum of a per-team value
+// across both. Find the leading player(s) and break the total back down into a
+// per-team badge, so it's clear which team each contribution came from.
+function lmsLeaderboard(
+  draw: DrawResult,
+  players: Player[],
+  teams: Team[],
+  valueForTeam: (teamId: string) => number,
+  statFor: (total: number) => string
+): PrizeResult | null {
   const ptm = playerTeamMap(draw)
   const playerTotals = Array.from(ptm.entries()).map(([playerId, teamIds]) => ({
     playerId,
-    val: teamIds.reduce((s, id) => s + (totals[id]?.for ?? 0), 0),
+    val: teamIds.reduce((s, id) => s + valueForTeam(id), 0),
     teamIds,
   }))
   if (!playerTotals.length) return null
@@ -213,59 +221,30 @@ const lmsMostGoalsScored: PrizeComputer = (scores, draw, players, teams) => {
   const tied = playerTotals.filter(p => p.val === maxVal)
   const allTeams = tied.flatMap(p => p.teamIds.map(id => teams.find(t => t.id === id)).filter(Boolean) as Team[])
   const tiedPlayerNames = tied.map(p => playerName(p.playerId, players)).join(' & ')
-  return { player: tiedPlayerNames, teams: allTeams, stat: `${maxVal} goals scored` }
+  const teamNotes = Object.fromEntries(allTeams.map(t => [t.id, String(valueForTeam(t.id))]))
+  return { player: tiedPlayerNames, teams: allTeams, teamNotes, stat: statFor(maxVal) }
+}
+
+const lmsMostGoalsScored: PrizeComputer = (scores, draw, players, teams) => {
+  const totals = goalTotals(scores)
+  return lmsLeaderboard(draw, players, teams, id => totals[id]?.for ?? 0, n => `${n} goals scored`)
 }
 
 const lmsMostConceded: PrizeComputer = (scores, draw, players, teams) => {
   const totals = goalTotals(scores)
-  const ptm = playerTeamMap(draw)
-  const playerTotals = Array.from(ptm.entries()).map(([playerId, teamIds]) => ({
-    playerId,
-    val: teamIds.reduce((s, id) => s + (totals[id]?.against ?? 0), 0),
-    teamIds,
-  }))
-  if (!playerTotals.length) return null
-  const maxVal = Math.max(...playerTotals.map(p => p.val))
-  if (maxVal === 0) return null
-  const tied = playerTotals.filter(p => p.val === maxVal)
-  const allTeams = tied.flatMap(p => p.teamIds.map(id => teams.find(t => t.id === id)).filter(Boolean) as Team[])
-  const tiedPlayerNames = tied.map(p => playerName(p.playerId, players)).join(' & ')
-  return { player: tiedPlayerNames, teams: allTeams, stat: `${maxVal} goals conceded` }
+  return lmsLeaderboard(draw, players, teams, id => totals[id]?.against ?? 0, n => `${n} goals conceded`)
 }
 
 const lmsMostOwnGoals: PrizeComputer = (scores, draw, players, teams) => {
-  const teamStats = scores.teamStats
-  if (!teamStats) return null
-  const ptm = playerTeamMap(draw)
-  const playerTotals = Array.from(ptm.entries()).map(([playerId, teamIds]) => ({
-    playerId,
-    val: teamIds.reduce((s, id) => s + (teamStats[id]?.ownGoals ?? 0), 0),
-    teamIds,
-  }))
-  if (!playerTotals.length) return null
-  const maxVal = Math.max(...playerTotals.map(p => p.val))
-  if (maxVal === 0) return null
-  const tied = playerTotals.filter(p => p.val === maxVal)
-  const allTeams = tied.flatMap(p => p.teamIds.map(id => teams.find(t => t.id === id)).filter(Boolean) as Team[])
-  const tiedPlayerNames = tied.map(p => playerName(p.playerId, players)).join(' & ')
-  // Break the total down per team so it's clear which side conceded the own goals.
-  const teamNotes = Object.fromEntries(
-    allTeams.map(t => [t.id, `${teamStats[t.id]?.ownGoals ?? 0} OG`])
-  )
-  return { player: tiedPlayerNames, teams: allTeams, teamNotes, stat: `${maxVal} own goal${maxVal !== 1 ? 's' : ''}` }
+  const teamStats = scores.teamStats ?? {}
+  return lmsLeaderboard(draw, players, teams, id => teamStats[id]?.ownGoals ?? 0,
+    n => `${n} own goal${n !== 1 ? 's' : ''}`)
 }
 
 const lmsMostRedCards: PrizeComputer = (scores, draw, players, teams) => {
   const cards = scores.cards ?? {}
-  const ptm = playerTeamMap(draw)
-  let best: { playerId: string; val: number; teamIds: string[] } | null = null
-  for (const [playerId, teamIds] of ptm) {
-    const val = teamIds.reduce((s, id) => s + (cards[id]?.red ?? 0), 0)
-    if (!best || val > best.val) best = { playerId, val, teamIds }
-  }
-  if (!best || best.val === 0) return null
-  const playerTeams = best.teamIds.map(id => teams.find(t => t.id === id)).filter(Boolean) as Team[]
-  return { player: playerName(best.playerId, players), teams: playerTeams, stat: `${best.val} red card${best.val !== 1 ? 's' : ''}` }
+  return lmsLeaderboard(draw, players, teams, id => cards[id]?.red ?? 0,
+    n => `${n} red card${n !== 1 ? 's' : ''}`)
 }
 
 const PRIZE_COMPUTERS: Record<string, PrizeComputer> = {
