@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-28T06:25:26.685Z",
+  "lastUpdated": "2026-06-28T07:51:18.162Z",
   "matches": [
     {
       "id": 537327,
@@ -2340,17 +2340,17 @@
     "PAR": {
       "scored": 2,
       "conceded": 4,
-      "ownGoals": 0
+      "ownGoals": 1
     },
     "QAT": {
       "scored": 2,
       "conceded": 10,
-      "ownGoals": 0
+      "ownGoals": 2
     },
     "SUI": {
       "scored": 7,
       "conceded": 3,
-      "ownGoals": 0
+      "ownGoals": 1
     },
     "BRA": {
       "scored": 7,
@@ -2360,7 +2360,7 @@
     "MAR": {
       "scored": 6,
       "conceded": 3,
-      "ownGoals": 0
+      "ownGoals": 1
     },
     "HAI": {
       "scored": 2,
@@ -2375,7 +2375,7 @@
     "AUS": {
       "scored": 2,
       "conceded": 2,
-      "ownGoals": 0
+      "ownGoals": 1
     },
     "TUR": {
       "scored": 3,
@@ -2390,7 +2390,7 @@
     "CUW": {
       "scored": 1,
       "conceded": 9,
-      "ownGoals": 0
+      "ownGoals": 2
     },
     "NED": {
       "scored": 10,
@@ -2420,7 +2420,7 @@
     "TUN": {
       "scored": 2,
       "conceded": 12,
-      "ownGoals": 0
+      "ownGoals": 1
     },
     "ESP": {
       "scored": 5,
@@ -2440,12 +2440,12 @@
     "EGY": {
       "scored": 5,
       "conceded": 3,
-      "ownGoals": 0
+      "ownGoals": 1
     },
     "KSA": {
       "scored": 1,
       "conceded": 5,
-      "ownGoals": 0
+      "ownGoals": 1
     },
     "URU": {
       "scored": 3,
@@ -2475,7 +2475,7 @@
     "IRQ": {
       "scored": 1,
       "conceded": 12,
-      "ownGoals": 0
+      "ownGoals": 1
     },
     "NOR": {
       "scored": 8,
@@ -2500,7 +2500,7 @@
     "JOR": {
       "scored": 3,
       "conceded": 8,
-      "ownGoals": 0
+      "ownGoals": 1
     },
     "POR": {
       "scored": 6,
@@ -2535,7 +2535,7 @@
     "UZB": {
       "scored": 2,
       "conceded": 11,
-      "ownGoals": 0
+      "ownGoals": 1
     },
     "COL": {
       "scored": 4,
