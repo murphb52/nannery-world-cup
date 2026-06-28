@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-28T19:38:04.895Z",
+  "lastUpdated": "2026-06-28T21:09:09.259Z",
   "matches": [
     {
       "id": 537327,
@@ -944,11 +944,11 @@
       "homeTeamId": "RSA",
       "awayTeamId": "CAN",
       "homeScore": 0,
-      "awayScore": 0,
+      "awayScore": 1,
       "date": "2026-06-28T19:00:00Z",
       "venue": null,
-      "status": "IN_PLAY",
-      "winner": "DRAW"
+      "status": "FINISHED",
+      "winner": "AWAY_TEAM"
     },
     {
       "id": 537423,
@@ -2118,7 +2118,7 @@
       "red": 0
     },
     "CAN": {
-      "yellow": 5,
+      "yellow": 7,
       "red": 0
     },
     "BIH": {
@@ -2309,7 +2309,7 @@
     },
     "RSA": {
       "scored": 2,
-      "conceded": 3,
+      "conceded": 4,
       "ownGoals": 0
     },
     "KOR": {
@@ -2323,7 +2323,7 @@
       "ownGoals": 0
     },
     "CAN": {
-      "scored": 8,
+      "scored": 9,
       "conceded": 3,
       "ownGoals": 0
     },

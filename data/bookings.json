@@ -1262,5 +1262,19 @@
       "player": "Kojo Peprah Oppong",
       "card": "YELLOW"
     }
+  ],
+  "537417": [
+    {
+      "minute": 54,
+      "teamId": "CAN",
+      "player": "Nathan Saliba",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 67,
+      "teamId": "CAN",
+      "player": "Niko Sigur",
+      "card": "YELLOW"
+    }
   ]
 }
