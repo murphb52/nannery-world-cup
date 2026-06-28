@@ -34,6 +34,13 @@ const LMS_PRIZES: PrizeDefinition[] = [
   { key: 'lmsMostRedCards',     title: 'Red Cards',           icon: '🟥', description: 'Most red cards across both teams',             amount: 0 },
 ]
 
+const MURPHYS_SLOSH_PRIZES: PrizeDefinition[] = [
+  { key: 'winner',          title: 'Winner',       icon: '🏆', description: 'Owns the team that wins the World Cup',         amount: 60 },
+  { key: 'runnerUp',        title: 'Second Place', icon: '🥈', description: 'Owns the team that loses the final',            amount: 40 },
+  { key: 'thirdPlace',      title: 'Third Place',  icon: '🥉', description: 'Owns the winner of the 3rd/4th place play-off', amount: 10 },
+  { key: 'firstEliminated', title: 'Wooden Spoon', icon: '🥄', description: 'Owns the first team eliminated',                amount: 10 },
+]
+
 export const SWEEPSTAKES: Record<string, SweepstakesConfig> = {
   'nannery': {
     id: 'nannery',
@@ -50,5 +57,13 @@ export const SWEEPSTAKES: Record<string, SweepstakesConfig> = {
     dataDir: 'lms',
     passphrase: 'lastmanstanding2026',
     prizes: LMS_PRIZES,
+  },
+  'murphys-slosh': {
+    id: 'murphys-slosh',
+    name: "Murphy's Slosh",
+    year: 2026,
+    dataDir: 'slosh',
+    passphrase: 'murphysslosh2026',
+    prizes: MURPHYS_SLOSH_PRIZES,
   },
 }
