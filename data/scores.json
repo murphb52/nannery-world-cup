@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-28T00:07:29.136Z",
+  "lastUpdated": "2026-06-28T05:04:21.457Z",
   "matches": [
     {
       "id": 537327,
@@ -895,7 +895,7 @@
       "awayScore": 0,
       "date": "2026-06-27T23:30:00Z",
       "venue": null,
-      "status": "LIVE",
+      "status": "FINISHED",
       "winner": "DRAW"
     },
     {
@@ -904,12 +904,12 @@
       "group": "GROUP_K",
       "homeTeamId": "COD",
       "awayTeamId": "UZB",
-      "homeScore": 1,
+      "homeScore": 3,
       "awayScore": 1,
       "date": "2026-06-27T23:30:00Z",
       "venue": null,
-      "status": "LIVE",
-      "winner": "DRAW"
+      "status": "FINISHED",
+      "winner": "HOME_TEAM"
     },
     {
       "id": 537401,
@@ -917,12 +917,12 @@
       "group": "GROUP_J",
       "homeTeamId": "JOR",
       "awayTeamId": "ARG",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 1,
+      "awayScore": 3,
       "date": "2026-06-28T02:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null
+      "status": "FINISHED",
+      "winner": "AWAY_TEAM"
     },
     {
       "id": 537402,
@@ -930,12 +930,12 @@
       "group": "GROUP_J",
       "homeTeamId": "ALG",
       "awayTeamId": "AUT",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 3,
+      "awayScore": 3,
       "date": "2026-06-28T02:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null
+      "status": "FINISHED",
+      "winner": "DRAW"
     },
     {
       "id": 537417,
@@ -1398,8 +1398,8 @@
         "points": 3,
         "yellowCards": 4,
         "redCards": 0,
-        "eliminated": false,
-        "eliminatedAt": null
+        "eliminated": true,
+        "eliminatedAt": "2026-06-28T02:00:00Z"
       },
       {
         "teamId": "CZE",
@@ -1522,8 +1522,8 @@
         "points": 3,
         "yellowCards": 5,
         "redCards": 0,
-        "eliminated": false,
-        "eliminatedAt": null
+        "eliminated": true,
+        "eliminatedAt": "2026-06-28T02:00:00Z"
       },
       {
         "teamId": "HAI",
@@ -1770,8 +1770,8 @@
         "points": 3,
         "yellowCards": 6,
         "redCards": 0,
-        "eliminated": false,
-        "eliminatedAt": null
+        "eliminated": true,
+        "eliminatedAt": "2026-06-28T02:00:00Z"
       },
       {
         "teamId": "NZL",
@@ -1832,8 +1832,8 @@
         "points": 2,
         "yellowCards": 5,
         "redCards": 1,
-        "eliminated": false,
-        "eliminatedAt": null
+        "eliminated": true,
+        "eliminatedAt": "2026-06-28T02:00:00Z"
       },
       {
         "teamId": "KSA",
@@ -1916,14 +1916,14 @@
     "Group J": [
       {
         "teamId": "ARG",
-        "played": 2,
-        "won": 2,
+        "played": 3,
+        "won": 3,
         "drawn": 0,
         "lost": 0,
-        "goalsFor": 5,
-        "goalsAgainst": 0,
-        "goalDiff": 5,
-        "points": 6,
+        "goalsFor": 8,
+        "goalsAgainst": 1,
+        "goalDiff": 7,
+        "points": 9,
         "yellowCards": 2,
         "redCards": 0,
         "eliminated": false,
@@ -1931,29 +1931,29 @@
       },
       {
         "teamId": "AUT",
-        "played": 2,
+        "played": 3,
         "won": 1,
-        "drawn": 0,
+        "drawn": 1,
         "lost": 1,
-        "goalsFor": 3,
-        "goalsAgainst": 3,
+        "goalsFor": 6,
+        "goalsAgainst": 6,
         "goalDiff": 0,
-        "points": 3,
-        "yellowCards": 3,
+        "points": 4,
+        "yellowCards": 4,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
       },
       {
         "teamId": "ALG",
-        "played": 2,
+        "played": 3,
         "won": 1,
-        "drawn": 0,
+        "drawn": 1,
         "lost": 1,
-        "goalsFor": 2,
-        "goalsAgainst": 4,
+        "goalsFor": 5,
+        "goalsAgainst": 7,
         "goalDiff": -2,
-        "points": 3,
+        "points": 4,
         "yellowCards": 1,
         "redCards": 0,
         "eliminated": false,
@@ -1961,18 +1961,18 @@
       },
       {
         "teamId": "JOR",
-        "played": 2,
+        "played": 3,
         "won": 0,
         "drawn": 0,
-        "lost": 2,
-        "goalsFor": 2,
-        "goalsAgainst": 5,
-        "goalDiff": -3,
+        "lost": 3,
+        "goalsFor": 3,
+        "goalsAgainst": 8,
+        "goalDiff": -5,
         "points": 0,
-        "yellowCards": 1,
+        "yellowCards": 4,
         "redCards": 0,
-        "eliminated": false,
-        "eliminatedAt": null
+        "eliminated": true,
+        "eliminatedAt": "2026-06-28T02:00:00Z"
       }
     ],
     "Group K": [
@@ -1986,7 +1986,7 @@
         "goalsAgainst": 1,
         "goalDiff": 3,
         "points": 7,
-        "yellowCards": 3,
+        "yellowCards": 4,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
@@ -2007,34 +2007,34 @@
         "eliminatedAt": null
       },
       {
-        "teamId": "UZB",
+        "teamId": "COD",
         "played": 3,
         "won": 1,
-        "drawn": 0,
-        "lost": 2,
-        "goalsFor": 2,
-        "goalsAgainst": 8,
-        "goalDiff": -6,
-        "points": 3,
-        "yellowCards": 2,
+        "drawn": 1,
+        "lost": 1,
+        "goalsFor": 4,
+        "goalsAgainst": 3,
+        "goalDiff": 1,
+        "points": 4,
+        "yellowCards": 5,
         "redCards": 0,
         "eliminated": false,
         "eliminatedAt": null
       },
       {
-        "teamId": "COD",
+        "teamId": "UZB",
         "played": 3,
         "won": 0,
-        "drawn": 1,
-        "lost": 2,
-        "goalsFor": 1,
-        "goalsAgainst": 3,
-        "goalDiff": -2,
-        "points": 1,
-        "yellowCards": 2,
+        "drawn": 0,
+        "lost": 3,
+        "goalsFor": 2,
+        "goalsAgainst": 11,
+        "goalDiff": -9,
+        "points": 0,
+        "yellowCards": 4,
         "redCards": 0,
-        "eliminated": false,
-        "eliminatedAt": null
+        "eliminated": true,
+        "eliminatedAt": "2026-06-27T23:30:00Z"
       }
     ],
     "Group L": [
@@ -2246,7 +2246,7 @@
       "red": 0
     },
     "AUT": {
-      "yellow": 3,
+      "yellow": 4,
       "red": 0
     },
     "ARG": {
@@ -2258,7 +2258,7 @@
       "red": 0
     },
     "JOR": {
-      "yellow": 1,
+      "yellow": 4,
       "red": 0
     },
     "POR": {
@@ -2266,15 +2266,15 @@
       "red": 0
     },
     "COD": {
-      "yellow": 2,
+      "yellow": 5,
       "red": 0
     },
     "COL": {
-      "yellow": 3,
+      "yellow": 4,
       "red": 0
     },
     "UZB": {
-      "yellow": 2,
+      "yellow": 4,
       "red": 0
     },
     "GHA": {
@@ -2483,23 +2483,23 @@
       "ownGoals": 0
     },
     "ARG": {
-      "scored": 5,
-      "conceded": 0,
+      "scored": 8,
+      "conceded": 1,
       "ownGoals": 0
     },
     "ALG": {
-      "scored": 2,
-      "conceded": 4,
+      "scored": 5,
+      "conceded": 7,
       "ownGoals": 0
     },
     "AUT": {
-      "scored": 3,
-      "conceded": 3,
+      "scored": 6,
+      "conceded": 6,
       "ownGoals": 0
     },
     "JOR": {
-      "scored": 2,
-      "conceded": 5,
+      "scored": 3,
+      "conceded": 8,
       "ownGoals": 0
     },
     "POR": {
@@ -2508,8 +2508,8 @@
       "ownGoals": 0
     },
     "COD": {
-      "scored": 1,
-      "conceded": 2,
+      "scored": 4,
+      "conceded": 3,
       "ownGoals": 0
     },
     "ENG": {
@@ -2533,8 +2533,8 @@
       "ownGoals": 0
     },
     "UZB": {
-      "scored": 1,
-      "conceded": 8,
+      "scored": 2,
+      "conceded": 11,
       "ownGoals": 0
     },
     "COL": {

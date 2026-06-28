@@ -1038,6 +1038,34 @@
       "card": "YELLOW"
     }
   ],
+  "537401": [
+    {
+      "minute": 17,
+      "teamId": "JOR",
+      "player": "Mohannad Abu Taha",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 64,
+      "teamId": "JOR",
+      "player": "Yazan Al-Arab",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 90,
+      "teamId": "JOR",
+      "player": "Mohammed Abu Zraiq",
+      "card": "YELLOW"
+    }
+  ],
+  "537402": [
+    {
+      "minute": 11,
+      "teamId": "AUT",
+      "player": "Marko Arnautovic",
+      "card": "YELLOW"
+    }
+  ],
   "537403": [
     {
       "minute": 13,
@@ -1109,6 +1137,46 @@
       "minute": 90,
       "teamId": "COL",
       "player": "Jefferson Lerma",
+      "card": "YELLOW"
+    }
+  ],
+  "537407": [
+    {
+      "minute": 86,
+      "teamId": "COL",
+      "player": "Gustavo Puerta",
+      "card": "YELLOW"
+    }
+  ],
+  "537408": [
+    {
+      "minute": 21,
+      "teamId": "COD",
+      "player": "Noah Sadiki",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 43,
+      "teamId": "UZB",
+      "player": "Abdukodir Khusanov",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 45,
+      "teamId": "COD",
+      "player": "Nathanaël Mbuku",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 48,
+      "teamId": "UZB",
+      "player": "Sherzod Nasrullaev",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 62,
+      "teamId": "COD",
+      "player": "Samuel Moutoussamy",
       "card": "YELLOW"
     }
   ],
