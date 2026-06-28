@@ -9,6 +9,8 @@ interface PrizeResult {
   team?: Team
   teams?: Team[]
   stat: string
+  /** Per-team badge (e.g. each team's own-goal tally), keyed by teamId. */
+  teamNotes?: Record<string, string>
   /** Second-placed team(s) — shown so players can see if they're close. */
   runnersUp?: { teams: Team[]; stat: string }
 }
@@ -246,7 +248,11 @@ const lmsMostOwnGoals: PrizeComputer = (scores, draw, players, teams) => {
   const tied = playerTotals.filter(p => p.val === maxVal)
   const allTeams = tied.flatMap(p => p.teamIds.map(id => teams.find(t => t.id === id)).filter(Boolean) as Team[])
   const tiedPlayerNames = tied.map(p => playerName(p.playerId, players)).join(' & ')
-  return { player: tiedPlayerNames, teams: allTeams, stat: `${maxVal} own goal${maxVal !== 1 ? 's' : ''}` }
+  // Break the total down per team so it's clear which side conceded the own goals.
+  const teamNotes = Object.fromEntries(
+    allTeams.map(t => [t.id, `${teamStats[t.id]?.ownGoals ?? 0} OG`])
+  )
+  return { player: tiedPlayerNames, teams: allTeams, teamNotes, stat: `${maxVal} own goal${maxVal !== 1 ? 's' : ''}` }
 }
 
 const lmsMostRedCards: PrizeComputer = (scores, draw, players, teams) => {
@@ -281,11 +287,14 @@ function TeamRow({
   player,
   isOut,
   tone = 'lead',
+  note,
 }: {
   team: Team
   player: string
   isOut: boolean
   tone?: 'lead' | 'chase'
+  /** Optional right-aligned badge, e.g. this team's own-goal count. */
+  note?: string
 }) {
   return (
     <div className="flex items-center gap-3">
@@ -303,6 +312,9 @@ function TeamRow({
         </p>
         <p className="text-xs text-white/60 truncate">{team.name}</p>
       </div>
+      {note && (
+        <span className="text-xs font-semibold text-white/70 tabular-nums shrink-0">{note}</span>
+      )}
     </div>
   )
 }
@@ -340,6 +352,7 @@ function PrizeCard({
               team={t}
               player={teamToPlayer[t.id] ?? result.player}
               isOut={eliminated.has(t.id)}
+              note={result.teamNotes?.[t.id]}
             />
           ))}
           <p className="text-xs text-white/40 text-right border-t border-white/5 pt-2 mt-1">{result.stat}</p>
