@@ -146,6 +146,17 @@ const runnerUp: PrizeComputer = (scores, draw, players, teams) => {
   return { player: names[team.id] ?? '—', team, stat: 'Runner-Up 🥈' }
 }
 
+const thirdPlace: PrizeComputer = (scores, draw, players, teams) => {
+  const match = scores.matches?.find(m => m.stage === 'THIRD_PLACE' && m.status === 'FINISHED')
+  if (!match) return null
+  const winnerId = matchWinnerId(match)
+  if (!winnerId) return null
+  const team = teams.find(t => t.id === winnerId)
+  if (!team) return null
+  const names = resolveNames(draw, players)
+  return { player: names[team.id] ?? '—', team, stat: 'Third-place play-off winner 🥉' }
+}
+
 const mostGoalsScored: PrizeComputer = (scores, draw, players, teams) => {
   const totals = goalTotals(scores)
   const tiers = valueTiers(Object.entries(totals).map(([id, t]) => [id, t.for]), teams)
@@ -250,6 +261,7 @@ const lmsMostRedCards: PrizeComputer = (scores, draw, players, teams) => {
 const PRIZE_COMPUTERS: Record<string, PrizeComputer> = {
   winner,
   runnerUp,
+  thirdPlace,
   mostGoalsScored,
   mostConceded,
   mostYellows,
