@@ -16,9 +16,9 @@ interface ZoomMatch extends MatchData {
 }
 
 // Layout constants
-const SLOT_H = 80    // px height per R32 slot
-const MATCH_H = 64   // px height of a match card
-const MATCH_W = 152  // px width of a match card
+const SLOT_H = 96    // px height per R32 slot
+const MATCH_H = 80   // px height of a match card (two stacked team/player rows)
+const MATCH_W = 188  // px width of a match card
 const COL_GAP = 24   // px gap between columns
 const BRACKET_H = 8 * SLOT_H  // 640px total
 const LABEL_H = 24  // px height reserved above matches for round labels
@@ -133,8 +133,8 @@ function buildPlaceholderBracket(): Record<string, MatchData[]> {
   }
 }
 
-function MatchCard({ match, teams, flipped = false, onClick }: {
-  match: MatchData; teams: Team[]; flipped?: boolean; onClick: () => void
+function MatchCard({ match, teams, playerNames, flipped = false, onClick }: {
+  match: MatchData; teams: Team[]; playerNames: Record<string, string>; flipped?: boolean; onClick: () => void
 }) {
   const home = teams.find(t => t.id === match.homeTeamId) ?? null
   const away = teams.find(t => t.id === match.awayTeamId) ?? null
@@ -143,13 +143,17 @@ function MatchCard({ match, teams, flipped = false, onClick }: {
   const awayWon = finished && match.awayScore! > match.homeScore!
 
   function Row({ team, score, won, lost }: { team: Team | null; score: number | null; won: boolean; lost: boolean }) {
+    const player = team ? playerNames[team.id] : null
     return (
-      <div className={`flex items-center gap-1.5 px-2 py-1 ${lost ? 'opacity-40' : ''}`}>
+      <div className={`flex items-center gap-1.5 px-2 h-1/2 ${lost ? 'opacity-40' : ''}`}>
         {team
           ? <>
               <img src={team.flag} alt={team.name} className={`w-6 h-4 object-cover rounded shrink-0 ${lost ? 'grayscale' : ''}`} />
-              <span className={`text-xs flex-1 truncate ${won ? 'text-yellow-400 font-semibold' : 'text-white/80'}`}>{team.name}</span>
-              {score !== null && <span className={`text-xs font-bold ${won ? 'text-yellow-400' : 'text-white/40'}`}>{score}</span>}
+              <div className="flex-1 min-w-0 leading-tight">
+                <div className={`text-xs truncate ${won ? 'text-yellow-400 font-semibold' : 'text-white/80'}`}>{team.name}</div>
+                {player && <div className="text-[10px] text-white/45 truncate">{player}</div>}
+              </div>
+              {score !== null && <span className={`text-sm font-bold shrink-0 ${won ? 'text-yellow-400' : 'text-white/40'}`}>{score}</span>}
             </>
           : <>
               <div className="w-6 h-4 bg-white/10 rounded shrink-0" />
@@ -177,10 +181,11 @@ function MatchCard({ match, teams, flipped = false, onClick }: {
   )
 }
 
-function BracketColumn({ rounds, bracket, teams, leftSide, onMatchClick }: {
+function BracketColumn({ rounds, bracket, teams, playerNames, leftSide, onMatchClick }: {
   rounds: readonly string[]
   bracket: Record<string, MatchData[]>
   teams: Team[]
+  playerNames: Record<string, string>
   leftSide: boolean
   onMatchClick: (m: MatchData, round: string) => void
 }) {
@@ -209,6 +214,7 @@ function BracketColumn({ rounds, bracket, teams, leftSide, onMatchClick }: {
                 <MatchCard
                   match={match}
                   teams={teams}
+                  playerNames={playerNames}
                   flipped={!leftSide}
                   onClick={() => onMatchClick(match, round)}
                 />
@@ -283,6 +289,7 @@ export default function KnockoutPage() {
               rounds={LEFT_ROUNDS}
               bracket={bracket}
               teams={teams}
+              playerNames={playerNames}
               leftSide={true}
               onMatchClick={(m, r) => setZoom({ ...m, roundLabel: ROUND_LABELS[r] })}
             />
@@ -297,6 +304,7 @@ export default function KnockoutPage() {
                   <MatchCard
                     match={final}
                     teams={teams}
+                    playerNames={playerNames}
                     onClick={() => setZoom({ ...final, roundLabel: 'Final' })}
                   />
                 </div>
@@ -308,6 +316,7 @@ export default function KnockoutPage() {
               rounds={RIGHT_ROUNDS}
               bracket={bracket}
               teams={teams}
+              playerNames={playerNames}
               leftSide={false}
               onMatchClick={(m, r) => setZoom({ ...m, roundLabel: ROUND_LABELS[r] })}
             />
