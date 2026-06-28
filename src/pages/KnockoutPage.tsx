@@ -233,13 +233,21 @@ export default function KnockoutPage() {
       setTeams(t)
       if (s.matches?.length) {
         const updated = { ...buildPlaceholderBracket() }
+        // Group knockout matches by stage. The API match `id` is not the
+        // placeholder slot id (`R32-1`…), but ids run sequentially within a
+        // stage in bracket order, so sort by id and fill slots positionally.
+        const byStage: Record<string, Match[]> = {}
         for (const m of s.matches.filter((m: Match) => m.stage !== 'GROUP')) {
-          const stage = updated[m.stage]
-          if (!stage) continue
-          const idx = stage.findIndex(x => x.id === String(m.id))
-          if (idx !== -1) {
-            updated[m.stage][idx] = { ...updated[m.stage][idx], homeTeamId: m.homeTeamId, awayTeamId: m.awayTeamId, homeScore: m.homeScore, awayScore: m.awayScore }
-          }
+          if (!updated[m.stage]) continue // skip stages not in the bracket (e.g. THIRD_PLACE)
+          ;(byStage[m.stage] ??= []).push(m)
+        }
+        for (const [stage, matches] of Object.entries(byStage)) {
+          matches.sort((a, b) => a.id - b.id)
+          matches.forEach((m, idx) => {
+            const slot = updated[stage][idx]
+            if (!slot) return
+            updated[stage][idx] = { ...slot, homeTeamId: m.homeTeamId, awayTeamId: m.awayTeamId, homeScore: m.homeScore, awayScore: m.awayScore }
+          })
         }
         setBracket(updated)
       }
