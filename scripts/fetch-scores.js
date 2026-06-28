@@ -1,12 +1,13 @@
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import { fetchCardsFromEspn } from './fetch-cards.js'
+import { fetchEventsFromEspn } from './fetch-cards.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const dataDir = path.join(__dirname, '..', 'data')
 const scoresPath = path.join(dataDir, 'scores.json')
 const bookingsPath = path.join(dataDir, 'bookings.json')
+const ownGoalsPath = path.join(dataDir, 'owngoals.json')
 
 const API_KEY = process.env.FOOTBALL_DATA_API_KEY
 const COMPETITION_ID = 2000 // FIFA World Cup on football-data.org
@@ -63,16 +64,27 @@ async function main() {
   const teamStats = computeTeamStats(rawMatches)
 
   const existingBookings = readJson(bookingsPath, {})
+  const existingOwnGoals = readJson(ownGoalsPath, {})
   let bookings = existingBookings
+  let ownGoalsByMatch = existingOwnGoals
   try {
-    bookings = await fetchCardsFromEspn(matches, existingBookings)
+    const events = await fetchEventsFromEspn(matches, existingBookings, existingOwnGoals)
+    bookings = events.bookings
+    ownGoalsByMatch = events.ownGoals
     if (JSON.stringify(bookings) !== JSON.stringify(existingBookings)) {
       fs.writeFileSync(bookingsPath, JSON.stringify(bookings, null, 2))
     }
+    if (JSON.stringify(ownGoalsByMatch) !== JSON.stringify(existingOwnGoals)) {
+      fs.writeFileSync(ownGoalsPath, JSON.stringify(ownGoalsByMatch, null, 2))
+    }
   } catch (err) {
-    console.warn(`ESPN card fetch failed, using existing bookings: ${err.message}`)
+    console.warn(`ESPN event fetch failed, using existing cache: ${err.message}`)
     bookings = existingBookings
+    ownGoalsByMatch = existingOwnGoals
   }
+  // football-data's matches-list endpoint omits per-goal detail, so own goals
+  // come from ESPN's key events instead. Fold them into the per-team stats.
+  applyOwnGoals(teamStats, ownGoalsByMatch)
   const { cards, groupCards, firstRedCard } = aggregateCards(matches, bookings)
   const eliminations = { ...computeEliminations(matches), ...MANUAL_ELIMINATIONS }
 
@@ -226,11 +238,9 @@ function miniTable(groupMatches) {
     b.points - a.points || b.goalDiff - a.goalDiff || b.goalsFor - a.goalsFor)
 }
 
-// Aggregate per-team goals scored, conceded, and own goals from raw API match data.
-// The football-data.org API includes a `goals` array per match where each entry has:
-//   type: "REGULAR" | "OWN_GOAL" | "PENALTY" | "EXTRA_TIME"
-//   team: the team that BENEFITED from the goal (scored into the opponent's net)
-// For an OWN_GOAL, team = the team that gained the goal, so the committing team is the other one.
+// Aggregate per-team goals scored and conceded from raw API match data. Own
+// goals are filled in separately from ESPN key events (applyOwnGoals), because
+// football-data.org's matches-list endpoint does not include per-goal detail.
 function computeTeamStats(rawMatches) {
   const stats = {}
   for (const m of rawMatches) {
@@ -247,13 +257,17 @@ function computeTeamStats(rawMatches) {
     stats[home].conceded += as_
     stats[away].scored += as_
     stats[away].conceded += hs
+  }
+  return stats
+}
 
-    // Own goals: goal.team is the benefiting team, committing team is the other
-    for (const goal of m.goals ?? []) {
-      if (goal.type !== 'OWN_GOAL') continue
-      const benefitingTla = goal.team?.tla
-      const committingTla = benefitingTla === home ? away : home
-      if (stats[committingTla]) stats[committingTla].ownGoals++
+// Fold ESPN-sourced own goals into teamStats. ownGoalsByMatch maps a match id
+// to a list of { teamId } entries where teamId is the COMMITTING team.
+function applyOwnGoals(stats, ownGoalsByMatch) {
+  for (const events of Object.values(ownGoalsByMatch ?? {})) {
+    for (const og of events ?? []) {
+      if (!og.teamId) continue
+      ;(stats[og.teamId] ??= { scored: 0, conceded: 0, ownGoals: 0 }).ownGoals++
     }
   }
   return stats
