@@ -9,6 +9,8 @@ interface PrizeResult {
   team?: Team
   teams?: Team[]
   stat: string
+  /** Second-placed team(s) — shown so players can see if they're close. */
+  runnersUp?: { teams: Team[]; stat: string }
 }
 
 type PrizeComputer = (
@@ -80,6 +82,44 @@ function playerName(playerId: string, players: Player[]): string {
   return players.find(p => p.id === playerId)?.name ?? playerId
 }
 
+// Group teams into descending value tiers (ignoring zero/negative values), so
+// tier[0] is the leader(s) and tier[1] is the next-closest team(s).
+function valueTiers(valueByTeam: [string, number][], teams: Team[]): { value: number; teams: Team[] }[] {
+  const byValue = new Map<number, Team[]>()
+  for (const [id, val] of valueByTeam) {
+    if (val <= 0) continue
+    const team = teams.find(t => t.id === id)
+    if (!team) continue
+    const arr = byValue.get(val) ?? []
+    arr.push(team)
+    byValue.set(val, arr)
+  }
+  return [...byValue.entries()]
+    .sort((a, b) => b[0] - a[0])
+    .map(([value, tierTeams]) => ({ value, teams: tierTeams }))
+}
+
+// Build a leaderboard-style result: the top tier as the winner(s), plus the
+// second tier as runners-up so players can gauge how close they are.
+function leaderboardResult(
+  tiers: { value: number; teams: Team[] }[],
+  names: Record<string, string>,
+  statFor: (value: number) => string
+): PrizeResult | null {
+  const lead = tiers[0]
+  if (!lead) return null
+  const uniquePlayers = [...new Set(lead.teams.map(t => names[t.id] ?? '—'))]
+  const result: PrizeResult = {
+    player: uniquePlayers.join(' & '),
+    teams: lead.teams,
+    stat: statFor(lead.value),
+  }
+  if (tiers[1]) {
+    result.runnersUp = { teams: tiers[1].teams, stat: statFor(tiers[1].value) }
+  }
+  return result
+}
+
 // --- Single-team prize computers (Nannery style) ---
 
 const winner: PrizeComputer = (scores, draw, players, teams) => {
@@ -106,49 +146,23 @@ const runnerUp: PrizeComputer = (scores, draw, players, teams) => {
 
 const mostGoalsScored: PrizeComputer = (scores, draw, players, teams) => {
   const totals = goalTotals(scores)
-  const entries = Object.entries(totals)
-  if (!entries.length) return null
-  const maxFor = Math.max(...entries.map(([, t]) => t.for))
-  if (maxFor === 0) return null
-  const tiedTeams = entries
-    .filter(([, t]) => t.for === maxFor)
-    .map(([id]) => teams.find(t => t.id === id))
-    .filter(Boolean) as Team[]
-  if (!tiedTeams.length) return null
+  const tiers = valueTiers(Object.entries(totals).map(([id, t]) => [id, t.for]), teams)
   const names = resolveNames(draw, players)
-  const uniquePlayers = [...new Set(tiedTeams.map(t => names[t.id] ?? '—'))]
-  return { player: uniquePlayers.join(' & '), teams: tiedTeams, stat: `${maxFor} goals scored` }
+  return leaderboardResult(tiers, names, n => `${n} goals scored`)
 }
 
 const mostConceded: PrizeComputer = (scores, draw, players, teams) => {
   const totals = goalTotals(scores)
-  const entries = Object.entries(totals)
-  if (!entries.length) return null
-  const maxAgainst = Math.max(...entries.map(([, t]) => t.against))
-  if (maxAgainst === 0) return null
-  const tiedTeams = entries
-    .filter(([, t]) => t.against === maxAgainst)
-    .map(([id]) => teams.find(t => t.id === id))
-    .filter(Boolean) as Team[]
-  if (!tiedTeams.length) return null
+  const tiers = valueTiers(Object.entries(totals).map(([id, t]) => [id, t.against]), teams)
   const names = resolveNames(draw, players)
-  const uniquePlayers = [...new Set(tiedTeams.map(t => names[t.id] ?? '—'))]
-  return { player: uniquePlayers.join(' & '), teams: tiedTeams, stat: `${maxAgainst} goals conceded` }
+  return leaderboardResult(tiers, names, n => `${n} goals conceded`)
 }
 
 const mostYellows: PrizeComputer = (scores, draw, players, teams) => {
-  const entries = Object.entries(scores.cards ?? {})
-  if (!entries.length) return null
-  const maxYellow = Math.max(...entries.map(([, c]) => c.yellow))
-  if (maxYellow === 0) return null
-  const tiedTeams = entries
-    .filter(([, c]) => c.yellow === maxYellow)
-    .map(([id]) => teams.find(t => t.id === id))
-    .filter(Boolean) as Team[]
-  if (!tiedTeams.length) return null
+  const entries = Object.entries(scores.cards ?? {}).map(([id, c]) => [id, c.yellow]) as [string, number][]
+  const tiers = valueTiers(entries, teams)
   const names = resolveNames(draw, players)
-  const uniquePlayers = [...new Set(tiedTeams.map(t => names[t.id] ?? '—'))]
-  return { player: uniquePlayers.join(' & '), teams: tiedTeams, stat: `${maxYellow} yellow cards` }
+  return leaderboardResult(tiers, names, n => `${n} yellow card${n === 1 ? '' : 's'}`)
 }
 
 const firstRed: PrizeComputer = (scores, draw, players, teams) => {
@@ -258,6 +272,37 @@ const PRIZE_COMPUTERS: Record<string, PrizeComputer> = {
   lmsMostRedCards,
 }
 
+function TeamRow({
+  team,
+  player,
+  isOut,
+  tone = 'lead',
+}: {
+  team: Team
+  player: string
+  isOut: boolean
+  tone?: 'lead' | 'chase'
+}) {
+  return (
+    <div className="flex items-center gap-3">
+      <img
+        src={team.flag}
+        alt={team.name}
+        title={isOut ? `${team.name} (knocked out)` : team.name}
+        className={`w-10 h-7 object-cover rounded shrink-0 transition-opacity ${
+          isOut ? 'opacity-30 grayscale' : ''
+        }`}
+      />
+      <div className="flex-1 min-w-0">
+        <p className={`font-semibold truncate ${tone === 'lead' ? 'text-yellow-400' : 'text-white/70'}`}>
+          {player}
+        </p>
+        <p className="text-xs text-white/60 truncate">{team.name}</p>
+      </div>
+    </div>
+  )
+}
+
 function PrizeCard({
   def,
   result,
@@ -285,26 +330,31 @@ function PrizeCard({
 
       {result ? (
         <div className="bg-white/5 rounded-xl p-3 flex flex-col gap-2">
-          {displayTeams.map(t => {
-            const isOut = eliminated.has(t.id)
-            return (
-              <div key={t.id} className="flex items-center gap-3">
-                <img
-                  src={t.flag}
-                  alt={t.name}
-                  title={isOut ? `${t.name} (knocked out)` : t.name}
-                  className={`w-10 h-7 object-cover rounded shrink-0 transition-opacity ${
-                    isOut ? 'opacity-30 grayscale' : ''
-                  }`}
-                />
-                <div className="flex-1 min-w-0">
-                  <p className="font-semibold text-yellow-400 truncate">{teamToPlayer[t.id] ?? result.player}</p>
-                  <p className="text-xs text-white/60 truncate">{t.name}</p>
-                </div>
-              </div>
-            )
-          })}
+          {displayTeams.map(t => (
+            <TeamRow
+              key={t.id}
+              team={t}
+              player={teamToPlayer[t.id] ?? result.player}
+              isOut={eliminated.has(t.id)}
+            />
+          ))}
           <p className="text-xs text-white/40 text-right border-t border-white/5 pt-2 mt-1">{result.stat}</p>
+
+          {result.runnersUp && result.runnersUp.teams.length > 0 && (
+            <div className="flex flex-col gap-2 border-t border-white/5 pt-2 mt-1">
+              <p className="text-[10px] font-semibold uppercase tracking-wide text-white/30">Next closest</p>
+              {result.runnersUp.teams.map(t => (
+                <TeamRow
+                  key={t.id}
+                  team={t}
+                  player={teamToPlayer[t.id] ?? '—'}
+                  isOut={eliminated.has(t.id)}
+                  tone="chase"
+                />
+              ))}
+              <p className="text-xs text-white/30 text-right">{result.runnersUp.stat}</p>
+            </div>
+          )}
         </div>
       ) : (
         <div className="bg-white/5 rounded-xl p-3 text-white/30 text-sm text-center">
