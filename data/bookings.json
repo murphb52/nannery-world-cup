@@ -1263,6 +1263,32 @@
       "card": "YELLOW"
     }
   ],
+  "537415": [
+    {
+      "minute": 65,
+      "teamId": "PAR",
+      "player": "Andrés Cubas",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 106,
+      "teamId": "GER",
+      "player": "Kai Havertz",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 115,
+      "teamId": "GER",
+      "player": "Jamal Musiala",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 117,
+      "teamId": "PAR",
+      "player": "Matías Galarza",
+      "card": "YELLOW"
+    }
+  ],
   "537417": [
     {
       "minute": 54,
