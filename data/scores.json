@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-28T21:09:09.259Z",
+  "lastUpdated": "2026-06-29T10:09:38.865Z",
   "matches": [
     {
       "id": 537327,
@@ -1149,7 +1149,7 @@
       "id": 537376,
       "stage": "R16",
       "group": null,
-      "homeTeamId": null,
+      "homeTeamId": "CAN",
       "awayTeamId": null,
       "homeScore": null,
       "awayScore": null,
