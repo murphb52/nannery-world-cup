@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-29T10:09:38.865Z",
+  "lastUpdated": "2026-06-29T17:43:18.231Z",
   "matches": [
     {
       "id": 537327,
@@ -956,12 +956,12 @@
       "group": null,
       "homeTeamId": "BRA",
       "awayTeamId": "JPN",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 1,
       "date": "2026-06-29T17:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null
+      "status": "IN_PLAY",
+      "winner": "AWAY_TEAM"
     },
     {
       "id": 537415,
