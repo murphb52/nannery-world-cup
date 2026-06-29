@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-29T21:53:35.249Z",
+  "lastUpdated": "2026-06-29T23:02:51.943Z",
   "matches": [
     {
       "id": 537327,
@@ -969,12 +969,12 @@
       "group": null,
       "homeTeamId": "GER",
       "awayTeamId": "PAR",
-      "homeScore": 1,
+      "homeScore": 2,
       "awayScore": 1,
       "date": "2026-06-29T20:30:00Z",
       "venue": null,
-      "status": "IN_PLAY",
-      "winner": "DRAW"
+      "status": "PAUSED",
+      "winner": "HOME_TEAM"
     },
     {
       "id": 537418,
