@@ -1276,5 +1276,37 @@
       "player": "Niko Sigur",
       "card": "YELLOW"
     }
+  ],
+  "537423": [
+    {
+      "minute": 12,
+      "teamId": "JPN",
+      "player": "Kaishu Sano",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 14,
+      "teamId": "BRA",
+      "player": "Casemiro",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 45,
+      "teamId": "JPN",
+      "player": "Daichi Kamada",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 48,
+      "teamId": "BRA",
+      "player": "Danilo",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 84,
+      "teamId": "JPN",
+      "player": "Junnosuke Suzuki",
+      "card": "YELLOW"
+    }
   ]
 }

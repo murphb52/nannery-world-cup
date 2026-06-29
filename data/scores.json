@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-29T17:43:18.231Z",
+  "lastUpdated": "2026-06-29T20:06:34.932Z",
   "matches": [
     {
       "id": 537327,
@@ -956,12 +956,12 @@
       "group": null,
       "homeTeamId": "BRA",
       "awayTeamId": "JPN",
-      "homeScore": 0,
+      "homeScore": 2,
       "awayScore": 1,
       "date": "2026-06-29T17:00:00Z",
       "venue": null,
-      "status": "IN_PLAY",
-      "winner": "AWAY_TEAM"
+      "status": "FINISHED",
+      "winner": "HOME_TEAM"
     },
     {
       "id": 537415,
@@ -2134,7 +2134,7 @@
       "red": 0
     },
     "BRA": {
-      "yellow": 5,
+      "yellow": 7,
       "red": 0
     },
     "HAI": {
@@ -2194,7 +2194,7 @@
       "red": 0
     },
     "JPN": {
-      "yellow": 1,
+      "yellow": 4,
       "red": 0
     },
     "EGY": {
@@ -2353,8 +2353,8 @@
       "ownGoals": 1
     },
     "BRA": {
-      "scored": 7,
-      "conceded": 1,
+      "scored": 9,
+      "conceded": 2,
       "ownGoals": 0
     },
     "MAR": {
@@ -2398,8 +2398,8 @@
       "ownGoals": 0
     },
     "JPN": {
-      "scored": 7,
-      "conceded": 3,
+      "scored": 8,
+      "conceded": 5,
       "ownGoals": 0
     },
     "CIV": {
