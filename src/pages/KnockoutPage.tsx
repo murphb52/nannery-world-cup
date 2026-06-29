@@ -10,6 +10,7 @@ interface MatchData {
   awayTeamId: string | null
   homeScore: number | null
   awayScore: number | null
+  winner?: 'HOME_TEAM' | 'AWAY_TEAM' | 'DRAW' | null
 }
 
 interface ZoomMatch extends MatchData {
@@ -132,6 +133,44 @@ function buildPlaceholderBracket(): Record<string, MatchData[]> {
     SF: Array.from({ length: 2 }, (_, i) => ({ id: `SF-${i + 1}`, homeTeamId: null, awayTeamId: null, homeScore: null, awayScore: null })),
     F: [{ id: 'F-1', homeTeamId: null, awayTeamId: null, homeScore: null, awayScore: null }],
   }
+}
+
+// Bracket stages in progression order. Slot `i` of one stage feeds slot
+// `floor(i/2)` of the next — home if `i` is even, away if odd — matching the
+// positional fill used when loading matches and the SVG connector layout.
+const STAGE_ORDER = ['R32', 'R16', 'QF', 'SF', 'F'] as const
+
+/** Returns the winning team id of a finished match, or null if undecided. */
+function matchWinner(m: MatchData): string | null {
+  if (m.winner === 'HOME_TEAM') return m.homeTeamId
+  if (m.winner === 'AWAY_TEAM') return m.awayTeamId
+  if (m.homeScore === null || m.awayScore === null) return null
+  if (m.homeScore > m.awayScore) return m.homeTeamId
+  if (m.awayScore > m.homeScore) return m.awayTeamId
+  return null // draw with no decided winner (e.g. pending penalties)
+}
+
+// Advance the winner of each finished match into the next round so a team that
+// has won is shown in the following stage even before the upstream data source
+// populates that fixture. Only fills empty slots, so real API team assignments
+// always take precedence.
+function propagateWinners(bracket: Record<string, MatchData[]>): Record<string, MatchData[]> {
+  for (let r = 0; r < STAGE_ORDER.length - 1; r++) {
+    const cur = bracket[STAGE_ORDER[r]] ?? []
+    const next = bracket[STAGE_ORDER[r + 1]] ?? []
+    cur.forEach((match, idx) => {
+      const winner = matchWinner(match)
+      if (!winner) return
+      const nextSlot = next[Math.floor(idx / 2)]
+      if (!nextSlot) return
+      if (idx % 2 === 0) {
+        if (nextSlot.homeTeamId === null) nextSlot.homeTeamId = winner
+      } else {
+        if (nextSlot.awayTeamId === null) nextSlot.awayTeamId = winner
+      }
+    })
+  }
+  return bracket
 }
 
 function MatchCard({ match, teams, playerNames, flipped = false, onClick }: {
@@ -257,10 +296,10 @@ export default function KnockoutPage() {
           matches.forEach((m, idx) => {
             const slot = updated[stage][idx]
             if (!slot) return
-            updated[stage][idx] = { ...slot, homeTeamId: m.homeTeamId, awayTeamId: m.awayTeamId, homeScore: m.homeScore, awayScore: m.awayScore }
+            updated[stage][idx] = { ...slot, homeTeamId: m.homeTeamId, awayTeamId: m.awayTeamId, homeScore: m.homeScore, awayScore: m.awayScore, winner: m.winner ?? null }
           })
         }
-        setBracket(updated)
+        setBracket(propagateWinners(updated))
       }
       setLoading(false)
     })
