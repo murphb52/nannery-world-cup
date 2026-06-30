@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-29T23:59:06.319Z",
+  "lastUpdated": "2026-06-30T01:31:50.524Z",
   "matches": [
     {
       "id": 537327,
@@ -969,8 +969,8 @@
       "group": null,
       "homeTeamId": "GER",
       "awayTeamId": "PAR",
-      "homeScore": 5,
-      "awayScore": 6,
+      "homeScore": 4,
+      "awayScore": 5,
       "date": "2026-06-29T20:30:00Z",
       "venue": null,
       "status": "FINISHED",
@@ -982,12 +982,12 @@
       "group": null,
       "homeTeamId": "NED",
       "awayTeamId": "MAR",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 0,
       "date": "2026-06-30T01:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null
+      "status": "IN_PLAY",
+      "winner": "DRAW"
     },
     {
       "id": 537424,
@@ -2338,8 +2338,8 @@
       "ownGoals": 0
     },
     "PAR": {
-      "scored": 8,
-      "conceded": 9,
+      "scored": 7,
+      "conceded": 8,
       "ownGoals": 1
     },
     "QAT": {
@@ -2383,8 +2383,8 @@
       "ownGoals": 0
     },
     "GER": {
-      "scored": 15,
-      "conceded": 10,
+      "scored": 14,
+      "conceded": 9,
       "ownGoals": 0
     },
     "CUW": {
