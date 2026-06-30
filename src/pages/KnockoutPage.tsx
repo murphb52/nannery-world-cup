@@ -151,6 +151,24 @@ function matchWinner(m: MatchData): string | null {
   return null // draw with no decided winner (e.g. pending penalties)
 }
 
+// Overlay an API result onto the bracket slot that holds the same fixture,
+// aligning home/away to the slot's existing orientation by team id (the API may
+// list the teams in the opposite order to how propagation placed them). Any team
+// the propagation could not yet determine is filled in from the API match.
+function overlayApiResult(slot: MatchData, m: Match) {
+  const flipped = slot.homeTeamId != null && slot.homeTeamId === m.awayTeamId
+  slot.homeScore = flipped ? m.awayScore : m.homeScore
+  slot.awayScore = flipped ? m.homeScore : m.awayScore
+  slot.winner = flipped
+    ? (m.winner === 'HOME_TEAM' ? 'AWAY_TEAM' : m.winner === 'AWAY_TEAM' ? 'HOME_TEAM' : m.winner ?? null)
+    : (m.winner ?? null)
+  slot.penalties = m.penalties
+    ? (flipped ? { home: m.penalties.away, away: m.penalties.home } : m.penalties)
+    : null
+  if (slot.homeTeamId == null) slot.homeTeamId = flipped ? m.awayTeamId : m.homeTeamId
+  if (slot.awayTeamId == null) slot.awayTeamId = flipped ? m.homeTeamId : m.awayTeamId
+}
+
 // Advance the winner of each finished match into the next round so a team that
 // has won is shown in the following stage even before the upstream data source
 // populates that fixture. Only fills empty slots, so real API team assignments
@@ -289,24 +307,40 @@ export default function KnockoutPage() {
       setTeams(t)
       setLastUpdated(s.lastUpdated ?? null)
       if (s.matches?.length) {
-        const updated = { ...buildPlaceholderBracket() }
-        // Group knockout matches by stage. The API match `id` is not the
-        // placeholder slot id (`R32-1`…), but ids run sequentially within a
-        // stage in bracket order, so sort by id and fill slots positionally.
-        const byStage: Record<string, Match[]> = {}
-        for (const m of s.matches.filter((m: Match) => m.stage !== 'GROUP')) {
-          if (!updated[m.stage]) continue // skip stages not in the bracket (e.g. THIRD_PLACE)
-          ;(byStage[m.stage] ??= []).push(m)
-        }
-        for (const [stage, matches] of Object.entries(byStage)) {
-          matches.sort((a, b) => a.id - b.id)
-          matches.forEach((m, idx) => {
-            const slot = updated[stage][idx]
+        const updated = buildPlaceholderBracket()
+        // Knockout matches in the bracket (skip stages not shown, e.g. THIRD_PLACE).
+        const knockout = s.matches.filter((m: Match) => m.stage !== 'GROUP' && updated[m.stage])
+
+        // R32 is the only knockout round whose API match order matches the
+        // bracket-slot order, so fill it positionally — ids run sequentially in
+        // bracket order within the round.
+        knockout
+          .filter((m: Match) => m.stage === 'R32')
+          .sort((a, b) => a.id - b.id)
+          .forEach((m, idx) => {
+            const slot = updated.R32[idx]
             if (!slot) return
-            updated[stage][idx] = { ...slot, homeTeamId: m.homeTeamId, awayTeamId: m.awayTeamId, homeScore: m.homeScore, awayScore: m.awayScore, winner: m.winner ?? null, penalties: m.penalties ?? null }
+            updated.R32[idx] = { ...slot, homeTeamId: m.homeTeamId, awayTeamId: m.awayTeamId, homeScore: m.homeScore, awayScore: m.awayScore, winner: m.winner ?? null, penalties: m.penalties ?? null }
           })
+
+        // Establish team positions for every later round from the R32 results.
+        propagateWinners(updated)
+
+        // Overlay API data for later rounds onto the slot whose teams match. The
+        // API numbers these fixtures in an order that does not follow the bracket
+        // layout, so filling them positionally would place a team in the wrong
+        // slot and duplicate it against the propagated one.
+        for (const m of knockout) {
+          if (m.stage === 'R32') continue
+          const apiTeams = [m.homeTeamId, m.awayTeamId].filter(Boolean)
+          if (!apiTeams.length) continue
+          const slot = updated[m.stage].find(sl =>
+            (sl.homeTeamId != null && apiTeams.includes(sl.homeTeamId)) ||
+            (sl.awayTeamId != null && apiTeams.includes(sl.awayTeamId)))
+          if (slot) overlayApiResult(slot, m)
         }
-        setBracket(propagateWinners(updated))
+
+        setBracket({ ...updated })
       }
       setLoading(false)
     })
