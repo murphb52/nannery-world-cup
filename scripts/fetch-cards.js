@@ -58,6 +58,12 @@ async function buildEspnIndex(dateCodes) {
         awayAbbr: awayComp.team.abbreviation?.toUpperCase(),
         homeName: normaliseName(homeComp.team.displayName ?? ''),
         awayName: normaliseName(awayComp.team.displayName ?? ''),
+        // Penalty-shootout score + winner, present only when a match went to
+        // penalties. ESPN exposes these per competitor on the scoreboard.
+        homeShootout: parseShootoutScore(homeComp.shootoutScore),
+        awayShootout: parseShootoutScore(awayComp.shootoutScore),
+        homeWinner: homeComp.winner === true,
+        awayWinner: awayComp.winner === true,
       })
     }
   }
@@ -87,6 +93,12 @@ function findEspnEvent(fdMatch, espnIndex) {
 function parseMinute(displayValue) {
   const m = (displayValue ?? '').match(/^(\d+)/)
   return m ? parseInt(m[1], 10) : null
+}
+
+function parseShootoutScore(value) {
+  if (value == null || value === '') return null
+  const n = parseInt(String(value), 10)
+  return Number.isNaN(n) ? null : n
 }
 
 // ESPN flags own goals on a scoring key event. The exact field varies across
@@ -200,4 +212,62 @@ export async function fetchEventsFromEspn(matches, existingBookings, existingOwn
   }
 
   return { bookings, ownGoals: ownGoalsByMatch }
+}
+
+// Pull penalty-shootout scores (and the winner) from ESPN for the given
+// finished shootout matches. football-data.org's free tier returns unreliable
+// shootout data (tied scores, null winner), so ESPN is the source of truth.
+// `shootoutMatchIds` is the set of fd match ids (as strings) whose football-data
+// duration is PENALTY_SHOOTOUT. Returns a map of fd match id -> { home, away,
+// winner } and caches each result so it is fetched only once.
+export async function fetchShootoutsFromEspn(matches, shootoutMatchIds, existingShootouts) {
+  const shootouts = { ...existingShootouts }
+  const pending = matches.filter(
+    m => m.status === 'FINISHED' &&
+      shootoutMatchIds.has(String(m.id)) &&
+      !(String(m.id) in shootouts)
+  )
+  if (pending.length === 0) {
+    console.log('ESPN shootouts: all decided shootouts already cached')
+    return shootouts
+  }
+  console.log(`ESPN shootouts: fetching for ${pending.length} match(es)`)
+
+  const dateCodes = [...new Set(pending.flatMap(m => adjacentDays(matchDateKey(m.date))))]
+  let espnIndex
+  try {
+    espnIndex = await buildEspnIndex(dateCodes)
+  } catch (err) {
+    console.warn(`ESPN shootout fetch skipped (index build failed): ${err.message}`)
+    return shootouts
+  }
+
+  for (const fdMatch of pending) {
+    const ev = findEspnEvent(fdMatch, espnIndex)
+    if (!ev) {
+      console.warn(`ESPN shootouts: no ESPN match for fd ${fdMatch.id} (${fdMatch.homeTeamId} v ${fdMatch.awayTeamId})`)
+      continue
+    }
+    // Orient ESPN's home/away to football-data's home/away — ESPN may list the
+    // sides in the opposite order.
+    const fdHome = fdMatch.homeTeamId?.toUpperCase()
+    const fdAway = fdMatch.awayTeamId?.toUpperCase()
+    const swapped = ev.awayAbbr === fdHome || ev.homeAbbr === fdAway
+    const home = swapped ? ev.awayShootout : ev.homeShootout
+    const away = swapped ? ev.homeShootout : ev.awayShootout
+    const homeWins = swapped ? ev.awayWinner : ev.homeWinner
+    const awayWins = swapped ? ev.homeWinner : ev.awayWinner
+    if (home == null || away == null) {
+      console.warn(`ESPN shootouts: no shootout score for ${fdMatch.homeTeamId} v ${fdMatch.awayTeamId}`)
+      continue
+    }
+    const winner = homeWins ? 'HOME_TEAM'
+      : awayWins ? 'AWAY_TEAM'
+      : home > away ? 'HOME_TEAM'
+      : away > home ? 'AWAY_TEAM'
+      : null
+    shootouts[String(fdMatch.id)] = { home, away, winner }
+    console.log(`  ${fdMatch.homeTeamId} ${home}-${away} ${fdMatch.awayTeamId} (pens)`)
+  }
+  return shootouts
 }

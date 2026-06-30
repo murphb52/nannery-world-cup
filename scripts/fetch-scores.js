@@ -1,13 +1,14 @@
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import { fetchEventsFromEspn } from './fetch-cards.js'
+import { fetchEventsFromEspn, fetchShootoutsFromEspn } from './fetch-cards.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const dataDir = path.join(__dirname, '..', 'data')
 const scoresPath = path.join(dataDir, 'scores.json')
 const bookingsPath = path.join(dataDir, 'bookings.json')
 const ownGoalsPath = path.join(dataDir, 'owngoals.json')
+const shootoutsPath = path.join(dataDir, 'shootouts.json')
 
 const API_KEY = process.env.FOOTBALL_DATA_API_KEY
 const COMPETITION_ID = 2000 // FIFA World Cup on football-data.org
@@ -100,6 +101,37 @@ async function main() {
     }
   })
   const teamStats = computeTeamStats(rawMatches)
+
+  // football-data.org's free tier returns unreliable penalty-shootout data
+  // (tied scores, null winner), so take the shootout score + winner from ESPN
+  // instead. Detect which matches went to penalties from the authoritative
+  // duration flag, which is correct even when the score isn't.
+  const shootoutMatchIds = new Set(
+    rawMatches.filter(m => m.score?.duration === 'PENALTY_SHOOTOUT').map(m => String(m.id))
+  )
+  const existingShootouts = readJson(shootoutsPath, {})
+  let shootouts = existingShootouts
+  try {
+    shootouts = await fetchShootoutsFromEspn(matches, shootoutMatchIds, existingShootouts)
+    if (JSON.stringify(shootouts) !== JSON.stringify(existingShootouts)) {
+      fs.writeFileSync(shootoutsPath, JSON.stringify(shootouts, null, 2))
+    }
+  } catch (err) {
+    console.warn(`ESPN shootout fetch failed, using existing cache: ${err.message}`)
+    shootouts = existingShootouts
+  }
+  for (const m of matches) {
+    if (!shootoutMatchIds.has(String(m.id))) continue
+    const espn = shootouts[String(m.id)]
+    if (espn) {
+      m.penalties = { home: espn.home, away: espn.away }
+      m.winner = m.winner ?? espn.winner
+    } else if (m.penalties && m.penalties.home === m.penalties.away) {
+      // No ESPN data and football-data returned a tied (invalid) shootout —
+      // suppress it rather than display a bogus score.
+      m.penalties = null
+    }
+  }
 
   const existingBookings = readJson(bookingsPath, {})
   const existingOwnGoals = readJson(ownGoalsPath, {})

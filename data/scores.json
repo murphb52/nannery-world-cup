@@ -1049,10 +1049,7 @@
       "venue": null,
       "status": "FINISHED",
       "winner": null,
-      "penalties": {
-        "home": 4,
-        "away": 4
-      }
+      "penalties": null
     },
     {
       "id": 537418,
@@ -1066,10 +1063,7 @@
       "venue": null,
       "status": "FINISHED",
       "winner": null,
-      "penalties": {
-        "home": 3,
-        "away": 3
-      }
+      "penalties": null
     },
     {
       "id": 537424,
