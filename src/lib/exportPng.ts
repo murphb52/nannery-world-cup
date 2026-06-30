@@ -191,6 +191,7 @@ interface KnockoutMatch {
   awayTeamId: string | null
   homeScore: number | null
   awayScore: number | null
+  winner?: 'HOME_TEAM' | 'AWAY_TEAM' | 'DRAW' | null
 }
 
 type KnockoutBracket = Record<string, KnockoutMatch[]>
@@ -415,8 +416,10 @@ export async function exportKnockoutPng(
       const x = colX(c)
       const y = BRACKET_TOP + matchTop(col.roundIdx, i)
       const finished = match.homeScore !== null && match.awayScore !== null
-      const homeWon = finished && match.homeScore! > match.awayScore!
-      const awayWon = finished && match.awayScore! > match.homeScore!
+      // Prefer the explicit winner (set for penalty shootouts, where the
+      // on-pitch score is level), falling back to the run-of-play score.
+      const homeWon = match.winner === 'HOME_TEAM' || (finished && match.winner == null && match.homeScore! > match.awayScore!)
+      const awayWon = match.winner === 'AWAY_TEAM' || (finished && match.winner == null && match.awayScore! > match.homeScore!)
 
       // Card body
       ctx.fillStyle = 'rgba(255,255,255,0.05)'
@@ -445,8 +448,12 @@ export async function exportKnockoutPng(
   // Footer — champion (if decided) + timestamp
   const final = bracket.F?.[0]
   let champion: Team | null = null
-  if (final && final.homeScore !== null && final.awayScore !== null && final.homeScore !== final.awayScore) {
-    const winnerId = final.homeScore > final.awayScore ? final.homeTeamId : final.awayTeamId
+  if (final && final.homeScore !== null && final.awayScore !== null) {
+    const winnerId = final.winner === 'HOME_TEAM' ? final.homeTeamId
+      : final.winner === 'AWAY_TEAM' ? final.awayTeamId
+      : final.homeScore > final.awayScore ? final.homeTeamId
+      : final.awayScore > final.homeScore ? final.awayTeamId
+      : null
     champion = winnerId ? teamById.get(winnerId) ?? null : null
   }
   const footerY = height - PAD - FOOTER_H / 2

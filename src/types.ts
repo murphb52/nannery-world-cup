@@ -55,6 +55,12 @@ export interface Match {
   venue: string
   status: 'SCHEDULED' | 'TIMED' | 'LIVE' | 'FINISHED'
   winner?: 'HOME_TEAM' | 'AWAY_TEAM' | 'DRAW' | null
+  /**
+   * Penalty shootout result, present only when the match was decided on
+   * penalties. These goals are deliberately excluded from homeScore/awayScore
+   * so they never inflate goal totals — they are kept here for display only.
+   */
+  penalties?: { home: number; away: number } | null
 }
 
 export interface TeamStats {

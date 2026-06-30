@@ -39,6 +39,40 @@ function readJson(file, fallback) {
   }
 }
 
+// Goals scored in normal time + extra time, excluding any penalty-shootout
+// tally. football-data.org folds the shootout result into `fullTime` for
+// matches decided on penalties, so for those we reconstruct the on-pitch score
+// from regularTime + extraTime, falling back to fullTime - penalties, then to
+// the level score a shootout necessarily implies.
+function runOfPlayScore(score) {
+  const ft = score?.fullTime ?? {}
+  if (score?.duration !== 'PENALTY_SHOOTOUT') {
+    return { home: ft.home ?? null, away: ft.away ?? null }
+  }
+  const reg = score.regularTime
+  const ext = score.extraTime
+  if (reg && reg.home != null) {
+    return {
+      home: (reg.home ?? 0) + (ext?.home ?? 0),
+      away: (reg.away ?? 0) + (ext?.away ?? 0),
+    }
+  }
+  const pen = score.penalties
+  if (pen && pen.home != null && ft.home != null && ft.away != null) {
+    return { home: ft.home - pen.home, away: ft.away - pen.away }
+  }
+  // A shootout only occurs when the sides are level after extra time.
+  const level = Math.min(ft.home ?? 0, ft.away ?? 0)
+  return { home: level, away: level }
+}
+
+// The shootout score, when a match was decided on penalties; otherwise null.
+function penaltyScore(score) {
+  const pen = score?.penalties
+  if (score?.duration !== 'PENALTY_SHOOTOUT' || !pen || pen.home == null) return null
+  return { home: pen.home, away: pen.away }
+}
+
 async function main() {
   console.log('Fetching World Cup data from football-data.org…')
 
@@ -48,19 +82,23 @@ async function main() {
   ])
 
   const rawMatches = matchesData.matches
-  const matches = rawMatches.map(m => ({
-    id: m.id,
-    stage: normaliseStage(m.stage),
-    group: m.group ?? null,
-    homeTeamId: m.homeTeam.tla,
-    awayTeamId: m.awayTeam.tla,
-    homeScore: m.score.fullTime.home,
-    awayScore: m.score.fullTime.away,
-    date: m.utcDate,
-    venue: m.venue ?? null,
-    status: m.status,
-    winner: m.score.winner ?? null,
-  }))
+  const matches = rawMatches.map(m => {
+    const { home, away } = runOfPlayScore(m.score)
+    return {
+      id: m.id,
+      stage: normaliseStage(m.stage),
+      group: m.group ?? null,
+      homeTeamId: m.homeTeam.tla,
+      awayTeamId: m.awayTeam.tla,
+      homeScore: home,
+      awayScore: away,
+      date: m.utcDate,
+      venue: m.venue ?? null,
+      status: m.status,
+      winner: m.score.winner ?? null,
+      penalties: penaltyScore(m.score),
+    }
+  })
   const teamStats = computeTeamStats(rawMatches)
 
   const existingBookings = readJson(bookingsPath, {})
@@ -251,8 +289,9 @@ function computeTeamStats(rawMatches) {
     ;(stats[home] ??= { scored: 0, conceded: 0, ownGoals: 0 })
     ;(stats[away] ??= { scored: 0, conceded: 0, ownGoals: 0 })
 
-    const hs = m.score?.fullTime?.home ?? 0
-    const as_ = m.score?.fullTime?.away ?? 0
+    const { home: rop, away: ropAway } = runOfPlayScore(m.score)
+    const hs = rop ?? 0
+    const as_ = ropAway ?? 0
     stats[home].scored += hs
     stats[home].conceded += as_
     stats[away].scored += as_
