@@ -181,8 +181,10 @@ function FixtureRow({ match, home, away, homePlayer, awayPlayer, highlight }: {
   const finished = match.status === 'FINISHED' && match.homeScore !== null && match.awayScore !== null
   const live = match.status === 'LIVE'
   const hasScore = match.homeScore !== null && match.awayScore !== null
-  const homeWon = finished && match.homeScore! > match.awayScore!
-  const awayWon = finished && match.awayScore! > match.homeScore!
+  // Prefer the explicit winner (set for penalty shootouts, where the on-pitch
+  // score is level), falling back to the run-of-play score.
+  const homeWon = match.winner === 'HOME_TEAM' || (finished && match.winner == null && match.homeScore! > match.awayScore!)
+  const awayWon = match.winner === 'AWAY_TEAM' || (finished && match.winner == null && match.awayScore! > match.homeScore!)
 
   const isHit = (name: string | null, team: Team | null) =>
     !!highlight && (
@@ -218,7 +220,9 @@ function FixtureRow({ match, home, away, homePlayer, awayPlayer, highlight }: {
         <div className="shrink-0 text-center min-w-[3.5rem]">
           {hasScore ? (
             <div className={`text-xl font-bold tabular-nums ${live ? 'text-red-400' : 'text-white'}`}>
-              {match.homeScore}<span className="text-white/30 mx-1">–</span>{match.awayScore}
+              {match.homeScore}{match.penalties && <span className="text-xs font-semibold align-top">&#8202;({match.penalties.home})</span>}
+              <span className="text-white/30 mx-1">–</span>
+              {match.awayScore}{match.penalties && <span className="text-xs font-semibold align-top">&#8202;({match.penalties.away})</span>}
             </div>
           ) : (
             <div className="text-white/30 text-sm font-medium">vs</div>

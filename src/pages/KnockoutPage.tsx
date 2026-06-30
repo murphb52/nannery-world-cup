@@ -11,6 +11,7 @@ interface MatchData {
   homeScore: number | null
   awayScore: number | null
   winner?: 'HOME_TEAM' | 'AWAY_TEAM' | 'DRAW' | null
+  penalties?: { home: number; away: number } | null
 }
 
 interface ZoomMatch extends MatchData {
@@ -179,10 +180,12 @@ function MatchCard({ match, teams, playerNames, flipped = false, onClick }: {
   const home = teams.find(t => t.id === match.homeTeamId) ?? null
   const away = teams.find(t => t.id === match.awayTeamId) ?? null
   const finished = match.homeScore !== null && match.awayScore !== null
-  const homeWon = finished && match.homeScore! > match.awayScore!
-  const awayWon = finished && match.awayScore! > match.homeScore!
+  // Prefer the explicit winner (set for penalty shootouts, where the on-pitch
+  // score is level), falling back to the run-of-play score.
+  const homeWon = match.winner === 'HOME_TEAM' || (finished && match.winner == null && match.homeScore! > match.awayScore!)
+  const awayWon = match.winner === 'AWAY_TEAM' || (finished && match.winner == null && match.awayScore! > match.homeScore!)
 
-  function Row({ team, score, won, lost }: { team: Team | null; score: number | null; won: boolean; lost: boolean }) {
+  function Row({ team, score, pen, won, lost }: { team: Team | null; score: number | null; pen: number | null; won: boolean; lost: boolean }) {
     const player = team ? playerNames[team.id] : null
     return (
       <div className={`flex items-center gap-1.5 px-2 h-1/2 ${lost ? 'opacity-40' : ''}`}>
@@ -193,7 +196,11 @@ function MatchCard({ match, teams, playerNames, flipped = false, onClick }: {
                 <div className={`text-xs truncate ${won ? 'text-yellow-400 font-semibold' : 'text-white/80'}`}>{team.name}</div>
                 {player && <div className="text-[10px] text-white/45 truncate">{player}</div>}
               </div>
-              {score !== null && <span className={`text-sm font-bold shrink-0 ${won ? 'text-yellow-400' : 'text-white/40'}`}>{score}</span>}
+              {score !== null && (
+                <span className={`text-sm font-bold shrink-0 ${won ? 'text-yellow-400' : 'text-white/40'}`}>
+                  {score}{pen !== null && <span className="text-[10px] font-semibold align-top ml-0.5">({pen})</span>}
+                </span>
+              )}
             </>
           : <>
               <div className="w-6 h-4 bg-white/10 rounded shrink-0" />
@@ -205,8 +212,8 @@ function MatchCard({ match, teams, playerNames, flipped = false, onClick }: {
   }
 
   const rows = flipped
-    ? [{ team: away, score: match.awayScore, won: awayWon, lost: homeWon }, { team: home, score: match.homeScore, won: homeWon, lost: awayWon }]
-    : [{ team: home, score: match.homeScore, won: homeWon, lost: awayWon }, { team: away, score: match.awayScore, won: awayWon, lost: homeWon }]
+    ? [{ team: away, score: match.awayScore, pen: match.penalties?.away ?? null, won: awayWon, lost: homeWon }, { team: home, score: match.homeScore, pen: match.penalties?.home ?? null, won: homeWon, lost: awayWon }]
+    : [{ team: home, score: match.homeScore, pen: match.penalties?.home ?? null, won: homeWon, lost: awayWon }, { team: away, score: match.awayScore, pen: match.penalties?.away ?? null, won: awayWon, lost: homeWon }]
 
   return (
     <button
@@ -296,7 +303,7 @@ export default function KnockoutPage() {
           matches.forEach((m, idx) => {
             const slot = updated[stage][idx]
             if (!slot) return
-            updated[stage][idx] = { ...slot, homeTeamId: m.homeTeamId, awayTeamId: m.awayTeamId, homeScore: m.homeScore, awayScore: m.awayScore, winner: m.winner ?? null }
+            updated[stage][idx] = { ...slot, homeTeamId: m.homeTeamId, awayTeamId: m.awayTeamId, homeScore: m.homeScore, awayScore: m.awayScore, winner: m.winner ?? null, penalties: m.penalties ?? null }
           })
         }
         setBracket(propagateWinners(updated))
@@ -402,7 +409,7 @@ export default function KnockoutPage() {
               <h3 className="font-bold text-white">{zoom.roundLabel}</h3>
               <button onClick={() => setZoom(null)} className="text-white/40 hover:text-white text-xl leading-none">×</button>
             </div>
-            {[{ teamId: zoom.homeTeamId, score: zoom.homeScore }, { teamId: zoom.awayTeamId, score: zoom.awayScore }].map(({ teamId, score }, i) => {
+            {[{ teamId: zoom.homeTeamId, score: zoom.homeScore, pen: zoom.penalties?.home ?? null }, { teamId: zoom.awayTeamId, score: zoom.awayScore, pen: zoom.penalties?.away ?? null }].map(({ teamId, score, pen }, i) => {
               const team = teams.find(t => t.id === teamId)
               const player = teamId ? playerNames[teamId] : null
               return (
@@ -413,11 +420,18 @@ export default function KnockoutPage() {
                       <p className="font-semibold text-white">{team.name}</p>
                       {player && <p className="text-xs text-white/50">{player}</p>}
                     </div>
-                    {score !== null && <span className="text-2xl font-bold text-yellow-400">{score}</span>}
+                    {score !== null && (
+                      <span className="text-2xl font-bold text-yellow-400">
+                        {score}{pen !== null && <span className="text-sm font-semibold align-top ml-1">({pen})</span>}
+                      </span>
+                    )}
                   </> : <p className="text-white/30 text-sm">TBD</p>}
                 </div>
               )
             })}
+            {zoom.penalties && (
+              <p className="text-center text-xs text-white/40 mt-1">Decided on penalties ({zoom.penalties.home}–{zoom.penalties.away})</p>
+            )}
           </div>
         </div>
       )}
