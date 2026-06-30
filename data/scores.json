@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-30T17:24:57.077Z",
+  "lastUpdated": "2026-06-30T19:20:42.947Z",
   "matches": [
     {
       "id": 537327,
@@ -1077,12 +1077,12 @@
       "group": null,
       "homeTeamId": "CIV",
       "awayTeamId": "NOR",
-      "homeScore": 0,
-      "awayScore": 0,
+      "homeScore": 1,
+      "awayScore": 2,
       "date": "2026-06-30T17:00:00Z",
       "venue": null,
-      "status": "IN_PLAY",
-      "winner": "DRAW",
+      "status": "FINISHED",
+      "winner": "AWAY_TEAM",
       "penalties": null
     },
     {
@@ -2344,7 +2344,7 @@
       "red": 1
     },
     "NOR": {
-      "yellow": 1,
+      "yellow": 2,
       "red": 0
     },
     "FRA": {
@@ -2513,8 +2513,8 @@
       "ownGoals": 0
     },
     "CIV": {
-      "scored": 4,
-      "conceded": 2,
+      "scored": 5,
+      "conceded": 4,
       "ownGoals": 0
     },
     "ECU": {
@@ -2588,8 +2588,8 @@
       "ownGoals": 1
     },
     "NOR": {
-      "scored": 8,
-      "conceded": 7,
+      "scored": 10,
+      "conceded": 8,
       "ownGoals": 0
     },
     "ARG": {
