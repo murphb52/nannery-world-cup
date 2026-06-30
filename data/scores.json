@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-30T05:51:22.311Z",
+  "lastUpdated": "2026-06-30T06:18:14.265Z",
   "matches": [
     {
       "id": 537327,
@@ -1244,7 +1244,7 @@
       "stage": "R16",
       "group": null,
       "homeTeamId": "CAN",
-      "awayTeamId": null,
+      "awayTeamId": "MAR",
       "homeScore": null,
       "awayScore": null,
       "date": "2026-07-04T17:00:00Z",
@@ -1257,7 +1257,7 @@
       "id": 537375,
       "stage": "R16",
       "group": null,
-      "homeTeamId": null,
+      "homeTeamId": "PAR",
       "awayTeamId": null,
       "homeScore": null,
       "awayScore": null,
@@ -1271,7 +1271,7 @@
       "id": 537377,
       "stage": "R16",
       "group": null,
-      "homeTeamId": null,
+      "homeTeamId": "BRA",
       "awayTeamId": null,
       "homeScore": null,
       "awayScore": null,
