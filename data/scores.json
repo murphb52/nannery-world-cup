@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-30T05:22:59.541Z",
+  "lastUpdated": "2026-06-30T05:51:22.311Z",
   "matches": [
     {
       "id": 537327,
@@ -1048,8 +1048,11 @@
       "date": "2026-06-29T20:30:00Z",
       "venue": null,
       "status": "FINISHED",
-      "winner": null,
-      "penalties": null
+      "winner": "AWAY_TEAM",
+      "penalties": {
+        "home": 3,
+        "away": 4
+      }
     },
     {
       "id": 537418,
@@ -1062,8 +1065,11 @@
       "date": "2026-06-30T01:00:00Z",
       "venue": null,
       "status": "FINISHED",
-      "winner": null,
-      "penalties": null
+      "winner": "AWAY_TEAM",
+      "penalties": {
+        "home": 2,
+        "away": 3
+      }
     },
     {
       "id": 537424,
