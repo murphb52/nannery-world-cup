@@ -40,6 +40,9 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/scores.json data/bookings.json
+          # Own-goal and penalty-shootout caches are optional — only present
+          # once a relevant match has been played — so add them if they exist.
+          git add data/owngoals.json data/shootouts.json 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
             echo "No data changes — skipping commit"
