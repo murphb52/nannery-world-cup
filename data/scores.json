@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-30T22:51:40.567Z",
+  "lastUpdated": "2026-07-01T00:02:58.261Z",
   "matches": [
     {
       "id": 537327,
@@ -1095,7 +1095,7 @@
       "awayScore": 0,
       "date": "2026-06-30T21:00:00Z",
       "venue": null,
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "winner": "HOME_TEAM",
       "penalties": null
     },
@@ -2524,7 +2524,7 @@
     },
     "SWE": {
       "scored": 7,
-      "conceded": 7,
+      "conceded": 10,
       "ownGoals": 0
     },
     "TUN": {
@@ -2573,7 +2573,7 @@
       "ownGoals": 0
     },
     "FRA": {
-      "scored": 10,
+      "scored": 13,
       "conceded": 2,
       "ownGoals": 0
     },
