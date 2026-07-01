@@ -1351,5 +1351,31 @@
       "player": "Antonio Nusa",
       "card": "YELLOW"
     }
+  ],
+  "537425": [
+    {
+      "minute": 45,
+      "teamId": "ECU",
+      "player": "Alan Franco",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 90,
+      "teamId": "ECU",
+      "player": "Kendry Páez",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 90,
+      "teamId": "ECU",
+      "player": "Piero Hincapié",
+      "card": "RED"
+    },
+    {
+      "minute": 90,
+      "teamId": "ECU",
+      "player": "Moisés Caicedo",
+      "card": "YELLOW"
+    }
   ]
 }

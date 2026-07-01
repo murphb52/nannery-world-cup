@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-01T04:02:18.513Z",
+  "lastUpdated": "2026-07-01T04:58:08.606Z",
   "matches": [
     {
       "id": 537327,
@@ -1077,12 +1077,12 @@
       "group": null,
       "homeTeamId": "CIV",
       "awayTeamId": "NOR",
-      "homeScore": 1,
-      "awayScore": 2,
+      "homeScore": null,
+      "awayScore": null,
       "date": "2026-06-30T17:00:00Z",
       "venue": null,
-      "status": "FINISHED",
-      "winner": "AWAY_TEAM",
+      "status": "TIMED",
+      "winner": null,
       "penalties": null
     },
     {
@@ -1109,7 +1109,7 @@
       "awayScore": 0,
       "date": "2026-07-01T01:00:00Z",
       "venue": null,
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "winner": "HOME_TEAM",
       "penalties": null
     },
@@ -2280,8 +2280,8 @@
       "red": 0
     },
     "ECU": {
-      "yellow": 5,
-      "red": 0
+      "yellow": 8,
+      "red": 1
     },
     "CUW": {
       "yellow": 7,
@@ -2413,7 +2413,7 @@
   },
   "teamStats": {
     "MEX": {
-      "scored": 6,
+      "scored": 8,
       "conceded": 0,
       "ownGoals": 0
     },
@@ -2513,13 +2513,13 @@
       "ownGoals": 0
     },
     "CIV": {
-      "scored": 5,
-      "conceded": 4,
+      "scored": 4,
+      "conceded": 2,
       "ownGoals": 0
     },
     "ECU": {
       "scored": 2,
-      "conceded": 2,
+      "conceded": 4,
       "ownGoals": 0
     },
     "SWE": {
@@ -2588,8 +2588,8 @@
       "ownGoals": 1
     },
     "NOR": {
-      "scored": 10,
-      "conceded": 8,
+      "scored": 8,
+      "conceded": 7,
       "ownGoals": 0
     },
     "ARG": {
