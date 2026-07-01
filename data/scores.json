@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-01T21:06:48.273Z",
+  "lastUpdated": "2026-07-01T22:47:09.337Z",
   "matches": [
     {
       "id": 537327,
@@ -1133,12 +1133,12 @@
       "group": null,
       "homeTeamId": "BEL",
       "awayTeamId": "SEN",
-      "homeScore": 0,
-      "awayScore": 1,
+      "homeScore": 2,
+      "awayScore": 2,
       "date": "2026-07-01T20:00:00Z",
       "venue": null,
       "status": "PAUSED",
-      "winner": "AWAY_TEAM",
+      "winner": "DRAW",
       "penalties": null
     },
     {
