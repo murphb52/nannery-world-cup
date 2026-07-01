@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-01T04:58:08.606Z",
+  "lastUpdated": "2026-07-01T08:35:55.641Z",
   "matches": [
     {
       "id": 537327,
@@ -1077,12 +1077,12 @@
       "group": null,
       "homeTeamId": "CIV",
       "awayTeamId": "NOR",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 1,
+      "awayScore": 2,
       "date": "2026-06-30T17:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null,
+      "status": "FINISHED",
+      "winner": "AWAY_TEAM",
       "penalties": null
     },
     {
@@ -1258,7 +1258,7 @@
       "stage": "R16",
       "group": null,
       "homeTeamId": "PAR",
-      "awayTeamId": null,
+      "awayTeamId": "FRA",
       "homeScore": null,
       "awayScore": null,
       "date": "2026-07-04T21:00:00Z",
@@ -1272,7 +1272,7 @@
       "stage": "R16",
       "group": null,
       "homeTeamId": "BRA",
-      "awayTeamId": null,
+      "awayTeamId": "NOR",
       "homeScore": null,
       "awayScore": null,
       "date": "2026-07-05T20:00:00Z",
@@ -2513,8 +2513,8 @@
       "ownGoals": 0
     },
     "CIV": {
-      "scored": 4,
-      "conceded": 2,
+      "scored": 5,
+      "conceded": 4,
       "ownGoals": 0
     },
     "ECU": {
@@ -2588,8 +2588,8 @@
       "ownGoals": 1
     },
     "NOR": {
-      "scored": 8,
-      "conceded": 7,
+      "scored": 10,
+      "conceded": 8,
       "ownGoals": 0
     },
     "ARG": {
