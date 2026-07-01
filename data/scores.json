@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-01T00:02:58.261Z",
+  "lastUpdated": "2026-07-01T04:02:18.513Z",
   "matches": [
     {
       "id": 537327,
@@ -1105,12 +1105,12 @@
       "group": null,
       "homeTeamId": "MEX",
       "awayTeamId": "ECU",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 2,
+      "awayScore": 0,
       "date": "2026-07-01T01:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null,
+      "status": "IN_PLAY",
+      "winner": "HOME_TEAM",
       "penalties": null
     },
     {
