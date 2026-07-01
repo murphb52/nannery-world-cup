@@ -1377,5 +1377,19 @@
       "player": "Moisés Caicedo",
       "card": "YELLOW"
     }
+  ],
+  "537426": [
+    {
+      "minute": 19,
+      "teamId": "ENG",
+      "player": "Jude Bellingham",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 28,
+      "teamId": "COD",
+      "player": "Noah Sadiki",
+      "card": "YELLOW"
+    }
   ]
 }
