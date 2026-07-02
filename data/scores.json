@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-02T22:07:59.557Z",
+  "lastUpdated": "2026-07-02T23:37:47.015Z",
   "matches": [
     {
       "id": 537327,
@@ -1175,12 +1175,12 @@
       "group": null,
       "homeTeamId": "POR",
       "awayTeamId": "CRO",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 0,
       "date": "2026-07-02T23:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null,
+      "status": "IN_PLAY",
+      "winner": "DRAW",
       "penalties": null
     },
     {
