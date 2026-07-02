@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-02T00:08:47.555Z",
+  "lastUpdated": "2026-07-02T04:40:14.914Z",
   "matches": [
     {
       "id": 537327,
@@ -1107,7 +1107,7 @@
       "awayTeamId": "ECU",
       "homeScore": 2,
       "awayScore": 0,
-      "date": "2026-07-01T01:00:00Z",
+      "date": "2026-07-01T02:00:00Z",
       "venue": null,
       "status": "FINISHED",
       "winner": "HOME_TEAM",
@@ -1147,12 +1147,12 @@
       "group": null,
       "homeTeamId": "USA",
       "awayTeamId": "BIH",
-      "homeScore": 0,
+      "homeScore": 2,
       "awayScore": 0,
       "date": "2026-07-02T00:00:00Z",
       "venue": null,
-      "status": "IN_PLAY",
-      "winner": "DRAW",
+      "status": "FINISHED",
+      "winner": "HOME_TEAM",
       "penalties": null
     },
     {
@@ -2232,7 +2232,7 @@
       "red": 0
     },
     "BIH": {
-      "yellow": 6,
+      "yellow": 7,
       "red": 1
     },
     "QAT": {
@@ -2265,7 +2265,7 @@
     },
     "USA": {
       "yellow": 5,
-      "red": 0
+      "red": 1
     },
     "TUR": {
       "yellow": 2,
@@ -2439,11 +2439,11 @@
     },
     "BIH": {
       "scored": 5,
-      "conceded": 6,
+      "conceded": 8,
       "ownGoals": 0
     },
     "USA": {
-      "scored": 8,
+      "scored": 10,
       "conceded": 4,
       "ownGoals": 0
     },

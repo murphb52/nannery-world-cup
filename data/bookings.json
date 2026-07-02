@@ -1312,6 +1312,20 @@
       "card": "YELLOW"
     }
   ],
+  "537421": [
+    {
+      "minute": 64,
+      "teamId": "USA",
+      "player": "Folarin Balogun",
+      "card": "RED"
+    },
+    {
+      "minute": 80,
+      "teamId": "BIH",
+      "player": "Stjepan Radeljic",
+      "card": "YELLOW"
+    }
+  ],
   "537422": [
     {
       "minute": 64,
