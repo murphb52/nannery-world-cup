@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-02T20:42:01.659Z",
+  "lastUpdated": "2026-07-02T22:07:59.557Z",
   "matches": [
     {
       "id": 537327,
@@ -1161,11 +1161,11 @@
       "group": null,
       "homeTeamId": "ESP",
       "awayTeamId": "AUT",
-      "homeScore": 2,
+      "homeScore": 3,
       "awayScore": 0,
       "date": "2026-07-02T19:00:00Z",
       "venue": null,
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "winner": "HOME_TEAM",
       "penalties": null
     },
@@ -2356,7 +2356,7 @@
       "red": 0
     },
     "AUT": {
-      "yellow": 4,
+      "yellow": 5,
       "red": 0
     },
     "ARG": {
@@ -2533,7 +2533,7 @@
       "ownGoals": 1
     },
     "ESP": {
-      "scored": 5,
+      "scored": 8,
       "conceded": 0,
       "ownGoals": 0
     },
@@ -2604,7 +2604,7 @@
     },
     "AUT": {
       "scored": 6,
-      "conceded": 6,
+      "conceded": 9,
       "ownGoals": 0
     },
     "JOR": {
