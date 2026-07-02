@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-02T00:02:56.383Z",
+  "lastUpdated": "2026-07-02T00:08:47.555Z",
   "matches": [
     {
       "id": 537327,
@@ -1147,12 +1147,12 @@
       "group": null,
       "homeTeamId": "USA",
       "awayTeamId": "BIH",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 0,
       "date": "2026-07-02T00:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null,
+      "status": "IN_PLAY",
+      "winner": "DRAW",
       "penalties": null
     },
     {
