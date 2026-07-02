@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-01T22:47:09.337Z",
+  "lastUpdated": "2026-07-02T00:02:56.383Z",
   "matches": [
     {
       "id": 537327,
@@ -1133,12 +1133,12 @@
       "group": null,
       "homeTeamId": "BEL",
       "awayTeamId": "SEN",
-      "homeScore": 2,
+      "homeScore": 3,
       "awayScore": 2,
       "date": "2026-07-01T20:00:00Z",
       "venue": null,
-      "status": "PAUSED",
-      "winner": "DRAW",
+      "status": "FINISHED",
+      "winner": "HOME_TEAM",
       "penalties": null
     },
     {
@@ -2312,7 +2312,7 @@
       "red": 0
     },
     "BEL": {
-      "yellow": 3,
+      "yellow": 4,
       "red": 1
     },
     "IRN": {
@@ -2352,7 +2352,7 @@
       "red": 0
     },
     "SEN": {
-      "yellow": 2,
+      "yellow": 3,
       "red": 0
     },
     "AUT": {
@@ -2543,8 +2543,8 @@
       "ownGoals": 0
     },
     "BEL": {
-      "scored": 6,
-      "conceded": 2,
+      "scored": 9,
+      "conceded": 4,
       "ownGoals": 0
     },
     "EGY": {
@@ -2578,8 +2578,8 @@
       "ownGoals": 0
     },
     "SEN": {
-      "scored": 8,
-      "conceded": 6,
+      "scored": 10,
+      "conceded": 9,
       "ownGoals": 0
     },
     "IRQ": {

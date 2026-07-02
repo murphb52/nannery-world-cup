@@ -1312,6 +1312,20 @@
       "card": "YELLOW"
     }
   ],
+  "537422": [
+    {
+      "minute": 64,
+      "teamId": "BEL",
+      "player": "Brandon Mechele",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 67,
+      "teamId": "SEN",
+      "player": "Lamine Camara",
+      "card": "YELLOW"
+    }
+  ],
   "537423": [
     {
       "minute": 12,
