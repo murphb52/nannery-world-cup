@@ -1447,5 +1447,19 @@
       "player": "Noah Sadiki",
       "card": "YELLOW"
     }
+  ],
+  "537429": [
+    {
+      "minute": 36,
+      "teamId": "ALG",
+      "player": "Farès Chaïbi",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 72,
+      "teamId": "ALG",
+      "player": "Hicham Boudaoui",
+      "card": "YELLOW"
+    }
   ]
 }

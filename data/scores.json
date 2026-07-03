@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-03T03:23:44.011Z",
+  "lastUpdated": "2026-07-03T06:47:33.762Z",
   "matches": [
     {
       "id": 537327,
@@ -1189,11 +1189,11 @@
       "group": null,
       "homeTeamId": "SUI",
       "awayTeamId": "ALG",
-      "homeScore": 1,
+      "homeScore": 2,
       "awayScore": 0,
       "date": "2026-07-03T03:00:00Z",
       "venue": null,
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "winner": "HOME_TEAM",
       "penalties": null
     },
@@ -2364,7 +2364,7 @@
       "red": 0
     },
     "ALG": {
-      "yellow": 1,
+      "yellow": 3,
       "red": 0
     },
     "JOR": {
@@ -2458,7 +2458,7 @@
       "ownGoals": 2
     },
     "SUI": {
-      "scored": 7,
+      "scored": 9,
       "conceded": 3,
       "ownGoals": 1
     },
@@ -2599,7 +2599,7 @@
     },
     "ALG": {
       "scored": 5,
-      "conceded": 7,
+      "conceded": 9,
       "ownGoals": 0
     },
     "AUT": {
