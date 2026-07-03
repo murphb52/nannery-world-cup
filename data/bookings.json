@@ -1448,6 +1448,20 @@
       "card": "YELLOW"
     }
   ],
+  "537428": [
+    {
+      "minute": 105,
+      "teamId": "EGY",
+      "player": "Haissem Hassan",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 120,
+      "teamId": "EGY",
+      "player": "Yasser Ibrahim",
+      "card": "YELLOW"
+    }
+  ],
   "537429": [
     {
       "minute": 36,

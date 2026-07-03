@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-03T19:40:46.355Z",
+  "lastUpdated": "2026-07-03T21:08:24.750Z",
   "matches": [
     {
       "id": 537327,
@@ -1207,9 +1207,12 @@
       "awayScore": 1,
       "date": "2026-07-03T18:00:00Z",
       "venue": null,
-      "status": "IN_PLAY",
-      "winner": "DRAW",
-      "penalties": null
+      "status": "FINISHED",
+      "winner": "AWAY_TEAM",
+      "penalties": {
+        "home": 2,
+        "away": 4
+      }
     },
     {
       "id": 537427,
@@ -2308,7 +2311,7 @@
       "red": 0
     },
     "EGY": {
-      "yellow": 6,
+      "yellow": 8,
       "red": 0
     },
     "BEL": {
@@ -2483,8 +2486,8 @@
       "ownGoals": 0
     },
     "AUS": {
-      "scored": 2,
-      "conceded": 2,
+      "scored": 3,
+      "conceded": 3,
       "ownGoals": 1
     },
     "TUR": {
@@ -2548,9 +2551,9 @@
       "ownGoals": 0
     },
     "EGY": {
-      "scored": 5,
-      "conceded": 3,
-      "ownGoals": 1
+      "scored": 6,
+      "conceded": 4,
+      "ownGoals": 2
     },
     "KSA": {
       "scored": 1,
