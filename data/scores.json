@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-03T06:47:33.762Z",
+  "lastUpdated": "2026-07-03T19:40:46.355Z",
   "matches": [
     {
       "id": 537327,
@@ -1203,12 +1203,12 @@
       "group": null,
       "homeTeamId": "AUS",
       "awayTeamId": "EGY",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 1,
+      "awayScore": 1,
       "date": "2026-07-03T18:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null,
+      "status": "IN_PLAY",
+      "winner": "DRAW",
       "penalties": null
     },
     {
