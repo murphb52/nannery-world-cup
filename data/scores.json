@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-03T00:00:46.091Z",
+  "lastUpdated": "2026-07-03T03:23:44.011Z",
   "matches": [
     {
       "id": 537327,
@@ -1175,12 +1175,12 @@
       "group": null,
       "homeTeamId": "POR",
       "awayTeamId": "CRO",
-      "homeScore": 0,
-      "awayScore": 0,
+      "homeScore": 2,
+      "awayScore": 1,
       "date": "2026-07-02T23:00:00Z",
       "venue": null,
-      "status": "PAUSED",
-      "winner": "DRAW",
+      "status": "FINISHED",
+      "winner": "HOME_TEAM",
       "penalties": null
     },
     {
@@ -1189,12 +1189,12 @@
       "group": null,
       "homeTeamId": "SUI",
       "awayTeamId": "ALG",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 1,
+      "awayScore": 0,
       "date": "2026-07-03T03:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null,
+      "status": "IN_PLAY",
+      "winner": "HOME_TEAM",
       "penalties": null
     },
     {
@@ -2372,7 +2372,7 @@
       "red": 0
     },
     "POR": {
-      "yellow": 4,
+      "yellow": 5,
       "red": 0
     },
     "COD": {
@@ -2400,7 +2400,7 @@
       "red": 0
     },
     "CRO": {
-      "yellow": 2,
+      "yellow": 4,
       "red": 0
     }
   },
@@ -2613,8 +2613,8 @@
       "ownGoals": 1
     },
     "POR": {
-      "scored": 6,
-      "conceded": 1,
+      "scored": 8,
+      "conceded": 2,
       "ownGoals": 0
     },
     "COD": {
@@ -2628,8 +2628,8 @@
       "ownGoals": 0
     },
     "CRO": {
-      "scored": 5,
-      "conceded": 5,
+      "scored": 6,
+      "conceded": 7,
       "ownGoals": 0
     },
     "GHA": {

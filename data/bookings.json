@@ -1312,6 +1312,26 @@
       "card": "YELLOW"
     }
   ],
+  "537419": [
+    {
+      "minute": 17,
+      "teamId": "POR",
+      "player": "Rúben Dias",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 59,
+      "teamId": "CRO",
+      "player": "Luka Modric",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 90,
+      "teamId": "CRO",
+      "player": "Ivan Perisic",
+      "card": "YELLOW"
+    }
+  ],
   "537420": [
     {
       "minute": 83,
