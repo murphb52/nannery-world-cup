@@ -925,6 +925,26 @@
       "card": "YELLOW"
     }
   ],
+  "537375": [
+    {
+      "minute": 19,
+      "teamId": "FRA",
+      "player": "Bradley Barcola",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 81,
+      "teamId": "FRA",
+      "player": "Manu Koné",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 90,
+      "teamId": "FRA",
+      "player": "Michael Olise",
+      "card": "YELLOW"
+    }
+  ],
   "537376": [
     {
       "minute": 20,
