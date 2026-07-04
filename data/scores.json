@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-04T07:22:35.170Z",
+  "lastUpdated": "2026-07-04T17:34:31.767Z",
   "matches": [
     {
       "id": 537327,
@@ -1248,12 +1248,12 @@
       "group": null,
       "homeTeamId": "CAN",
       "awayTeamId": "MAR",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 0,
       "date": "2026-07-04T17:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null,
+      "status": "IN_PLAY",
+      "winner": "DRAW",
       "penalties": null
     },
     {
