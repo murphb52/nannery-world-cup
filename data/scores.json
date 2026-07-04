@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-04T17:34:31.767Z",
+  "lastUpdated": "2026-07-04T19:15:25.989Z",
   "matches": [
     {
       "id": 537327,
@@ -1249,11 +1249,11 @@
       "homeTeamId": "CAN",
       "awayTeamId": "MAR",
       "homeScore": 0,
-      "awayScore": 0,
+      "awayScore": 3,
       "date": "2026-07-04T17:00:00Z",
       "venue": null,
-      "status": "IN_PLAY",
-      "winner": "DRAW",
+      "status": "FINISHED",
+      "winner": "AWAY_TEAM",
       "penalties": null
     },
     {
@@ -2231,7 +2231,7 @@
       "red": 0
     },
     "CAN": {
-      "yellow": 7,
+      "yellow": 11,
       "red": 0
     },
     "BIH": {
@@ -2259,7 +2259,7 @@
       "red": 0
     },
     "MAR": {
-      "yellow": 2,
+      "yellow": 6,
       "red": 0
     },
     "PAR": {
@@ -2437,7 +2437,7 @@
     },
     "CAN": {
       "scored": 9,
-      "conceded": 3,
+      "conceded": 6,
       "ownGoals": 0
     },
     "BIH": {
@@ -2471,7 +2471,7 @@
       "ownGoals": 0
     },
     "MAR": {
-      "scored": 7,
+      "scored": 10,
       "conceded": 4,
       "ownGoals": 1
     },

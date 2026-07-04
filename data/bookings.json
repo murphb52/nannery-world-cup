@@ -925,6 +925,56 @@
       "card": "YELLOW"
     }
   ],
+  "537376": [
+    {
+      "minute": 20,
+      "teamId": "MAR",
+      "player": "Redouane Halhal",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 40,
+      "teamId": "MAR",
+      "player": "Achraf Hakimi",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 40,
+      "teamId": "CAN",
+      "player": "Richie Laryea",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 43,
+      "teamId": "CAN",
+      "player": "Jonathan David",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 45,
+      "teamId": "MAR",
+      "player": "Azzedine Ounahi",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 45,
+      "teamId": "MAR",
+      "player": "Bilal El Khannouss",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 49,
+      "teamId": "CAN",
+      "player": "Luc de Fougerolles",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 67,
+      "teamId": "CAN",
+      "player": "Cyle Larin",
+      "card": "YELLOW"
+    }
+  ],
   "537391": [],
   "537392": [
     {
