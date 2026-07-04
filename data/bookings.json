@@ -1448,6 +1448,20 @@
       "card": "YELLOW"
     }
   ],
+  "537427": [
+    {
+      "minute": 68,
+      "teamId": "CPV",
+      "player": "Kevin Pina",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 115,
+      "teamId": "ARG",
+      "player": "Gonzalo Montiel",
+      "card": "YELLOW"
+    }
+  ],
   "537428": [
     {
       "minute": 105,
@@ -1473,6 +1487,38 @@
       "minute": 72,
       "teamId": "ALG",
       "player": "Hicham Boudaoui",
+      "card": "YELLOW"
+    }
+  ],
+  "537430": [
+    {
+      "minute": 12,
+      "teamId": "COL",
+      "player": "Jhon Arias",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 49,
+      "teamId": "GHA",
+      "player": "Caleb Yirenkyi",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 66,
+      "teamId": "GHA",
+      "player": "Fatawu Issahaku",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 76,
+      "teamId": "GHA",
+      "player": "Alidu Seidu",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 78,
+      "teamId": "COL",
+      "player": "Richard Ríos",
       "card": "YELLOW"
     }
   ]

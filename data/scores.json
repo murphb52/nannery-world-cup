@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-04T00:05:20.203Z",
+  "lastUpdated": "2026-07-04T04:11:54.390Z",
   "matches": [
     {
       "id": 537327,
@@ -1220,12 +1220,12 @@
       "group": null,
       "homeTeamId": "ARG",
       "awayTeamId": "CPV",
-      "homeScore": 1,
-      "awayScore": 1,
+      "homeScore": 3,
+      "awayScore": 2,
       "date": "2026-07-03T22:00:00Z",
       "venue": null,
-      "status": "PAUSED",
-      "winner": "DRAW",
+      "status": "FINISHED",
+      "winner": "HOME_TEAM",
       "penalties": null
     },
     {
@@ -1234,12 +1234,12 @@
       "group": null,
       "homeTeamId": "COL",
       "awayTeamId": "GHA",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 1,
+      "awayScore": 0,
       "date": "2026-07-04T01:30:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null,
+      "status": "FINISHED",
+      "winner": "HOME_TEAM",
       "penalties": null
     },
     {
@@ -2327,7 +2327,7 @@
       "red": 0
     },
     "CPV": {
-      "yellow": 4,
+      "yellow": 5,
       "red": 0
     },
     "ESP": {
@@ -2363,7 +2363,7 @@
       "red": 0
     },
     "ARG": {
-      "yellow": 2,
+      "yellow": 3,
       "red": 0
     },
     "ALG": {
@@ -2383,7 +2383,7 @@
       "red": 0
     },
     "COL": {
-      "yellow": 4,
+      "yellow": 6,
       "red": 0
     },
     "UZB": {
@@ -2391,7 +2391,7 @@
       "red": 0
     },
     "GHA": {
-      "yellow": 3,
+      "yellow": 6,
       "red": 0
     },
     "PAN": {
@@ -2541,9 +2541,9 @@
       "ownGoals": 0
     },
     "CPV": {
-      "scored": 2,
-      "conceded": 2,
-      "ownGoals": 0
+      "scored": 4,
+      "conceded": 5,
+      "ownGoals": 1
     },
     "BEL": {
       "scored": 9,
@@ -2596,8 +2596,8 @@
       "ownGoals": 0
     },
     "ARG": {
-      "scored": 8,
-      "conceded": 1,
+      "scored": 11,
+      "conceded": 3,
       "ownGoals": 0
     },
     "ALG": {
@@ -2637,7 +2637,7 @@
     },
     "GHA": {
       "scored": 2,
-      "conceded": 2,
+      "conceded": 3,
       "ownGoals": 0
     },
     "PAN": {
@@ -2651,7 +2651,7 @@
       "ownGoals": 1
     },
     "COL": {
-      "scored": 4,
+      "scored": 5,
       "conceded": 1,
       "ownGoals": 0
     }
