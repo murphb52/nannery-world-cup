@@ -12,6 +12,13 @@ interface MatchData {
   awayScore: number | null
   winner?: 'HOME_TEAM' | 'AWAY_TEAM' | 'DRAW' | null
   penalties?: { home: number; away: number } | null
+  date?: string | null
+}
+
+function formatKickoff(iso: string): string {
+  return new Date(iso).toLocaleString(undefined, {
+    weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit',
+  })
 }
 
 interface ZoomMatch extends MatchData {
@@ -165,6 +172,7 @@ function overlayApiResult(slot: MatchData, m: Match) {
   slot.penalties = m.penalties
     ? (flipped ? { home: m.penalties.away, away: m.penalties.home } : m.penalties)
     : null
+  slot.date = m.date
   if (slot.homeTeamId == null) slot.homeTeamId = flipped ? m.awayTeamId : m.homeTeamId
   if (slot.awayTeamId == null) slot.awayTeamId = flipped ? m.homeTeamId : m.awayTeamId
 }
@@ -275,7 +283,7 @@ function BracketColumn({ rounds, bracket, teams, playerNames, leftSide, onMatchC
               {ROUND_LABELS[round]}
             </div>
             {matches.map((match, i) => (
-              <div key={match.id} style={{ position: 'absolute', top: matchTop(roundIdx, i), left: 0 }}>
+              <div key={match.id} style={{ position: 'absolute', top: matchTop(roundIdx, i), left: 0, width: MATCH_W }}>
                 <MatchCard
                   match={match}
                   teams={teams}
@@ -283,6 +291,11 @@ function BracketColumn({ rounds, bracket, teams, playerNames, leftSide, onMatchC
                   flipped={!leftSide}
                   onClick={() => onMatchClick(match, round)}
                 />
+                {match.date && (
+                  <div className="text-center text-[9px] leading-none text-white/30 mt-1 truncate">
+                    {formatKickoff(match.date)}
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -320,7 +333,7 @@ export default function KnockoutPage() {
           .forEach((m, idx) => {
             const slot = updated.R32[idx]
             if (!slot) return
-            updated.R32[idx] = { ...slot, homeTeamId: m.homeTeamId, awayTeamId: m.awayTeamId, homeScore: m.homeScore, awayScore: m.awayScore, winner: m.winner ?? null, penalties: m.penalties ?? null }
+            updated.R32[idx] = { ...slot, homeTeamId: m.homeTeamId, awayTeamId: m.awayTeamId, homeScore: m.homeScore, awayScore: m.awayScore, winner: m.winner ?? null, penalties: m.penalties ?? null, date: m.date }
           })
 
         // Establish team positions for every later round from the R32 results.
@@ -416,13 +429,18 @@ export default function KnockoutPage() {
                 Final
               </div>
               {final && (
-                <div style={{ position: 'absolute', top: matchTop(3, 0), left: 0 }}>
+                <div style={{ position: 'absolute', top: matchTop(3, 0), left: 0, width: MATCH_W }}>
                   <MatchCard
                     match={final}
                     teams={teams}
                     playerNames={playerNames}
                     onClick={() => setZoom({ ...final, roundLabel: 'Final' })}
                   />
+                  {final.date && (
+                    <div className="text-center text-[9px] leading-none text-white/30 mt-1 truncate">
+                      {formatKickoff(final.date)}
+                    </div>
+                  )}
                 </div>
               )}
             </div>
