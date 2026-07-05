@@ -28,6 +28,7 @@ interface ZoomMatch extends MatchData {
 // Layout constants
 const SLOT_H = 96    // px height per R32 slot
 const MATCH_H = 80   // px height of a match card (two stacked team/player rows)
+const MID_H = 16     // px height of the kickoff-time band between the two rows
 const MATCH_W = 188  // px width of a match card
 const COL_GAP = 24   // px gap between columns
 const BRACKET_H = 8 * SLOT_H  // 640px total
@@ -214,7 +215,7 @@ function MatchCard({ match, teams, playerNames, flipped = false, onClick }: {
   function Row({ team, score, pen, won, lost }: { team: Team | null; score: number | null; pen: number | null; won: boolean; lost: boolean }) {
     const player = team ? playerNames[team.id] : null
     return (
-      <div className={`flex items-center gap-1.5 px-2 h-1/2 ${lost ? 'opacity-40' : ''}`}>
+      <div className={`flex items-center gap-1.5 px-2 h-full ${lost ? 'opacity-40' : ''}`}>
         {team
           ? <>
               <img src={team.flag} alt={team.name} className={`w-6 h-4 object-cover rounded shrink-0 ${lost ? 'grayscale' : ''}`} />
@@ -241,15 +242,23 @@ function MatchCard({ match, teams, playerNames, flipped = false, onClick }: {
     ? [{ team: away, score: match.awayScore, pen: match.penalties?.away ?? null, won: awayWon, lost: homeWon }, { team: home, score: match.homeScore, pen: match.penalties?.home ?? null, won: homeWon, lost: awayWon }]
     : [{ team: home, score: match.homeScore, pen: match.penalties?.home ?? null, won: homeWon, lost: awayWon }, { team: away, score: match.awayScore, pen: match.penalties?.away ?? null, won: awayWon, lost: homeWon }]
 
+  // Rows split the card height evenly, leaving a fixed middle band for the
+  // kickoff time so it reads as part of this card, not a neighbor's.
+  const rowH = (MATCH_H - MID_H) / 2
+
   return (
     <button
       onClick={onClick}
       style={{ width: MATCH_W, height: MATCH_H }}
-      className="rounded-lg border border-white/15 bg-white/5 hover:border-yellow-400/40 hover:bg-white/10 transition-all text-left flex flex-col justify-center overflow-hidden"
+      className="rounded-lg border border-white/15 bg-white/5 hover:border-yellow-400/40 hover:bg-white/10 transition-all text-left flex flex-col overflow-hidden"
     >
-      <Row {...rows[0]} />
-      <div className="h-px bg-white/10 mx-2" />
-      <Row {...rows[1]} />
+      <div style={{ height: rowH }}><Row {...rows[0]} /></div>
+      <div style={{ height: MID_H }} className="flex items-center justify-center border-t border-b border-white/10 px-2">
+        {match.date && (
+          <span className="text-[9px] leading-none text-white/35 truncate">{formatKickoff(match.date)}</span>
+        )}
+      </div>
+      <div style={{ height: rowH }}><Row {...rows[1]} /></div>
     </button>
   )
 }
@@ -291,11 +300,6 @@ function BracketColumn({ rounds, bracket, teams, playerNames, leftSide, onMatchC
                   flipped={!leftSide}
                   onClick={() => onMatchClick(match, round)}
                 />
-                {match.date && (
-                  <div className="text-center text-[9px] leading-none text-white/30 mt-1 truncate">
-                    {formatKickoff(match.date)}
-                  </div>
-                )}
               </div>
             ))}
           </div>
@@ -351,6 +355,22 @@ export default function KnockoutPage() {
             (sl.homeTeamId != null && apiTeams.includes(sl.homeTeamId)) ||
             (sl.awayTeamId != null && apiTeams.includes(sl.awayTeamId)))
           if (slot) overlayApiResult(slot, m)
+        }
+
+        // QF/SF/F kickoff times are fixed on the tournament calendar before the
+        // teams are known, so the API sends these fixtures with null team ids —
+        // the match-by-team overlay above can't place them. Fill them
+        // positionally instead, same assumption as R32. Once the teams are
+        // decided the API match gains real team ids and gets overlaid properly
+        // above, correcting any slot this guessed wrong.
+        for (const stage of ['QF', 'SF', 'F'] as const) {
+          knockout
+            .filter((m: Match) => m.stage === stage && m.homeTeamId == null && m.awayTeamId == null)
+            .sort((a, b) => a.id - b.id)
+            .forEach((m, idx) => {
+              const slot = updated[stage][idx]
+              if (slot) slot.date = m.date
+            })
         }
 
         // Re-propagate now that later-round results are overlaid, so a
@@ -436,11 +456,6 @@ export default function KnockoutPage() {
                     playerNames={playerNames}
                     onClick={() => setZoom({ ...final, roundLabel: 'Final' })}
                   />
-                  {final.date && (
-                    <div className="text-center text-[9px] leading-none text-white/30 mt-1 truncate">
-                      {formatKickoff(final.date)}
-                    </div>
-                  )}
                 </div>
               )}
             </div>
