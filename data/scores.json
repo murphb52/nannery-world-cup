@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-05T07:57:26.366Z",
+  "lastUpdated": "2026-07-05T21:01:56.665Z",
   "matches": [
     {
       "id": 537327,
@@ -1276,12 +1276,12 @@
       "group": null,
       "homeTeamId": "BRA",
       "awayTeamId": "NOR",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 0,
       "date": "2026-07-05T20:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null,
+      "status": "PAUSED",
+      "winner": "DRAW",
       "penalties": null
     },
     {
