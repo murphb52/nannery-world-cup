@@ -340,6 +340,11 @@ export default function KnockoutPage() {
           if (slot) overlayApiResult(slot, m)
         }
 
+        // Re-propagate now that later-round results are overlaid, so a
+        // decided R16/QF/SF match advances its winner into the next slot
+        // even when the API hasn't populated that fixture yet.
+        propagateWinners(updated)
+
         setBracket({ ...updated })
       }
       setLoading(false)
