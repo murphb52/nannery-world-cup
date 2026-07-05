@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-05T21:01:56.665Z",
+  "lastUpdated": "2026-07-05T22:32:04.011Z",
   "matches": [
     {
       "id": 537327,
@@ -1276,12 +1276,12 @@
       "group": null,
       "homeTeamId": "BRA",
       "awayTeamId": "NOR",
-      "homeScore": 0,
-      "awayScore": 0,
+      "homeScore": 1,
+      "awayScore": 2,
       "date": "2026-07-05T20:00:00Z",
       "venue": null,
-      "status": "PAUSED",
-      "winner": "DRAW",
+      "status": "FINISHED",
+      "winner": "AWAY_TEAM",
       "penalties": null
     },
     {
@@ -2247,7 +2247,7 @@
       "red": 0
     },
     "BRA": {
-      "yellow": 7,
+      "yellow": 8,
       "red": 0
     },
     "HAI": {
@@ -2466,8 +2466,8 @@
       "ownGoals": 1
     },
     "BRA": {
-      "scored": 9,
-      "conceded": 2,
+      "scored": 10,
+      "conceded": 4,
       "ownGoals": 0
     },
     "MAR": {
@@ -2591,8 +2591,8 @@
       "ownGoals": 1
     },
     "NOR": {
-      "scored": 10,
-      "conceded": 8,
+      "scored": 12,
+      "conceded": 9,
       "ownGoals": 0
     },
     "ARG": {
