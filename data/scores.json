@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-06T04:51:55.275Z",
+  "lastUpdated": "2026-07-06T06:22:55.969Z",
   "matches": [
     {
       "id": 537327,
@@ -1386,8 +1386,8 @@
       "id": 537385,
       "stage": "QF",
       "group": null,
-      "homeTeamId": null,
-      "awayTeamId": null,
+      "homeTeamId": "NOR",
+      "awayTeamId": "ENG",
       "homeScore": null,
       "awayScore": null,
       "date": "2026-07-11T21:00:00Z",
