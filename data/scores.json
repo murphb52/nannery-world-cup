@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-06T06:22:55.969Z",
+  "lastUpdated": "2026-07-06T20:53:21.885Z",
   "matches": [
     {
       "id": 537327,
@@ -1304,12 +1304,12 @@
       "group": null,
       "homeTeamId": "POR",
       "awayTeamId": "ESP",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 0,
       "date": "2026-07-06T19:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null,
+      "status": "IN_PLAY",
+      "winner": "DRAW",
       "penalties": null
     },
     {
