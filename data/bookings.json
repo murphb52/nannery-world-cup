@@ -1047,6 +1047,26 @@
       "card": "YELLOW"
     }
   ],
+  "537379": [
+    {
+      "minute": 89,
+      "teamId": "POR",
+      "player": "Bernardo Silva",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 90,
+      "teamId": "POR",
+      "player": "Renato Veiga",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 90,
+      "teamId": "ESP",
+      "player": "Ferran Torres",
+      "card": "YELLOW"
+    }
+  ],
   "537391": [],
   "537392": [
     {
