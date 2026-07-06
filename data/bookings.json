@@ -1003,6 +1003,50 @@
       "card": "YELLOW"
     }
   ],
+  "537378": [
+    {
+      "minute": 1,
+      "teamId": "ENG",
+      "player": "Declan Rice",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 54,
+      "teamId": "ENG",
+      "player": "Jarell Quansah",
+      "card": "RED"
+    },
+    {
+      "minute": 68,
+      "teamId": "ENG",
+      "player": "Marc Guéhi",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 71,
+      "teamId": "MEX",
+      "player": "Jorge Sánchez",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 72,
+      "teamId": "ENG",
+      "player": "Nico O'Reilly",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 90,
+      "teamId": "MEX",
+      "player": "Johan Vásquez",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 90,
+      "teamId": "ENG",
+      "player": "Jordan Henderson",
+      "card": "YELLOW"
+    }
+  ],
   "537391": [],
   "537392": [
     {
