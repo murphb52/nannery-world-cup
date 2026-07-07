@@ -1081,6 +1081,32 @@
       "card": "YELLOW"
     }
   ],
+  "537381": [
+    {
+      "minute": 90,
+      "teamId": "EGY",
+      "player": "Mostafa Shoubir",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 90,
+      "teamId": "EGY",
+      "player": "Hamdy Fathy",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 90,
+      "teamId": "EGY",
+      "player": "Marawan Attia",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 90,
+      "teamId": "EGY",
+      "player": "Haissem Hassan",
+      "card": "YELLOW"
+    }
+  ],
   "537391": [],
   "537392": [
     {
