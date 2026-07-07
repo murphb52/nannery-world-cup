@@ -1107,6 +1107,38 @@
       "card": "YELLOW"
     }
   ],
+  "537382": [
+    {
+      "minute": 51,
+      "teamId": "SUI",
+      "player": "Granit Xhaka",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 59,
+      "teamId": "SUI",
+      "player": "Denis Zakaria",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 60,
+      "teamId": "COL",
+      "player": "Luis Suárez",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 95,
+      "teamId": "COL",
+      "player": "Davinson Sánchez",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 105,
+      "teamId": "SUI",
+      "player": "Miro Muheim",
+      "card": "YELLOW"
+    }
+  ],
   "537391": [],
   "537392": [
     {

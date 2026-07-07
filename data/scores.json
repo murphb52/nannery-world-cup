@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-07T20:28:24.795Z",
+  "lastUpdated": "2026-07-07T23:04:23.302Z",
   "matches": [
     {
       "id": 537327,
@@ -1350,9 +1350,12 @@
       "awayScore": 0,
       "date": "2026-07-07T20:00:00Z",
       "venue": null,
-      "status": "IN_PLAY",
-      "winner": "DRAW",
-      "penalties": null
+      "status": "FINISHED",
+      "winner": "HOME_TEAM",
+      "penalties": {
+        "home": 4,
+        "away": 3
+      }
     },
     {
       "id": 537383,
@@ -2243,7 +2246,7 @@
       "red": 2
     },
     "SUI": {
-      "yellow": 3,
+      "yellow": 6,
       "red": 0
     },
     "BRA": {
@@ -2354,6 +2357,10 @@
       "yellow": 7,
       "red": 0
     },
+    "COL": {
+      "yellow": 8,
+      "red": 0
+    },
     "IRQ": {
       "yellow": 4,
       "red": 1
@@ -2383,10 +2390,6 @@
       "red": 0
     },
     "COD": {
-      "yellow": 6,
-      "red": 0
-    },
-    "COL": {
       "yellow": 6,
       "red": 0
     },
