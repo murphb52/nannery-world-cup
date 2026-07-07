@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-06T22:14:30.438Z",
+  "lastUpdated": "2026-07-07T03:32:00.275Z",
   "matches": [
     {
       "id": 537327,
@@ -1318,12 +1318,12 @@
       "group": null,
       "homeTeamId": "USA",
       "awayTeamId": "BEL",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 1,
+      "awayScore": 4,
       "date": "2026-07-07T00:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null,
+      "status": "FINISHED",
+      "winner": "AWAY_TEAM",
       "penalties": null
     },
     {
@@ -2267,7 +2267,7 @@
       "red": 1
     },
     "USA": {
-      "yellow": 5,
+      "yellow": 7,
       "red": 1
     },
     "TUR": {
@@ -2446,8 +2446,8 @@
       "ownGoals": 0
     },
     "USA": {
-      "scored": 10,
-      "conceded": 4,
+      "scored": 11,
+      "conceded": 8,
       "ownGoals": 0
     },
     "PAR": {
@@ -2546,8 +2546,8 @@
       "ownGoals": 1
     },
     "BEL": {
-      "scored": 9,
-      "conceded": 4,
+      "scored": 13,
+      "conceded": 5,
       "ownGoals": 0
     },
     "EGY": {

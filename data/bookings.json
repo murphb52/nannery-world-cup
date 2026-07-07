@@ -1067,6 +1067,20 @@
       "card": "YELLOW"
     }
   ],
+  "537380": [
+    {
+      "minute": 35,
+      "teamId": "USA",
+      "player": "Weston McKennie",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 69,
+      "teamId": "USA",
+      "player": "Malik Tillman",
+      "card": "YELLOW"
+    }
+  ],
   "537391": [],
   "537392": [
     {
