@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-09T21:58:04.301Z",
+  "lastUpdated": "2026-07-09T23:19:41.558Z",
   "matches": [
     {
       "id": 537327,
@@ -1367,7 +1367,7 @@
       "awayScore": 0,
       "date": "2026-07-09T20:00:00Z",
       "venue": null,
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "winner": "HOME_TEAM",
       "penalties": null
     },
@@ -2262,7 +2262,7 @@
       "red": 0
     },
     "MAR": {
-      "yellow": 6,
+      "yellow": 7,
       "red": 0
     },
     "PAR": {
@@ -2475,7 +2475,7 @@
     },
     "MAR": {
       "scored": 10,
-      "conceded": 4,
+      "conceded": 6,
       "ownGoals": 1
     },
     "HAI": {
@@ -2579,7 +2579,7 @@
       "ownGoals": 0
     },
     "FRA": {
-      "scored": 14,
+      "scored": 16,
       "conceded": 2,
       "ownGoals": 0
     },
