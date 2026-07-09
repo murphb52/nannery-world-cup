@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-09T20:19:46.414Z",
+  "lastUpdated": "2026-07-09T21:58:04.301Z",
   "matches": [
     {
       "id": 537327,
@@ -1363,12 +1363,12 @@
       "group": null,
       "homeTeamId": "FRA",
       "awayTeamId": "MAR",
-      "homeScore": 0,
+      "homeScore": 2,
       "awayScore": 0,
       "date": "2026-07-09T20:00:00Z",
       "venue": null,
       "status": "IN_PLAY",
-      "winner": "DRAW",
+      "winner": "HOME_TEAM",
       "penalties": null
     },
     {
