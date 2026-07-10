@@ -340,43 +340,45 @@ export default function KnockoutPage() {
             updated.R32[idx] = { ...slot, homeTeamId: m.homeTeamId, awayTeamId: m.awayTeamId, homeScore: m.homeScore, awayScore: m.awayScore, winner: m.winner ?? null, penalties: m.penalties ?? null, date: m.date }
           })
 
-        // Establish team positions for every later round from the R32 results.
-        propagateWinners(updated)
+        // Process each later round in bracket order. A round's slots only get
+        // their team ids once the previous round's winners are propagated in,
+        // so propagation must happen before that round's API results are
+        // matched by team id — otherwise a fixture whose teams are already
+        // decided (e.g. a semi-final the API has pre-assigned) has nothing to
+        // match against yet and silently fails to attach to its slot.
+        for (const stage of ['R16', 'QF', 'SF', 'F'] as const) {
+          propagateWinners(updated)
 
-        // Overlay API data for later rounds onto the slot whose teams match. The
-        // API numbers these fixtures in an order that does not follow the bracket
-        // layout, so filling them positionally would place a team in the wrong
-        // slot and duplicate it against the propagated one.
-        for (const m of knockout) {
-          if (m.stage === 'R32') continue
-          const apiTeams = [m.homeTeamId, m.awayTeamId].filter(Boolean)
-          if (!apiTeams.length) continue
-          const slot = updated[m.stage].find(sl =>
-            (sl.homeTeamId != null && apiTeams.includes(sl.homeTeamId)) ||
-            (sl.awayTeamId != null && apiTeams.includes(sl.awayTeamId)))
-          if (slot) overlayApiResult(slot, m)
-        }
+          // Overlay API data onto the slot whose teams match. The API numbers
+          // these fixtures in an order that does not follow the bracket
+          // layout, so filling them positionally would place a team in the
+          // wrong slot and duplicate it against the propagated one.
+          for (const m of knockout) {
+            if (m.stage !== stage) continue
+            const apiTeams = [m.homeTeamId, m.awayTeamId].filter(Boolean)
+            if (!apiTeams.length) continue
+            const slot = updated[stage].find(sl =>
+              (sl.homeTeamId != null && apiTeams.includes(sl.homeTeamId)) ||
+              (sl.awayTeamId != null && apiTeams.includes(sl.awayTeamId)))
+            if (slot) overlayApiResult(slot, m)
+          }
 
-        // QF/SF/F kickoff times are fixed on the tournament calendar before the
-        // teams are known, so the API sends these fixtures with null team ids —
-        // the match-by-team overlay above can't place them. Fill them
-        // positionally instead, same assumption as R32. Once the teams are
-        // decided the API match gains real team ids and gets overlaid properly
-        // above, correcting any slot this guessed wrong.
-        for (const stage of ['QF', 'SF', 'F'] as const) {
+          // QF/SF/F kickoff times are fixed on the tournament calendar before
+          // the teams are known, so the API sends these fixtures with null
+          // team ids — the match-by-team overlay above can't place them. Fill
+          // them positionally instead, matching against bracket slots that
+          // are still fully undecided (same assumption as R32). Once the
+          // teams are decided the API match gains real team ids and gets
+          // overlaid properly above, correcting any slot this guessed wrong.
+          const unresolvedSlots = updated[stage].filter(sl => sl.homeTeamId == null && sl.awayTeamId == null)
           knockout
             .filter((m: Match) => m.stage === stage && m.homeTeamId == null && m.awayTeamId == null)
             .sort((a, b) => a.id - b.id)
             .forEach((m, idx) => {
-              const slot = updated[stage][idx]
+              const slot = unresolvedSlots[idx]
               if (slot) slot.date = m.date
             })
         }
-
-        // Re-propagate now that later-round results are overlaid, so a
-        // decided R16/QF/SF match advances its winner into the next slot
-        // even when the API hasn't populated that fixture yet.
-        propagateWinners(updated)
 
         setBracket({ ...updated })
       }
