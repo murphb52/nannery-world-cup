@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-10T20:49:49.327Z",
+  "lastUpdated": "2026-07-10T22:04:43.637Z",
   "matches": [
     {
       "id": 537327,
@@ -1377,12 +1377,12 @@
       "group": null,
       "homeTeamId": "ESP",
       "awayTeamId": "BEL",
-      "homeScore": 1,
+      "homeScore": 2,
       "awayScore": 1,
       "date": "2026-07-10T19:00:00Z",
       "venue": null,
-      "status": "IN_PLAY",
-      "winner": "DRAW",
+      "status": "FINISHED",
+      "winner": "HOME_TEAM",
       "penalties": null
     },
     {
@@ -2318,7 +2318,7 @@
       "red": 0
     },
     "BEL": {
-      "yellow": 4,
+      "yellow": 6,
       "red": 1
     },
     "IRN": {
@@ -2334,7 +2334,7 @@
       "red": 0
     },
     "ESP": {
-      "yellow": 3,
+      "yellow": 5,
       "red": 0
     },
     "KSA": {
@@ -2539,8 +2539,8 @@
       "ownGoals": 1
     },
     "ESP": {
-      "scored": 9,
-      "conceded": 0,
+      "scored": 11,
+      "conceded": 1,
       "ownGoals": 0
     },
     "CPV": {
@@ -2549,8 +2549,8 @@
       "ownGoals": 1
     },
     "BEL": {
-      "scored": 13,
-      "conceded": 5,
+      "scored": 14,
+      "conceded": 7,
       "ownGoals": 0
     },
     "EGY": {

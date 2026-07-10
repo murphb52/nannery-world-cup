@@ -1147,6 +1147,32 @@
       "card": "YELLOW"
     }
   ],
+  "537384": [
+    {
+      "minute": 43,
+      "teamId": "ESP",
+      "player": "Pau Cubarsí",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 85,
+      "teamId": "BEL",
+      "player": "Kevin De Bruyne",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 90,
+      "teamId": "ESP",
+      "player": "Aymeric Laporte",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 90,
+      "teamId": "BEL",
+      "player": "Axel Witsel",
+      "card": "YELLOW"
+    }
+  ],
   "537391": [],
   "537392": [
     {
