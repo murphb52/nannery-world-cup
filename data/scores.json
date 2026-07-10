@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-09T23:19:41.558Z",
+  "lastUpdated": "2026-07-10T09:37:12.642Z",
   "matches": [
     {
       "id": 537327,
@@ -1417,7 +1417,7 @@
       "id": 537387,
       "stage": "SF",
       "group": null,
-      "homeTeamId": null,
+      "homeTeamId": "FRA",
       "awayTeamId": null,
       "homeScore": null,
       "awayScore": null,
