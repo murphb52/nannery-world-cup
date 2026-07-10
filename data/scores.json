@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-10T09:37:12.642Z",
+  "lastUpdated": "2026-07-10T20:49:49.327Z",
   "matches": [
     {
       "id": 537327,
@@ -1377,12 +1377,12 @@
       "group": null,
       "homeTeamId": "ESP",
       "awayTeamId": "BEL",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 1,
+      "awayScore": 1,
       "date": "2026-07-10T19:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null,
+      "status": "IN_PLAY",
+      "winner": "DRAW",
       "penalties": null
     },
     {
