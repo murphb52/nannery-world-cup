@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-11T21:51:12.148Z",
+  "lastUpdated": "2026-07-11T22:50:19.137Z",
   "matches": [
     {
       "id": 537327,
@@ -1391,8 +1391,8 @@
       "group": null,
       "homeTeamId": "NOR",
       "awayTeamId": "ENG",
-      "homeScore": 1,
-      "awayScore": 0,
+      "homeScore": 2,
+      "awayScore": 1,
       "date": "2026-07-11T21:00:00Z",
       "venue": null,
       "status": "IN_PLAY",
