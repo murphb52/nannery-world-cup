@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-11T07:11:36.306Z",
+  "lastUpdated": "2026-07-11T21:51:12.148Z",
   "matches": [
     {
       "id": 537327,
@@ -1294,7 +1294,7 @@
       "awayScore": 3,
       "date": "2026-07-06T01:00:00Z",
       "venue": null,
-      "status": "FINISHED",
+      "status": "2026-07-06 01:00:00Z",
       "winner": "AWAY_TEAM",
       "penalties": null
     },
@@ -1391,12 +1391,12 @@
       "group": null,
       "homeTeamId": "NOR",
       "awayTeamId": "ENG",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 1,
+      "awayScore": 0,
       "date": "2026-07-11T21:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null,
+      "status": "IN_PLAY",
+      "winner": "HOME_TEAM",
       "penalties": null
     },
     {
@@ -2419,8 +2419,8 @@
   },
   "teamStats": {
     "MEX": {
-      "scored": 10,
-      "conceded": 3,
+      "scored": 8,
+      "conceded": 0,
       "ownGoals": 0
     },
     "RSA": {
@@ -2629,8 +2629,8 @@
       "ownGoals": 0
     },
     "ENG": {
-      "scored": 11,
-      "conceded": 5,
+      "scored": 8,
+      "conceded": 3,
       "ownGoals": 0
     },
     "CRO": {
