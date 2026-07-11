@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-11T23:49:24.338Z",
+  "lastUpdated": "2026-07-11T23:56:04.152Z",
   "matches": [
     {
       "id": 537327,
@@ -1395,7 +1395,7 @@
       "awayScore": 2,
       "date": "2026-07-11T21:00:00Z",
       "venue": null,
-      "status": "PAUSED",
+      "status": "FINISHED",
       "winner": "AWAY_TEAM",
       "penalties": null
     },
@@ -2361,13 +2361,13 @@
       "yellow": 8,
       "red": 0
     },
+    "NOR": {
+      "yellow": 3,
+      "red": 0
+    },
     "IRQ": {
       "yellow": 4,
       "red": 1
-    },
-    "NOR": {
-      "yellow": 2,
-      "red": 0
     },
     "SEN": {
       "yellow": 3,
@@ -2594,8 +2594,8 @@
       "ownGoals": 1
     },
     "NOR": {
-      "scored": 12,
-      "conceded": 9,
+      "scored": 13,
+      "conceded": 11,
       "ownGoals": 0
     },
     "ARG": {
@@ -2629,8 +2629,8 @@
       "ownGoals": 0
     },
     "ENG": {
-      "scored": 8,
-      "conceded": 3,
+      "scored": 10,
+      "conceded": 4,
       "ownGoals": 0
     },
     "CRO": {
