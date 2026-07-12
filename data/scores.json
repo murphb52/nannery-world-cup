@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-11T23:56:04.152Z",
+  "lastUpdated": "2026-07-12T03:18:49.529Z",
   "matches": [
     {
       "id": 537327,
@@ -1405,12 +1405,12 @@
       "group": null,
       "homeTeamId": "ARG",
       "awayTeamId": "SUI",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 1,
+      "awayScore": 1,
       "date": "2026-07-12T01:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null,
+      "status": "PAUSED",
+      "winner": "DRAW",
       "penalties": null
     },
     {
