@@ -1181,6 +1181,38 @@
       "card": "YELLOW"
     }
   ],
+  "537386": [
+    {
+      "minute": 44,
+      "teamId": "SUI",
+      "player": "Breel Embolo",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 72,
+      "teamId": "SUI",
+      "player": "Breel Embolo",
+      "card": "RED"
+    },
+    {
+      "minute": 97,
+      "teamId": "ARG",
+      "player": "Thiago Almada",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 98,
+      "teamId": "ARG",
+      "player": "Lautaro Martínez",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 114,
+      "teamId": "ARG",
+      "player": "José Manuel López",
+      "card": "YELLOW"
+    }
+  ],
   "537391": [],
   "537392": [
     {

@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-12T03:18:49.529Z",
+  "lastUpdated": "2026-07-12T05:44:58.979Z",
   "matches": [
     {
       "id": 537327,
@@ -1405,12 +1405,12 @@
       "group": null,
       "homeTeamId": "ARG",
       "awayTeamId": "SUI",
-      "homeScore": 1,
+      "homeScore": 3,
       "awayScore": 1,
       "date": "2026-07-12T01:00:00Z",
       "venue": null,
-      "status": "PAUSED",
-      "winner": "DRAW",
+      "status": "FINISHED",
+      "winner": "HOME_TEAM",
       "penalties": null
     },
     {
@@ -2246,8 +2246,8 @@
       "red": 2
     },
     "SUI": {
-      "yellow": 6,
-      "red": 0
+      "yellow": 7,
+      "red": 1
     },
     "BRA": {
       "yellow": 8,
@@ -2365,6 +2365,10 @@
       "yellow": 3,
       "red": 0
     },
+    "ARG": {
+      "yellow": 6,
+      "red": 0
+    },
     "IRQ": {
       "yellow": 4,
       "red": 1
@@ -2375,10 +2379,6 @@
     },
     "AUT": {
       "yellow": 5,
-      "red": 0
-    },
-    "ARG": {
-      "yellow": 3,
       "red": 0
     },
     "ALG": {
@@ -2464,8 +2464,8 @@
       "ownGoals": 2
     },
     "SUI": {
-      "scored": 9,
-      "conceded": 3,
+      "scored": 10,
+      "conceded": 6,
       "ownGoals": 1
     },
     "BRA": {
@@ -2599,8 +2599,8 @@
       "ownGoals": 0
     },
     "ARG": {
-      "scored": 14,
-      "conceded": 5,
+      "scored": 17,
+      "conceded": 6,
       "ownGoals": 0
     },
     "ALG": {
