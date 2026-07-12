@@ -2,18 +2,10 @@ import { useState, useEffect, useMemo } from 'react'
 import { loadTeams, loadScores, resolveNames } from '../data/loaders'
 import { useSweepstakes } from '../contexts/SweepstakesContext'
 import { exportKnockoutPng } from '../lib/exportPng'
-import type { Team, Match } from '../types'
+import { resolveKnockout, type BracketSlot } from '../lib/knockoutResolution'
+import type { Team } from '../types'
 
-interface MatchData {
-  id: string
-  homeTeamId: string | null
-  awayTeamId: string | null
-  homeScore: number | null
-  awayScore: number | null
-  winner?: 'HOME_TEAM' | 'AWAY_TEAM' | 'DRAW' | null
-  penalties?: { home: number; away: number } | null
-  date?: string | null
-}
+type MatchData = BracketSlot
 
 function formatKickoff(iso: string): string {
   return new Date(iso).toLocaleString(undefined, {
@@ -134,73 +126,6 @@ const ROUND_LABELS: Record<string, string> = {
   R32: 'Round of 32', R16: 'Round of 16', QF: 'Quarter-Finals', SF: 'Semi-Finals', F: 'Final',
 }
 
-function buildPlaceholderBracket(): Record<string, MatchData[]> {
-  return {
-    R32: Array.from({ length: 16 }, (_, i) => ({ id: `R32-${i + 1}`, homeTeamId: null, awayTeamId: null, homeScore: null, awayScore: null })),
-    R16: Array.from({ length: 8 }, (_, i) => ({ id: `R16-${i + 1}`, homeTeamId: null, awayTeamId: null, homeScore: null, awayScore: null })),
-    QF: Array.from({ length: 4 }, (_, i) => ({ id: `QF-${i + 1}`, homeTeamId: null, awayTeamId: null, homeScore: null, awayScore: null })),
-    SF: Array.from({ length: 2 }, (_, i) => ({ id: `SF-${i + 1}`, homeTeamId: null, awayTeamId: null, homeScore: null, awayScore: null })),
-    F: [{ id: 'F-1', homeTeamId: null, awayTeamId: null, homeScore: null, awayScore: null }],
-  }
-}
-
-// Bracket stages in progression order. Slot `i` of one stage feeds slot
-// `floor(i/2)` of the next — home if `i` is even, away if odd — matching the
-// positional fill used when loading matches and the SVG connector layout.
-const STAGE_ORDER = ['R32', 'R16', 'QF', 'SF', 'F'] as const
-
-/** Returns the winning team id of a finished match, or null if undecided. */
-function matchWinner(m: MatchData): string | null {
-  if (m.winner === 'HOME_TEAM') return m.homeTeamId
-  if (m.winner === 'AWAY_TEAM') return m.awayTeamId
-  if (m.homeScore === null || m.awayScore === null) return null
-  if (m.homeScore > m.awayScore) return m.homeTeamId
-  if (m.awayScore > m.homeScore) return m.awayTeamId
-  return null // draw with no decided winner (e.g. pending penalties)
-}
-
-// Overlay an API result onto the bracket slot that holds the same fixture,
-// aligning home/away to the slot's existing orientation by team id (the API may
-// list the teams in the opposite order to how propagation placed them). Any team
-// the propagation could not yet determine is filled in from the API match.
-function overlayApiResult(slot: MatchData, m: Match) {
-  const flipped = slot.homeTeamId != null && slot.homeTeamId === m.awayTeamId
-  slot.homeScore = flipped ? m.awayScore : m.homeScore
-  slot.awayScore = flipped ? m.homeScore : m.awayScore
-  slot.winner = flipped
-    ? (m.winner === 'HOME_TEAM' ? 'AWAY_TEAM' : m.winner === 'AWAY_TEAM' ? 'HOME_TEAM' : m.winner ?? null)
-    : (m.winner ?? null)
-  slot.penalties = m.penalties
-    ? (flipped ? { home: m.penalties.away, away: m.penalties.home } : m.penalties)
-    : null
-  slot.date = m.date
-  if (slot.homeTeamId == null) slot.homeTeamId = flipped ? m.awayTeamId : m.homeTeamId
-  if (slot.awayTeamId == null) slot.awayTeamId = flipped ? m.homeTeamId : m.awayTeamId
-}
-
-// Advance the winner of each finished match into the next round so a team that
-// has won is shown in the following stage even before the upstream data source
-// populates that fixture. Only fills empty slots, so real API team assignments
-// always take precedence.
-function propagateWinners(bracket: Record<string, MatchData[]>): Record<string, MatchData[]> {
-  for (let r = 0; r < STAGE_ORDER.length - 1; r++) {
-    const cur = bracket[STAGE_ORDER[r]] ?? []
-    const next = bracket[STAGE_ORDER[r + 1]] ?? []
-    cur.forEach((match, idx) => {
-      const winner = matchWinner(match)
-      if (!winner) return
-      const nextSlot = next[Math.floor(idx / 2)]
-      if (!nextSlot) return
-      if (idx % 2 === 0) {
-        if (nextSlot.homeTeamId === null) nextSlot.homeTeamId = winner
-      } else {
-        if (nextSlot.awayTeamId === null) nextSlot.awayTeamId = winner
-      }
-    })
-  }
-  return bracket
-}
-
 function MatchCard({ match, teams, playerNames, flipped = false, onClick }: {
   match: MatchData; teams: Team[]; playerNames: Record<string, string>; flipped?: boolean; onClick: () => void
 }) {
@@ -312,7 +237,7 @@ function BracketColumn({ rounds, bracket, teams, playerNames, leftSide, onMatchC
 export default function KnockoutPage() {
   const { config, players, draw } = useSweepstakes()
   const [teams, setTeams] = useState<Team[]>([])
-  const [bracket, setBracket] = useState<Record<string, MatchData[]>>(buildPlaceholderBracket())
+  const [bracket, setBracket] = useState<Record<string, MatchData[]>>({})
   const [zoom, setZoom] = useState<ZoomMatch | null>(null)
   const [loading, setLoading] = useState(true)
   const [lastUpdated, setLastUpdated] = useState<string | null>(null)
@@ -324,63 +249,7 @@ export default function KnockoutPage() {
       setTeams(t)
       setLastUpdated(s.lastUpdated ?? null)
       if (s.matches?.length) {
-        const updated = buildPlaceholderBracket()
-        // Knockout matches in the bracket (skip stages not shown, e.g. THIRD_PLACE).
-        const knockout = s.matches.filter((m: Match) => m.stage !== 'GROUP' && updated[m.stage])
-
-        // R32 is the only knockout round whose API match order matches the
-        // bracket-slot order, so fill it positionally — ids run sequentially in
-        // bracket order within the round.
-        knockout
-          .filter((m: Match) => m.stage === 'R32')
-          .sort((a, b) => a.id - b.id)
-          .forEach((m, idx) => {
-            const slot = updated.R32[idx]
-            if (!slot) return
-            updated.R32[idx] = { ...slot, homeTeamId: m.homeTeamId, awayTeamId: m.awayTeamId, homeScore: m.homeScore, awayScore: m.awayScore, winner: m.winner ?? null, penalties: m.penalties ?? null, date: m.date }
-          })
-
-        // Process each later round in bracket order. A round's slots only get
-        // their team ids once the previous round's winners are propagated in,
-        // so propagation must happen before that round's API results are
-        // matched by team id — otherwise a fixture whose teams are already
-        // decided (e.g. a semi-final the API has pre-assigned) has nothing to
-        // match against yet and silently fails to attach to its slot.
-        for (const stage of ['R16', 'QF', 'SF', 'F'] as const) {
-          propagateWinners(updated)
-
-          // Overlay API data onto the slot whose teams match. The API numbers
-          // these fixtures in an order that does not follow the bracket
-          // layout, so filling them positionally would place a team in the
-          // wrong slot and duplicate it against the propagated one.
-          for (const m of knockout) {
-            if (m.stage !== stage) continue
-            const apiTeams = [m.homeTeamId, m.awayTeamId].filter(Boolean)
-            if (!apiTeams.length) continue
-            const slot = updated[stage].find(sl =>
-              (sl.homeTeamId != null && apiTeams.includes(sl.homeTeamId)) ||
-              (sl.awayTeamId != null && apiTeams.includes(sl.awayTeamId)))
-            if (slot) overlayApiResult(slot, m)
-          }
-
-          // QF/SF/F kickoff times are fixed on the tournament calendar before
-          // the teams are known, so the API sends these fixtures with null
-          // team ids — the match-by-team overlay above can't place them. Fill
-          // them positionally instead, matching against bracket slots that
-          // are still fully undecided (same assumption as R32). Once the
-          // teams are decided the API match gains real team ids and gets
-          // overlaid properly above, correcting any slot this guessed wrong.
-          const unresolvedSlots = updated[stage].filter(sl => sl.homeTeamId == null && sl.awayTeamId == null)
-          knockout
-            .filter((m: Match) => m.stage === stage && m.homeTeamId == null && m.awayTeamId == null)
-            .sort((a, b) => a.id - b.id)
-            .forEach((m, idx) => {
-              const slot = unresolvedSlots[idx]
-              if (slot) slot.date = m.date
-            })
-        }
-
-        setBracket({ ...updated })
+        setBracket(resolveKnockout(s.matches).bracket)
       }
       setLoading(false)
     })

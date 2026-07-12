@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo, useRef } from 'react'
 import { loadTeams, loadScores, resolveNames } from '../data/loaders'
 import { useSweepstakes } from '../contexts/SweepstakesContext'
+import { resolveKnockout } from '../lib/knockoutResolution'
 import type { Team, Match } from '../types'
 
 const STAGE_LABELS: Record<string, string> = {
@@ -46,7 +47,15 @@ export default function FixturesPage() {
   useEffect(() => {
     Promise.all([loadTeams(), loadScores()]).then(([t, s]) => {
       setTeams(t)
-      setMatches([...(s.matches ?? [])].sort((a, b) => a.date.localeCompare(b.date)))
+      // Knockout fixtures can lag the upstream data source in getting their
+      // team ids assigned (e.g. right after the previous round finishes) —
+      // resolve those from the bracket so they show here too, not just TBD.
+      const { resolvedTeamsByMatchId } = resolveKnockout(s.matches ?? [])
+      const resolved = (s.matches ?? []).map(m => {
+        const r = resolvedTeamsByMatchId.get(m.id)
+        return r ? ({ ...m, homeTeamId: r.homeTeamId, awayTeamId: r.awayTeamId } as Match) : m
+      })
+      setMatches(resolved.sort((a, b) => a.date.localeCompare(b.date)))
       setLastUpdated(s.lastUpdated)
       setLoading(false)
     })
