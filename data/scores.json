@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-12T05:44:58.979Z",
+  "lastUpdated": "2026-07-12T06:17:31.633Z",
   "matches": [
     {
       "id": 537327,
@@ -1294,7 +1294,7 @@
       "awayScore": 3,
       "date": "2026-07-06T01:00:00Z",
       "venue": null,
-      "status": "2026-07-06 01:00:00Z",
+      "status": "FINISHED",
       "winner": "AWAY_TEAM",
       "penalties": null
     },
@@ -1431,8 +1431,8 @@
       "id": 537388,
       "stage": "SF",
       "group": null,
-      "homeTeamId": null,
-      "awayTeamId": null,
+      "homeTeamId": "ENG",
+      "awayTeamId": "ARG",
       "homeScore": null,
       "awayScore": null,
       "date": "2026-07-15T19:00:00Z",
@@ -2419,8 +2419,8 @@
   },
   "teamStats": {
     "MEX": {
-      "scored": 8,
-      "conceded": 0,
+      "scored": 10,
+      "conceded": 3,
       "ownGoals": 0
     },
     "RSA": {
@@ -2629,8 +2629,8 @@
       "ownGoals": 0
     },
     "ENG": {
-      "scored": 10,
-      "conceded": 4,
+      "scored": 13,
+      "conceded": 6,
       "ownGoals": 0
     },
     "CRO": {
