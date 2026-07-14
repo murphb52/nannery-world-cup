@@ -1213,6 +1213,26 @@
       "card": "YELLOW"
     }
   ],
+  "537387": [
+    {
+      "minute": 9,
+      "teamId": "FRA",
+      "player": "Adrien Rabiot",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 31,
+      "teamId": "ESP",
+      "player": "Marc Cucurella",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 86,
+      "teamId": "FRA",
+      "player": "Kylian Mbappé",
+      "card": "YELLOW"
+    }
+  ],
   "537391": [],
   "537392": [
     {

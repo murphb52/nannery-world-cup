@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-14T20:12:44.481Z",
+  "lastUpdated": "2026-07-14T21:30:35.016Z",
   "matches": [
     {
       "id": 537327,
@@ -1420,10 +1420,10 @@
       "homeTeamId": "FRA",
       "awayTeamId": "ESP",
       "homeScore": 0,
-      "awayScore": 1,
+      "awayScore": 2,
       "date": "2026-07-14T19:00:00Z",
       "venue": null,
-      "status": "LIVE",
+      "status": "FINISHED",
       "winner": "AWAY_TEAM",
       "penalties": null
     },
@@ -2334,7 +2334,7 @@
       "red": 0
     },
     "ESP": {
-      "yellow": 5,
+      "yellow": 6,
       "red": 0
     },
     "KSA": {
@@ -2346,7 +2346,7 @@
       "red": 1
     },
     "FRA": {
-      "yellow": 4,
+      "yellow": 6,
       "red": 0
     },
     "ENG": {
@@ -2539,7 +2539,7 @@
       "ownGoals": 1
     },
     "ESP": {
-      "scored": 11,
+      "scored": 13,
       "conceded": 1,
       "ownGoals": 0
     },
@@ -2580,7 +2580,7 @@
     },
     "FRA": {
       "scored": 16,
-      "conceded": 2,
+      "conceded": 4,
       "ownGoals": 0
     },
     "SEN": {
