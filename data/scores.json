@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-15T08:12:37.132Z",
+  "lastUpdated": "2026-07-15T19:12:47.892Z",
   "matches": [
     {
       "id": 537327,
@@ -1433,12 +1433,12 @@
       "group": null,
       "homeTeamId": "ENG",
       "awayTeamId": "ARG",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 0,
       "date": "2026-07-15T19:00:00Z",
       "venue": null,
-      "status": "TIMED",
-      "winner": null,
+      "status": "IN_PLAY",
+      "winner": "DRAW",
       "penalties": null
     },
     {
