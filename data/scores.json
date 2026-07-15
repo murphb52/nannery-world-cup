@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-15T20:33:47.921Z",
+  "lastUpdated": "2026-07-15T22:01:53.323Z",
   "matches": [
     {
       "id": 537327,
@@ -1434,11 +1434,11 @@
       "homeTeamId": "ENG",
       "awayTeamId": "ARG",
       "homeScore": 1,
-      "awayScore": 0,
+      "awayScore": 2,
       "date": "2026-07-15T19:00:00Z",
       "venue": null,
-      "status": "IN_PLAY",
-      "winner": "HOME_TEAM",
+      "status": "FINISHED",
+      "winner": "AWAY_TEAM",
       "penalties": null
     },
     {
@@ -2350,7 +2350,7 @@
       "red": 0
     },
     "ENG": {
-      "yellow": 7,
+      "yellow": 8,
       "red": 1
     },
     "POR": {
@@ -2366,7 +2366,7 @@
       "red": 0
     },
     "ARG": {
-      "yellow": 6,
+      "yellow": 9,
       "red": 0
     },
     "IRQ": {
@@ -2599,8 +2599,8 @@
       "ownGoals": 0
     },
     "ARG": {
-      "scored": 17,
-      "conceded": 6,
+      "scored": 19,
+      "conceded": 7,
       "ownGoals": 0
     },
     "ALG": {
@@ -2629,8 +2629,8 @@
       "ownGoals": 0
     },
     "ENG": {
-      "scored": 13,
-      "conceded": 6,
+      "scored": 14,
+      "conceded": 8,
       "ownGoals": 0
     },
     "CRO": {

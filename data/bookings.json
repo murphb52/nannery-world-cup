@@ -1233,6 +1233,32 @@
       "card": "YELLOW"
     }
   ],
+  "537388": [
+    {
+      "minute": 37,
+      "teamId": "ENG",
+      "player": "Elliot Anderson",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 42,
+      "teamId": "ARG",
+      "player": "Lisandro Martínez",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 51,
+      "teamId": "ARG",
+      "player": "Cristian Romero",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 90,
+      "teamId": "ARG",
+      "player": "Rodrigo De Paul",
+      "card": "YELLOW"
+    }
+  ],
   "537391": [],
   "537392": [
     {
