@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-18T22:23:30.618Z",
+  "lastUpdated": "2026-07-18T23:21:45.437Z",
   "matches": [
     {
       "id": 537327,
@@ -1447,11 +1447,11 @@
       "group": null,
       "homeTeamId": "FRA",
       "awayTeamId": "ENG",
-      "homeScore": 2,
-      "awayScore": 4,
+      "homeScore": 4,
+      "awayScore": 6,
       "date": "2026-07-18T21:00:00Z",
       "venue": null,
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "winner": "AWAY_TEAM",
       "penalties": null
     },
@@ -2579,8 +2579,8 @@
       "ownGoals": 0
     },
     "FRA": {
-      "scored": 16,
-      "conceded": 4,
+      "scored": 20,
+      "conceded": 10,
       "ownGoals": 0
     },
     "SEN": {
@@ -2629,8 +2629,8 @@
       "ownGoals": 0
     },
     "ENG": {
-      "scored": 14,
-      "conceded": 8,
+      "scored": 20,
+      "conceded": 12,
       "ownGoals": 0
     },
     "CRO": {
