@@ -3,6 +3,8 @@ import { loadTeams, loadScores, resolveNames } from '../data/loaders'
 import { useSweepstakes } from '../contexts/SweepstakesContext'
 import type { Team, DrawResult, ScoresData, Standing, Match, Player } from '../types'
 import type { PrizeDefinition } from '../config/sweepstakes'
+import { exportPrizeCardPng, exportPrizeCardsPng } from '../lib/exportPng'
+import type { PrizeExportCard } from '../lib/exportPng'
 
 interface PrizeResult {
   player: string
@@ -315,11 +317,15 @@ function PrizeCard({
   result,
   teamToPlayer,
   eliminated,
+  onExport,
+  exporting,
 }: {
   def: PrizeDefinition
   result: PrizeResult | null
   teamToPlayer: Record<string, string>
   eliminated: Set<string>
+  onExport?: () => void
+  exporting?: boolean
 }) {
   const displayTeams = result?.teams ?? (result?.team ? [result.team] : [])
   return (
@@ -332,6 +338,17 @@ function PrizeCard({
         </div>
         {def.amount > 0 && (
           <span className="text-sm font-bold text-yellow-400 shrink-0">€{def.amount}</span>
+        )}
+        {onExport && (
+          <button
+            onClick={onExport}
+            disabled={exporting}
+            title="Export this card as an image"
+            aria-label={`Export ${def.title} as an image`}
+            className="shrink-0 px-2 py-1 rounded-lg border border-white/15 text-white/60 text-xs hover:bg-white/10 disabled:opacity-40 transition-all"
+          >
+            {exporting ? '…' : '📸'}
+          </button>
         )}
       </div>
 
@@ -373,11 +390,50 @@ function PrizeCard({
   )
 }
 
+// Flatten a computed PrizeResult (plus its definition) into the CSS-independent
+// shape the canvas exporter renders. Mirrors what <PrizeCard> shows on screen.
+function toPrizeExportCard(
+  def: PrizeDefinition,
+  result: PrizeResult | null,
+  teamToPlayer: Record<string, string>,
+  eliminated: Set<string>,
+): PrizeExportCard {
+  const displayTeams = result?.teams ?? (result?.team ? [result.team] : [])
+  return {
+    icon: def.icon,
+    title: def.title,
+    description: def.description,
+    amount: def.amount,
+    empty: !result,
+    teams: displayTeams.map(t => ({
+      teamId: t.id,
+      player: teamToPlayer[t.id] ?? result?.player ?? '—',
+      teamName: t.name,
+      isOut: eliminated.has(t.id),
+      note: result?.teamNotes?.[t.id],
+    })),
+    stat: result?.stat,
+    runnersUp: result?.runnersUp && result.runnersUp.teams.length > 0
+      ? {
+          teams: result.runnersUp.teams.map(t => ({
+            teamId: t.id,
+            player: teamToPlayer[t.id] ?? '—',
+            teamName: t.name,
+            isOut: eliminated.has(t.id),
+          })),
+          stat: result.runnersUp.stat,
+        }
+      : undefined,
+  }
+}
+
 export default function PrizesPage() {
   const { config, players, draw } = useSweepstakes()
   const [teams, setTeams] = useState<Team[]>([])
   const [scores, setScores] = useState<ScoresData | null>(null)
   const [loading, setLoading] = useState(true)
+  const [exporting, setExporting] = useState<string | null>(null)
+  const [exportError, setExportError] = useState<string | null>(null)
 
   useEffect(() => {
     Promise.all([loadTeams(), loadScores()]).then(([t, s]) => {
@@ -409,10 +465,53 @@ export default function PrizesPage() {
     )
   }
 
+  const sweepstakesName = `${config.name} ${config.year}`
+
+  async function runExport(key: string, fn: () => Promise<void>) {
+    setExporting(key)
+    setExportError(null)
+    try {
+      await fn()
+    } catch (e) {
+      setExportError(e instanceof Error ? e.message : 'Export failed')
+    } finally {
+      setExporting(null)
+    }
+  }
+
+  const handleExportAll = () =>
+    runExport('__all__', () =>
+      exportPrizeCardsPng(
+        config.prizes.map(def => toPrizeExportCard(def, results[def.key] ?? null, teamToPlayer, eliminated)),
+        teams,
+        sweepstakesName,
+      )
+    )
+
+  const handleExportCard = (def: PrizeDefinition) =>
+    runExport(def.key, () =>
+      exportPrizeCardPng(toPrizeExportCard(def, results[def.key] ?? null, teamToPlayer, eliminated), teams, sweepstakesName)
+    )
+
   return (
     <div className="max-w-5xl mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-white mb-2">Prizes</h1>
+      <div className="flex flex-wrap items-start justify-between gap-3 mb-2">
+        <h1 className="text-3xl font-bold text-white">Prizes</h1>
+        <button
+          onClick={handleExportAll}
+          disabled={exporting !== null}
+          className="px-4 py-2 rounded-xl border border-white/20 text-white/70 text-sm hover:bg-white/10 disabled:opacity-40 transition-all shrink-0"
+        >
+          {exporting === '__all__' ? 'Generating…' : '📸 Export all'}
+        </button>
+      </div>
       <p className="text-white/40 text-sm mb-8">Live leaderboard — updates daily during the tournament</p>
+
+      {exportError && (
+        <div className="mb-6 px-4 py-3 rounded-xl border border-red-500/30 bg-red-500/5 text-red-400 text-sm">
+          ⚠ {exportError}
+        </div>
+      )}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {config.prizes.map(def => (
@@ -422,6 +521,8 @@ export default function PrizesPage() {
             result={results[def.key] ?? null}
             teamToPlayer={teamToPlayer}
             eliminated={eliminated}
+            onExport={() => handleExportCard(def)}
+            exporting={exporting === def.key}
           />
         ))}
       </div>

@@ -2,6 +2,8 @@ import { useState, useEffect, useMemo } from 'react'
 import { loadTeams, loadScores, resolveNames } from '../data/loaders'
 import { useSweepstakes } from '../contexts/SweepstakesContext'
 import type { Team, ScoresData } from '../types'
+import { exportStatCardPng, exportStatCardsPng } from '../lib/exportPng'
+import type { StatExportCard } from '../lib/exportPng'
 
 function goalTotals(scores: ScoresData): Record<string, { for: number; against: number }> {
   const totals: Record<string, { for: number; against: number }> = {}
@@ -38,9 +40,11 @@ interface LeaderboardCardProps {
   teams: Team[]
   playerNames: Record<string, string>
   higherIsBetter?: boolean
+  onExport?: () => void
+  exporting?: boolean
 }
 
-function LeaderboardCard({ icon, title, entries, teams, playerNames }: LeaderboardCardProps) {
+function LeaderboardCard({ icon, title, entries, teams, playerNames, onExport, exporting }: LeaderboardCardProps) {
   const isEmpty = entries.length === 0
 
   return (
@@ -48,6 +52,17 @@ function LeaderboardCard({ icon, title, entries, teams, playerNames }: Leaderboa
       <div className="bg-gradient-to-r from-yellow-500/15 to-red-500/15 px-4 py-3 border-b border-white/10 flex items-center gap-2">
         <span className="text-lg">{icon}</span>
         <h3 className="font-bold text-white text-sm">{title}</h3>
+        {onExport && (
+          <button
+            onClick={onExport}
+            disabled={exporting}
+            title="Export this card as an image"
+            aria-label={`Export ${title} as an image`}
+            className="ml-auto shrink-0 px-2 py-1 rounded-lg border border-white/15 text-white/60 text-xs hover:bg-white/10 disabled:opacity-40 transition-all"
+          >
+            {exporting ? '…' : '📸'}
+          </button>
+        )}
       </div>
 
       {isEmpty ? (
@@ -98,10 +113,12 @@ function LeaderboardCard({ icon, title, entries, teams, playerNames }: Leaderboa
 }
 
 export default function StatsPage() {
-  const { players, draw } = useSweepstakes()
+  const { config, players, draw } = useSweepstakes()
   const [teams, setTeams] = useState<Team[]>([])
   const [scores, setScores] = useState<ScoresData | null>(null)
   const [loading, setLoading] = useState(true)
+  const [exporting, setExporting] = useState<string | null>(null)
+  const [exportError, setExportError] = useState<string | null>(null)
 
   useEffect(() => {
     Promise.all([loadTeams(), loadScores()]).then(([t, s]) => {
@@ -195,14 +212,78 @@ export default function StatsPage() {
 
   const hasData = stats && stats.matchesPlayed > 0
 
+  const sweepstakesName = `${config.name} ${config.year}`
+
+  // The leaderboards shown on the page, in display order. Kept as a single list
+  // so rendering and PNG export stay in sync (add a board here and it exports
+  // automatically). Red cards only appear once someone's actually been sent off.
+  const cards: { icon: string; title: string; entries: LeaderboardEntry[] }[] = [
+    { icon: '⚽', title: 'Most Goals Scored', entries: stats?.topScorers ?? [] },
+    { icon: '🛡️', title: 'Best Defence', entries: stats?.bestDefence ?? [] },
+    { icon: '🟨', title: 'Most Yellow Cards', entries: stats?.yellowCards ?? [] },
+    ...((stats?.redCards?.length ?? 0) > 0
+      ? [{ icon: '🟥', title: 'Most Red Cards', entries: stats?.redCards ?? [] }]
+      : []),
+    { icon: '🏅', title: 'Most Wins', entries: stats?.mostWins ?? [] },
+  ]
+
+  const toExportCard = (c: { icon: string; title: string; entries: LeaderboardEntry[] }): StatExportCard => ({
+    icon: c.icon,
+    title: c.title,
+    entries: c.entries.map(e => ({
+      teamId: e.teamId,
+      value: e.value,
+      label: e.label,
+      rank: e.rank,
+      isTied: c.entries.filter(x => x.rank === e.rank).length > 1,
+    })),
+  })
+
+  async function runExport(key: string, fn: () => Promise<void>) {
+    setExporting(key)
+    setExportError(null)
+    try {
+      await fn()
+    } catch (e) {
+      setExportError(e instanceof Error ? e.message : 'Export failed')
+    } finally {
+      setExporting(null)
+    }
+  }
+
+  const handleExportAll = () =>
+    runExport('__all__', () =>
+      exportStatCardsPng(cards.map(toExportCard), teams, playerNames, sweepstakesName)
+    )
+
+  const handleExportCard = (c: { icon: string; title: string; entries: LeaderboardEntry[] }) =>
+    runExport(c.title, () => exportStatCardPng(toExportCard(c), teams, playerNames, sweepstakesName))
+
   return (
     <div className="max-w-5xl mx-auto px-4 py-8">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-white mb-2">Tournament Stats</h1>
-        {scores?.lastUpdated && (
-          <p className="text-white/40 text-sm">Last updated: {new Date(scores.lastUpdated).toLocaleString()}</p>
+      <div className="mb-8 flex flex-wrap items-start justify-between gap-3">
+        <div>
+          <h1 className="text-3xl font-bold text-white mb-2">Tournament Stats</h1>
+          {scores?.lastUpdated && (
+            <p className="text-white/40 text-sm">Last updated: {new Date(scores.lastUpdated).toLocaleString()}</p>
+          )}
+        </div>
+        {hasData && (
+          <button
+            onClick={handleExportAll}
+            disabled={exporting !== null}
+            className="px-4 py-2 rounded-xl border border-white/20 text-white/70 text-sm hover:bg-white/10 disabled:opacity-40 transition-all shrink-0"
+          >
+            {exporting === '__all__' ? 'Generating…' : '📸 Export all'}
+          </button>
         )}
       </div>
+
+      {exportError && (
+        <div className="mb-6 px-4 py-3 rounded-xl border border-red-500/30 bg-red-500/5 text-red-400 text-sm">
+          ⚠ {exportError}
+        </div>
+      )}
 
       {hasData && (
         <div className="mb-8 grid grid-cols-3 gap-3">
@@ -226,43 +307,18 @@ export default function StatsPage() {
       )}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <LeaderboardCard
-          icon="⚽"
-          title="Most Goals Scored"
-          entries={stats?.topScorers ?? []}
-          teams={teams}
-          playerNames={playerNames}
-        />
-        <LeaderboardCard
-          icon="🛡️"
-          title="Best Defence"
-          entries={stats?.bestDefence ?? []}
-          teams={teams}
-          playerNames={playerNames}
-        />
-        <LeaderboardCard
-          icon="🟨"
-          title="Most Yellow Cards"
-          entries={stats?.yellowCards ?? []}
-          teams={teams}
-          playerNames={playerNames}
-        />
-        {(stats?.redCards?.length ?? 0) > 0 && (
+        {cards.map(c => (
           <LeaderboardCard
-            icon="🟥"
-            title="Most Red Cards"
-            entries={stats?.redCards ?? []}
+            key={c.title}
+            icon={c.icon}
+            title={c.title}
+            entries={c.entries}
             teams={teams}
             playerNames={playerNames}
+            onExport={c.entries.length > 0 ? () => handleExportCard(c) : undefined}
+            exporting={exporting === c.title}
           />
-        )}
-        <LeaderboardCard
-          icon="🏅"
-          title="Most Wins"
-          entries={stats?.mostWins ?? []}
-          teams={teams}
-          playerNames={playerNames}
-        />
+        ))}
       </div>
     </div>
   )
