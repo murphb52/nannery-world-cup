@@ -482,3 +482,547 @@ export async function exportKnockoutPng(
   a.href = url
   a.click()
 }
+
+// ---------------------------------------------------------------------------
+// Prizes & Stats share graphics
+//
+// Like the draw/knockout exports above, these are drawn by hand on a canvas so
+// they don't depend on the page's CSS (Tailwind v4 oklch colours break
+// DOM-snapshot libraries) and always produce a clean, consistent share graphic.
+// Cards are laid out with a shortest-column-first packing so mixed-height cards
+// tile without big gaps, and the same renderer powers both a single-card export
+// and an "export everything" grid.
+// ---------------------------------------------------------------------------
+
+const FONT = 'Inter, system-ui, sans-serif'
+
+const GRID_PAD = 44
+const GRID_HEADER_H = 108
+const GRID_GAP = 24
+
+function drawBackdrop(ctx: CanvasRenderingContext2D, width: number, height: number) {
+  const bg = ctx.createLinearGradient(0, 0, width, height)
+  bg.addColorStop(0, '#0a0a1a')
+  bg.addColorStop(0.5, '#0d1117')
+  bg.addColorStop(1, '#0a1628')
+  ctx.fillStyle = bg
+  ctx.fillRect(0, 0, width, height)
+}
+
+function drawTitle(ctx: CanvasRenderingContext2D, width: number, topY: number, title: string, subtitle: string) {
+  const titleGrad = ctx.createLinearGradient(0, 0, width, 0)
+  titleGrad.addColorStop(0, '#facc15')
+  titleGrad.addColorStop(1, '#ef4444')
+  ctx.textAlign = 'center'
+  ctx.textBaseline = 'middle'
+  ctx.fillStyle = titleGrad
+  // Shrink the title so it always fits within the graphic (single-card exports
+  // are narrow enough that the full name would otherwise clip).
+  const titleText = `🏆 ${title}`
+  const maxTitleW = width - GRID_PAD * 2
+  let titleSize = 42
+  do {
+    ctx.font = `800 ${titleSize}px ${FONT}`
+    if (ctx.measureText(titleText).width <= maxTitleW) break
+    titleSize -= 2
+  } while (titleSize > 22)
+  ctx.fillText(titleText, width / 2, topY + 26)
+  ctx.fillStyle = 'rgba(255,255,255,0.55)'
+  ctx.font = `500 20px ${FONT}`
+  ctx.fillText(subtitle, width / 2, topY + 66)
+}
+
+function triggerDownload(canvas: HTMLCanvasElement, filename: string) {
+  let url: string
+  try {
+    url = canvas.toDataURL('image/png')
+  } catch {
+    throw new Error('Could not export image (flag images blocked export). Try again.')
+  }
+  const a = document.createElement('a')
+  a.download = filename
+  a.href = url
+  a.click()
+}
+
+/**
+ * Generic card-grid renderer shared by the prizes and stats exports. Packs
+ * fixed-width, variable-height cards into `cols` columns (shortest column
+ * first), draws the shared backdrop + title, then hands each card to `drawCard`.
+ */
+async function renderCardGrid<T>(opts: {
+  items: T[]
+  cols: number
+  cardW: number
+  heightOf: (item: T) => number
+  drawCard: (ctx: CanvasRenderingContext2D, x: number, y: number, item: T, flags: Map<string, HTMLImageElement | null>) => void
+  teams: Team[]
+  title: string
+  subtitle: string
+  filename: string
+}): Promise<void> {
+  const { items, cardW, heightOf, drawCard, teams, title, subtitle, filename } = opts
+  const cols = Math.max(1, Math.min(opts.cols, items.length || 1))
+
+  // Pack cards into columns, always adding to the currently shortest column.
+  const heights = items.map(heightOf)
+  const colHeights = new Array(cols).fill(0)
+  const placements = items.map((_, i) => {
+    let col = 0
+    for (let c = 1; c < cols; c++) if (colHeights[c] < colHeights[col]) col = c
+    const yOffset = colHeights[col]
+    colHeights[col] += heights[i] + GRID_GAP
+    return { col, yOffset }
+  })
+  const contentH = Math.max(0, ...colHeights.map(h => h - GRID_GAP))
+
+  const width = GRID_PAD * 2 + cols * cardW + (cols - 1) * GRID_GAP
+  const height = GRID_PAD + GRID_HEADER_H + contentH + GRID_PAD
+
+  const scale = Math.min(2, window.devicePixelRatio || 1) * 1.5
+  const canvas = document.createElement('canvas')
+  canvas.width = Math.round(width * scale)
+  canvas.height = Math.round(height * scale)
+  const ctx = canvas.getContext('2d')
+  if (!ctx) throw new Error('Canvas not supported')
+  ctx.scale(scale, scale)
+
+  const flagEntries = await Promise.all(
+    teams.map(async t => [t.id, await loadImage(t.flag)] as const)
+  )
+  const flags = new Map(flagEntries)
+
+  drawBackdrop(ctx, width, height)
+  drawTitle(ctx, width, GRID_PAD, title, subtitle)
+
+  items.forEach((item, i) => {
+    const { col, yOffset } = placements[i]
+    const x = GRID_PAD + col * (cardW + GRID_GAP)
+    const y = GRID_PAD + GRID_HEADER_H + yOffset
+    drawCard(ctx, x, y, item, flags)
+  })
+
+  triggerDownload(canvas, filename)
+}
+
+function slugify(...parts: string[]): string {
+  return parts.join(' ').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')
+}
+
+// --- Stats leaderboard cards -------------------------------------------------
+
+export interface StatExportEntry {
+  teamId: string
+  value: number | string
+  label: string
+  rank: number
+  isTied: boolean
+}
+
+export interface StatExportCard {
+  icon: string
+  title: string
+  entries: StatExportEntry[]
+}
+
+const STAT_CARD_W = 460
+const STAT_HEADER_H = 52
+const STAT_ROW_H = 44
+
+function statCardHeight(card: StatExportCard): number {
+  return STAT_HEADER_H + Math.max(card.entries.length, 1) * STAT_ROW_H + 10
+}
+
+function drawStatCard(
+  ctx: CanvasRenderingContext2D,
+  x: number,
+  y: number,
+  card: StatExportCard,
+  teams: Team[],
+  playerNames: Record<string, string>,
+  flags: Map<string, HTMLImageElement | null>,
+) {
+  const w = STAT_CARD_W
+  const h = statCardHeight(card)
+  const teamById = new Map(teams.map(t => [t.id, t]))
+
+  // Card body
+  ctx.fillStyle = 'rgba(255,255,255,0.03)'
+  roundRect(ctx, x, y, w, h, 16)
+  ctx.fill()
+  ctx.strokeStyle = 'rgba(255,255,255,0.10)'
+  ctx.lineWidth = 1
+  roundRect(ctx, x, y, w, h, 16)
+  ctx.stroke()
+
+  // Header strip
+  ctx.save()
+  roundRect(ctx, x, y, w, STAT_HEADER_H, 16)
+  ctx.clip()
+  const hg = ctx.createLinearGradient(x, y, x + w, y)
+  hg.addColorStop(0, 'rgba(234,179,8,0.15)')
+  hg.addColorStop(1, 'rgba(239,68,68,0.15)')
+  ctx.fillStyle = hg
+  ctx.fillRect(x, y, w, STAT_HEADER_H)
+  ctx.restore()
+  ctx.textAlign = 'left'
+  ctx.textBaseline = 'middle'
+  ctx.font = `400 20px ${FONT}`
+  ctx.fillStyle = '#ffffff'
+  ctx.fillText(card.icon, x + 16, y + STAT_HEADER_H / 2 + 1)
+  ctx.font = `700 17px ${FONT}`
+  ctx.fillText(card.title, x + 48, y + STAT_HEADER_H / 2 + 1)
+
+  if (!card.entries.length) {
+    ctx.textAlign = 'center'
+    ctx.fillStyle = 'rgba(255,255,255,0.3)'
+    ctx.font = `500 15px ${FONT}`
+    ctx.fillText('No data yet', x + w / 2, y + STAT_HEADER_H + STAT_ROW_H / 2)
+    return
+  }
+
+  card.entries.forEach((entry, i) => {
+    const rowY = y + STAT_HEADER_H + i * STAT_ROW_H
+    const midY = rowY + STAT_ROW_H / 2
+    if (i > 0) {
+      ctx.strokeStyle = 'rgba(255,255,255,0.05)'
+      ctx.beginPath()
+      ctx.moveTo(x + 12, rowY)
+      ctx.lineTo(x + w - 12, rowY)
+      ctx.stroke()
+    }
+
+    const team = teamById.get(entry.teamId)
+    const isFirst = entry.rank === 1
+
+    // Rank
+    ctx.textAlign = 'right'
+    ctx.fillStyle = entry.rank === 1 ? '#facc15'
+      : entry.rank === 2 ? 'rgba(255,255,255,0.5)'
+      : entry.rank === 3 ? 'rgba(251,146,60,0.7)'
+      : 'rgba(255,255,255,0.25)'
+    ctx.font = `700 14px ${FONT}`
+    ctx.fillText(entry.isTied ? `=${entry.rank}` : String(entry.rank), x + 32, midY)
+
+    // Flag
+    const fw = 32
+    const fh = 20
+    const fx = x + 44
+    const fy = midY - fh / 2
+    const flag = team ? flags.get(team.id) : null
+    if (flag) {
+      ctx.save()
+      roundRect(ctx, fx, fy, fw, fh, 3)
+      ctx.clip()
+      ctx.drawImage(flag, fx, fy, fw, fh)
+      ctx.restore()
+    } else {
+      ctx.fillStyle = 'rgba(255,255,255,0.12)'
+      roundRect(ctx, fx, fy, fw, fh, 3)
+      ctx.fill()
+    }
+
+    // Value + label (right-aligned block)
+    ctx.font = `700 16px ${FONT}`
+    const valueText = String(entry.value)
+    const valueW = ctx.measureText(valueText).width
+    ctx.font = `400 12px ${FONT}`
+    const labelW = ctx.measureText(entry.label).width
+    const blockRight = x + w - 16
+    const blockLeft = blockRight - valueW - 6 - labelW
+    ctx.textAlign = 'right'
+    ctx.fillStyle = 'rgba(255,255,255,0.3)'
+    ctx.fillText(entry.label, blockRight, midY)
+    ctx.font = `700 16px ${FONT}`
+    ctx.fillStyle = isFirst ? '#facc15' : 'rgba(255,255,255,0.75)'
+    ctx.fillText(valueText, blockLeft + valueW, midY)
+
+    // Team name + player
+    const nameX = fx + fw + 12
+    const nameMaxW = blockLeft - 10 - nameX
+    const player = playerNames[entry.teamId]
+    ctx.textAlign = 'left'
+    ctx.fillStyle = '#ffffff'
+    ctx.font = `500 15px ${FONT}`
+    ctx.fillText(fitText(ctx, team?.name ?? entry.teamId, nameMaxW), nameX, player ? midY - 7 : midY)
+    if (player) {
+      ctx.fillStyle = 'rgba(255,255,255,0.4)'
+      ctx.font = `400 12px ${FONT}`
+      ctx.fillText(fitText(ctx, player, nameMaxW), nameX, midY + 9)
+    }
+  })
+}
+
+/** Export a single stats leaderboard card as a PNG. */
+export async function exportStatCardPng(
+  card: StatExportCard,
+  teams: Team[],
+  playerNames: Record<string, string>,
+  sweepstakesName = 'World Cup 2026',
+): Promise<void> {
+  await renderCardGrid({
+    items: [card],
+    cols: 1,
+    cardW: STAT_CARD_W,
+    heightOf: statCardHeight,
+    drawCard: (ctx, x, y, item, flags) => drawStatCard(ctx, x, y, item, teams, playerNames, flags),
+    teams,
+    title: sweepstakesName,
+    subtitle: card.title,
+    filename: `${slugify(sweepstakesName, card.title)}.png`,
+  })
+}
+
+/** Export every stats leaderboard card as one PNG. */
+export async function exportStatCardsPng(
+  cards: StatExportCard[],
+  teams: Team[],
+  playerNames: Record<string, string>,
+  sweepstakesName = 'World Cup 2026',
+): Promise<void> {
+  await renderCardGrid({
+    items: cards,
+    cols: 2,
+    cardW: STAT_CARD_W,
+    heightOf: statCardHeight,
+    drawCard: (ctx, x, y, item, flags) => drawStatCard(ctx, x, y, item, teams, playerNames, flags),
+    teams,
+    title: sweepstakesName,
+    subtitle: 'Tournament Stats',
+    filename: `${slugify(sweepstakesName, 'stats')}.png`,
+  })
+}
+
+// --- Prize cards -------------------------------------------------------------
+
+export interface PrizeExportTeam {
+  teamId: string
+  player: string
+  teamName: string
+  isOut: boolean
+  note?: string
+}
+
+export interface PrizeExportCard {
+  icon: string
+  title: string
+  description: string
+  amount: number
+  empty: boolean
+  teams: PrizeExportTeam[]
+  stat?: string
+  runnersUp?: { teams: PrizeExportTeam[]; stat: string }
+}
+
+const PRIZE_CARD_W = 460
+const PRIZE_HEADER_H = 68
+const PRIZE_ROW_H = 48
+const PRIZE_RU_ROW_H = 42
+const PRIZE_PANEL_PAD = 14
+const PRIZE_BOTTOM = 12
+
+function prizeCardHeight(card: PrizeExportCard): number {
+  let inner: number
+  if (card.empty) {
+    inner = 44
+  } else {
+    inner = card.teams.length * PRIZE_ROW_H
+    if (card.stat) inner += 30
+    if (card.runnersUp && card.runnersUp.teams.length) {
+      inner += 12 + 20 + card.runnersUp.teams.length * PRIZE_RU_ROW_H + 20
+    }
+  }
+  return PRIZE_HEADER_H + PRIZE_PANEL_PAD * 2 + inner + PRIZE_BOTTOM
+}
+
+function drawPrizeRow(
+  ctx: CanvasRenderingContext2D,
+  innerX: number,
+  innerW: number,
+  midY: number,
+  t: PrizeExportTeam,
+  flags: Map<string, HTMLImageElement | null>,
+  tone: 'lead' | 'chase',
+) {
+  const fw = 40
+  const fh = 28
+  const fx = innerX
+  const fy = midY - fh / 2
+  const flag = flags.get(t.teamId)
+
+  ctx.save()
+  if (t.isOut) ctx.globalAlpha = 0.4
+  if (flag) {
+    ctx.save()
+    roundRect(ctx, fx, fy, fw, fh, 4)
+    ctx.clip()
+    ctx.drawImage(flag, fx, fy, fw, fh)
+    ctx.restore()
+  } else {
+    ctx.fillStyle = 'rgba(255,255,255,0.12)'
+    roundRect(ctx, fx, fy, fw, fh, 4)
+    ctx.fill()
+  }
+  ctx.restore()
+
+  const noteW = t.note ? 40 : 0
+  const nameX = fx + fw + 12
+  const nameMaxW = innerX + innerW - nameX - noteW - 8
+
+  ctx.textAlign = 'left'
+  ctx.textBaseline = 'middle'
+  ctx.font = `600 16px ${FONT}`
+  ctx.fillStyle = tone === 'lead' ? '#facc15' : 'rgba(255,255,255,0.7)'
+  ctx.fillText(fitText(ctx, t.player, nameMaxW), nameX, midY - 8)
+  ctx.font = `400 12px ${FONT}`
+  ctx.fillStyle = 'rgba(255,255,255,0.5)'
+  ctx.fillText(fitText(ctx, t.teamName, nameMaxW), nameX, midY + 9)
+
+  if (t.note) {
+    ctx.textAlign = 'right'
+    ctx.font = `600 13px ${FONT}`
+    ctx.fillStyle = 'rgba(255,255,255,0.7)'
+    ctx.fillText(t.note, innerX + innerW, midY)
+  }
+}
+
+function drawPrizeCard(
+  ctx: CanvasRenderingContext2D,
+  x: number,
+  y: number,
+  card: PrizeExportCard,
+  flags: Map<string, HTMLImageElement | null>,
+) {
+  const w = PRIZE_CARD_W
+  const h = prizeCardHeight(card)
+
+  // Card body
+  ctx.fillStyle = 'rgba(255,255,255,0.04)'
+  roundRect(ctx, x, y, w, h, 18)
+  ctx.fill()
+  ctx.strokeStyle = 'rgba(255,255,255,0.10)'
+  ctx.lineWidth = 1
+  roundRect(ctx, x, y, w, h, 18)
+  ctx.stroke()
+
+  // Header — icon, title, description, amount
+  ctx.textAlign = 'left'
+  ctx.textBaseline = 'middle'
+  ctx.font = `400 30px ${FONT}`
+  ctx.fillStyle = '#ffffff'
+  ctx.fillText(card.icon, x + 18, y + 34)
+  const titleX = x + 64
+  const amountW = card.amount > 0 ? 62 : 0
+  const headMaxW = w - (titleX - x) - amountW - 16
+  ctx.font = `700 18px ${FONT}`
+  ctx.fillStyle = '#ffffff'
+  ctx.fillText(fitText(ctx, card.title, headMaxW), titleX, y + 25)
+  ctx.font = `400 12px ${FONT}`
+  ctx.fillStyle = 'rgba(255,255,255,0.4)'
+  ctx.fillText(fitText(ctx, card.description, headMaxW), titleX, y + 45)
+  if (card.amount > 0) {
+    ctx.textAlign = 'right'
+    ctx.font = `700 15px ${FONT}`
+    ctx.fillStyle = '#facc15'
+    ctx.fillText(`€${card.amount}`, x + w - 16, y + 30)
+  }
+
+  // Inner panel
+  const panelX = x + 14
+  const panelW = w - 28
+  const panelY = y + PRIZE_HEADER_H
+  const panelH = h - PRIZE_HEADER_H - PRIZE_BOTTOM
+  ctx.fillStyle = 'rgba(255,255,255,0.04)'
+  roundRect(ctx, panelX, panelY, panelW, panelH, 12)
+  ctx.fill()
+
+  const innerX = panelX + PRIZE_PANEL_PAD
+  const innerW = panelW - PRIZE_PANEL_PAD * 2
+
+  if (card.empty) {
+    ctx.textAlign = 'center'
+    ctx.fillStyle = 'rgba(255,255,255,0.3)'
+    ctx.font = `500 14px ${FONT}`
+    ctx.fillText('TBD — not yet decided', panelX + panelW / 2, panelY + panelH / 2)
+    return
+  }
+
+  let cursor = panelY + PRIZE_PANEL_PAD
+  card.teams.forEach(t => {
+    drawPrizeRow(ctx, innerX, innerW, cursor + PRIZE_ROW_H / 2, t, flags, 'lead')
+    cursor += PRIZE_ROW_H
+  })
+
+  if (card.stat) {
+    ctx.strokeStyle = 'rgba(255,255,255,0.06)'
+    ctx.beginPath()
+    ctx.moveTo(innerX, cursor + 4)
+    ctx.lineTo(innerX + innerW, cursor + 4)
+    ctx.stroke()
+    ctx.textAlign = 'right'
+    ctx.font = `400 12px ${FONT}`
+    ctx.fillStyle = 'rgba(255,255,255,0.4)'
+    ctx.fillText(fitText(ctx, card.stat, innerW), innerX + innerW, cursor + 18)
+    cursor += 30
+  }
+
+  if (card.runnersUp && card.runnersUp.teams.length) {
+    ctx.strokeStyle = 'rgba(255,255,255,0.06)'
+    ctx.beginPath()
+    ctx.moveTo(innerX, cursor + 2)
+    ctx.lineTo(innerX + innerW, cursor + 2)
+    ctx.stroke()
+    cursor += 12
+    ctx.textAlign = 'left'
+    ctx.font = `700 10px ${FONT}`
+    ctx.fillStyle = 'rgba(255,255,255,0.3)'
+    ctx.fillText('NEXT CLOSEST', innerX, cursor + 8)
+    cursor += 20
+    card.runnersUp.teams.forEach(t => {
+      drawPrizeRow(ctx, innerX, innerW, cursor + PRIZE_RU_ROW_H / 2, t, flags, 'chase')
+      cursor += PRIZE_RU_ROW_H
+    })
+    ctx.textAlign = 'right'
+    ctx.font = `400 12px ${FONT}`
+    ctx.fillStyle = 'rgba(255,255,255,0.3)'
+    ctx.fillText(fitText(ctx, card.runnersUp.stat, innerW), innerX + innerW, cursor + 10)
+  }
+}
+
+/** Export a single prize card as a PNG. */
+export async function exportPrizeCardPng(
+  card: PrizeExportCard,
+  teams: Team[],
+  sweepstakesName = 'World Cup 2026',
+): Promise<void> {
+  await renderCardGrid({
+    items: [card],
+    cols: 1,
+    cardW: PRIZE_CARD_W,
+    heightOf: prizeCardHeight,
+    drawCard: (ctx, x, y, item, flags) => drawPrizeCard(ctx, x, y, item, flags),
+    teams,
+    title: sweepstakesName,
+    subtitle: card.title,
+    filename: `${slugify(sweepstakesName, card.title)}.png`,
+  })
+}
+
+/** Export every prize card as one PNG. */
+export async function exportPrizeCardsPng(
+  cards: PrizeExportCard[],
+  teams: Team[],
+  sweepstakesName = 'World Cup 2026',
+): Promise<void> {
+  await renderCardGrid({
+    items: cards,
+    cols: 3,
+    cardW: PRIZE_CARD_W,
+    heightOf: prizeCardHeight,
+    drawCard: (ctx, x, y, item, flags) => drawPrizeCard(ctx, x, y, item, flags),
+    teams,
+    title: sweepstakesName,
+    subtitle: 'Prizes',
+    filename: `${slugify(sweepstakesName, 'prizes')}.png`,
+  })
+}
