@@ -532,16 +532,53 @@ function drawTitle(ctx: CanvasRenderingContext2D, width: number, topY: number, t
   ctx.fillText(subtitle, width / 2, topY + 66)
 }
 
-function triggerDownload(canvas: HTMLCanvasElement, filename: string) {
-  let url: string
+// Keep share graphics comfortably shareable. PNG is lossless (crisp text, no
+// artefacts) so it's always preferred, but a large multi-card grid can exceed a
+// sensible size — past this budget we re-encode as high-quality WebP (still
+// sharp on flat UI/text), then JPEG as a last resort, stepping quality down
+// only as far as needed to fit.
+const MAX_EXPORT_BYTES = 4 * 1024 * 1024
+
+function dataUrlBytes(dataUrl: string): number {
+  const comma = dataUrl.indexOf(',')
+  const b64 = comma >= 0 ? dataUrl.slice(comma + 1) : dataUrl
+  const padding = b64.endsWith('==') ? 2 : b64.endsWith('=') ? 1 : 0
+  return Math.floor((b64.length * 3) / 4) - padding
+}
+
+/**
+ * Encode the canvas to a data URL that stays under {@link MAX_EXPORT_BYTES}
+ * where possible, keeping quality as high as the budget allows. Returns the URL
+ * and the file extension for the format actually used.
+ */
+function encodeWithinBudget(canvas: HTMLCanvasElement): { url: string; ext: string } {
+  const png = canvas.toDataURL('image/png')
+  if (dataUrlBytes(png) <= MAX_EXPORT_BYTES) return { url: png, ext: 'png' }
+
+  for (const [mime, ext] of [['image/webp', 'webp'], ['image/jpeg', 'jpg']] as const) {
+    let quality = 0.92
+    let url = canvas.toDataURL(mime, quality)
+    // Browsers that don't support the format fall back to PNG — skip those.
+    if (!url.startsWith(`data:${mime}`)) continue
+    while (dataUrlBytes(url) > MAX_EXPORT_BYTES && quality > 0.6) {
+      quality = Math.round((quality - 0.08) * 100) / 100
+      url = canvas.toDataURL(mime, quality)
+    }
+    return { url, ext }
+  }
+  return { url: png, ext: 'png' }
+}
+
+function triggerDownload(canvas: HTMLCanvasElement, baseName: string) {
+  let encoded: { url: string; ext: string }
   try {
-    url = canvas.toDataURL('image/png')
+    encoded = encodeWithinBudget(canvas)
   } catch {
     throw new Error('Could not export image (flag images blocked export). Try again.')
   }
   const a = document.createElement('a')
-  a.download = filename
-  a.href = url
+  a.download = `${baseName}.${encoded.ext}`
+  a.href = encoded.url
   a.click()
 }
 
@@ -579,7 +616,9 @@ async function renderCardGrid<T>(opts: {
   const width = GRID_PAD * 2 + cols * cardW + (cols - 1) * GRID_GAP
   const height = GRID_PAD + GRID_HEADER_H + contentH + GRID_PAD
 
-  const scale = Math.min(2, window.devicePixelRatio || 1) * 1.5
+  // 2× supersampling keeps text/edges crisp without exploding the pixel count
+  // (and therefore the file size) the way a 3× buffer would on retina screens.
+  const scale = Math.min(2, (window.devicePixelRatio || 1) * 1.5)
   const canvas = document.createElement('canvas')
   canvas.width = Math.round(width * scale)
   canvas.height = Math.round(height * scale)
@@ -769,7 +808,7 @@ export async function exportStatCardPng(
     teams,
     title: sweepstakesName,
     subtitle: card.title,
-    filename: `${slugify(sweepstakesName, card.title)}.png`,
+    filename: slugify(sweepstakesName, card.title),
   })
 }
 
@@ -789,7 +828,7 @@ export async function exportStatCardsPng(
     teams,
     title: sweepstakesName,
     subtitle: 'Tournament Stats',
-    filename: `${slugify(sweepstakesName, 'stats')}.png`,
+    filename: slugify(sweepstakesName, 'stats'),
   })
 }
 
@@ -1004,7 +1043,7 @@ export async function exportPrizeCardPng(
     teams,
     title: sweepstakesName,
     subtitle: card.title,
-    filename: `${slugify(sweepstakesName, card.title)}.png`,
+    filename: slugify(sweepstakesName, card.title),
   })
 }
 
@@ -1023,6 +1062,6 @@ export async function exportPrizeCardsPng(
     teams,
     title: sweepstakesName,
     subtitle: 'Prizes',
-    filename: `${slugify(sweepstakesName, 'prizes')}.png`,
+    filename: slugify(sweepstakesName, 'prizes'),
   })
 }
