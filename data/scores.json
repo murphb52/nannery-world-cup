@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-19T21:54:04.059Z",
+  "lastUpdated": "2026-07-19T22:12:48.368Z",
   "matches": [
     {
       "id": 537327,
@@ -1465,7 +1465,7 @@
       "awayScore": 0,
       "date": "2026-07-19T19:00:00Z",
       "venue": null,
-      "status": "LIVE",
+      "status": "FINISHED",
       "winner": "HOME_TEAM",
       "penalties": null
     }
@@ -2366,8 +2366,8 @@
       "red": 0
     },
     "ARG": {
-      "yellow": 9,
-      "red": 0
+      "yellow": 14,
+      "red": 2
     },
     "IRQ": {
       "yellow": 4,
@@ -2539,7 +2539,7 @@
       "ownGoals": 1
     },
     "ESP": {
-      "scored": 13,
+      "scored": 14,
       "conceded": 1,
       "ownGoals": 0
     },
@@ -2600,7 +2600,7 @@
     },
     "ARG": {
       "scored": 19,
-      "conceded": 7,
+      "conceded": 8,
       "ownGoals": 0
     },
     "ALG": {

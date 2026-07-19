@@ -1260,6 +1260,50 @@
     }
   ],
   "537389": [],
+  "537390": [
+    {
+      "minute": 41,
+      "teamId": "ARG",
+      "player": "Lisandro Martínez",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 52,
+      "teamId": "ARG",
+      "player": "Leandro Paredes",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 82,
+      "teamId": "ARG",
+      "player": "Enzo Fernández",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 90,
+      "teamId": "ARG",
+      "player": "Cristian Romero",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 90,
+      "teamId": "ARG",
+      "player": "Enzo Fernández",
+      "card": "RED"
+    },
+    {
+      "minute": 111,
+      "teamId": "ARG",
+      "player": "Alexis Mac Allister",
+      "card": "YELLOW"
+    },
+    {
+      "minute": 120,
+      "teamId": "ARG",
+      "player": "Leandro Paredes",
+      "card": "RED"
+    }
+  ],
   "537391": [],
   "537392": [
     {
