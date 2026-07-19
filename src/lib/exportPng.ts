@@ -173,17 +173,8 @@ export async function exportGroupsPng(teams: Team[], draw: DrawResult, players: 
     })
   })
 
-  let url: string
-  try {
-    url = canvas.toDataURL('image/png')
-  } catch {
-    throw new Error('Could not export image (flag images blocked export). Try again.')
-  }
-  const a = document.createElement('a')
   const slug = sweepstakesName.toLowerCase().replace(/\s+/g, '-')
-  a.download = `${slug}-draw.png`
-  a.href = url
-  a.click()
+  await shareOrDownload(canvas, `${slug}-draw`, `${sweepstakesName} — The Official Draw`)
 }
 
 interface KnockoutMatch {
@@ -470,17 +461,8 @@ export async function exportKnockoutPng(
     ctx.fillText(`Last updated ${new Date(lastUpdated).toLocaleString()}`, width / 2, champion ? footerY + 24 : footerY)
   }
 
-  let url: string
-  try {
-    url = canvas.toDataURL('image/png')
-  } catch {
-    throw new Error('Could not export image (flag images blocked export). Try again.')
-  }
-  const a = document.createElement('a')
   const slug = sweepstakesName.toLowerCase().replace(/\s+/g, '-')
-  a.download = `${slug}-knockout.png`
-  a.href = url
-  a.click()
+  await shareOrDownload(canvas, `${slug}-knockout`, `${sweepstakesName} — Knockout Bracket`)
 }
 
 // ---------------------------------------------------------------------------
@@ -532,17 +514,79 @@ function drawTitle(ctx: CanvasRenderingContext2D, width: number, topY: number, t
   ctx.fillText(subtitle, width / 2, topY + 66)
 }
 
-function triggerDownload(canvas: HTMLCanvasElement, filename: string) {
-  let url: string
+// Keep share graphics comfortably shareable. PNG is lossless (crisp text, no
+// artefacts) so it's always preferred, but a large multi-card grid can exceed a
+// sensible size — past this budget we re-encode as high-quality WebP (still
+// sharp on flat UI/text), then JPEG as a last resort, stepping quality down
+// only as far as needed to fit.
+const MAX_EXPORT_BYTES = 4 * 1024 * 1024
+
+function canvasToBlob(canvas: HTMLCanvasElement, mime: string, quality?: number): Promise<Blob | null> {
+  return new Promise(resolve => canvas.toBlob(b => resolve(b), mime, quality))
+}
+
+/**
+ * Encode the canvas to a Blob that stays under {@link MAX_EXPORT_BYTES} where
+ * possible, keeping quality as high as the budget allows. Returns the blob plus
+ * the mime/extension for the format actually used.
+ */
+async function encodeWithinBudget(canvas: HTMLCanvasElement): Promise<{ blob: Blob; mime: string; ext: string }> {
+  const png = await canvasToBlob(canvas, 'image/png')
+  if (!png) throw new Error('encode-failed')
+  if (png.size <= MAX_EXPORT_BYTES) return { blob: png, mime: 'image/png', ext: 'png' }
+
+  for (const [mime, ext] of [['image/webp', 'webp'], ['image/jpeg', 'jpg']] as const) {
+    let quality = 0.92
+    let blob = await canvasToBlob(canvas, mime, quality)
+    // Browsers that don't support the format fall back to PNG — skip those.
+    if (!blob || blob.type !== mime) continue
+    while (blob.size > MAX_EXPORT_BYTES && quality > 0.6) {
+      quality = Math.round((quality - 0.08) * 100) / 100
+      const next = await canvasToBlob(canvas, mime, quality)
+      if (!next) break
+      blob = next
+    }
+    return { blob, mime, ext }
+  }
+  return { blob: png, mime: 'image/png', ext: 'png' }
+}
+
+/**
+ * Hand the rendered canvas to the user. On devices with the Web Share API and
+ * file support (notably iOS Safari, where an `<a download>` on a generated
+ * image silently does nothing) this opens the native share sheet so the image
+ * can be saved to Photos, AirDropped, messaged, etc. Everywhere else it falls
+ * back to a normal file download.
+ */
+async function shareOrDownload(canvas: HTMLCanvasElement, baseName: string, shareTitle: string) {
+  let encoded: { blob: Blob; mime: string; ext: string }
   try {
-    url = canvas.toDataURL('image/png')
+    encoded = await encodeWithinBudget(canvas)
   } catch {
     throw new Error('Could not export image (flag images blocked export). Try again.')
   }
+  const filename = `${baseName}.${encoded.ext}`
+  const file = new File([encoded.blob], filename, { type: encoded.mime })
+
+  const nav = navigator as Navigator & { canShare?: (data?: ShareData) => boolean }
+  if (typeof nav.share === 'function' && nav.canShare?.({ files: [file] })) {
+    try {
+      await nav.share({ files: [file], title: shareTitle })
+      return
+    } catch (e) {
+      // User dismissed the share sheet — that's a deliberate cancel, not a
+      // failure, so don't fall back to a download or surface an error.
+      if (e instanceof DOMException && e.name === 'AbortError') return
+      // Any other share failure: fall through to the download path below.
+    }
+  }
+
+  const url = URL.createObjectURL(encoded.blob)
   const a = document.createElement('a')
   a.download = filename
   a.href = url
   a.click()
+  setTimeout(() => URL.revokeObjectURL(url), 10000)
 }
 
 /**
@@ -579,7 +623,9 @@ async function renderCardGrid<T>(opts: {
   const width = GRID_PAD * 2 + cols * cardW + (cols - 1) * GRID_GAP
   const height = GRID_PAD + GRID_HEADER_H + contentH + GRID_PAD
 
-  const scale = Math.min(2, window.devicePixelRatio || 1) * 1.5
+  // 2× supersampling keeps text/edges crisp without exploding the pixel count
+  // (and therefore the file size) the way a 3× buffer would on retina screens.
+  const scale = Math.min(2, (window.devicePixelRatio || 1) * 1.5)
   const canvas = document.createElement('canvas')
   canvas.width = Math.round(width * scale)
   canvas.height = Math.round(height * scale)
@@ -602,7 +648,7 @@ async function renderCardGrid<T>(opts: {
     drawCard(ctx, x, y, item, flags)
   })
 
-  triggerDownload(canvas, filename)
+  await shareOrDownload(canvas, filename, `${title} — ${subtitle}`)
 }
 
 function slugify(...parts: string[]): string {
@@ -769,7 +815,7 @@ export async function exportStatCardPng(
     teams,
     title: sweepstakesName,
     subtitle: card.title,
-    filename: `${slugify(sweepstakesName, card.title)}.png`,
+    filename: slugify(sweepstakesName, card.title),
   })
 }
 
@@ -789,7 +835,7 @@ export async function exportStatCardsPng(
     teams,
     title: sweepstakesName,
     subtitle: 'Tournament Stats',
-    filename: `${slugify(sweepstakesName, 'stats')}.png`,
+    filename: slugify(sweepstakesName, 'stats'),
   })
 }
 
@@ -1004,7 +1050,7 @@ export async function exportPrizeCardPng(
     teams,
     title: sweepstakesName,
     subtitle: card.title,
-    filename: `${slugify(sweepstakesName, card.title)}.png`,
+    filename: slugify(sweepstakesName, card.title),
   })
 }
 
@@ -1023,6 +1069,6 @@ export async function exportPrizeCardsPng(
     teams,
     title: sweepstakesName,
     subtitle: 'Prizes',
-    filename: `${slugify(sweepstakesName, 'prizes')}.png`,
+    filename: slugify(sweepstakesName, 'prizes'),
   })
 }
