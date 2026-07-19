@@ -173,17 +173,8 @@ export async function exportGroupsPng(teams: Team[], draw: DrawResult, players: 
     })
   })
 
-  let url: string
-  try {
-    url = canvas.toDataURL('image/png')
-  } catch {
-    throw new Error('Could not export image (flag images blocked export). Try again.')
-  }
-  const a = document.createElement('a')
   const slug = sweepstakesName.toLowerCase().replace(/\s+/g, '-')
-  a.download = `${slug}-draw.png`
-  a.href = url
-  a.click()
+  await shareOrDownload(canvas, `${slug}-draw`, `${sweepstakesName} — The Official Draw`)
 }
 
 interface KnockoutMatch {
@@ -470,17 +461,8 @@ export async function exportKnockoutPng(
     ctx.fillText(`Last updated ${new Date(lastUpdated).toLocaleString()}`, width / 2, champion ? footerY + 24 : footerY)
   }
 
-  let url: string
-  try {
-    url = canvas.toDataURL('image/png')
-  } catch {
-    throw new Error('Could not export image (flag images blocked export). Try again.')
-  }
-  const a = document.createElement('a')
   const slug = sweepstakesName.toLowerCase().replace(/\s+/g, '-')
-  a.download = `${slug}-knockout.png`
-  a.href = url
-  a.click()
+  await shareOrDownload(canvas, `${slug}-knockout`, `${sweepstakesName} — Knockout Bracket`)
 }
 
 // ---------------------------------------------------------------------------
@@ -539,47 +521,72 @@ function drawTitle(ctx: CanvasRenderingContext2D, width: number, topY: number, t
 // only as far as needed to fit.
 const MAX_EXPORT_BYTES = 4 * 1024 * 1024
 
-function dataUrlBytes(dataUrl: string): number {
-  const comma = dataUrl.indexOf(',')
-  const b64 = comma >= 0 ? dataUrl.slice(comma + 1) : dataUrl
-  const padding = b64.endsWith('==') ? 2 : b64.endsWith('=') ? 1 : 0
-  return Math.floor((b64.length * 3) / 4) - padding
+function canvasToBlob(canvas: HTMLCanvasElement, mime: string, quality?: number): Promise<Blob | null> {
+  return new Promise(resolve => canvas.toBlob(b => resolve(b), mime, quality))
 }
 
 /**
- * Encode the canvas to a data URL that stays under {@link MAX_EXPORT_BYTES}
- * where possible, keeping quality as high as the budget allows. Returns the URL
- * and the file extension for the format actually used.
+ * Encode the canvas to a Blob that stays under {@link MAX_EXPORT_BYTES} where
+ * possible, keeping quality as high as the budget allows. Returns the blob plus
+ * the mime/extension for the format actually used.
  */
-function encodeWithinBudget(canvas: HTMLCanvasElement): { url: string; ext: string } {
-  const png = canvas.toDataURL('image/png')
-  if (dataUrlBytes(png) <= MAX_EXPORT_BYTES) return { url: png, ext: 'png' }
+async function encodeWithinBudget(canvas: HTMLCanvasElement): Promise<{ blob: Blob; mime: string; ext: string }> {
+  const png = await canvasToBlob(canvas, 'image/png')
+  if (!png) throw new Error('encode-failed')
+  if (png.size <= MAX_EXPORT_BYTES) return { blob: png, mime: 'image/png', ext: 'png' }
 
   for (const [mime, ext] of [['image/webp', 'webp'], ['image/jpeg', 'jpg']] as const) {
     let quality = 0.92
-    let url = canvas.toDataURL(mime, quality)
+    let blob = await canvasToBlob(canvas, mime, quality)
     // Browsers that don't support the format fall back to PNG — skip those.
-    if (!url.startsWith(`data:${mime}`)) continue
-    while (dataUrlBytes(url) > MAX_EXPORT_BYTES && quality > 0.6) {
+    if (!blob || blob.type !== mime) continue
+    while (blob.size > MAX_EXPORT_BYTES && quality > 0.6) {
       quality = Math.round((quality - 0.08) * 100) / 100
-      url = canvas.toDataURL(mime, quality)
+      const next = await canvasToBlob(canvas, mime, quality)
+      if (!next) break
+      blob = next
     }
-    return { url, ext }
+    return { blob, mime, ext }
   }
-  return { url: png, ext: 'png' }
+  return { blob: png, mime: 'image/png', ext: 'png' }
 }
 
-function triggerDownload(canvas: HTMLCanvasElement, baseName: string) {
-  let encoded: { url: string; ext: string }
+/**
+ * Hand the rendered canvas to the user. On devices with the Web Share API and
+ * file support (notably iOS Safari, where an `<a download>` on a generated
+ * image silently does nothing) this opens the native share sheet so the image
+ * can be saved to Photos, AirDropped, messaged, etc. Everywhere else it falls
+ * back to a normal file download.
+ */
+async function shareOrDownload(canvas: HTMLCanvasElement, baseName: string, shareTitle: string) {
+  let encoded: { blob: Blob; mime: string; ext: string }
   try {
-    encoded = encodeWithinBudget(canvas)
+    encoded = await encodeWithinBudget(canvas)
   } catch {
     throw new Error('Could not export image (flag images blocked export). Try again.')
   }
+  const filename = `${baseName}.${encoded.ext}`
+  const file = new File([encoded.blob], filename, { type: encoded.mime })
+
+  const nav = navigator as Navigator & { canShare?: (data?: ShareData) => boolean }
+  if (typeof nav.share === 'function' && nav.canShare?.({ files: [file] })) {
+    try {
+      await nav.share({ files: [file], title: shareTitle })
+      return
+    } catch (e) {
+      // User dismissed the share sheet — that's a deliberate cancel, not a
+      // failure, so don't fall back to a download or surface an error.
+      if (e instanceof DOMException && e.name === 'AbortError') return
+      // Any other share failure: fall through to the download path below.
+    }
+  }
+
+  const url = URL.createObjectURL(encoded.blob)
   const a = document.createElement('a')
-  a.download = `${baseName}.${encoded.ext}`
-  a.href = encoded.url
+  a.download = filename
+  a.href = url
   a.click()
+  setTimeout(() => URL.revokeObjectURL(url), 10000)
 }
 
 /**
@@ -641,7 +648,7 @@ async function renderCardGrid<T>(opts: {
     drawCard(ctx, x, y, item, flags)
   })
 
-  triggerDownload(canvas, filename)
+  await shareOrDownload(canvas, filename, `${title} — ${subtitle}`)
 }
 
 function slugify(...parts: string[]): string {
