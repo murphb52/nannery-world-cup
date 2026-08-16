@@ -30,11 +30,13 @@ export function SweepstakesProvider({ children }: { children: React.ReactNode })
   useEffect(() => {
     if (!config) return
     setLoading(true)
-    Promise.all([loadPlayersFor(config.dataDir), loadDrawFor(config.dataDir)]).then(([p, d]) => {
-      setPlayers(p)
-      setDraw(d)
-      setLoading(false)
-    })
+    Promise.all([loadPlayersFor(config.dataDir), loadDrawFor(config.dataDir)])
+      .then(([p, d]) => {
+        setPlayers(p)
+        setDraw(d)
+      })
+      .catch(err => console.error('Failed to load sweepstakes data:', err))
+      .finally(() => setLoading(false))
   }, [config?.dataDir])
 
   if (!config) {
